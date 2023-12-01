@@ -50,7 +50,6 @@ public interface UserMapper {
     // 전체 탑승권 조회
     public List<Product> product_flightList() throws Exception;
 
-    
     // 장바구니 조회 : 비회원
     public List<Users> user2_cart_list(int phone, int userPw) throws Exception;
 

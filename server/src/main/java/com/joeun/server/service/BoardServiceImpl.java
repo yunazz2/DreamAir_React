@@ -17,7 +17,6 @@ import com.joeun.server.mapper.FileMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-    // quick fix : ctrl + .
 
     @Autowired
     private BoardMapper boardMapper;
@@ -28,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
     @Value("${upload.path}")            // application.properties 에 설정한 업로드 경로 속성명
     private String uploadPath;          // 업로드 경로
 
+    // 게시글 목록
     @Override
     public List<Board> list() throws Exception {
         List<Board> boardList = boardMapper.list();
@@ -48,6 +48,7 @@ public class BoardServiceImpl implements BoardService {
         return boardList;
     }
 
+    // 메인 화면 게시글 조회
     @Override
     public List<Board> mainList() throws Exception {
         List<Board> boardMainList = boardMapper.mainList();
@@ -68,13 +69,14 @@ public class BoardServiceImpl implements BoardService {
         return boardMainList;
     }
 
+    // 게시글 조회
     @Override
     public Board select(int boardNo) throws Exception {
         Board board = boardMapper.select(boardNo);
-        // 조회수 증가...
         return board;
     }
 
+    // 게시글 등록
     @Override
     public int insert(Board board) throws Exception {
         int result = boardMapper.insert(board);
@@ -94,11 +96,6 @@ public class BoardServiceImpl implements BoardService {
             long fileSize = file.getSize();
             byte[] fileData = file.getBytes();
             
-            // 업로드 경로
-            // 파일명 중복 방지 방법(정책)
-            // - 날짜_파일명.확장자
-            // - UID_파일명.확장자
-
             // UID_강아지.png
             String fileName = UUID.randomUUID().toString() + "_" + originName;
 
@@ -106,14 +103,8 @@ public class BoardServiceImpl implements BoardService {
             String filePath = uploadPath + "/" + fileName;
 
             // 파일업로드
-            // - 서버 측, 파일 시스템에 파일 복사
-            // - DB 에 파일 정보 등록
             File uploadFile = new File(uploadPath, fileName);
             FileCopyUtils.copy(fileData, uploadFile);       // 파일 업로드
-
-            // FileOutputStream fos = new FileOutputStream(uploadFile);
-            // fos.write(fileData);
-            // fos.close();
 
             Files uploadedFile = new Files();
             uploadedFile.setParentTable(parentTable);
@@ -131,26 +122,24 @@ public class BoardServiceImpl implements BoardService {
         return result;
     }
 
+    // 게시글 수정
     @Override
     public int update(Board board) throws Exception {
         int result = boardMapper.update(board);
         return result;
     }
     
+    // 게시글 삭제
     @Override
-    public int delete(int boardNo) throws Exception {
-        int result = boardMapper.delete(boardNo);
+    public int remove(int boardNo) throws Exception {
+        int result = boardMapper.remove(boardNo);
         return result;
     }
 
+    // 조회수
     @Override
     public void Views(int boardNo) throws Exception {
-        //Board board = boardMapper.select(boardNo);  // findById 대신 select 사용
-        //if(board != null) {
-            //board.setViews(board.getViews() + 1);
-            //boardMapper.update(board);  // save 대신 update 사용
-    		boardMapper.views(boardNo);
-        //}
+        boardMapper.views(boardNo);
     }
     
     

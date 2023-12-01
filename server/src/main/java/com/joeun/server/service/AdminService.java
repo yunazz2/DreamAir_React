@@ -8,9 +8,6 @@ import com.joeun.server.dto.Users;
 
 public interface AdminService {
   
-    /**
-     * 관리자
-     */
     // 전체 관리자 조회
     public List<Admin> admin_list() throws Exception;
 
@@ -20,9 +17,6 @@ public interface AdminService {
     // 관리자 정보 삭제
     public int admin_delete(int adminNo) throws Exception;
         
-    // /**
-    //  * 사용자 관리
-    //  */
     // 전체 사용자 조회
     public List<Users> user_list() throws Exception;
 
@@ -35,17 +29,8 @@ public interface AdminService {
     // 사용자 정보 삭제
     public int user_delete(int userNo) throws Exception;
   
-    /**
-     * 예매 관리
-     */
     // 전체 예매 내역 조회
     public List<Booking> booking_list() throws Exception;
-
-    /**
-     * 탑승권 관리
-     */
-    // 탑승권 조회 : 항공기 번호를 입력 했을 때 당일에 한하여만 조회 가능, 체크인도 되어 있어야 함
-    //public Booking ticket_select(int ticketNo) throws Exception;
 
     // 항공권 번호로 당일의 탑승객 조회
     public List<Booking> ticket_selectList(String today, int flightNo, int checkedIn, int isBoarded) throws Exception;
@@ -61,8 +46,8 @@ public interface AdminService {
     // 탑승권 조회 - ticketNo
     public List<Booking> pas_ticketList(int ticketNo) throws Exception;
 
-     // boardingTime
-     public int update_boardingTime(int ticketNo, String boardingTime) throws Exception;
+    // boardingTime
+    public int update_boardingTime(int ticketNo, String boardingTime) throws Exception;
     
 
 }

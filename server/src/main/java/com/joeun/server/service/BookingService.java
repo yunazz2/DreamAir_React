@@ -11,7 +11,6 @@ import com.joeun.server.dto.Booking;
 
 public interface BookingService {
     
-    
     // 가는편 항공권 조회
     public List<Booking> golist(Booking booking) throws Exception;
 
@@ -27,9 +26,6 @@ public interface BookingService {
     // 비회원 - 가장 최근 예매 번호 조회
     public int latest_user2_bookingNo(int userNo2) throws Exception;
     
-    // 여권 정보 입력 
-    // public int infoPassport(Users user) throws Exception;
-
     // 편도 항공 스케줄(탑승객 유의사항 안내)
     public List<Booking> goScheduleList(Booking booking) throws Exception;
 

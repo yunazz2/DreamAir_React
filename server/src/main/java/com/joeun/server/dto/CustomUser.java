@@ -31,13 +31,6 @@ public class CustomUser extends User {
                                  .map( (auth) -> new SimpleGrantedAuthority(auth.getAuth()))
                                  .collect(Collectors.toList()));
         
-        // List<UserAuth> userAuthList = users.getAuthList();
-        // List<SimpleGrantedAuthority> authList = new ArrayList<SimpleGrantedAuthority>();
-        // for (int i = 0; i < userAuthList.size(); i++) {
-        //     authList.add( new SimpleGrantedAuthority( userAuthList.get(i).getAuth() ));
-        // }
-        // super(users.getUserId(), users.getUserPw(), authList);
-        
         this.users = users;
     }
 

@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <!-- 게시글 삭제 -->
-    <delete id="delete">
+    <delete id="remove">
         DELETE FROM board
         WHERE board_no = #{boardNo}
     </delete>

@@ -12,7 +12,6 @@ public class Comment {
     private String parent_table;
     private int parent_no;
     private int parentNo;
-    
     private String writer;
     private String content;
     private int groupNo;

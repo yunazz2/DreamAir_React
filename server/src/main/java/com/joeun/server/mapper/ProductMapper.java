@@ -10,9 +10,6 @@ import com.joeun.server.dto.ProductIo;
 @Mapper
 public interface ProductMapper {
 
-    /**
-     * 항공기
-     */
     // 항공기 전체 조회
     public List<Product> flight_list() throws Exception;
 
@@ -31,9 +28,6 @@ public interface ProductMapper {
     // 항공기 번호(기본키) 최댓값
     public int flight_maxPk() throws Exception;
 
-    /**
-     * 상품
-     */
     // 상품(항공권) 전체 조회
     public List<Product> product_list() throws Exception;
 
@@ -52,9 +46,6 @@ public interface ProductMapper {
     // 상품(항공권)(기본키) 최댓값
     public int product_maxPk() throws Exception;
 
-    /**
-     * 상품 입출고 등록
-     */
     // 상품이 등록되면 IN / 예매가 완료되면 OUT -> 예매가 환불되면 IN
     public int productIO_insert(ProductIo productIo) throws Exception;
 }

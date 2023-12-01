@@ -105,7 +105,6 @@ public class AdminServiceImpl implements AdminService {
     int result = adminMapper.user_delete(userNo);
     return result;
   }
-
   
   // 전체 예매 내역 조회
   @Override
@@ -115,17 +114,16 @@ public class AdminServiceImpl implements AdminService {
   }
 
   // 항공권 번호로 당일의 탑승객 조회
-    @Override
+  @Override
   public List<Booking> ticket_selectList(String departureDate, int flightNo, int checkedIn, int isBoarded) throws Exception {
     List<Booking> ticketList = adminMapper.ticket_selectList(departureDate, flightNo, checkedIn, isBoarded);
-
     return ticketList;
   }
 
-     @Override
+  // 항공권 전체 조회
+  @Override
   public List<Booking> ticket_selectList_w(String departureDate, int flightNo) throws Exception {
     List<Booking> ticketList = adminMapper.ticket_selectList_w(departureDate, flightNo);
-
     return ticketList;
   }
 

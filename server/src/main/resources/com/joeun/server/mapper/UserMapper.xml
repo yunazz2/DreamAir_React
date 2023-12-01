@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="매퍼 인터페이스 경로" -->
+<mapper namespace="com.joeun.server.mapper.UserMapper">
+
+    <!-- Users 매핑-->
+    <resultMap type="Users" id="userMap">
+        <id property="userNo" column="user_no" />
+        
+        <result property="userNo" column="user_no" />
+        <result property="userId" column="user_id" />
+        <result property="userPw" column="user_pw" />
+        <result property="name" column="name" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <result property="email" column="email" />
+        <result property="status" column="status" />
+        <result property="regDate" column="reg_date" />
+        <result property="updDate" column="upd_date" />
+        
+        <collection property="authList" resultMap="authMap"></collection>
+    </resultMap>
+        
+    <!-- UserAuth 매핑 -->
+    <resultMap type="Auth" id="authMap">
+        <result property="userId" column="user_id" />
+        <result property="auth" column="auth" />
+    </resultMap>
+
+    
+    <!-- 회원 등록 -->
+    <!-- users 테이블에 회원 등록 -->
+    <insert id="insertUsers" parameterType="Users">
+        INSERT INTO users( user_id, user_pw, name, email, phone, address )
+        VALUES ( #{userId}, #{userPw}, #{name}, #{email}, #{phone}, #{address} );
+    </insert>
+
+    <!-- mileage 테이블에 회원 추가 -->
+    <insert id="insertMileage" parameterType="Users">
+        INSERT INTO mileage( user_id )
+        VALUES( #{userId} );
+    </insert>
+
+    <!-- 회원 권한 등록 -->
+    <insert id="insertAuth">
+        INSERT INTO auth( user_id, auth ) 
+        VALUES ( #{userId}, #{auth} )
+    </insert>
+
+    <!-- 회원 조회 - id -->
+    <select id="login" resultMap="userMap">
+        SELECT u.user_no
+              ,u.user_id
+              ,user_pw
+              ,name
+              ,email
+              ,status
+              ,reg_date
+              ,upd_date
+              ,auth
+        FROM users u LEFT OUTER JOIN auth
+                    ON u.user_id = auth.user_id
+        WHERE u.user_id = #{userId}
+    </select>
+
+    <!-- 회원 조회 - id -->
+    <select id="selectById" resultType="Users">
+        SELECT *
+        FROM users
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 비회원 조회 - id -->
+    <select id="selectByUser2Id" resultType="Users">
+        SELECT *
+        FROM user2
+        WHERE user_id = #{userId}
+    </select>
+    
+    <!-- user_no 조회 - id -->
+    <select id="selectUserNoByUserId" resultType="int">
+        SELECT user_no
+        FROM users
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 회원 수정 -->
+    <update id="update">
+        UPDATE users
+           SET user_id = #{userId}
+              ,user_pw = #{userPw}
+              ,name = #{name}
+              ,phone = #{phone}
+              ,email = #{email}
+              ,address = #{address}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- users 테이블 회원 삭제 -->
+    <delete id="deleteUsers">
+        DELETE FROM users
+        WHERE user_id = #{userId}
+    </delete>
+    
+    <select id="selectMileage" resultType="Users">
+        SELECT mileage
+        FROM mileage
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 장바구니 : 회원 -->
+    <select id="user_cart_list" resultType="Users">
+        SELECT *
+        FROM cart
+        WHERE user_no=#{userNo}
+    </select>
+
+    <!-- 장바구니 : 비회원 -->
+    <select id="user2_cart_list" resultType="Users">
+        SELECT *
+        FROM cart
+        WHERE phone=#{phone} AND user_pw = #{userPw}
+    </select>
+
+    <!-- 장바구니 추가 -->
+    <insert id="cartadd">
+        INSERT INTO cart ( product_no, user_no, user_no2, cart_cnt )
+        VALUES ( #{productNo}, #{userNo}, #{userNo2}, #{cartCnt} )
+    </insert>
+
+
+
+    <!-- 장바구니 삭제 -->
+    <insert id="cart_delete">
+        DELETE cart
+        WHERE cart_no = #{cartNo}
+    </insert>
+
+    <!-- 전체 항공권 조회 -->
+    <select id="product_flightList" resultType="Product">
+        SELECT *
+        FROM flight f left join product p on f.route_no = p.route_no 
+                    left join route r on f.route_no = r.route_no
+    </select>
+    
+    <!-- auth 테이블 회원 삭제 -->
+    <delete id="deleteAuth">
+        DELETE FROM Auth
+        WHERE user_id = #{userId}
+    </delete>
+
+    <!-- auth 테이블 회원 삭제 -->
+    <delete id="deleteMileage">
+        DELETE FROM mileage
+        WHERE user_id = #{userId}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="매퍼 인터페이스 경로" -->
+<mapper namespace="com.joeun.server.mapper.AdminMapper">
+
+<!-- 관리자 등록 -->
+<insert id="admin_insert">
+    INSERT INTO admin ( admin_id, admin_pw )
+    VALUES ( #{adminId}, #{adminPw} )
+</insert>
+
+<!-- 관리자 삭제 -->
+<delete id="admin_delete">
+DELETE FROM admin
+WHERE admin_no = #{adminNo}
+</delete>
+
+<!-- 권한 삭제 -->
+<delete id="deleteAuth">
+DELETE FROM auth
+WHERE user_id = #{userId}
+</delete>
+
+<!-- 회원 권한 등록 -->
+<insert id="insertAuth">
+    INSERT INTO auth( user_id, auth ) 
+    VALUES ( #{userId}, #{auth} )
+</insert>
+
+<!-- 관리자 조회 -->
+<!-- <select id="admin_list" resultType="Admin">
+    SELECT admin.*, auth.*
+    FROM admin
+    INNER JOIN auth ON admin.admin_id = auth.user_id
+    WHERE auth.auth = 'ROLE_ADMIN'
+</select> -->
+<select id="admin_list" resultType="Admin">
+SELECT *
+FROM admin
+</select>
+
+<!-- 사용자 조회 -->
+<!-- <select id="user_list" resultType="Users">
+    SELECT users.*, auth.*
+    FROM users
+    INNER JOIN auth ON users.user_id = auth.user_id
+    WHERE auth.auth = 'ROLE_USER'
+    AND users.user_id NOT IN (SELECT user_id FROM auth WHERE auth = 'ROLE_ADMIN');
+</select> -->
+<select id="user_list" resultType="Users">
+    SELECT *
+    FROM users;
+</select>
+
+
+<!-- 사용자 등록 -->
+<insert id="user_insert">
+INSERT INTO users ( user_no, user_id, user_pw, name, address, phone, email, status) 
+VALUES(  #{user_no}, #{user_id}, #{userPw}, #{name}, #{address}, #{phone}, #{email}, #{status} )  
+</insert>
+
+<!-- 사용자 수정 -->
+<update id="user_update">
+UPDATE users
+SET auth_no = #{authNo}
+  , user_id = #{userId} 
+  , user_pw = #{userPw}
+  , name = #{name}
+  , address = #{address}
+  , phone = #{phone}
+  , email = #{email}
+  , status = #{status}
+WHERE user_no = #{userNo}
+</update>
+
+<!-- 사용자 삭제 -->
+<delete id="user_delete">
+DELETE FROM users
+WHERE user_no = #{userNo}
+</delete>
+
+<!-- 예매 전체 조회 -->
+<select id="booking_list" resultType="Booking">
+    SELECT *
+    FROM booking 
+</select>
+
+<!-- 탑승권 전체 조회 -->
+<select id="ticket_list" resultType="Booking">
+    SELECT * 
+    FROM ticket 
+    WHERE departure_date = #{today};
+</select>
+
+<!-- 탑승권 조회 -->
+<!--
+    checkedIn : 1 ➡ isBoarded : 0,1
+    checkedIn : 0 
+
+    isBoarded  : 1 ➡ checkedIn : 1
+-->
+<select id="ticket_selectList" resultType="Booking">
+    SELECT *
+    FROM ticket
+    WHERE 1 = 1
+        <if test='checkedIn == 1'>
+            AND checked_in = #{checkedIn}
+            AND is_boarded  = #{isBoarded}
+        </if>
+        <if test='isBoarded == 1'>
+            AND checked_in = 1
+            AND is_boarded  = #{isBoarded}
+        </if>
+        AND flight_no = #{flightNo}
+        AND departure_date = #{today};
+</select>
+
+<select id="ticket_selectList_w" resultType="Booking">
+    SELECT *
+    FROM ticket
+    WHERE flight_no = #{flightNo}
+    AND departure_date = #{today};
+</select>
+
+
+
+<!-- 탑승권 정보 수정/탑승처리 -->
+<!-- <update id="ticket_update">
+    UPDATE ticket
+    SET passenger_no = #{passengerNo}
+       ,passenger_name = #{passengerName}
+       ,departure = #{departure}
+       ,destination = #{destination}
+       ,departure_date = #{departureDate}
+       ,destination_dte = #{destinationDate}
+       ,departure_time = #{departureTime}
+       ,duration = #{duration}
+       ,boarding = #{boarding}
+       ,checked_in = #{checkedIn}
+       ,is_boarded = #{isBoarded}
+       ,route_no = #{routeNo}
+       ,boarding_time = #{boardingTime}
+    WHERE ticket_no = #{ticketNo} 
+</update> -->
+
+<update id="ticket_update_c">
+    UPDATE ticket
+    SET checked_in = #{checkedIn}
+    WHERE ticket_no = #{ticketNo} 
+</update>
+
+<update id="ticket_update_b">
+    UPDATE ticket
+    SET is_boarded = #{isBoarded}
+    WHERE ticket_no = #{ticketNo} 
+</update>
+
+<!-- ticketNo에 따른 탑승권 정보 -->
+<select id="pas_ticketList" resultType="Booking">
+    SELECT *
+    FROM ticket
+    WHERE ticket_no = #{ticketNo}
+</select>
+
+<update id="update_boardingTime">
+    UPDATE ticket
+    SET boarding_time = #{boardingTime}
+    WHERE ticket_no = #{ticketNo}
+</update>
+
+
+</mapper>

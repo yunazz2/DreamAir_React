@@ -84,40 +84,40 @@ public class BoardServiceImpl implements BoardService {
         int parentNo = boardMapper.maxPk();
 
         // 파일 업로드 
-        List<MultipartFile> fileList = board.getFile();
+        // List<MultipartFile> fileList = board.getFile();
 
-        if( !fileList.isEmpty() )
-        for (MultipartFile file : fileList) {
+        // if( !fileList.isEmpty() )
+        // for (MultipartFile file : fileList) {
 
-            if( file.isEmpty() ) continue;
+        //     if( file.isEmpty() ) continue;
 
-            // 파일 정보 : 원본파일명, 파일 용량, 파일 데이터 
-            String originName = file.getOriginalFilename();
-            long fileSize = file.getSize();
-            byte[] fileData = file.getBytes();
+        //     // 파일 정보 : 원본파일명, 파일 용량, 파일 데이터 
+        //     String originName = file.getOriginalFilename();
+        //     long fileSize = file.getSize();
+        //     byte[] fileData = file.getBytes();
             
-            // UID_강아지.png
-            String fileName = UUID.randomUUID().toString() + "_" + originName;
+        //     // UID_강아지.png
+        //     String fileName = UUID.randomUUID().toString() + "_" + originName;
 
-            // c:/upload/UID_강아지.png
-            String filePath = uploadPath + "/" + fileName;
+        //     // c:/upload/UID_강아지.png
+        //     String filePath = uploadPath + "/" + fileName;
 
-            // 파일업로드
-            File uploadFile = new File(uploadPath, fileName);
-            FileCopyUtils.copy(fileData, uploadFile);       // 파일 업로드
+        //     // 파일업로드
+        //     File uploadFile = new File(uploadPath, fileName);
+        //     FileCopyUtils.copy(fileData, uploadFile);       // 파일 업로드
 
-            Files uploadedFile = new Files();
-            uploadedFile.setParentTable(parentTable);
-            uploadedFile.setParentNo(parentNo);
-            uploadedFile.setBoardNo(parentNo);
-            uploadedFile.setFileName(fileName);
-            uploadedFile.setFilePath(filePath);
-            uploadedFile.setOriginName(originName);
-            uploadedFile.setFileSize(fileSize);
-            uploadedFile.setFileCode(0);
+        //     Files uploadedFile = new Files();
+        //     uploadedFile.setParentTable(parentTable);
+        //     uploadedFile.setParentNo(parentNo);
+        //     uploadedFile.setBoardNo(parentNo);
+        //     uploadedFile.setFileName(fileName);
+        //     uploadedFile.setFilePath(filePath);
+        //     uploadedFile.setOriginName(originName);
+        //     uploadedFile.setFileSize(fileSize);
+        //     uploadedFile.setFileCode(0);
 
-            fileMapper.insert(uploadedFile);
-        }
+        //     fileMapper.insert(uploadedFile);
+        // }
 
         return result;
     }

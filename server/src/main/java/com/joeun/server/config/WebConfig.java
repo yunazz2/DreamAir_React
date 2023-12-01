@@ -16,5 +16,4 @@ public class WebConfig {
         // NoOpPasswordEncoder          : 암호화 없이 비밀번호를 저장
         // ...
     }
-    
 }

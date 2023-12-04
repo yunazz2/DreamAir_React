@@ -7,10 +7,10 @@ export const flight_list = () => axios.get("/flight")
 export const flight_select = (flightNo) => axios.get(`/flight/${flightNo}`)
 
 // 항공기 정보 등록
-export const flight_insert = (flightName, routeNo, setMax) => axios.post("/flight", {flightName, routeNo, setMax})
+export const flight_insert = (flightName, file, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) => axios.post("/flight", {flightName, file, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining})
 
 // 항공기 정보 수정
-export const flight_update = (flightNo, flightName, routeNo, setMax) => axios.put("/flight", {flightNo, flightName, routeNo, setMax})
+export const flight_update = (flightNo, flightName, file, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) => axios.put("/flight", {flightNo, flightName, file, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining})
 
 // 항공기 정보 삭제
 export const flight_delete = (flightNo) => axios.delete(`/flight/${flightNo}`)

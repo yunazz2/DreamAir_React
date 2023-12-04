@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import Index from './pages/Index';
@@ -8,6 +9,7 @@ import BoardListContainer from './containers/board/BoardListContainer';
 import BoardReadContainer from './containers/board/BoardReadContainer';
 import BoardUpdateContainer from './containers/board/BoardUpdateContainer';
 
+import AdminListContainer from './containers/admin/AdminListContainer';
 import UserListContainer from './containers/admin/UserListContainer';
 import BookingListContainer from './containers/admin/BookingListContainer';
 import TicketListContainer from './containers/admin/TicketListContainer';
@@ -39,6 +41,7 @@ function App() {
 
       {/* ADMIN */}
       <Routes>
+        <Route path="/admin" element={<AdminListContainer/>}/>
         <Route path="/admin/user_list" element={<UserListContainer/>}/>
         <Route path="/admin/booking_list" element={<BookingListContainer/>}/>
         <Route path="/admin/ticket_list" element={<TicketListContainer/>}/>
@@ -48,15 +51,15 @@ function App() {
       {/* PRODUCT */}
       <Routes>
         <Route path="/product" element={<ProductListContainer/>}/>
-        <Route path="/product/insert" element={<ProductInsertContainer/>}/>
-        <Route path="/product/update/:productNo" element={<ProductUpdateContainer/>}/>
+        <Route path="/product/product_insert" element={<ProductInsertContainer/>}/>
+        <Route path="/product/product_update/:productNo" element={<ProductUpdateContainer/>}/>
       </Routes>
 
       {/* FLIGHT */}
       <Routes>
         <Route path="/flight" element={<FlightListContainer/>}/>
-        <Route path="/flight/insert" element={<FlightInsertContainer/>}/>
-        <Route path="/flight/update/:flightNo" element={<FlightUpdateContainer/>}/>
+        <Route path="/flight/flight_insert" element={<FlightInsertContainer/>}/>
+        <Route path="/flight/flight_update/:flightNo" element={<FlightUpdateContainer/>}/>
       </Routes>
     </BrowserRouter>
   );

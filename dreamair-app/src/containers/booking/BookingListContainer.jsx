@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import BookingListForm from '../../components/booking/BookingListForm';
 
 const BookingListContainer = () => {
+  
+  const [roundTrip, setRoundTrip] = useState('');
+  const [departure, setDeparture] = useState('');
+  const [destination, setDestination] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
+  const [pasCount, setPasCount] = useState(1);
+
+  const booking = {
+    roundTrip : roundTrip,
+    departure : departure,
+    destination : destination,
+    departureDate : departureDate,
+    pasCount : pasCount
+  }
+  
   return (
     <Container className="mt-5 py-3">
       <h1 className="text-center">항공권 조회</h1>

@@ -1,7 +1,5 @@
 import React from 'react'
-import IndexContainer from '../containers/IndexContainer'
-import '../static/css/bookingMain.css'
-import '../static/css/main.css'
+import IndexContainer from '../containers/index/IndexContainer'
 
 const Index = () => {
   return (

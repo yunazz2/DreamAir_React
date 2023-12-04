@@ -9,6 +9,15 @@ const SearchFlightForm = () => {
   const [pasCount, setPasCount] = useState(1);
   const [showPassengerBox, setShowPassengerBox] = useState(false);
 
+  const booking = {
+    roundTrip : roundTrip,
+    departure : departure,
+    destination : destination,
+    departureDate : departureDate,
+    pasCount : pasCount
+  }
+  
+
   const handleRoundTripChange = (value) => {
     setRoundTrip(value);
   };

@@ -33,7 +33,7 @@ const ProductListContainer = () => {
 
   return <ProductList productList={productList}
                       productNo={productNo}
-                      onDelte={onDelete}
+                      onDelete={onDelete}
                       />                      
     
 }

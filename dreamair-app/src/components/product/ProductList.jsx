@@ -9,7 +9,7 @@ const ProductList = ( {productList, productNo, onDelete}) => {
     <div className='container'>
       <h1 className="text-center my-5">상품 관리</h1>
       <div className="btn-box d-grid gap-2">
-      <button className='btn btn-outline-primary btn-lg'><Link to="/product/product_insert">상품 등록</Link></button>
+        <button className='btn btn-outline-primary btn-lg'><Link to="/product/product_insert">상품 등록</Link></button>
       </div>
       <br />
 
@@ -38,9 +38,7 @@ const ProductList = ( {productList, productNo, onDelete}) => {
             {productList.map((product) => (
               <tr key={product.productNo}>
                 <td>
-                  <a href={`/product/product_list/${product.productNo}`}>
-                    <span>{product.productNo}</span>
-                  </a>
+                  <Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link>
                 </td>
                 {/* 이미지 출력 부분 */}
                 <td>

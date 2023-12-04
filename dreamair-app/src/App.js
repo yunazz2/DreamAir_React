@@ -22,6 +22,8 @@ import ProductUpdateContainer from './containers/product/ProductUpdateContainer'
 import FlightListContainer from './containers/flight/FlightListContainer';
 import FlightInsertContainer from './containers/flight/FlightInsertContainer';
 import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
+import IndexContainer from './containers/bus/IndexContainer';
+import ReservationContainer from './containers/bus/ReservationContainer';
 
 function App() {
   return (
@@ -60,6 +62,12 @@ function App() {
         <Route path="/flight" element={<FlightListContainer/>}/>
         <Route path="/flight/flight_insert" element={<FlightInsertContainer/>}/>
         <Route path="/flight/flight_update/:flightNo" element={<FlightUpdateContainer/>}/>
+      </Routes>
+
+      {/* BUS */}
+      <Routes>
+        <Route path="/bus" element={<IndexContainer/>}/>
+        <Route path="/bus/resevation" element={<ReservationContainer/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const UserUpdateForm = () => {
+const UserUpdateForm = ({id, user}) => {
 
   // ⭐ state 설정
-  const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const [passwordcheck, setPasswordCheck] = useState('')
   const [name, setName] = useState('')
@@ -11,45 +10,59 @@ const UserUpdateForm = () => {
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
 
+  const handleChangeName = (e) => {
+    setName(e.target.value)
+  }
+
+  useEffect(() => {
+    if(user) {
+      setName(user.name);
+    }
+  }, [user])
+
   return (
-    <div>
-      <h1>회원 정보 수정</h1>
+    <div className='container p-4'>
+      <h1 className="text-center my-3">회원 정보 수정</h1>
 
       <hr />
       
-      <div>
-        <label htmlFor="id">아이디</label>
-        <input type="text" />
+      <div className="col-12">
+        <label htmlFor="id" className="form-label">아이디</label>
+        <input type="text" value={id} className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="password">비밀번호</label>
-        <input type="password" />
+      <div className="col-12">
+        <label htmlFor="password" className="form-label">비밀번호</label>
+        <input type="password" className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="passwordcheck">비밀번호 확인</label>
-        <input type="passwordcheck" />
+      <div className="col-12">
+        <label htmlFor="passwordcheck" className="form-label">비밀번호 확인</label>
+        <input type="passwordcheck" className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="name">이름</label>
-        <input type="text" />
+      <div className="col-12">
+        <label htmlFor="name" className="form-label">이름</label>
+        <input type="text" value={name} onChange={handleChangeName} className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="phone">핸드폰 번호</label>
-        <input type="text" />
+      <div className="col-12">
+        <label htmlFor="phone" className="form-label">핸드폰 번호</label>
+        <input type="text" className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="email">이메일</label>
-        <input type="email" />
+      <div className="col-12">
+        <label htmlFor="email" className="form-label">이메일</label>
+        <input type="email" className="form-control" />
       </div>
 
-      <div>
-        <label htmlFor="address">주소</label>
-        <input type="text" />
+      <div className="col-12">
+        <label htmlFor="address" className="form-label">주소</label>
+        <input type="text" className="form-control" />
+      </div>
+
+      <div className="btn-box d-grid gap-2">
+          <button type="submit" className="btn btn-outline-primary btn-lg">회원정보 수정</button>
       </div>
     </div>
   )

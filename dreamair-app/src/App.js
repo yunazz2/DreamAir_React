@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Index from './pages/Index';
 import BoardListContainer from './containers/board/BoardListContainer';
 import BoardReadContainer from './containers/board/BoardReadContainer';
@@ -29,7 +30,7 @@ function App() {
     {/* user */}
       <Routes>
         <Route path="/user" element={<MyPageContainer/>}/>
-        <Route path="/user/update" element={<UserUpdateContainer/>}/>
+        <Route path="/user/update/:id" element={<UserUpdateContainer/>}/>
         <Route path="/user/checkin" element={<CheckInContainer/>}/>
         <Route path="/user/mileage" element={<MileageContainer/>}/>
         <Route path="/user/deleteaccount" element={<DeleteAccountContainer/>}/>

@@ -3,6 +3,8 @@ package com.joeun.server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,23 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    // 회원 아이디로 회원 정보 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<?> selectById(@PathVariable String id) { // 수정된 부분
+        log.info("[GET] - /user/{id} - 회원 정보 조회");
+        try {
+            Users user = userService.selectById(id);
+            if (user != null) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("해당 ID의 회원을 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            log.error("Error while fetching user by id: {}", id, e); // 수정된 부분
+            return new ResponseEntity<>("서버 내부 오류", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // 회원 정보 수정
     @PutMapping()

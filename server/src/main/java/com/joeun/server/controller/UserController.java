@@ -25,7 +25,7 @@ public class UserController {
 
     // 회원 아이디로 회원 정보 조회
     @GetMapping("/{id}")
-    public ResponseEntity<?> selectById(@PathVariable String id) { // 수정된 부분
+    public ResponseEntity<?> selectById(@PathVariable String id) {
         log.info("[GET] - /user/{id} - 회원 정보 조회");
         try {
             Users user = userService.selectById(id);
@@ -35,7 +35,7 @@ public class UserController {
                 return new ResponseEntity<>("해당 ID의 회원을 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            log.error("Error while fetching user by id: {}", id, e); // 수정된 부분
+            log.error("Error while fetching user by id: {}", id, e);
             return new ResponseEntity<>("서버 내부 오류", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

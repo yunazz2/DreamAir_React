@@ -17,6 +17,9 @@ const UserUpdateForm = ({id, user}) => {
   useEffect(() => {
     if(user) {
       setName(user.name);
+      setPhone(user.phone);
+      setEmail(user.email);
+      setAddress(user.address);
     }
   }, [user])
 
@@ -48,18 +51,20 @@ const UserUpdateForm = ({id, user}) => {
 
       <div className="col-12">
         <label htmlFor="phone" className="form-label">핸드폰 번호</label>
-        <input type="text" className="form-control" />
+        <input type="text" value={phone} className="form-control" />
       </div>
 
       <div className="col-12">
         <label htmlFor="email" className="form-label">이메일</label>
-        <input type="email" className="form-control" />
+        <input type="email" value={email} className="form-control" />
       </div>
 
       <div className="col-12">
         <label htmlFor="address" className="form-label">주소</label>
-        <input type="text" className="form-control" />
+        <input type="text" value={address} className="form-control" />
       </div>
+
+      <br />
 
       <div className="btn-box d-grid gap-2">
           <button type="submit" className="btn btn-outline-primary btn-lg">회원정보 수정</button>

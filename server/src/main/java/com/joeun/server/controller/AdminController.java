@@ -2,11 +2,14 @@ package com.joeun.server.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
+import com.joeun.server.dto.Files;
+import com.joeun.server.dto.QR;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.AdminService;
 import com.joeun.server.service.FileService;
@@ -195,6 +200,84 @@ public class AdminController {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
     }
+
+    // 탑승권 화면 - 탑승 최종 확인 위한
+    @GetMapping("Final_check/{ticketNo}")
+    public ResponseEntity<?> getOne(@PathVariable Integer ticketNo) {
+        log.info("[GET] - /admin/Final_check");  
+        try {
+            List<Booking> pasTicketList = adminService.pas_ticketList(ticketNo);
+            if( pasTicketList == null )
+                log.info("탑승권 목록 없음");
+            else
+                log.info("탑승권 수 : " + pasTicketList.size());
+
+                Files files = new Files();
+                files.setParentTable("booking");
+                files.setParentNo(ticketNo);
+                List<Files> fileList = fileService.listByParent(files);
+
+                QR qr = new QR();
+                qr.setParentTable("booking");
+                qr.setParentNo(ticketNo);
+                List<QR> qrList = qrService.listByParent(qr);
+
+                Map<String, Object> result = new HashMap<String,Object>();
+                result.put("qrList", qrList);
+                result.put("fileList", fileList);
+                result.put("pasTicketList", pasTicketList);
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
+            
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    
+    // @GetMapping(value="/Final_check")
+    // public String ticket_Checking(Model model, Booking ticket, Files files, QR qr) throws Exception{
+    //     log.info("[GET] - /admin/Final_check");       
+
+    //     int ticketNo = ticket.getTicketNo();
+    //     // ticketNo로 탑승권 조회
+    //     List<Booking> pasTicketList = adminService.pas_ticketList(ticketNo);
+        
+        // files.setParentTable("booking");
+        // files.setParentNo(ticketNo);
+        // List<Files> fileList = fileService.listByParent(files);
+
+        // qr.setParentTable("booking");
+        // qr.setParentNo(ticketNo);
+        // List<QR> qrList = qrService.listByParent(qr);
+
+    //     model.addAttribute("pasTicketList", pasTicketList);
+    //     model.addAttribute("fileList", fileList);
+    //     model.addAttribute("qrList", qrList);
+        
+    //     return "admin/Final_check";
+    // }
+
+    // // 탑승권 처리 - 탑승 최종 확인 위한
+    // @PostMapping(value="/Final_check")
+    // public String ticket_CheckingPro(Model model, Booking ticket) throws Exception{
+    //     log.info("[POST] - /admin/Final_check");       
+
+    //     // ticketNo에 해당하는 정보 조회
+    //     int ticketNo = ticket.getTicketNo();
+
+    //     // adminService.ticket_update(ticketNo);
+    //     // 버튼을 클릭 하면, '탑승 완료'로 처리
+    //     int isBoarded = 1;
+    //     ticket.setIsBoarded(isBoarded);
+    //     int result = adminService.ticket_update_b(ticketNo);
+    //     if(result > 0 ){
+    //         log.info("탑승 완료 DB 처리");
+    //     }
+    //     // 탑승처리가 완료되면 QR 코드 삭제
+
+    //     return "redirect:/admin/ticket_list";
+    // }
 
 
 }

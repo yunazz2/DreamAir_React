@@ -4,7 +4,7 @@ import BoardList from '../components/board/BoardList'
 const Board = () => {
   return (
     <>
-      <BoardList />
+      {/* <BoardList /> */}
     </>
   )
 }

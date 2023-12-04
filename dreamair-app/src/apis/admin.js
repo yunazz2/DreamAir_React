@@ -1,7 +1,25 @@
 import axios from 'axios';
 
+ // 전체 관리자 조회
+ export const admin_list = () => axios.get("/admin")
+
+ // 관리자 등록
+ export const admin_insert = (adminId, adminPw) => axios.post("/admin", {adminId, adminPw})
+
+ // 관리자 삭제
+ export const admin_delete = (adminNo) => axios.delete(`/admin/${adminNo}`)
+
  // 전체 사용자 조회
  export const user_list = () => axios.get("/admin/user_list")
+ 
+ // 사용자 등록
+ export const user_insert = (userId, userPw, name, address, phone, email, regDate, updDate, status) => axios.post("/admin/user_list", {userId, userPw, name, address, phone, email, regDate, updDate, status})
+ 
+ // 사용자 수정
+ export const user_update = (userNo, userId, userPw, name, address, phone, email, regDate, updDate, status) => axios.put("/admin/user_list", {userNo, userId, userPw, name, address, phone, email, regDate, updDate, status})
+ 
+ // 사용자 삭제
+ export const user_delete = (userNo) => axios.delete(`/admin/user_list/${userNo}`)
 
  // 전체 예매 내역 조회
  export const booking_list = () => axios.get("/admin/booking_list")

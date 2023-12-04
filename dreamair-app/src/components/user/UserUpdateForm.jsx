@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from 'react'
 
-const UserUpdateForm = ({id, user}) => {
+const UserUpdateForm = ({id, user, onUpdate}) => {
 
   // ⭐ state 설정
-  const [password, setPassword] = useState('')
-  const [passwordcheck, setPasswordCheck] = useState('')
+  const userId = id
+  const [userPw, setUserPw] = useState('')
+  const [userPwCheck, setUserPwCheck] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
 
+  // submit하면서 변경할 값
+  const handelChangePassword = (e) => {
+    setUserPw(e.target.value)
+  }
   const handleChangeName = (e) => {
     setName(e.target.value)
   }
+  const handleChangePhone = (e) => {
+    setPhone(e.target.value)
+  }
+  const handelChangeEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handleChangeAddress = (e) => {
+    setAddress(e.target.value)
+  }
 
+  const onSubmit = () => {
+    onUpdate(userId, userPw, name, phone, email, address)
+    console.log(userId);
+  }
+
+  // 기존 정보 세팅하기
   useEffect(() => {
     if(user) {
       setName(user.name);
@@ -30,18 +50,18 @@ const UserUpdateForm = ({id, user}) => {
       <hr />
       
       <div className="col-12">
-        <label htmlFor="id" className="form-label">아이디</label>
-        <input type="text" value={id} className="form-control" />
+        <label htmlFor="userId" className="form-label">아이디</label>
+        <input type="text" value={userId} className="form-control" readOnly/>
       </div>
 
       <div className="col-12">
-        <label htmlFor="password" className="form-label">비밀번호</label>
+        <label htmlFor="userPw" className="form-label">비밀번호</label>
+        <input type="password" onChange={handelChangePassword} className="form-control" />
+      </div>
+
+      <div className="col-12">
+        <label htmlFor="userPwCheck" className="form-label">비밀번호 확인</label>
         <input type="password" className="form-control" />
-      </div>
-
-      <div className="col-12">
-        <label htmlFor="passwordcheck" className="form-label">비밀번호 확인</label>
-        <input type="passwordcheck" className="form-control" />
       </div>
 
       <div className="col-12">
@@ -51,23 +71,23 @@ const UserUpdateForm = ({id, user}) => {
 
       <div className="col-12">
         <label htmlFor="phone" className="form-label">핸드폰 번호</label>
-        <input type="text" value={phone} className="form-control" />
+        <input type="text" value={phone} onChange={handleChangePhone} className="form-control" />
       </div>
 
       <div className="col-12">
         <label htmlFor="email" className="form-label">이메일</label>
-        <input type="email" value={email} className="form-control" />
+        <input type="email" value={email} onChange={handelChangeEmail} className="form-control" />
       </div>
 
       <div className="col-12">
         <label htmlFor="address" className="form-label">주소</label>
-        <input type="text" value={address} className="form-control" />
+        <input type="text" value={address} onChange={handleChangeAddress} className="form-control" />
       </div>
 
       <br />
 
       <div className="btn-box d-grid gap-2">
-          <button type="submit" className="btn btn-outline-primary btn-lg">회원정보 수정</button>
+          <button type="submit" onClick={onSubmit} className="btn btn-outline-primary btn-lg">회원정보 수정</button>
       </div>
     </div>
   )

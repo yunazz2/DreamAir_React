@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { DateRangePicker } from 'react-bootstrap-daterangepicker';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
-// import { Calendar } from 'react-date-range'
 import moment from 'moment';
+import 'moment/locale/ko';
 
 const TestDate = () => {
   const [dateRange, setDateRange] = useState({
@@ -13,34 +12,12 @@ const TestDate = () => {
 
   const handleDateRangeChange = (event, picker) => {
     setDateRange({
-      startDate: picker.startDate,
-      endDate: picker.endDate,
+      startDate: picker.startDate.format('YYYY/MM/DD'),
+      endDate: picker.endDate.format('YYYY/MM/DD'),
+      
     });
 
     console.log('New date range selected:', picker.startDate.format('YYYY-MM-DD'), 'to', picker.endDate.format('YYYY-MM-DD'));
-  };
-
-  const customOptions = {
-    singleDatePicker: true,
-    autoApply: true,
-    minYear: 1000,
-    maxYear: 9999,
-    locale: {
-      format: 'YYYY/MM/DD',
-      separator: ' ~ ',
-      applyLabel: '확인',
-      cancelLabel: '취소',
-      fromLabel: 'From',
-      toLabel: 'To',
-      customRangeLabel: 'Custom',
-      weekLabel: '주',
-      daysOfWeek: ['일', '월', '화', '수', '목', '금', '토'],
-      monthNames: [
-        '1월', '2월', '3월', '4월', '5월', '6월',
-        '7월', '8월', '9월', '10월', '11월', '12월',
-      ],
-      firstDay: 1,
-    },
   };
 
   return (
@@ -50,12 +27,24 @@ const TestDate = () => {
         startDate={dateRange.startDate}
         endDate={dateRange.endDate}
         onApply={handleDateRangeChange}
-        options={customOptions}
       >
         <input type="text" id="input-day" className="form-control" />
       </DateRangePicker>
     </div>
   );
+
+
+  // const [selectedDate, setSelectedDate] = useState('');
+
+  // const handleDateChange = (event, picker) => {
+  //   setSelectedDate(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+  // };
+
+  // return (
+  //   <DateRangePicker onApply={handleDateChange}>
+  //     <input type="text" value={selectedDate} readOnly />
+  //   </DateRangePicker>
+  // );
 };
 
 export default TestDate;

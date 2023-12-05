@@ -1,11 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import Index from './pages/Index';
+
+import BoardInsertContainer from './containers/board/BoardInsertContainer';
 import BoardListContainer from './containers/board/BoardListContainer';
 import BoardReadContainer from './containers/board/BoardReadContainer';
-import BoardInsertContainer from './containers/board/BoardInsertContainer';
 import BoardUpdateContainer from './containers/board/BoardUpdateContainer';
+
 import MyPageContainer from './containers/user/MyPageContainer';
 import UserUpdateContainer from './containers/user/UserUpdateContainer';
 import CheckInContainer from './containers/user/CheckInContainer';
@@ -15,9 +17,30 @@ import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+
 import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
 import Notice from './containers/booking/Notice';
+
+import AdminListContainer from './containers/admin/AdminListContainer';
+import UserListContainer from './containers/admin/UserListContainer';
+import BookingListContainer from './containers/admin/BookingListContainer';
+import TicketListContainer from './containers/admin/TicketListContainer';
+import FinalCheckContainer from './containers/admin/FinalCheckContainer';
+import QRListContainer from './containers/admin/QRListContainer';
+import AdminInsertContainer from './containers/admin/AdminInsertContainer';
+
+import ProductListContainer from './containers/product/ProductListContainer';
+import ProductInsertContainer from './containers/product/ProductInsertContainer';
+import ProductUpdateContainer from './containers/product/ProductUpdateContainer';
+
+import FlightListContainer from './containers/flight/FlightListContainer';
+import FlightInsertContainer from './containers/flight/FlightInsertContainer';
+import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
+
+import IndexContainer from './containers/bus/IndexContainer';
+import ReservationContainer from './containers/bus/ReservationContainer';
+
 
 function App() {
   return (
@@ -40,7 +63,7 @@ function App() {
         <Route path="/user/logout" element={<LogoutContainer/>}/>
       </Routes>
 
-      {/* board */}
+      {/* BOARD */}
       <Routes>
         <Route path="/board" element={<BoardListContainer/>}/>
         <Route path="/board/:boardNo" element={<BoardReadContainer/>}/>
@@ -55,6 +78,41 @@ function App() {
         <Route path='booking/notice' element={<Notice />} />
       </Routes>
 
+
+      {/* ADMIN */}
+      <Routes>
+        <Route path="/admin" element={<AdminListContainer/>}/>
+        <Route path="/admin/admin_insert" element={<AdminInsertContainer/>}/>
+        <Route path="/admin/user_list" element={<UserListContainer/>}/>
+        <Route path="/admin/booking_list" element={<BookingListContainer/>}/>
+        <Route path="/admin/ticket_list" element={<TicketListContainer/>}/>
+        <Route path="/admin/Final_Check" element={<FinalCheckContainer/>}/>
+      </Routes>
+
+      {/* PRODUCT */}
+      <Routes>
+        <Route path="/product" element={<ProductListContainer/>}/>
+        <Route path="/product/product_insert" element={<ProductInsertContainer/>}/>
+        <Route path="/product/product_update/:productNo" element={<ProductUpdateContainer/>}/>
+      </Routes>
+
+      {/* FLIGHT */}
+      <Routes>
+        <Route path="/flight" element={<FlightListContainer/>}/>
+        <Route path="/flight/flight_insert" element={<FlightInsertContainer/>}/>
+        <Route path="/flight/flight_update/:flightNo" element={<FlightUpdateContainer/>}/>
+      </Routes>
+
+      {/* BUS */}
+      <Routes>
+        <Route path="/bus" element={<IndexContainer/>}/>
+        <Route path="/bus/reservation" element={<ReservationContainer/>}/>
+      </Routes>
+
+      {/* QR */}
+      <Routes>
+        <Route path="/qr" element={<QRListContainer/>}/>
+      </Routes>
     </BrowserRouter>
 
   );

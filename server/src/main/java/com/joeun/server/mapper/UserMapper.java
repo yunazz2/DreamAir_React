@@ -38,7 +38,7 @@ public interface UserMapper {
     public int update(Users user) throws Exception;
 
     // 회원 삭제
-    public Users deleteUsers(String username);
+    public int deleteUsers(String username);
 
     // 마일리지 조회
     public Users selectMileage(String username) throws Exception;
@@ -63,6 +63,6 @@ public interface UserMapper {
     public Users deleteAuth(String username);
     
     // 회원 삭제 시, mileage 테이블 삭제
-    public Users deleteMileage(String username);
+    public int deleteMileage(String username);
 
 }

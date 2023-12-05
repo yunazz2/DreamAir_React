@@ -142,12 +142,11 @@ public class UserServiceImpl implements UserService {
     
     // 회원 탈퇴
     @Override
-    public Users deleteUsers(String userId) throws Exception {
+    public int deleteUsers(String userId) {
         
-        // 사용자를 삭제하고 삭제된 사용자 정보를 반환
-        Users deleteUser = userMapper.deleteUsers(userId);
+        int result = userMapper.deleteUsers(userId);
 
-        return deleteUser;
+        return result;
     }
     
 
@@ -207,11 +206,11 @@ public class UserServiceImpl implements UserService {
     
     // 회원 탈퇴 시, mileage 테이블 삭제
     @Override
-    public Users deleteMileage(String username) {
+    public int deleteMileage(String username) {
 
-        Users deleteMileage = userMapper.deleteMileage(username);
+        int result = userMapper.deleteMileage(username);
 
-        return deleteMileage;
+        return result;
     }
 
     

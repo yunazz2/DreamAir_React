@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-const UserUpdateForm = ({id, user, onUpdate}) => {
+const UserUpdateForm = ({userId, user, onUpdate}) => {
 
   // ⭐ state 설정
-  const userId = id
   const [userPw, setUserPw] = useState('')
   const [userPwCheck, setUserPwCheck] = useState('')
   const [name, setName] = useState('')
@@ -33,7 +32,7 @@ const UserUpdateForm = ({id, user, onUpdate}) => {
     console.log(userId);
   }
 
-  // 기존 정보 세팅하기
+  // 회원의 기존 정보 세팅
   useEffect(() => {
     if(user) {
       setName(user.name);

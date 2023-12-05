@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Mileage = () => {
+const Mileage = ({user}) => {
+
+
   return (
 
     <div className="container p-4">
@@ -8,7 +10,7 @@ const Mileage = () => {
     
       <br />
       
-      <h3 className="text-center">보유 마일리지 : </h3>
+      <h3 className="text-center">보유 마일리지 : <span><input type="text" value={user.mileage}/></span></h3>
     </div>
   )
 }

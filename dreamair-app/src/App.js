@@ -30,11 +30,11 @@ function App() {
     {/* user */}
       <Routes>
         <Route path="/user" element={<MyPageContainer/>}/>
-        <Route path="/user/update/:id" element={<UserUpdateContainer/>}/>
-        <Route path="/user/checkin/:id" element={<CheckInContainer/>}/>
-        <Route path="/user/mileage/:id" element={<MileageContainer/>}/>
-        <Route path="/user/deleteaccount/:id" element={<DeleteAccountContainer/>}/>
-        <Route path="/user/mybooking/:id" element={<MyBookingContainer/>}/>
+        <Route path="/user/update/:userId" element={<UserUpdateContainer/>}/>
+        <Route path="/user/checkin/:userId" element={<CheckInContainer/>}/>
+        <Route path="/user/mileage/:userId" element={<MileageContainer/>}/>
+        <Route path="/user/deleteaccount/:userId" element={<DeleteAccountContainer/>}/>
+        <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
       </Routes>
     </BrowserRouter>

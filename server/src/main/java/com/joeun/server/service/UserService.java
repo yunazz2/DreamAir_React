@@ -29,7 +29,7 @@ public interface UserService {
     public int update(Users user) throws Exception;
 
     // 회원 삭제
-    public Users deleteUsers(String userId) throws Exception;
+    public int deleteUsers(String userId);
 
     // 회원 마일리지 조회
     public Users selectMileage(String userId) throws Exception;
@@ -53,5 +53,5 @@ public interface UserService {
     public Users deleteAuth(String username);
 
     // 회원 삭제 시, mileage 테이블 삭제
-    public Users deleteMileage(String username);
+    public int deleteMileage(String username);
 }

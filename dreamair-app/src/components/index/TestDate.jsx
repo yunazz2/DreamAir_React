@@ -14,8 +14,7 @@ const TestDate = () => {
     setDateRange({
       startDate: picker.startDate.format('YYYY/MM/DD'),
       endDate: picker.endDate.format('YYYY/MM/DD'),
-      
-    });
+  });
 
     console.log('New date range selected:', picker.startDate.format('YYYY-MM-DD'), 'to', picker.endDate.format('YYYY-MM-DD'));
   };
@@ -28,23 +27,11 @@ const TestDate = () => {
         endDate={dateRange.endDate}
         onApply={handleDateRangeChange}
       >
-        <input type="text" id="input-day" className="form-control" />
+        <input type="text" id="input-day" value={`${dateRange.startDate} ~ ${dateRange.endDate}`} className="form-control" />
       </DateRangePicker>
     </div>
   );
 
-
-  // const [selectedDate, setSelectedDate] = useState('');
-
-  // const handleDateChange = (event, picker) => {
-  //   setSelectedDate(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
-  // };
-
-  // return (
-  //   <DateRangePicker onApply={handleDateChange}>
-  //     <input type="text" value={selectedDate} readOnly />
-  //   </DateRangePicker>
-  // );
 };
 
 export default TestDate;

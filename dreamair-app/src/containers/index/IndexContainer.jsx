@@ -15,7 +15,7 @@ import DateRange from '../../components/index/DateRange'
 const IndexContainer = () => {
   return (
     <div>
-      <TestDate />
+      {/* <TestDate /> */}
       {/* <DateRange /> */}
       <SearchFlight />
       <QuickMenu />

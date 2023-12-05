@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { DateRangePicker } from 'react-bootstrap-daterangepicker';
+import 'bootstrap-daterangepicker/daterangepicker.css';
+import moment from 'moment';
+import 'moment/locale/ko';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const SearchFlightForm = () => {
   const [roundTrip, setRoundTrip] = useState('왕복 가는편');
@@ -8,7 +15,7 @@ const SearchFlightForm = () => {
   const [departureDate, setDepartureDate] = useState('');
   const [pasCount, setPasCount] = useState(1);
   const [showPassengerBox, setShowPassengerBox] = useState(false);
-
+  
   const booking = {
     roundTrip : roundTrip,
     departure : departure,
@@ -17,6 +24,35 @@ const SearchFlightForm = () => {
     pasCount : pasCount
   }
   
+  // 왕복 날짜
+  const [dateRange, setDateRange] = useState({
+    startDate: moment(),
+    endDate: moment(),
+  });
+
+  // 왕복 날짜 이벤트
+  const handleDateRangeChange = (event, picker) => {
+    setDateRange({
+      startDate: picker.startDate.format('YYYY/MM/DD'),
+      endDate: picker.endDate.format('YYYY/MM/DD'),
+    })
+  }
+
+  // 왕복 날짜 useEffect
+  useEffect( () => {
+    setDepartureDate(`${dateRange.startDate} ~ ${dateRange.endDate}`)
+  }, [dateRange])
+
+  const [singleDate, setSingleDate] = useState(null);
+  
+  // 편도 날짜 이벤트
+  const handleDateChange = (date) => {
+    setSingleDate(date);
+  };
+
+  useEffect( () => {
+    setDepartureDate(singleDate)
+  }, [singleDate])
 
   const handleRoundTripChange = (value) => {
     setRoundTrip(value);
@@ -30,13 +66,19 @@ const SearchFlightForm = () => {
     setDestination(value);
   };
 
-  const handleDepartureDateChange = (e) => {
-    setDepartureDate(e.target.value);
-  };
+  // const handleDepartureDateChange = (e) => {
+  //   console.log(e.target.value); 
+  //   setDepartureDate(e.target.value);
+  // };
 
   const handlePasCountChange = (value) => {
+    console.log(value);
     setPasCount(value);
   };
+
+  useEffect( () => {
+    handlePasCountChange(pasCount)
+  }, [pasCount])
 
   const handleIconClick = () => {
     setShowPassengerBox(true);
@@ -53,8 +95,10 @@ const SearchFlightForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // 여기에 폼 제출 로직을 추가하세요.
+
+    alert(departureDate)
     console.log('폼 제출됨!');
   };
 
@@ -66,7 +110,7 @@ const SearchFlightForm = () => {
             <div className="tab-content">
               <div className="tab-pane active" id="tab1">
                 <div className="tab_wrap">
-                  <Form onSubmit={handleSubmit} id="frm">
+                  <Form id="frm">
                     <Row className="d-flex py-2">
                       <Col>
                         <Form.Check
@@ -128,25 +172,51 @@ const SearchFlightForm = () => {
                         </Form.Floating>
                       </Col>
                       <Col>
-                        <Form.Floating>
-                          <Form.Control
-                            type="text"
-                            name="departureDate"
-                            placeholder="yyyy/mm/dd"
-                            id="input-start"
-                            value={departureDate}
-                            onChange={(e) => handleDepartureDateChange(e)}
-                          />
-                          <label htmlFor="floatingSelectGrid">여정</label>
-                        </Form.Floating>
+                          {(roundTrip === '왕복 가는편') && (
+                            <Form.Floating>
+                                <DateRangePicker
+                                  startDate={dateRange.startDate}
+                                  endDate={dateRange.endDate}
+                                  onApply={handleDateRangeChange}
+                                  > 
+                                <Form.Control
+                                  type="text"
+                                  name="departureDate"
+                                  placeholder="yyyy/mm/dd"
+                                  id="input-start"
+                                />
+                                </DateRangePicker>
+                              <label htmlFor="floatingSelectGrid">여정</label>
+                            </Form.Floating>
+                          )}
+
+                          {(roundTrip === '편도') && (
+                            <Form.Floating>
+                                <DatePicker
+                                  selected={singleDate}
+                                  onChange={handleDateChange}
+                                  dateFormat="yyyy/MM/dd" // 날짜 표시 형식 지정
+                                  // placeholderText="날짜를 선택하세요" // 선택 전 플레이스홀더 텍스트
+                                  locale="ko" // 한국어 지원
+                                  id="input-start"
+                                />
+                                {/* <Form.Control
+                                  type="text"
+                                  name="departureDate"
+                                  placeholder="yyyy/mm/dd"
+                                  id="input-start"
+                                /> */}
+                              {/* <label htmlFor="floatingSelectGrid">여정</label> */}
+                            </Form.Floating>
+                          )}
                       </Col>
                       <Col>
                         <div className="passenger">
                           <Form.Floating>
-                            <a className="text-center" href="javascript:;" onClick={handleIconClick}>
+                            <div className="text-center" id='icon_click' onClick={handleIconClick}>
                               탑승객
                               <Form.Control className="form-control" readOnly />
-                            </a>
+                            </div>
                             {showPassengerBox && (
                               <div className="number_box">
                                 <div className="d-flex position-absolute bottom-0">
@@ -175,7 +245,7 @@ const SearchFlightForm = () => {
                     </Row>
 
                     <div className="search_btn pt-2">
-                      <Button id="booking_btn" type="submit" className="btn btn-primary">
+                      <Button id="booking_btn" onClick={handleSubmit} className="btn btn-primary">
                         검색
                       </Button>
                     </div>

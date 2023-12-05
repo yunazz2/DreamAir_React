@@ -14,20 +14,20 @@ import MileageContainer from './containers/user/MileageContainer';
 import DeleteAccountContainer from './containers/user/DeleteAccountContainer';
 import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
+import Join from './containers/Join';
+import Login from './containers/Login';
 
 function App() {
   return (
     <BrowserRouter>
-    {/* board */}
+      {/* index */}
       <Routes>
         <Route path="/" element={<Index/>}/>
-        <Route path="/board" element={<BoardListContainer/>}/>
-        <Route path="/board/:boardNo" element={<BoardReadContainer/>}/>
-        <Route path="/board/insert" element={<BoardInsertContainer/>}/>
-        <Route path="/board/update/:boardNo" element={<BoardUpdateContainer/>}/>
+        <Route path="/join" element={<Join/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     
-    {/* user */}
+      {/* user */}
       <Routes>
         <Route path="/user" element={<MyPageContainer/>}/>
         <Route path="/user/update/:userId" element={<UserUpdateContainer/>}/>
@@ -37,6 +37,16 @@ function App() {
         <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
       </Routes>
+
+      {/* board */}
+      <Routes>
+        <Route path="/board" element={<BoardListContainer/>}/>
+        <Route path="/board/:boardNo" element={<BoardReadContainer/>}/>
+        <Route path="/board/insert" element={<BoardInsertContainer/>}/>
+        <Route path="/board/update/:boardNo" element={<BoardUpdateContainer/>}/>
+      </Routes>
+
+
     </BrowserRouter>
 
   );

@@ -14,7 +14,7 @@ const MyPageContainer = () => {
                 <a className="btn btn-outline-primary btn-lg"><Link to={`/user/checkin/${userId}`}>체크인</Link></a>
                 <a className="btn btn-outline-primary btn-lg"><Link to={`/user/mileage/${userId}`}>마일리지 조회</Link></a>
                 <a className="btn btn-outline-primary btn-lg"><Link to={`/user/deleteaccount/${userId}`}>회원 탈퇴</Link></a>
-                <a className="btn btn-outline-primary btn-lg"><Link to="/user/mybooking">나의 탑승권 관리</Link></a>
+                <a className="btn btn-outline-primary btn-lg"><Link to={`/user/mybooking/${userId}`}>나의 탑승권 관리</Link></a>
                 <a className="btn btn-outline-primary btn-lg"><Link to="/user/logout">로그아웃</Link></a>
             </div>
         </div>

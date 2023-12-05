@@ -6,7 +6,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { ko } from 'date-fns/esm/locale';
 
 const SearchFlightForm = () => {
   const [roundTrip, setRoundTrip] = useState('왕복 가는편');
@@ -47,6 +47,7 @@ const SearchFlightForm = () => {
   
   // 편도 날짜 이벤트
   const handleDateChange = (date) => {
+    console.log(date);
     setSingleDate(date);
   };
 
@@ -98,6 +99,7 @@ const SearchFlightForm = () => {
     // e.preventDefault();
     // 여기에 폼 제출 로직을 추가하세요.
 
+    console.log(departureDate);
     alert(departureDate)
     console.log('폼 제출됨!');
   };
@@ -194,10 +196,12 @@ const SearchFlightForm = () => {
                             <Form.Floating>
                                 <DatePicker
                                   selected={singleDate}
+                                  startDate={singleDate}
+                                  endDate={singleDate}
                                   onChange={handleDateChange}
                                   dateFormat="yyyy/MM/dd" // 날짜 표시 형식 지정
-                                  // placeholderText="날짜를 선택하세요" // 선택 전 플레이스홀더 텍스트
-                                  locale="ko" // 한국어 지원
+                                  placeholderText="날짜를 선택하세요" // 선택 전 플레이스홀더 텍스트
+                                  locale={ko} // 한국어 지원
                                   id="input-start"
                                 />
                                 {/* <Form.Control

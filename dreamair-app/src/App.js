@@ -14,8 +14,8 @@ import MileageContainer from './containers/user/MileageContainer';
 import DeleteAccountContainer from './containers/user/DeleteAccountContainer';
 import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
-import Join from './containers/Join';
-import Login from './containers/Login';
+import JoinContainer from './containers/JoinContainer';
+import LoginContainer from './containers/LoginContainer';
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
       {/* index */}
       <Routes>
         <Route path="/" element={<Index/>}/>
-        <Route path="/join" element={<Join/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/join" element={<JoinContainer/>}/>
+        <Route path="/login" element={<LoginContainer/>}/>
       </Routes>
     
       {/* user */}

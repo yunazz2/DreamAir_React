@@ -1,11 +1,14 @@
 import React from 'react'
+import MyBooking from '../../components/user/MyBooking'
 
 const MyBookingContainer = () => {
-
+  
 
   
   return (
-    <div>MyBookingContainer</div>
+    <>
+      <MyBooking />
+    </>
   )
 }
 

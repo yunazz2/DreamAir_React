@@ -2,7 +2,12 @@ import React from 'react'
 
 const CheckIn = () => {
   return (
-    <div>CheckIn</div>
+    <div>CheckIn
+
+
+
+      
+    </div>
   )
 }
 

@@ -1,8 +1,11 @@
 import React from 'react'
+import CheckIn from '../../components/user/CheckIn'
 
 const CheckInContainer = () => {
   return (
-    <div>CheckInContainer</div>
+    <>
+      <CheckIn />
+    </>
   )
 }
 

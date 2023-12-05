@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as admin from '../../apis/admin'
 import UserList from '../../components/admin/UserList';
+import { useNavigate } from 'react-router-dom';
 
 const UserListContainer = () => {
+
+  const navigate = useNavigate()
 
   const [userList, setUserList] = useState([]);
 
@@ -14,11 +17,20 @@ const UserListContainer = () => {
     setUserList(data);
   };
 
+  const onDelete = async (userNo) => {
+    const response = await admin.user_delete(userNo);
+    const data = await response.data;
+    console.log(data);
+
+    navigate('/admin/user_list');
+  }
   useEffect(() => {
       getUserList();
   }, [])
 
-  return ( <UserList userList={userList}></UserList> )
+  return ( <UserList userList={userList}
+                     onDelete={onDelete}
+  /> )
 
   
 }

@@ -24,6 +24,8 @@ import FlightInsertContainer from './containers/flight/FlightInsertContainer';
 import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
 import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
+import QRListContainer from './containers/admin/QRListContainer';
+import AdminInsertContainer from './containers/admin/AdminInsertContainer';
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
       {/* ADMIN */}
       <Routes>
         <Route path="/admin" element={<AdminListContainer/>}/>
+        <Route path="/admin/admin_insert" element={<AdminInsertContainer/>}/>
         <Route path="/admin/user_list" element={<UserListContainer/>}/>
         <Route path="/admin/booking_list" element={<BookingListContainer/>}/>
         <Route path="/admin/ticket_list" element={<TicketListContainer/>}/>
@@ -67,9 +70,16 @@ function App() {
       {/* BUS */}
       <Routes>
         <Route path="/bus" element={<IndexContainer/>}/>
-        <Route path="/bus/resevation" element={<ReservationContainer/>}/>
+        <Route path="/bus/reservation" element={<ReservationContainer/>}/>
+      </Routes>
+
+      {/* QR */}
+      <Routes>
+        <Route path="/qr" element={<QRListContainer/>}/>
       </Routes>
     </BrowserRouter>
+
+    
   );
 }
 

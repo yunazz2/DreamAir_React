@@ -19,7 +19,7 @@ const AdminInsertForm = ({ onInsert }) => {
     }
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <h1 style={{ textAlign: 'center' }}>관리자 정보 등록</h1>
 
         <div className="row g-3">
@@ -42,8 +42,8 @@ const AdminInsertForm = ({ onInsert }) => {
           <hr className="my-4" />
 
           <div className="d-flex justify-content-between">
-            <Link to="/admin">목록</Link>
-            <button className="btn btn-outline-primary btn-lg" onClick={onSubmit }>관리자 등록</button>
+            <button className="btn btn-secondary btn-lg"><Link to="/admin">목록</Link></button>
+            <button className="btn btn-primary btn-lg" onClick={ onSubmit }>관리자 등록</button>
           </div>
         </div>
     </div>

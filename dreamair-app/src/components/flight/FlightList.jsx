@@ -57,6 +57,11 @@ const FlightList = ( { flightList, flightNo, onDelete }) => {
           </tbody>
         </table>
       )}
+      {flightList === null && (
+        <div>
+          {flightList && flightList.length === 0 && <div>등록된 항공기 정보가 없습니다.</div>}
+        </div>
+      )}
       </div>
   )}
 

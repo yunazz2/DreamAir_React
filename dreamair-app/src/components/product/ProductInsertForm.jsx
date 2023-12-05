@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const ProductInsertForm = ({productId, file, routeNo, name, productCat, productPrice, departure, destination, productRegdate, productUpdate, description, unitsInStock, onInsert}) => {
-  const onClick = () => {
+  const handleInsert = () => {
     onInsert(productId, file, routeNo, name, productCat, productPrice, departure, destination, productRegdate, productUpdate, description, unitsInStock)
   }
   
@@ -102,7 +102,7 @@ const ProductInsertForm = ({productId, file, routeNo, name, productCat, productP
           <hr className="my-4" />
 
           <div className="d-flex justify-content-between">
-            <button className='btn btn-primary' onClick={ () => onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, productRegdate, productUpdate, description, unitsInStock) }>등록</button>
+            <button className='btn btn-primary' onClick={ handleInsert }>등록</button>
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
           </div>
       </div>

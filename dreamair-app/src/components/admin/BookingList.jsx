@@ -19,7 +19,6 @@ const BookingList = ({bookingList}) => {
               <th>탑승인원</th>
               <th>왕복여부</th>
               <th>상태</th>
-              <th colSpan="2">비고</th>
             </tr>
           </thead>
           <tbody>

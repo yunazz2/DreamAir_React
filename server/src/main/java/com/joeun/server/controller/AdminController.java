@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Files;
+import com.joeun.server.dto.Product;
 import com.joeun.server.dto.QR;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.AdminService;
@@ -72,7 +72,7 @@ public class AdminController {
         try {
             int result = adminService.admin_insert(admin);
             if( result > 0 )
-                return new ResponseEntity<>("관리자 등록 완료", HttpStatus.CREATED);  // 201
+                return new ResponseEntity<>("관리자 등록 완료", HttpStatus.OK);  // 201
             else
                 return new ResponseEntity<>("관리자 등록 실패", HttpStatus.OK);  
 
@@ -150,59 +150,8 @@ public class AdminController {
         }
     }
 
-    // 전체 탑승권 목록 조회
-    @GetMapping("/ticket_list")
-    public ResponseEntity<?> ticket_getAll() {
-        log.info("[GET] - /admin/ticket_list - 전체 탑승권 목록");
-        
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        String today = format.format(now);
-        log.info("today : " + today);
-        
-        Booking ticket = new Booking();
-        ticket.setDepartureDate(today);
-
-        int select = ticket.getSelect();
-        int checkedIn = ticket.getCheckedIn();
-        int isBoarded = ticket.getIsBoarded();
-        int flightNo = ticket.getFlightNo();
-
-       try {
-
-            switch (select) {
-                case 1: checkedIn = 1; isBoarded = 0; break;
-                case 2: checkedIn = 1; isBoarded = 1; break;
-            }
-            
-            List<Booking> ticketList = null;
-
-            if(select==0){
-                if(flightNo==0){
-                    ticketList = adminService.ticket_list(today);
-                } else {
-                    ticketList = adminService.ticket_selectList_w(today, flightNo);
-                }
-            } else{
-                log.info("검색....");
-                ticketList = adminService.ticket_selectList(today, flightNo, checkedIn, isBoarded);
-            }
-
-            List<Booking> bookingList = adminService.booking_list();
-            if( bookingList == null )
-                log.info("예매 목록 없음");
-            else 
-                log.info("예매 목록 수 : " + bookingList.size());
-
-            return new ResponseEntity<>(bookingList, HttpStatus.OK);
-            } catch (Exception e) {
-                log.error(null, e);
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-    }
-
     // 탑승권 화면 - 탑승 최종 확인 위한
-    @GetMapping("Final_check/{ticketNo}")
+    @GetMapping("final_check/{ticketNo}")
     public ResponseEntity<?> getOne(@PathVariable Integer ticketNo) {
         log.info("[GET] - /admin/Final_check");  
         try {
@@ -233,51 +182,121 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    
-    // @GetMapping(value="/Final_check")
-    // public String ticket_Checking(Model model, Booking ticket, Files files, QR qr) throws Exception{
-    //     log.info("[GET] - /admin/Final_check");       
 
-    //     int ticketNo = ticket.getTicketNo();
-    //     // ticketNo로 탑승권 조회
-    //     List<Booking> pasTicketList = adminService.pas_ticketList(ticketNo);
+    // 탑승권 목록 조회
+    @GetMapping(value="/ticket_list")
+    public ResponseEntity<?> ticket_listPro(Booking ticket, Product product) throws Exception {
+        log.info("[GET] - /admin/ticket_list");
+
+        Date now = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String today = format.format(now);
+        log.info("today : " + today);
+        ticket.setDepartureDate(today);
         
-        // files.setParentTable("booking");
-        // files.setParentNo(ticketNo);
-        // List<Files> fileList = fileService.listByParent(files);
-
-        // qr.setParentTable("booking");
-        // qr.setParentNo(ticketNo);
-        // List<QR> qrList = qrService.listByParent(qr);
-
-    //     model.addAttribute("pasTicketList", pasTicketList);
-    //     model.addAttribute("fileList", fileList);
-    //     model.addAttribute("qrList", qrList);
+        int select  = ticket.getSelect();
+        int checkedIn = ticket.getCheckedIn();
+        int isBoarded = ticket.getIsBoarded();
+        int flightNo = ticket.getFlightNo();
         
-    //     return "admin/Final_check";
-    // }
+        log.info("select : " + select);
+        log.info("checkedIn : " + checkedIn);
+        log.info("isBoarded : " + isBoarded);
+        log.info("flightNo : " + flightNo);
 
-    // // 탑승권 처리 - 탑승 최종 확인 위한
-    // @PostMapping(value="/Final_check")
-    // public String ticket_CheckingPro(Model model, Booking ticket) throws Exception{
-    //     log.info("[POST] - /admin/Final_check");       
+        switch (select) {
+            case 1: checkedIn = 1; isBoarded = 0; break;
+            case 2: checkedIn = 1; isBoarded = 1; break;
+        }
+        
+        List<Booking> ticketList = null;
+        
+        // 전체조회
+        if(select==0){
+            if(flightNo==0){
+                ticketList = adminService.ticket_list(today);
+            } else {
+                ticketList = adminService.ticket_selectList_w(today, flightNo);
+            }
+        } else{
+            // 검색
+            log.info("검색....");
+            ticketList = adminService.ticket_selectList(today, flightNo, checkedIn, isBoarded);
+        }
 
-    //     // ticketNo에 해당하는 정보 조회
-    //     int ticketNo = ticket.getTicketNo();
+        // log.info("ticketList : " + ticketList);
 
-    //     // adminService.ticket_update(ticketNo);
-    //     // 버튼을 클릭 하면, '탑승 완료'로 처리
-    //     int isBoarded = 1;
-    //     ticket.setIsBoarded(isBoarded);
-    //     int result = adminService.ticket_update_b(ticketNo);
-    //     if(result > 0 ){
-    //         log.info("탑승 완료 DB 처리");
-    //     }
-    //     // 탑승처리가 완료되면 QR 코드 삭제
+        return new ResponseEntity<>(ticketList, HttpStatus.OK);
+    }
 
-    //     return "redirect:/admin/ticket_list";
-    // }
+    // 탑승권 처리 - 탑승 최종 확인 위한
+    @PostMapping(value="/Final_check")
+    public ResponseEntity<?> ticket_CheckingPro(@RequestBody Booking ticket) {
+        log.info("[POST] - /admin/Final_check");       
+        try {
+            // ticketNo에 해당하는 정보 조회
+            int ticketNo = ticket.getTicketNo();
 
+            int isBoarded = 1;
+            ticket.setIsBoarded(isBoarded);
+            log.info("ticketNo : " + ticketNo);
+           return new ResponseEntity<>("탑승권 처리 완료", HttpStatus.OK);  
+           
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @GetMapping(value = "/Final_check_complete")
+    public ResponseEntity<?> finalcomplete( Booking ticket) {
+        log.info("[GET] - /admin/Final_check_complete");
+        int ticketNo = ticket.getTicketNo();
+        try {
+        int isBoarded = 1;
+        
+        log.info("ticket no : " + ticketNo);
+        log.info("isBoarded : " + isBoarded);
+
+        ticket.setTicketNo(ticketNo);
+        ticket.setIsBoarded(isBoarded);
+        
+        int result = adminService.ticket_update_b(ticketNo, isBoarded);
+        if(result > 0) {
+            log.info("여기 맞음? DB 탑승 처리 완료");
+            log.info("boardingTime은?");
+        
+            //boardingTime
+            Date boardingTime = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            log.info("시간 : " + dateFormat.format(boardingTime));
+            int result2 = adminService.update_boardingTime(ticketNo, dateFormat.format(boardingTime));
+                if(result2 > 0) {
+                    return new ResponseEntity<>("탑승 완료", HttpStatus.CREATED); 
+                }
+                else {
+                    return new ResponseEntity<>("탑승 실패", HttpStatus.OK);
+                }
+        } }  catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    }
+
+    @PostMapping(value = "/Final_check_complete")
+    public ResponseEntity<?> finalcomplete1(Booking ticket) throws Exception{
+        log.info("[POST] - /admin/Final_check_complete");
+        int ticketNo = ticket.getTicketNo();
+        int isBoarded = 1;
+        
+        log.info("ticket no : " + ticketNo);
+        log.info("isBoarded : " + isBoarded);
+
+        ticket.setTicketNo(ticketNo);
+        ticket.setIsBoarded(isBoarded);
+
+        return new ResponseEntity<>(ticket, HttpStatus.CREATED);
+    }
 }

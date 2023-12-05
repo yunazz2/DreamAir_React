@@ -34,7 +34,7 @@ const UserList = ({userList, userNo, onDelete}) => {
                 <tr key={user.userNo}>
                   <td>{user.userNo}</td>
                   <td>{user.userId}</td>
-                  <td>{user.Name}</td>
+                  <td>{user.name}</td>
                   <td>{user.address}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>

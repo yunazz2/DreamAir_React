@@ -21,8 +21,6 @@ const AdminList = ( {adminList, adminNo, onDelete} ) => {
                 <th>순번</th>
                 <th>관리자 ID</th>
                 <th>관리자 PW</th>
-                <td></td>
-                <td></td>
                 <th colSpan="2">비고</th>
              </tr>
             </thead>
@@ -33,8 +31,6 @@ const AdminList = ( {adminList, adminNo, onDelete} ) => {
             <td>{admin.adminNo}</td>
             <td>{admin.adminId}</td>
             <td>{admin.adminPw}</td>
-            <td></td>
-            <td></td>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                 <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => handleDelete(adminNo) }>삭제</button></td>
             </div>

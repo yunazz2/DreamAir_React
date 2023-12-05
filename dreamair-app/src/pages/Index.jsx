@@ -1,11 +1,10 @@
 import React from 'react'
-
+import IndexContainer from '../containers/index/IndexContainer'
 
 const Index = () => {
   return (
     <div>
-        <h1>Index</h1>
-        <h3>화이팅~!</h3>
+        <IndexContainer />
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +15,9 @@ import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+import BookingListContainer from './containers/booking/BookingListContainer';
+import BookingInfoContainer from './containers/booking/BookingInfoContainer';
+import Notice from './containers/booking/Notice';
 
 function App() {
   return (
@@ -46,6 +48,12 @@ function App() {
         <Route path="/board/update/:boardNo" element={<BoardUpdateContainer/>}/>
       </Routes>
 
+      {/* booking */}
+      <Routes>
+        <Route path='booking/bookingList' element={<BookingListContainer />} />
+        <Route path='booking/info' element={<BookingInfoContainer />} />
+        <Route path='booking/notice' element={<Notice />} />
+      </Routes>
 
     </BrowserRouter>
 

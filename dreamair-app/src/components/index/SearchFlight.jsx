@@ -7,6 +7,7 @@ import 'moment/locale/ko';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
+import { addDays } from 'date-fns';
 
 const SearchFlightForm = () => {
   const [roundTrip, setRoundTrip] = useState('왕복 가는편');
@@ -25,35 +26,62 @@ const SearchFlightForm = () => {
   }
   
   // 왕복 날짜
-  const [dateRange, setDateRange] = useState({
-    startDate: moment(),
-    endDate: moment(),
-  });
+  // const [dateRange, setDateRange] = useState({
+  //   startDate: moment(),
+  //   endDate: moment(),
+  // });
 
   // 왕복 날짜 이벤트
-  const handleDateRangeChange = (event, picker) => {
-    setDateRange({
-      startDate: picker.startDate.format('YYYY/MM/DD'),
-      endDate: picker.endDate.format('YYYY/MM/DD'),
-    })
-  }
+  // const handleDateRangeChange = (event, picker) => {
+  //   setDateRange({
+  //     startDate: picker.startDate.format('YYYY/MM/DD'),
+  //     endDate: picker.endDate.format('YYYY/MM/DD'),
+  //   })
+  // }
 
   // 왕복 날짜 useEffect
-  useEffect( () => {
-    setDepartureDate(`${dateRange.startDate} ~ ${dateRange.endDate}`)
-  }, [dateRange])
+  // useEffect( () => {
+    //   setDepartureDate(`${dateRange.startDate} ~ ${dateRange.endDate}`)
+    // }, [dateRange])
+    
+    
+  // ------------ 왕복 -------------
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const onChange = (dates) => {
+    const [start, end] = dates;
 
-  const [singleDate, setSingleDate] = useState(null);
-  
-  // 편도 날짜 이벤트
-  const handleDateChange = (date) => {
-    console.log(date);
-    setSingleDate(date);
+    const startYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(start);
+    const startMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(start);
+    const startDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(start);
+    
+    const endYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(end);
+    const endMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(end);
+    const endDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(end);
+
+    const formattedDate = `${startYear}/${startMonth}/${startDay} ~ ${endYear}/${endMonth}/${endDay}`;
+
+    setStartDate(start);
+    setEndDate(end);
+    setDepartureDate(formattedDate)
   };
 
-  useEffect( () => {
-    setDepartureDate(singleDate)
-  }, [singleDate])
+  // ------------ 편도 -------------
+  const [singleDate, setSingleDate] = useState(new Date());
+  
+  const handleDateChange = (date) => {
+    const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+    const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date);
+    const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+    const formattedDate = `${year}/${month}/${day}`;
+
+    setSingleDate(date);
+    setDepartureDate(formattedDate)
+  };
+
+  // useEffect( () => {
+  //   setDepartureDate(singleDate)
+  // }, [singleDate])
 
   const handleRoundTripChange = (value) => {
     setRoundTrip(value);
@@ -176,32 +204,41 @@ const SearchFlightForm = () => {
                       <Col>
                           {(roundTrip === '왕복 가는편') && (
                             <Form.Floating>
-                                <DateRangePicker
+                                <DatePicker
+                                  selected={startDate}
+                                  onChange={onChange}
+                                  startDate={startDate}
+                                  endDate={endDate}
+                                  excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
+                                  selectsRange
+                                  selectsDisabledDaysInRange
+                                  dateFormat="yyyy/MM/dd"
+                                  locale={ko} 
+                                />
+
+                                {/* <DateRangePicker
                                   startDate={dateRange.startDate}
                                   endDate={dateRange.endDate}
                                   onApply={handleDateRangeChange}
-                                  > 
-                                <Form.Control
+                                  />  */}
+                                {/* <Form.Control
                                   type="text"
                                   name="departureDate"
                                   placeholder="yyyy/mm/dd"
                                   id="input-start"
-                                />
-                                </DateRangePicker>
-                              <label htmlFor="floatingSelectGrid">여정</label>
+                                /> */}
+                              {/* <label htmlFor="floatingSelectGrid">여정</label> */}
                             </Form.Floating>
                           )}
 
                           {(roundTrip === '편도') && (
                             <Form.Floating>
                                 <DatePicker
+                                  showIcon
                                   selected={singleDate}
-                                  startDate={singleDate}
-                                  endDate={singleDate}
                                   onChange={handleDateChange}
-                                  dateFormat="yyyy/MM/dd" // 날짜 표시 형식 지정
-                                  placeholderText="날짜를 선택하세요" // 선택 전 플레이스홀더 텍스트
-                                  locale={ko} // 한국어 지원
+                                  dateFormat="yyyy/MM/dd" 
+                                  locale={ko} 
                                   id="input-start"
                                 />
                                 {/* <Form.Control

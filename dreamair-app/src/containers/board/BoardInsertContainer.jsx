@@ -17,7 +17,6 @@ const BoardInsertContainer = () => {
 
       // 👉 게시글 목록 이동
       navigate('/board')
-
     }
     catch(e) {
       console.log(e);

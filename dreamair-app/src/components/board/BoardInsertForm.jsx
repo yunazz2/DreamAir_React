@@ -49,16 +49,16 @@ const BoardInsertForm = ({onInsert}) => {
                             </td>
                         </tr>
                         <tr>
-                            {/* <td>파일</td>
+                            <td>파일</td>
                             <td>
-                                <input type="file" value={file} multiple />
-                            </td> */}
+                                <input type="file" value={File} multiple />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             <div>
                 <Link to="/board">목록</Link>
-                <button onClick={onSubmit}>등록</button>
+                <button onClick={()=>{ onSubmit() }}>등록</button>
             </div>
         </div>
     )

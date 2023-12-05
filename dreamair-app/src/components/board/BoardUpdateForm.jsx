@@ -72,14 +72,14 @@ const BoardUpdateForm = ({boardNo, board, onUpdate, onDelete}) => {
                   <td>파일</td>
                   <td>
                     <ul>
-                      {fileList.map((file) => (
+                      {/* {fileList.map((file) => (
                         <li key={file.fileNo}>
                           <img id="imgId" src={`/img/${file.fileName}`} alt="첨부이미지" style={{ width: '400px', height: 'auto' }} th:if={`${file.filePath != null} and ${file.fileType == 'img'}`}/>
                           <br />
                           <Link to={`/file/${file.fileNo}`}>{file.originName}</Link>
                           <button type="button" className="btn btn-danger btn-sm btn-file-delete" data-fileNo={file.fileNo}>삭제</button>
                         </li>
-                      ))}
+                      ))} */}
                     </ul>
                   </td>
                 </tr>

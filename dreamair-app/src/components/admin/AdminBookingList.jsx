@@ -1,13 +1,13 @@
 import React from 'react'
 
-const BookingList = ({bookingList}) => {
+const AdminBookingList = ({AdminbookingList}) => {
   return (
     <div className='container'>
       <h1 className="text-center my-3">예매 관리</h1>
       <br />
       <br />
 
-      {bookingList != null && (
+      {AdminbookingList != null && (
         <table className="table table-striped table-hover table-bordered text-center align-middle">
           <thead>
             <tr className="table-primary">
@@ -22,12 +22,12 @@ const BookingList = ({bookingList}) => {
             </tr>
           </thead>
           <tbody>
-            {bookingList.length === 0 ? (
+            {AdminbookingList.length === 0 ? (
               <tr>
                 <td colSpan="13">등록된 예매 정보가 없습니다.</td>
               </tr>
             ) : (
-              bookingList.map((booking) => (
+              AdminbookingList.map((booking) => (
                 <tr key={booking.bookingNo}>
                   <td>{booking.bookingNo}</td>
                   <td>{booking.name}</td>
@@ -44,7 +44,7 @@ const BookingList = ({bookingList}) => {
         </table>
       )}
 
-      {bookingList == null && (
+      {AdminbookingList == null && (
         <table>
           <tbody>
             <tr>
@@ -57,4 +57,4 @@ const BookingList = ({bookingList}) => {
   );
   };
 
-export default BookingList
+export default AdminBookingList

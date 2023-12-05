@@ -24,7 +24,7 @@ import Notice from './containers/booking/Notice';
 
 import AdminListContainer from './containers/admin/AdminListContainer';
 import UserListContainer from './containers/admin/UserListContainer';
-import BookingListContainer from './containers/admin/BookingListContainer';
+import AdminBookingListContainer from './containers/admin/AdminBookingListContainer';
 import TicketListContainer from './containers/admin/TicketListContainer';
 import FinalCheckContainer from './containers/admin/FinalCheckContainer';
 import QRListContainer from './containers/admin/QRListContainer';
@@ -84,7 +84,7 @@ function App() {
         <Route path="/admin" element={<AdminListContainer/>}/>
         <Route path="/admin/admin_insert" element={<AdminInsertContainer/>}/>
         <Route path="/admin/user_list" element={<UserListContainer/>}/>
-        <Route path="/admin/booking_list" element={<BookingListContainer/>}/>
+        <Route path="/admin/booking_list" element={<AdminBookingListContainer/>}/>
         <Route path="/admin/ticket_list" element={<TicketListContainer/>}/>
         <Route path="/admin/Final_Check" element={<FinalCheckContainer/>}/>
       </Routes>

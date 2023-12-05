@@ -32,8 +32,6 @@ public class UserController {
         try {
             Users user = userService.selectById(userId);
             Users user2 = userService.selectMileage(userId);
-            System.out.println("유저 객체 : " + user);
-            System.out.println("유저 객체2 : " + user2);
             double mileage = user2.getMileage();
             user.setMileage(mileage);
 
@@ -72,9 +70,7 @@ public class UserController {
         log.info("[DELETE] - /user/ " + userId + " - 회원 정보 삭제");
         try {
             int result = userService.deleteMileage(userId);
-            System.out.println(result);
             int result2 = userService.deleteUsers(userId);
-            System.out.println(result2);
 
             return new ResponseEntity<>("회원 정보 삭제 완료", HttpStatus.OK);
 

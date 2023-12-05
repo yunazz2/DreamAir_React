@@ -1,10 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductList = ( {productList, productNo, onDelete}) => {
-  const handleDelete = () => {
-    onDelete(productNo)
-  }
+
   return (
     <div className='container'>
       <h1 className="text-center my-5">상품 관리</h1>
@@ -37,51 +35,22 @@ const ProductList = ( {productList, productNo, onDelete}) => {
           <tbody>
             {productList.map((product) => (
               <tr key={product.productNo}>
-                <td>
-                  <Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link>
-                </td>
-                {/* 이미지 출력 부분 */}
-                <td>
-                  {/* <img
-                    src={`/file/img/${product.thumbnail.fileNo}`}
-                    alt="이미지"
-                    style={{ width: '50px', height: '50px' }}
-                  /> */}
-                </td>
-                <td>
-                  <span>{product.routeNo}</span>
-                </td>
-                <td>
-                  <span>{product.name}</span>
-                </td>
-                <td>
-                  <span>{product.productCat}</span>
-                </td>
-                <td>
-                  <span>{product.productPrice}</span>
-                </td>
-                <td>
-                  <span>{product.departure}</span>
-                </td>
-                <td>
-                  <span>{product.destination}</span>
-                </td>
-                <td>
-                  <span>{product.departureTime}</span>
-                </td>
-                <td>
-                  <span>{product.destinationTime}</span>
-                </td>
-                <td>
-                  <span>{product.productRegDate}</span>
-                </td>
-                <td>
-                  <span>{product.productUpdDate}</span>
-                </td>
+                <td align='center'>{product.productNo}</td>
+                <td align='center'>{product.thumbnail && (<img src={`/file/img/${product.thumbnail.fileNo}`} alt="상품 이미지" style={{ width: '50px', height: '50px' }} className="card-img-top w-70 p-4" />)}</td>
+                <td align='center'>{product.routeNo}</td>
+                <td align='center'>{product.name}</td>
+                <td align='center'>{product.productCat}</td>
+                <td align='center'>{product.productPrice} </td>
+                <td align='center'>{product.departure}</td>
+                <td align='center'>{product.destination}</td>
+                <td align='center'>{product.departureTime}</td>
+                <td align='center'>{product.destinationTime}</td>
+                <td align='center'>{product.productRegDate}</td>
+                <td align='center'>{product.productUpdDate}</td>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${productNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(productNo) }>삭제</button></td>
+                  <td align='right'><button className='btn btn-danger' onClick={ () => onDelete(product.productNo) }>삭제</button></td>
                 </div>
               </tr>
             ))}

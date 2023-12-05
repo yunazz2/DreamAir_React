@@ -183,7 +183,7 @@ public class ProductServiceImpl implements ProductService {
         //파일 업로드 
         List<MultipartFile> fileList = product.getFile();
 
-        if( !fileList.isEmpty() )
+        if( !fileList.isEmpty() ){
         for (MultipartFile file : fileList) {
 
             if( file.isEmpty() ) continue;
@@ -226,7 +226,7 @@ public class ProductServiceImpl implements ProductService {
 
             fileMapper.insert(uploadedFile);
         }
-
+    }
 
         return result;
     }

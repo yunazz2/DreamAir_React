@@ -22,13 +22,11 @@ const ProductListContainer = () => {
     console.log(response.data);
     alert('삭제 완료')
 
-    // ➡ 게시글 목록 이동
     navigate('/product')
   }
 
   useEffect( () => {
     getProductList();
-
   }, [])
 
   return <ProductList productList={productList}

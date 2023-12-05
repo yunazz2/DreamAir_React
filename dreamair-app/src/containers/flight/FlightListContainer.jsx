@@ -8,7 +8,7 @@ const FlightListContainer = () => {
   const navigate = useNavigate()
 
   const { flightNo } = useParams();
-  const [ flightList, setFlightList] = useState('')
+  const [flightList, setFlightList] = useState([])
 
   // 게시글 목록 데이터
   const getFlightList = async() => {

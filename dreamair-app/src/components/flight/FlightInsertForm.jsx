@@ -65,8 +65,8 @@ const FlightInsertForm = ({ flightName, file, routeNo, departure, destination, d
       <hr className="my-4" />
 
       <div className="d-flex justify-content-between">
-        <button onClick={ () => onInsert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) }>등록</button>
-        <Link to="/flight">취소</Link>
+        <button className="btn btn-secondary btn-lg"><Link to="/flight">취소</Link></button>
+        <button onClick={ () => onClick(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) }>등록</button>
       </div>
     </div>
   );

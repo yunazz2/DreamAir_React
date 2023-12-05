@@ -57,7 +57,7 @@ const BoardInsertForm = ({onInsert}) => {
                     </tbody>
                 </table>
             <div>
-                <Link to="/board">목록</Link>
+                <button className="btn btn-secondary btn-lg"><Link to="/board">목록</Link></button>
                 <button onClick={()=>{ onSubmit() }}>등록</button>
             </div>
         </div>

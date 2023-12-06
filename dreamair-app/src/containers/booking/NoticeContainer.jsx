@@ -1,7 +1,7 @@
 import React from 'react'
 import NoticeForm from '../../components/booking/NoticeForm'
 
-const Notice = () => {
+const NoticeContainer = () => {
     return (
         <div>
             <NoticeForm />
@@ -9,4 +9,4 @@ const Notice = () => {
     )
 }
 
-export default Notice
+export default NoticeContainer

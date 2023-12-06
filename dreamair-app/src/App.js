@@ -20,7 +20,9 @@ import LoginContainer from './containers/LoginContainer';
 
 import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
-import Notice from './containers/booking/Notice';
+import NoticeContainer from './containers/booking/NoticeContainer';
+import PaymentContainer from './containers/booking/PaymentContainer';
+import PaymentCompelteContainer from './containers/booking/PaymentCompelteContainer';
 
 import AdminListContainer from './containers/admin/AdminListContainer';
 import UserListContainer from './containers/admin/UserListContainer';
@@ -75,7 +77,9 @@ function App() {
       <Routes>
         <Route path='booking/bookingList' element={<BookingListContainer />} />
         <Route path='booking/info' element={<BookingInfoContainer />} />
-        <Route path='booking/notice' element={<Notice />} />
+        <Route path='booking/notice' element={<NoticeContainer />} />
+        <Route path='booking/payment' element={<PaymentContainer />} />
+        <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />
       </Routes>
 
 

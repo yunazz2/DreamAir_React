@@ -1,14 +1,15 @@
 import React from 'react';
 
 const BookingListForm = ({ bookingInfo, bookingList }) => {
+
   return (
     <div className="container mt-5 py-3">
-      <h1 style={{ textAlign: 'center' }}>항공권 조회</h1>
+      {/* <h1 style={{ textAlign: 'center' }}>항공권 조회</h1>
       <br />
       <div className="img_container text-center">
         <img src="/img/searchTicket.png" alt="조회" />
       </div>
-      <br />
+      <br /> */}
       <section>
         <h2 style={{ textAlign: 'center' }}>
           {bookingInfo.roundTrip === '편도' || bookingInfo.roundTrip === '왕복 가는편' ? '가는편' : '오는편'}
@@ -46,7 +47,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
 
             {bookingList &&
               bookingList.map((booking) => (
-                <tr key={booking.flightName}>
+                <tr key={booking.routeNo}>
                   <td>
                     <i className="fa fa-solid fa-plane fa-2x" style={{ color: 'skyblue' }}></i>
                     <br />

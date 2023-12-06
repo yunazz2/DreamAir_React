@@ -100,6 +100,7 @@ const SearchFlightForm = () => {
   //   setDepartureDate(e.target.value);
   // };
 
+  // ------------------ 탑승객 ---------------------
   const handlePasCountChange = (value) => {
     console.log(value);
     setPasCount(value);
@@ -234,7 +235,7 @@ const SearchFlightForm = () => {
                           {(roundTrip === '편도') && (
                             <Form.Floating>
                                 <DatePicker
-                                  showIcon
+                                  // showIcon
                                   selected={singleDate}
                                   onChange={handleDateChange}
                                   dateFormat="yyyy/MM/dd" 

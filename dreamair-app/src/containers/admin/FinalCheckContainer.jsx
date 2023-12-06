@@ -5,28 +5,26 @@ import FinalCheck from '../../components/admin/FinalCheck'
 import * as QR from '../../apis/qr'
 
 const FinalCheckContainer = () => {
+  
   const navigate = useNavigate()
+  
+  const {ticketNo} = useParams();
+  const [pasTicketList, setPasTicketList] = useState([]);
 
-  const [ticketNo, setTicketNo] = useParams();
-  const ticketList = async(ticketNo) => {
+  const getPasTicketList = async(ticketNo) => {
     const response = await admin.pas_ticketList(ticketNo);
     const data = await response.data;
     console.log(data);
+    pasTicketList = setPasTicketList(data);
+
+    navigate('/admin/Final_check')
   } 
   
-  // const getPasTicketList = async () => {
-  //   const response = await admin.pas_ticketList(ticketNo); 
-  //   const data = await response.data;
-  //   console.log(data);
-
-  //   navigate('/admin/Final_check')
-  // };
-
   useEffect(() => {
-    ticketList();
+    getPasTicketList();
 }, [])
 
-  return (<FinalCheck ticketList={ticketList}
+  return (<FinalCheck pasTicketList={pasTicketList}
                       QR={QR}
                       ticketNo={ticketNo}/>  )
 }

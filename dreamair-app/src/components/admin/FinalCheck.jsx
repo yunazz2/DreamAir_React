@@ -1,11 +1,11 @@
 import React from 'react'
 
-const FinalCheck = ({ticketList, QR, ticket, ticketNo}) => {
+const FinalCheck = ({pasTicketList, QR, ticket, ticketNo}) => {
 
   return (
     <div className='container'>
       <h1 className="text-center my-5">탑승권 관리 - 탑승 처리</h1>
-        {/* {pasticketList.map((ticket) => ( */}
+        {pasTicketList.map((ticket) => (
           <div key={ticket.ticketNo} className="boarding-pass" style={{ width: '1200px', height: '300px' }}>
             {/* Left Section */}
             <div className="left-section">
@@ -43,7 +43,7 @@ const FinalCheck = ({ticketList, QR, ticket, ticketNo}) => {
               <div className="section"><img src="/img/logo.png" alt="로고이미지" style={{ width: '30px', height: '30px' }} /></div>
             </div>
           </div>
-        {/* ))} */}
+        ))}
         <div className="btn-box d-grid gap-2">
            <button type="submit" className="btn btn-outline-primary btn-lg">탑승 완료</button>
         </div>

@@ -29,7 +29,7 @@ const header = () => {
                 <div className="dropdown text-end mx-3">
                   <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle me-2" />
-                    <strong sec:authentication="principal.users.userId">아이디</strong>
+                    {/* <strong sec:authentication="principal.users.userId">아이디</strong> */}
                   </a>
                   <ul className="dropdown-menu text-small">
                     {/* 사용자 메뉴 */}

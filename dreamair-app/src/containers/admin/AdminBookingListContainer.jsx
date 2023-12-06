@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as admin from '../../apis/admin'
 import AdminBookingList from '../../components/admin/AdminBookingList';
+import AdminLayout from '../layout/AdminLayout';
 
 const AdminBookingListContainer = () => {
 
@@ -18,7 +19,13 @@ const AdminBookingListContainer = () => {
 }, [])
 
 
-return (<AdminBookingList AdminbookingList = {AdminbookingList}></AdminBookingList>)
+return (
+<>
+<AdminLayout>
+  <AdminBookingList AdminbookingList = {AdminbookingList}></AdminBookingList>
+</AdminLayout>
+</>
+)
 }
 
 export default AdminBookingListContainer

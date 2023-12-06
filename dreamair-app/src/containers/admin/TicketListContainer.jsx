@@ -4,16 +4,16 @@ import * as admin from '../../apis/admin'
 import TicketSearch from '../../components/admin/TicketSearch';
 import TicketList from '../../components/admin/TicketList';
 
+
 const TicketListContainer = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const { flightNo } = useParams();
   const { ticketNo } = useParams();
-  // const { selected } = useParams();
 
   const [ticketList, setTicketList] = useState([]);
-  const [selected, setSelected] = useState([]);
-  // ✔ 게시글 목록 데이터
+  
   const getTicketList = async () => {
     const response = await admin.ticket_list(); 
     const data = await response.data;
@@ -23,8 +23,8 @@ const TicketListContainer = () => {
     navigate('/admin/ticket_list')
   };
 
-  const onSearch = async (flightNo, selected) => {
-    const response = await admin.ticket_selectList(flightNo, selected);
+  const onSearch = async (flightNo) => {
+    const response = await admin.ticket_selectList(flightNo);
     const data = await response.data;
     console.log(data);
 }

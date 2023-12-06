@@ -32,4 +32,4 @@ import axios from 'axios';
  export const ticket_list = () => axios.get('/admin/ticket_list')
 
  // 탑승권 조회 - ticketNo
- export const pas_ticketList = (ticketNo) => axios.get("/admin/Final_check", {ticketNo})
+ export const pas_ticketList = (ticketNo) => axios.get(`/admin/Final_check/${ticketNo}`)

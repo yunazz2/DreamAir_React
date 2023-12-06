@@ -116,7 +116,6 @@ public class UserController {
         try {
             List<Booking> viewTicketDetail = bookingservice.selectTicket(ticketNo);
 
-            System.out.println("컨트롤러에서 티켓 정보 출력 : " + viewTicketDetail);
             if(viewTicketDetail == null) {
                 return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK);
             }

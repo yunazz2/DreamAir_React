@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Files;
-import com.joeun.server.dto.Product;
 import com.joeun.server.dto.QR;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.AdminService;
@@ -185,7 +184,7 @@ public class AdminController {
 
     // 탑승권 목록 조회
     @GetMapping(value="/ticket_list")
-    public ResponseEntity<?> ticket_listPro(Booking ticket, Product product) throws Exception {
+    public ResponseEntity<?> ticket_listPro(Booking ticket) throws Exception {
         log.info("[GET] - /admin/ticket_list");
 
         Date now = new Date();

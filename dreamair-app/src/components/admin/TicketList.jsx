@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TicketList = ({ticketList}) => {
+const TicketList = ({isLoading, ticketList}) => {
  
   return (
       <div>
       <br />
-      {ticketList != null && (
+      { isLoading && (
+        <center>
+          <img src="/img/loading.gif" alt="loading" />
+        </center>
+      )}
+      { !isLoading && ticketList != null && (
         <table className="table table-striped table-hover table-bordered text-center align-middle">
           <thead>
             <tr className="table-primary">
@@ -31,18 +36,18 @@ const TicketList = ({ticketList}) => {
               </tr>
             ) : (
               ticketList.map((ticket) => (
-                <tr>
-                  <td align='center'>{ticket.flightNo}</td>
-                  <td align='center'>{ticket.ticketNo}</td>
-                  <td align='center'>{ticket.passengerName}</td>
-                  <td align='center'>{ticket.seatNo}</td>
-                  <td align='center'>{ticket.departure}</td>
-                  <td align='center'>{ticket.destination}</td>
-                  <td align='center'>{ticket.departureTime}</td>
-                  <td align='center'>{ticket.destinationTime}</td>
-                  <td align='center'>{ticket.checkedIn}</td>
-                  <td align='center'>{ticket.isBoarded}</td>
-                  <td align='center'>{ticket.boardingTime}</td>
+                <tr key={ticket.ticketNo}>        {/* 반복되는 요소에 key */}
+                  <td>{ticket.flightNo}</td>      {/* 항공기 번호 확인용으로 추가 */}
+                  <td>{ticket.ticketNo}</td>
+                  <td>{ticket.passengerName}</td>
+                  <td>{ticket.seatNo}</td>
+                  <td>{ticket.departure}</td>
+                  <td>{ticket.destination}</td>
+                  <td>{ticket.departureTime}</td>
+                  <td>{ticket.destinationTime}</td>
+                  <td>{ticket.checkedIn}</td>
+                  <td>{ticket.isBoarded}</td>
+                  <td>{ticket.boardingTime}</td>
                   <td colSpan="2">
                     {ticket.isBoarded === 0 ? (
                       <button className="check_Button btn btn-primary active"><Link to={`/admin/Final_check/${ticket.ticketNo}`}>미탑승</Link></button>

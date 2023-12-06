@@ -7,9 +7,10 @@ import TicketList from '../../components/admin/TicketList';
 const TicketListContainer = () => {
 
   const navigate = useNavigate()
-  const { flightNo } = useParams();
   const { ticketNo } = useParams();
-  // const { selected } = useParams();
+  const [isLoading, setLoading] = useState(true)
+  // const { flightNo } = useParams();      // 파라미터로 받아오지 않는다
+  // const { selected } = useParams();      // 파라미터로 받아오지 않는다
 
   const [ticketList, setTicketList] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -20,20 +21,26 @@ const TicketListContainer = () => {
     console.log(data);
     setTicketList(data);
 
-    navigate('/admin/ticket_list')
+    // navigate('/admin/ticket_list')
   };
 
   const onSearch = async (flightNo, selected) => {
+    setLoading(true)
     const response = await admin.ticket_selectList(flightNo, selected);
     const data = await response.data;
-    console.log(data);
-    setTicketList(data);
+    console.log('★★★★★★★★★★ TicketListContainer');
+    console.log('flight No : ' + flightNo);
+    console.log('selected : ' + selected);
+    console.log(data);            // 데이터 OK ✅
 
-    navigate('/admin/ticket_list')
-}
+    setTicketList(data);          // ✅ 
+    setLoading(false)
+  }
 
   useEffect(() => {
+      setLoading(true)
       getTicketList();
+      setLoading(false)
   }, [])
 
   return (
@@ -45,11 +52,14 @@ const TicketListContainer = () => {
                     ticketList={ticketList}
                     onSearch={onSearch}
                     ticketNo={ticketNo}
-                    flightNo={flightNo}/>
+                    // flightNo={flightNo}
+                    />
     <TicketList 
+                    isLoading = {isLoading}
                     ticketList = {ticketList}
                     ticketNo={ticketNo}
-                    flightNo = {flightNo}/>
+                    // flightNo = {flightNo}
+                    />
     </div>
     </>
   )

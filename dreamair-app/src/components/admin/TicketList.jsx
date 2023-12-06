@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TicketList = ({ticketList, ticketNo}) => {
+const TicketList = ({isLoading, ticketList}) => {
  
   return (
       <div>
    
       <br />
-
-      {ticketList != null && (
+      { isLoading && (
+        <center>
+          <img src="/img/loading.gif" alt="loading" />
+        </center>
+      )}
+      { !isLoading && ticketList != null && (
         <table className="table table-striped table-hover table-bordered text-center align-middle">
           <thead>
             <tr className="table-primary">
+              <th>항공기 번호</th>
               <th>탑승권 번호</th>
               <th>탑승객 이름</th>
               <th>좌석 번호</th>
@@ -32,7 +37,8 @@ const TicketList = ({ticketList, ticketNo}) => {
               </tr>
             ) : (
               ticketList.map((ticket) => (
-                <tr>
+                <tr key={ticket.ticketNo}>        {/* 반복되는 요소에 key */}
+                  <td>{ticket.flightNo}</td>      {/* 항공기 번호 확인용으로 추가 */}
                   <td>{ticket.ticketNo}</td>
                   <td>{ticket.passengerName}</td>
                   <td>{ticket.seatNo}</td>

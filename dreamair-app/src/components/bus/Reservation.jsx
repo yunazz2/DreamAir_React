@@ -10,7 +10,7 @@ const Reservation = ({updatePrice}) => {
 
   return (
     <div className="busre_container">
-    <h1 className='busre'>주문/결제</h1>
+    <h1 className='busre text-center mt-2 mb-4'>주문/결제</h1>
     <table className='busre'>
       <thead className='busre'>
         <tr className='busre'>

@@ -52,12 +52,12 @@ const ProductInsertForm = ({onInsert}) => {
   const onSubmit = () => {
     onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
   }
-  
+
   return (
     
     <div className="container">
-      <h1 className="text-center my-5">상품(항공권) 정보 등록</h1>
-
+      <h1 className="text-center my-3">상품(항공권) 정보 등록</h1>
+          <form>
           <div className="input-group mb-3 row">
             <label className="input-group-text col-md-2" id="">상품코드</label>
             <input type="text" className="form-control col-md-10" name="productId" value={productId} onChange={handleChangeProductId}/>
@@ -105,7 +105,7 @@ const ProductInsertForm = ({onInsert}) => {
 
           <div className="input-group mb-3 row">
             <div className="col-md-2 p-0">
-              <label className="input-group-text" name="productCat" id="">카테고리</label>
+              <label className="input-group-text" name="productCat" id="productCat">카테고리</label>
             </div>
             <div className="col-md-10 d-flex align-items-center">
               <input type="hidden" name="temp-category" id="temp-category" value={productCat} onChange={handleChangeProductCat}/>
@@ -131,9 +131,10 @@ const ProductInsertForm = ({onInsert}) => {
           <hr className="my-4" />
 
           <div className="d-flex justify-content-between">
-            <button className='btn btn-primary' onClick={() => onSubmit() } >등록</button>
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
+            <button className='btn btn-primary' onClick={ () => onSubmit(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) }>등록</button>
           </div>
+          </form>
       </div>
   );
 };

@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 
 const AdminList = ( {adminList, onDelete} ) => {
 
+    useEffect(() => {
+        if(admin) {
+          setAdminId(admin.adminId);
+          setAdminPw(admin.adminPw);
+        }
+      }, [admin])
+
   return (
     <div className='container'>
         <h1 className="text-center my-5">관리자 관리</h1>
@@ -24,10 +31,11 @@ const AdminList = ( {adminList, onDelete} ) => {
 
         {adminList.map((admin) => (
         <tr key={admin.adminNo}>
-            <td>{admin.adminNo}</td>
-            <td>{admin.adminId}</td>
-            <td>{admin.adminPw}</td>
+            <td >{admin.adminNo}</td>
+            <td value={adminId} onChange={hadleChangeAdminId}>{admin.adminId}</td>
+            <td value={adminPw} onChange={handleChangeAdminPw}>{admin.adminPw}</td>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(admin.adminNo) }>삭제</button></td>
                 <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(admin.adminNo) }>삭제</button></td>
             </div>
         </tr>

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const AdminInsertForm = ({ onInsert }) => {
 
-    const [adminId, setAdminId] = useState('')
-    const [adminPw, setAdminPw] = useState('')
+    const [adminId, setAdminId] = useState([])
+    const [adminPw, setAdminPw] = useState([])
 
     const handleChangeAdminId = (e) => {
         setAdminId(e.target.value)

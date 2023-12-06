@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import * as flight from '../../apis/flight'
+import * as flights from '../../apis/flight'
 import FlightInsertForm from '../../components/flight/FlightInsertForm'
 
 const FlightInsertContainer = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const flight = useState([]);
 
   const onInsert = async (flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) => {
     try {
-      const response = await flight.flight_insert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
+      const response = await flights.flight_insert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
 
       alert('등록 완료')
       console.log(response.data);
@@ -25,7 +27,9 @@ const FlightInsertContainer = () => {
 
   return (
     <>
-      <FlightInsertForm onInsert={onInsert} />
+      <FlightInsertForm onInsert={onInsert}
+                        flight={flight}
+      />
     </>
   )
 }

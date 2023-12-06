@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const FlightInsertForm = ({ onInsert }) => {
+const FlightInsertForm = ({ flight, onInsert }) => {
   
   const [flightName, setFlightName] = useState([])
   const [routeNo, setRouteNo] = useState([])
@@ -52,6 +52,21 @@ const FlightInsertForm = ({ onInsert }) => {
   const onSubmit = () => {
     onInsert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
   }
+
+  // useEffect(() => {
+  //   if(flight) {
+  //   setFlightName(flight.FlightName);
+  //   setRouteNo(flight.routeNo);
+  //   setDeparture(flight.departure);
+  //   setDestination(flight.destination);
+  //   setDepartureTime(flight.departureTime);
+  //   setDestinationTime(flight.destinationTime);
+  //   setSeatMax(flight.seatMax);
+  //   setSeatUsed(flight.seatUsed);
+  //   setRemaining (flight.seatRemaining);
+  //   }
+  // }, [flight])
+
   return (
     <div className='container'>
       <h1 className="text-center my-5">항공기 정보 등록</h1>
@@ -112,7 +127,7 @@ const FlightInsertForm = ({ onInsert }) => {
       <hr className="my-4" />
 
       <div className="d-flex justify-content-between">
-        <button className='btn btn-primary' onClick={() => {onSubmit()}} >등록</button>
+        <button className='btn btn-primary' onClick={() => {onSubmit(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)}} >등록</button>
         <button className='btn btn-danger'><Link to="/flight">취소</Link></button>
       </div>
     </div>

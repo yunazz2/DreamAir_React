@@ -10,7 +10,7 @@ const Mileage = ({user}) => {
     
       <br />
       
-      <h3 className="text-center">보유 마일리지 : <span><input type="text" value={user.mileage}/></span></h3>
+      <span><h3 className="text-center">보유 마일리지 : {user.mileage}</h3></span>
     </div>
   )
 }

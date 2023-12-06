@@ -1,6 +1,8 @@
 package com.joeun.server.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -117,12 +119,11 @@ public class UserController {
             List<Booking> viewTicketDetail = bookingservice.selectTicket(ticketNo);
             Users userInfo = userService.selectById(userId);
 
-            if(viewTicketDetail == null) {
-                return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK);
-            }
-            else {
-                return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK); // 201
-            }
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("viewTicketDetail", viewTicketDetail);
+            responseData.put("userInfo", userInfo);
+
+            return new ResponseEntity<>(responseData, HttpStatus.OK);
 
         } catch (Exception e) {
             log.error(null, e);

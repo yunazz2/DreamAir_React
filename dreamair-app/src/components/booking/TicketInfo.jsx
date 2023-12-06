@@ -2,6 +2,9 @@ import React from 'react'
 
 const TicketInfo = ({ticketNo, viewTicketDetail}) => {
 
+  const ticketInfo = viewTicketDetail.viewTicketDetail; // 예시로 viewTicketDetail 객체에서 viewTicketDetail 키의 값 추출
+  const userInfo = viewTicketDetail.userInfo; // 예시로 viewTicketDetail 객체에서 userInfo 키의 값 추출
+  
   return (
     <div className="container p-4">
       <h1 className="text-center my-3">탑승권 조회</h1>
@@ -25,11 +28,11 @@ const TicketInfo = ({ticketNo, viewTicketDetail}) => {
 
         <tbody>
           <tr>
-            <td align='center'>{viewTicketDetail[0]?.ticketNo}</td>
-            <td align='center'>{viewTicketDetail[0]?.departure}</td>
-            <td align='center'>{viewTicketDetail[0]?.destination}</td>
-            <td align='center'>{viewTicketDetail[0]?.departureDate}</td>
-            <td align='center'>{viewTicketDetail[0]?.seatNo}</td>
+            <td align='center'>{ticketInfo[0]?.ticketNo}</td>
+            <td align='center'>{ticketInfo[0]?.departure}</td>
+            <td align='center'>{ticketInfo[0]?.destination}</td>
+            <td align='center'>{ticketInfo[0]?.departureDate}</td>
+            <td align='center'>{ticketInfo[0]?.seatNo}</td>
           </tr>
         </tbody>
       </table>
@@ -49,9 +52,9 @@ const TicketInfo = ({ticketNo, viewTicketDetail}) => {
 
         <tbody>
           <tr>
-            <td align='center'></td>
-            <td align='center'></td>
-            <td align='center'></td>
+            <td align='center'>{userInfo.name}</td>
+            <td align='center'>{userInfo.phone}</td>
+            <td align='center'>{userInfo.email}</td>
           </tr>
         </tbody>
       </table>

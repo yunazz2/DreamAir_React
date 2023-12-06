@@ -132,7 +132,7 @@ const ProductInsertForm = ({onInsert}) => {
 
           <div className="d-flex justify-content-between">
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
-            <button className='btn btn-primary' onClick={ () => onSubmit(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) }>등록</button>
+            <button className='btn btn-primary' onClick={ () => onSubmit() }>등록</button>
           </div>
           </form>
       </div>

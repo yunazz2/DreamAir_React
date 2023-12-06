@@ -7,11 +7,10 @@ const ProductInsertContainer = () => {
 
   const navigate = useNavigate()
 
-  const onInsert = async (productId, file, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) => {
+  const onInsert = async (productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) => {
 
     const Product = {
       productId,
-      file,
       routeNo, 
       name, 
       productCat, 

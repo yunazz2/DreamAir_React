@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as products from '../../apis/product'
 import ProductUpdateForm from '../../components/product/ProductUpdateForm'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const ProductUpdateContainer = () => {
 
@@ -46,11 +49,16 @@ const ProductUpdateContainer = () => {
     getProduct()
   }, [])
   
-    return (<ProductUpdateForm productNo={productNo} 
-                              onUpdate={onUpdate}
-                              onDelete={onDelete}
-                              product={product}
-       />)
+    return (
+      <>
+      <Header/>
+      <div className='d-flex'>
+          <Adminsidebar/>
+          <ProductUpdateForm productNo={productNo} onUpdate={onUpdate} onDelete={onDelete} product={product}/>
+      </div>
+      <Adminfooter/>  
+      </>
+    )
 }
 
 export default ProductUpdateContainer

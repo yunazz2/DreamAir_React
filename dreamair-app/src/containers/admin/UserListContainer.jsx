@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import * as admin from '../../apis/admin'
 import UserList from '../../components/admin/UserList';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const UserListContainer = () => {
 
@@ -28,9 +31,16 @@ const UserListContainer = () => {
       getUserList();
   }, [])
 
-  return ( <UserList userList={userList}
-                     onDelete={onDelete}
-  /> )
+  return ( 
+    <>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <UserList userList={userList} onDelete={onDelete}/> 
+    </div>
+    <Adminfooter/>  
+    </>  
+  )
 
   
 }

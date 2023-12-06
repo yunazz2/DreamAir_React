@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import * as admin from '../../apis/admin'
-import AdminBookingList from '../../components/admin/AdminBookingList';
-import AdminLayout from '../layout/AdminLayout';
+import AdminBookingList from '../../components/admin/AdminBookingList'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const AdminBookingListContainer = () => {
 
@@ -21,9 +23,12 @@ const AdminBookingListContainer = () => {
 
 return (
 <>
-<AdminLayout>
-  <AdminBookingList AdminbookingList = {AdminbookingList}></AdminBookingList>
-</AdminLayout>
+    <Header/>
+    <div className='d-flex'>
+      <Adminsidebar/>
+      <AdminBookingList AdminbookingList = {AdminbookingList}/>
+    </div>
+    <Adminfooter/> 
 </>
 )
 }

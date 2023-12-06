@@ -2,6 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as products from '../../apis/product'
 import ProductInsertForm from '../../components/product/ProductInsertForm'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const ProductInsertContainer = () => {
 
@@ -32,7 +35,12 @@ const ProductInsertContainer = () => {
 
   return (
     <>
-      <ProductInsertForm onInsert={onInsert}/>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <ProductInsertForm onInsert={onInsert}/>
+    </div>
+    <Adminfooter/>  
     </>
   )
 }

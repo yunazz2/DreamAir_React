@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as products from '../../apis/product'
 import ProductList from '../../components/product/ProductList'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const ProductListContainer = () => {
 
@@ -31,11 +34,16 @@ const ProductListContainer = () => {
     getProductList();
   }, [])
 
-  return <ProductList productList={productList}
-                      productNo={productNo}
-                      onDelete={onDelete}
-                      />                      
-    
+  return (
+    <>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <ProductList productList={productList} productNo={productNo} onDelete={onDelete}/>
+    </div>
+    <Adminfooter/>  
+    </>
+  )
 }
 
 export default ProductListContainer

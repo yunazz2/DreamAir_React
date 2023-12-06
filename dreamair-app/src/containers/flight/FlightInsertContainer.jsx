@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as flights from '../../apis/flight'
 import FlightInsertForm from '../../components/flight/FlightInsertForm'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const FlightInsertContainer = () => {
 
@@ -27,10 +30,14 @@ const FlightInsertContainer = () => {
 
   return (
     <>
-      <FlightInsertForm onInsert={onInsert}
-                        flight={flight}
-      />
-    </>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <FlightInsertForm onInsert={onInsert} flight={flight}/>
+    </div> 
+    <Adminfooter/> 
+    </>    
+
   )
 }
 

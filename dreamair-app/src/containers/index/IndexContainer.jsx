@@ -10,11 +10,13 @@ import '../../styles/style.css';
 import '../../styles/reset.css';
 import TestDate from '../../components/index/TestDate'
 import DateRange from '../../components/index/DateRange'
-
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
 
 const IndexContainer = () => {
   return (
     <div>
+      <Header/>
       {/* <TestDate /> */}
       {/* <DateRange /> */}
       <SearchFlight />
@@ -22,6 +24,7 @@ const IndexContainer = () => {
       <RecommendedSpots />
       <LatestBoard />
       <TripSlide />
+      <Footer/>
     </div>
   )
 }

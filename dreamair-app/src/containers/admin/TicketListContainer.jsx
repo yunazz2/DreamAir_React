@@ -3,7 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import * as admin from '../../apis/admin'
 import TicketSearch from '../../components/admin/TicketSearch';
 import TicketList from '../../components/admin/TicketList';
-
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const TicketListContainer = () => {
 
@@ -44,23 +46,17 @@ const TicketListContainer = () => {
   }, [])
 
   return (
-    <>  
-    <div className='container'>
-    <h1 className="text-center my-5">탑승권 관리</h1>
-    
-    <TicketSearch 
-                    ticketList={ticketList}
-                    onSearch={onSearch}
-                    ticketNo={ticketNo}
-                    // flightNo={flightNo}
-                    />
-    <TicketList 
-                    isLoading = {isLoading}
-                    ticketList = {ticketList}
-                    ticketNo={ticketNo}
-                    // flightNo = {flightNo}
-                    />
-    </div>
+    <>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <div className="container">
+          <h1 className="text-center my-5">탑승권 관리</h1>
+          <TicketSearch ticketList={ticketList} onSearch={onSearch} ticketNo={ticketNo}/>
+          <TicketList isLoading = {isLoading} ticketList = {ticketList} ticketNo={ticketNo}/>
+        </div>
+    </div>   
+    <Adminfooter/> 
     </>
   )
 }

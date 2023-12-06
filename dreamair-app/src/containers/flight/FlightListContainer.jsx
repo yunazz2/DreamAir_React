@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as flights from '../../apis/flight'
 import FlightList from '../../components/flight/FlightList'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const FlightListContainer = () => {
 
@@ -32,10 +35,16 @@ const FlightListContainer = () => {
     getFlightList();
   }, [])
 
-  return <FlightList  flightList={flightList}
-                      flightNo={flightNo} 
-                      onDelete={onDelete}
-                      />
-  }
+  return (
+    <>
+    <Header/>
+    <div className='d-flex'>
+        <Adminsidebar/>
+        <FlightList  flightList={flightList} flightNo={flightNo} onDelete={onDelete}/>
+    </div>
+    <Adminfooter/>  
+    </>
+  )
+}
 
 export default FlightListContainer

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import * as qr from '../../apis/qr'
 import QRList from '../../components/admin/QRList'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const QRListContainer = () => {
 
@@ -20,8 +23,15 @@ const QRListContainer = () => {
         getQRList();
     }, [])
 
-    return (<QRList qrList = {qrList}
-                    qrNo = {qrNo}/>
+    return (
+        <>
+        <Header/>
+        <div className='d-flex'>
+            <Adminsidebar/>
+            <QRList qrList = {qrList} qrNo = {qrNo}/>
+        </div> 
+        <Adminfooter/> 
+        </>
     )
 }
 

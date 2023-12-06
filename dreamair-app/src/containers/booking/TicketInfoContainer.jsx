@@ -1,26 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import * as bookingjs from '../../apis/booking'
+import * as userjs from '../../apis/user'
 import TicketInfo from '../../components/booking/TicketInfo';
 
 const TicketInfoContainer = () => {
 
   const { ticketNo } = useParams();
 
-  const [booking, setBooking] = useState({});
+  const [viewTicketDetail, setViewTicketDetail] = useState([]);
 
-  const getBooking = async () => {
+  const getViewTicektDetail = async () => {
     try {
-
+      const response = await userjs.viewTicket(ticketNo);
+      const data = response.data
+      console.log(data);
+      setViewTicketDetail(data);
     }
     catch (e) {
-
+      console.log(e);
     }
   }
 
+  useEffect(() => {
+    getViewTicektDetail();
+  }, [])
+
   return (
     <>
-      <TicketInfo ticketNo={ticketNo} />
+      <TicketInfo ticketNo={ticketNo} viewTicketDetail={viewTicketDetail} />
     </>
   )
 }

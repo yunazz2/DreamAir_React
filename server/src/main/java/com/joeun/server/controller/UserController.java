@@ -108,5 +108,26 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // 티켓 상세 조회
+    @GetMapping("/booking/ticketInfo/{ticketNo}")
+    public ResponseEntity<?> viewTicket(@PathVariable Integer ticketNo) {
+        log.info("[GET] - /user/booking/ticketInfo/" + ticketNo + " - 티켓 상세 조회");
+        try {
+            List<Booking> viewTicketDetail = bookingservice.selectTicket(ticketNo);
+
+            System.out.println("컨트롤러에서 티켓 정보 출력 : " + viewTicketDetail);
+            if(viewTicketDetail == null) {
+                return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK); // 201
+            }
+
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     
 }

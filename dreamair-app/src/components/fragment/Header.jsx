@@ -50,7 +50,7 @@ const Header = () => {
           </div>
         </nav>
       
-        <div className="border-bottom align-items-center text-center mt-5" style={{ lineHeight: '50px', marginTop: '-50px' }}>
+        <div className="align-items-center text-center mt-5" style={{ lineHeight: '50px', marginTop: '-50px' }}>
           <div className="container d-flex flex-wrap" style={{ width: '100%' }}>
             <ul className="navbar-nav me-auto mb-2 mb-md-0">
               <li className="nav-item"><Link to="/" className="nav-link active" aria-current="page" ><img src="/img/blackNameLogo.png" alt="로고 이미지" style={{ width: '150px', height: '60px' }} /></Link></li>

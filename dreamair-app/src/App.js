@@ -17,6 +17,7 @@ import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+import TicketInfoContainer from './containers/booking/TicketInfoContainer'
 
 import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
@@ -61,6 +62,7 @@ function App() {
         <Route path="/user/deleteaccount/:userId" element={<DeleteAccountContainer/>}/>
         <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
+        <Route path="/user/booking/ticketInfo/:ticketNo" element={<TicketInfoContainer/>}/>
       </Routes>
 
       {/* BOARD */}

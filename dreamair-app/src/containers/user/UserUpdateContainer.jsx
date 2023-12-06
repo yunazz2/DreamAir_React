@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import * as users from '../../apis/user'
+import * as userjs from '../../apis/user'
 import UserUpdateForm from '../../components/user/UserUpdateForm'
 
 
@@ -14,7 +14,7 @@ const UserUpdateContainer = () => {
   
   // 로그인 된 유저 정보 조회
   const getUser = async () => {
-    const response = await users.selectById(userId);
+    const response = await userjs.selectById(userId);
     const data = await response.data;
     console.log(data);
     setUser(data);
@@ -28,7 +28,7 @@ const UserUpdateContainer = () => {
 
   const onUpdate = async (userId, userPw, name, phone, email, address) => {
     try {
-      const response = await users.update(userId, userPw, name, phone, email, address);
+      const response = await userjs.update(userId, userPw, name, phone, email, address);
       console.log(response.data);
       alert('회원 정보 수정 완료');
 

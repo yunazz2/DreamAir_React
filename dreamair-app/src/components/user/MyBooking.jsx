@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MyBooking = ({bookingList}) => {
   return (
@@ -47,7 +48,7 @@ const MyBooking = ({bookingList}) => {
                   <p style={{ display: 'inline' }}> / </p>
                   <button>[좌석 변경]</button>
                   <p style={{ display: 'inline' }}> / </p>
-                  <a href={`/user/booking/TicketInfo?ticketNo=${booking.ticketNo}`}>[조회]</a>
+                  <Link to={`/user/booking/ticketInfo/${booking.ticketNo}`}>[조회]</Link>
                 </span>
               </td>
             </tr>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import * as users from '../../apis/user'
+import * as userjs from '../../apis/user'
 import MyBooking from '../../components/user/MyBooking'
 import { useParams } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ const MyBookingContainer = () => {
   
   // ✔ 예매 목록 데이터
   const getBookingList = async () => {
-    const response = await users.selectBookingListByUser(userId);
+    const response = await userjs.selectBookingListByUser(userId);
     const data = await response.data;
     console.log(data);
     setBookingList(data);

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MyBooking = () => {
+const MyBooking = ({bookingList}) => {
   return (
     <div className="container p-4">
       <h1 className="text-center my-3">나의 탑승권 관리</h1>
@@ -32,33 +32,27 @@ const MyBooking = () => {
           {/* ..... */}
 
           {/* 예매 내역이 있을 때 */}
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>                                
-            <td></td>
-            <td></td>
-            <td>
-                체크인 전
-                체크인 완료
-            </td>
-            <td>
-                탑승 전
-                탑승 완료
-            </td>
-            <td>
-                <span>
+          {bookingList.map((booking) => (
+            <tr key={booking.bookingNo}>
+              <td align='center'>{booking.bookingNo}</td>
+              <td align='center'>{booking.ticketNo}</td>
+              <td align='center'>{booking.name}</td>
+              <td align='center'>{booking.departureDate}</td>
+              <td>50,000</td>
+              <td align='center'>{booking.checkedIn === 0 ? '체크인 전' : '체크인 완료'}</td>
+              <td align='center'>{booking.isBoarded === 0 ? '탑승 전' : '탑승 완료'}</td>
+              <td>
+                <span style={{ whiteSpace: 'nowrap' }}>
                   <button>[환불]</button>
-                  <p>/</p>
+                  <p style={{ display: 'inline' }}> / </p>
                   <button>[좌석 변경]</button>
-                  <p>/</p>
-                  <button>[조회]</button>
+                  <p style={{ display: 'inline' }}> / </p>
+                  <a href={`/user/booking/TicketInfo?ticketNo=${booking.ticketNo}`}>[조회]</a>
                 </span>
-            </td>
-          </tr>
-
+              </td>
+            </tr>
+          ))}
         </tbody>
-
       </table>
     </div>
   )

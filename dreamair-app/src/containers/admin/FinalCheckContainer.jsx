@@ -8,19 +8,15 @@ import Adminfooter from '../../components/fragment/Adminfooter'
 import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const FinalCheckContainer = () => {
-  
-  const navigate = useNavigate()
-  
+    
   const {ticketNo} = useParams();
   const [pasTicketList, setPasTicketList] = useState([]);
 
-  const getPasTicketList = async(ticketNo) => {
+  const getPasTicketList = async() => {
     const response = await admin.pas_ticketList(ticketNo);
     const data = await response.data;
     console.log(data);
-    pasTicketList = setPasTicketList(data);
-
-    navigate('/admin/Final_check')
+    setPasTicketList(data);
   } 
   
   useEffect(() => {
@@ -32,7 +28,7 @@ const FinalCheckContainer = () => {
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <FinalCheck pasTicketList={pasTicketList} QR={QR} ticketNo={ticketNo}/>  
+      <FinalCheck pasTicketList={pasTicketList}/>  
     </div>
     <Adminfooter/> 
     </>

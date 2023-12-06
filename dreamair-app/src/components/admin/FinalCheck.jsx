@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const FinalCheck = ({pasTicketList, QR, ticket, ticketNo}) => {
+const FinalCheck = ({pasTicketList, QR, ticketNo}) => {
 
   return (
     <div className='container'>
@@ -26,9 +27,9 @@ const FinalCheck = ({pasTicketList, QR, ticket, ticketNo}) => {
               </div>
               {/* QR 코드 */}
               <div className="QRcode">
-                <a href={QR.url} target="_blank" style={{ textDecoration: 'none' }}>
+                <Link href={QR.url} target="_blank" style={{ textDecoration: 'none' }}>
                   <img src={`/qr/img?qrNo=${QR.qrNo}`} alt="QR코드" />
-                </a>
+                </Link>
               </div>
               <div className="boarding-pass-footer">
                 <p>Boarding gate closes <span style={{ color: 'red' }}>10 minutes</span> prior to departure time.</p>
@@ -43,9 +44,9 @@ const FinalCheck = ({pasTicketList, QR, ticket, ticketNo}) => {
               <div className="section"><img src="/img/logo.png" alt="로고이미지" style={{ width: '30px', height: '30px' }} /></div>
             </div>
           </div>
-        ))}
+           ))}
         <div className="btn-box d-grid gap-2">
-           <button type="submit" className="btn btn-outline-primary btn-lg">탑승 완료</button>
+           <button className="btn btn-outline-primary btn-lg"><Link to={`admin/Final_check_complete/${ticketNo}`}></Link>탑승 완료</button>
         </div>
       </div>
   );

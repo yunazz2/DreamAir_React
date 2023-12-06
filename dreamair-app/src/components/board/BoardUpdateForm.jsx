@@ -1,96 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const BoardUpdateForm = ({boardNo, board, onUpdate, onDelete}) => {
+const BoardUpdateForm = ({ boardNo, board, onUpdate, onDelete }) => {
+  // ⭐ state 설정
+  const [title, setTitle] = useState('');
+  const [writer, setWriter] = useState('');
+  const [content, setContent] = useState('');
+  // 파일 업로드 부분 추가 시 필요한 state
+  // const [fileList, setFileList] = useState([]);
 
-    // ⭐ state 설정
-    const [title, setTitle] = useState('')
-    const [writer, setWriter] = useState('')
-    const [content, setContent] = useState('')
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleChangeWriter = (e) => {
+    setWriter(e.target.value);
+  };
+  const handleChangeContent = (e) => {
+    setContent(e.target.value);
+  };
 
-    const handleChangeTitle = (e) => {
-        setTitle(e.target.value)
+  const onSubmit = () => {
+    onUpdate(boardNo, title, writer, content);
+  };
+
+  useEffect(() => {
+    if (board) {
+      setTitle(board.title);
+      setWriter(board.writer);
+      setContent(board.content);
+      // 파일 업로드 부분 추가 시 필요한 로직
+      // setFileList(board.fileList);
     }
-    const handleChangeWriter = (e) => {
-        setWriter(e.target.value)
-    }
-    const handleChangeContent = (e) => {
-        setContent(e.target.value)
-    }
+  }, [board]);
 
-    const onSubmit = () => {
-        onUpdate(boardNo, title, writer, content)
-    }
-
-    // 이걸 안 쓰면 기존 내용을 못 불러옴..
-    useEffect(() => {
-      if(board) {
-        setTitle(board.title);
-        setWriter(board.writer);
-        setContent(board.content);
-      }
-    }, [board]) // 이 useEffect가 board가 변할 때 계속적으로 호출될 수 있도록
-    
-    return (
-        <div>
-            <h1>게시글 수정</h1>
-            <h3>번호 : {boardNo}</h3>
-            <hr />
-            <table border={1}>
-              <tbody>
-                <tr>
-                  <td>번호</td>
-                  <td>
-                    <input type="text" value={board.boardNo} readOnly/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>등록일자</td>
-                  <td>
-                    <input type="text" value={board.regDate} readOnly/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>제목</td>
-                  <td>
-                    <input type="text" value={title} onChange={handleChangeTitle}/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>작성자</td>
-                  <td>
-                    <input type="text" value={writer} onChange={handleChangeWriter}/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>내용</td>
-                  <td>
-                    <textarea cols="40" rows="5" value={content} onChange={handleChangeContent}></textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td>파일</td>
-                  <td>
-                    <ul>
-                      {/* {fileList.map((file) => (
-                        <li key={file.fileNo}>
-                          <img id="imgId" src={`/img/${file.fileName}`} alt="첨부이미지" style={{ width: '400px', height: 'auto' }} th:if={`${file.filePath != null} and ${file.fileType == 'img'}`}/>
-                          <br />
-                          <Link to={`/file/${file.fileNo}`}>{file.originName}</Link>
-                          <button type="button" className="btn btn-danger btn-sm btn-file-delete" data-fileNo={file.fileNo}>삭제</button>
-                        </li>
-                      ))} */}
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <hr />
-            <button onClick={onSubmit}>수정</button>
-            <button onClick={() => onDelete(boardNo)}>삭제</button>
-            <span></span>
-            <Link to="/board">목록</Link>
+  return (
+    <div className="container my-5">
+      <div className="card">
+        <div className="card-header">
+          <h1 className="display-4 mb-0 text-center">게시글 수정</h1>
         </div>
-    )
-}
-export default BoardUpdateForm
+        <div className="card-body">
+          <div className="mb-3">
+            <label htmlFor="boardNo" className="form-label fw-bold">번호</label>
+            <input type="text" className="form-control" id="boardNo" value={board.boardNo} readOnly />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="regDate" className="form-label fw-bold">등록일자</label>
+            <input type="text" className="form-control" id="regDate" value={board.regDate} readOnly />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="title" className="form-label fw-bold">제목</label>
+            <input type="text" className="form-control" id="title" value={title} onChange={handleChangeTitle} />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="writer" className="form-label fw-bold">작성자</label>
+            <input type="text" className="form-control" id="writer" value={writer} onChange={handleChangeWriter} />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="content" className="form-label fw-bold">내용</label>
+            <textarea className="form-control" id="content" rows="8" value={content} onChange={handleChangeContent}></textarea>
+          </div>
+
+          {/* 파일 업로드 부분 추가 시 필요한 UI 로직 */}
+          {/* <div className="mb-3">
+            <label htmlFor="file" className="form-label fw-bold">파일</label>
+            <ul>
+              {fileList.map((file) => (
+                <li key={file.fileNo}>
+                  <img src={`/img/${file.fileName}`} alt="첨부이미지" style={{ width: '400px', height: 'auto' }} />
+                  <br />
+                  <Link to={`/file/${file.fileNo}`}>{file.originName}</Link>
+                  <button type="button" className="btn btn-danger btn-sm btn-file-delete" data-fileNo={file.fileNo}>삭제</button>
+                </li>
+              ))}
+            </ul>
+          </div> */}
+        </div>
+        <div className="card-footer">
+          <div className="d-flex justify-content-end">
+            <button className="btn btn-primary me-2" onClick={onSubmit}>수정</button>
+            <button className="btn btn-danger me-2" onClick={() => onDelete(boardNo)}>삭제</button>
+            <Link to="/board" className="btn btn-secondary">목록</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BoardUpdateForm;

@@ -86,9 +86,9 @@ public class FileController {
     
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
         if (multipartFile.isEmpty()) {
-            return "redirect:/errorPage"; // 에러 페이지로 리다이렉트
+           return new ResponseEntity<String>("FAIL", HttpStatus.OK);   
         }
 
         String fileName = multipartFile.getOriginalFilename(); // 파일 이름
@@ -105,7 +105,7 @@ public class FileController {
 
         fileService.insert(file); // 파일 정보 DB 저장
 
-        return "redirect:/listPage"; // 리스트 페이지로 리다이렉트
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
 }

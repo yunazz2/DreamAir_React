@@ -27,9 +27,6 @@ const TicketListContainer = () => {
     const response = await admin.ticket_selectList(flightNo, selected);
     const data = await response.data;
     console.log(data);
-    setTicketList(data);
-
-    navigate('/admin/ticket_list')
 }
 
   useEffect(() => {

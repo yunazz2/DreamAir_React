@@ -1,36 +1,41 @@
-import React, { useState } from 'react'
-import Select from 'react-select'
+import React, { useState } from 'react';
+import Select from 'react-select';
 
-const TicketSearch = ({flightNo, onSearch}) => {
+const TicketSearch = ({ flightNo, onSearch }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  const [selected, setSelected] = useState('0');
+  const options = [
+    { value: '0', label: '선택' },
+    { value: '1', label: '체크인 완료' },
+    { value: '2', label: '탑승 완료' },
+  ];
 
-  const handleChangeSelect = (e) => {
-    setSelected(e.target.value);
-  }
+  const handleChangeSelect = (selected) => {
+    setSelectedOption(selected);
+  };
 
   const onSubmit = () => {
-    onSearch(flightNo, selected)
-  }
+    const selectedValue = selectedOption ? selectedOption.value : '0';
+    onSearch(flightNo, selectedValue);
+  };
 
   return (
-    <div className='container'>
-        <div className="btn-box d-grid gap-2 ">
-          <div className="form-floating col-5">
-            <div className="input-group has-validation">
-              <label htmlFor="flightNo" className="form-label me-3" style={{ lineHeight: '50px' }}>항공기 번호 조회 : </label>
-              <input type="text" className="form-control me-3" style={{ lineHeight: '30px', width: '200px' }} id="filter" name="flightNo" placeholder="항공기 번호" />
-              <select className="form-select" id="searchType" name="select" onChange={handleChangeSelect} value={selected}>
-                <option value="0">선택</option>
-                <option value="1">체크인 완료</option>
-                <option value="2">탑승완료</option>
-              </select>
-            </div>
-          </div>
-          <button onClick={onSubmit} className="btn btn-outline-primary btn-lg">항공기 조회</button>
+      <div className="d-grid">
+        <div className="d-flex">
+          <label htmlFor="flightNo" className="" style={{ lineHeight: '50px' }}>항공기 번호 조회 : </label>
+          <input type="text" className="" style={{ lineHeight: '50px', width: '200px' }} id="filter" name="flightNo" placeholder='항공기 번호 입력'/>
+          <Select
+            className="select"
+            id="searchType"
+            name="select"
+            value={selectedOption}
+            onChange={handleChangeSelect}
+            options={options}
+          />
         </div>
-    </div>
-  )
-}
+        <button onClick={() => {onSubmit()}} className="btn btn-outline-primary btn-lg">항공기 조회</button>
+      </div>
+  );
+};
 
-export default TicketSearch
+export default TicketSearch;

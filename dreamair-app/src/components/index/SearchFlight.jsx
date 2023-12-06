@@ -10,6 +10,7 @@ import { ko } from 'date-fns/esm/locale';
 import { addDays } from 'date-fns';
 
 const SearchFlightForm = () => {
+
   const [roundTrip, setRoundTrip] = useState('왕복 가는편');
   const [departure, setDeparture] = useState('출발지');
   const [destination, setDestination] = useState('도착지');
@@ -222,13 +223,13 @@ const SearchFlightForm = () => {
                                   endDate={dateRange.endDate}
                                   onApply={handleDateRangeChange}
                                   />  */}
-                                {/* <Form.Control
+                                <Form.Control
                                   type="text"
                                   name="departureDate"
                                   placeholder="yyyy/mm/dd"
                                   id="input-start"
-                                /> */}
-                              {/* <label htmlFor="floatingSelectGrid">여정</label> */}
+                                />
+                              <label htmlFor="floatingSelectGrid">여정</label>
                             </Form.Floating>
                           )}
 
@@ -242,13 +243,13 @@ const SearchFlightForm = () => {
                                   locale={ko} 
                                   id="input-start"
                                 />
-                                {/* <Form.Control
+                                <Form.Control
                                   type="text"
                                   name="departureDate"
                                   placeholder="yyyy/mm/dd"
                                   id="input-start"
-                                /> */}
-                              {/* <label htmlFor="floatingSelectGrid">여정</label> */}
+                                />
+                              <label htmlFor="floatingSelectGrid">여정</label>
                             </Form.Floating>
                           )}
                       </Col>

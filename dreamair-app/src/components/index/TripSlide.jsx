@@ -19,7 +19,7 @@ const TripSlide = () => {
           spaceBetween={50}
           slidesPerView={1}
           navigation
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           className="mySwiper"
           // onSlideChange={() => console.log('slide change')}
           // onSwiper={(swiper) => console.log(swiper)}

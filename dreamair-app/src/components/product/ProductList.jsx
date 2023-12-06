@@ -37,22 +37,22 @@ const ProductList = ( {productList, productNo, onDelete}) => {
           <tbody>
             {productList.map((product) => (
               <tr key={product.productNo}>
-                <td><Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link></td>
-                <td><img src={`/file/img/${product.thumbnail.fileNo}`} alt="이미지" style={{ width: '100px', height: '100px' }} /></td>
-                <td></td>
-                <td>{product.routeNo}</td>
-                <td>{product.name}</td>
-                <td>{product.productCat}</td>
-                <td>{product.productPrice}</td>
-                <td>{product.departure}</td>
-                <td>{product.destination}</td>
-                <td>{product.departureTime}</td>
-                <td>{product.destinationTime}</td>
-                <td>{product.productRegDate} </td>
-                <td>{product.productUpdDate}</td>
+                {/* <td><Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link></td> */}
+                <td align='center'>{product.productNo}</td>
+                <td align='center' style={{width: '100px', height: '100px'}} >{product.thumbnail && (<img src={`/file/img/${product.thumbnail.fileNo}`} alt="이미지" className="card-img-top w-70 p-4" />)}</td>
+                <td align='center'>{product.routeNo}</td>
+                <td align='center'>{product.name}</td>
+                <td align='center'>{product.productCat}</td>
+                <td align='center'>{product.productPrice}</td>
+                <td align='center'>{product.departure}</td>
+                <td align='center'>{product.destination}</td>
+                <td align='center'>{product.departureTime}</td>
+                <td align='center'>{product.destinationTime}</td>
+                <td align='center'>{product.productRegDate} </td>
+                <td align='center'>{product.productUpdDate}</td>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${productNo}`}>수정</Link></button></td>
+                  <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${product.productNo}`}>수정</Link></button></td>
                   <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(productNo) }>삭제</button></td>
                 </div>
               </tr>

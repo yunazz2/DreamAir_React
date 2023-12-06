@@ -13,4 +13,4 @@
     export const product_update = (productNo, productId, routeNo, name, productCat, productPrice, departure, destination, productRegdate, productUpdate, description, unitsInStock) => axios.put("/product", {productNo, productId, routeNo, name, productCat, productPrice, departure, destination, productRegdate, productUpdate, description, unitsInStock})
 
     // 상품(항공권) 삭제
-    export const product_delete = (productNo) => axios.get(`/product/${productNo}`)
+    export const product_delete = (productNo) => axios.delete(`/product/${productNo}`)

@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 항공기 등록 -->
 <insert id="flight_insert">
-  INSERT INTO flight( flight_no, flight_name, route_no, seat_Max, seat_remaining, seat_used )
-  VALUES ( #{flightNo}, #{flightName}, #{routeNo}, #{seatMax}, #{seatRemaining}, #{seatUsed} )
+  INSERT INTO flight( flight_name, route_no, seat_Max, seat_remaining, seat_used )
+  VALUES ( #{flightName}, #{routeNo}, #{seatMax}, #{seatRemaining}, #{seatUsed} )
 </insert>
 
 <!-- 항공기 수정 -->
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     , seat_Max = #{seatMax}
     , seat_remaining = #{seatRemaining}
     , seat_used = #{seatUsed} 
-  WHERE flight_no = #{flighNo}
+  WHERE flight_no = #{flightNo}
 </update>
 
 <!-- 항공기 삭제 -->

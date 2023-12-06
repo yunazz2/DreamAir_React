@@ -49,7 +49,7 @@ const FlightList = ( { flightList, flightNo, onDelete }) => {
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <td align='right'><button className='btn btn-primary'><Link to={`/flight/flight_update/${flight.flightNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(flight.flightNo) }>삭제</button></td>
+                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(flightNo) }>삭제</button></td>
                 </div>
     
               </tr>

@@ -84,7 +84,7 @@ const FlightUpdateForm = ( {flightNo, flight, onUpdate}) => {
 
       <div className="input-group mb-3 row">
         <label htmlFor="flightname" className="input-group-text col-md-2" id="">항공기명</label>
-        <input type="text" className="form-control col-md-10" name="flightname" placeholder="항공기명" value={flightName} onChange={handleChangeFlightName} />
+        <input type="text" className="form-control col-md-10" name="flightName" placeholder="항공기명" value={flightName} onChange={handleChangeFlightName} />
       </div>
 
       <div className="input-group mb-3 row">

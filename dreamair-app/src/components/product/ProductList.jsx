@@ -37,47 +37,19 @@ const ProductList = ( {productList, productNo, onDelete}) => {
           <tbody>
             {productList.map((product) => (
               <tr key={product.productNo}>
-                <td>
-                  <Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link>
-                </td>
-                {/* 이미지 출력 부분 */}
-                <td>
-                  {/* <img
-                    src={`/file/img/${product.thumbnail.fileNo}`}
-                    alt="이미지"
-                    style={{ width: '50px', height: '50px' }}
-                  /> */}
-                </td>
-                <td>
-                  <span>{product.routeNo}</span>
-                </td>
-                <td>
-                  <span>{product.name}</span>
-                </td>
-                <td>
-                  <span>{product.productCat}</span>
-                </td>
-                <td>
-                  <span>{product.productPrice}</span>
-                </td>
-                <td>
-                  <span>{product.departure}</span>
-                </td>
-                <td>
-                  <span>{product.destination}</span>
-                </td>
-                <td>
-                  <span>{product.departureTime}</span>
-                </td>
-                <td>
-                  <span>{product.destinationTime}</span>
-                </td>
-                <td>
-                  <span>{product.productRegDate}</span>
-                </td>
-                <td>
-                  <span>{product.productUpdDate}</span>
-                </td>
+                <td><Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link></td>
+                <td><img src={`/file/img/${product.thumbnail.fileNo}`} alt="이미지" style={{ width: '100px', height: '100px' }} /></td>
+                <td></td>
+                <td>{product.routeNo}</td>
+                <td>{product.name}</td>
+                <td>{product.productCat}</td>
+                <td>{product.productPrice}</td>
+                <td>{product.departure}</td>
+                <td>{product.destination}</td>
+                <td>{product.departureTime}</td>
+                <td>{product.destinationTime}</td>
+                <td>{product.productRegDate} </td>
+                <td>{product.productUpdDate}</td>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${productNo}`}>수정</Link></button></td>

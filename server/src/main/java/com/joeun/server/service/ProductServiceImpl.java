@@ -233,7 +233,7 @@ public class ProductServiceImpl implements ProductService {
 
     // 상품(항공권) 수정
     @Override
-    public int product_update(int productNo) throws Exception {
+    public int product_update (int productNo) throws Exception {
         int result = productMapper.product_update(productNo);
         return result;
     }

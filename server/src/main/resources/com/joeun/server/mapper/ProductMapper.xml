@@ -27,8 +27,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="flight_update">
   UPDATE flight
   SET flight_name = #{flightName}
-    , seat_no = #{seatNo}
-    , file = #{file}
     , route_no = #{routeNo}
     , seat_Max = #{seatMax}
     , seat_remaining = #{seatRemaining}

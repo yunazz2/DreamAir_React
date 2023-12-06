@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as boards from '../../apis/board'
 import BoardUpdateForm from '../../components/board/BoardUpdateForm'
 
@@ -49,7 +49,7 @@ const BoardUpdateContainer = () => {
     
     useEffect(() => {
         getBoard()
-    }, [])  // 의존성 배열을 빈 배열로 지정
+    }, [])
 
     return (
         <>

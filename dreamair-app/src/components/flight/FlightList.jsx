@@ -36,7 +36,7 @@ const FlightList = ( { flightList, flightNo, onDelete }) => {
             {flightList.map((flight) => (
               <tr key={flight.flightNo}>
                 <td align='center'>{flight.flightNo}</td>
-                <td align='center'>{flight.thumbnail && (<img src={`/file/img/${flight.thumbnail.fileNo}`} alt="게시글 이미지" className="card-img-top w-70 p-4" />)}</td>
+                <td align='center' style={{width: '100px', height: '100px'}} >{flight.thumbnail && (<img src={`/file/img/${flight.thumbnail.fileNo}`} alt="게시글 이미지" className="card-img-top w-70 p-4" />)}</td>
                 <td align='center'>{flight.flightName}</td>
                 <td align='center'>{flight.routeNo}</td>
                 <td align='center'>{flight.departure}</td>
@@ -48,8 +48,8 @@ const FlightList = ( { flightList, flightNo, onDelete }) => {
                 <td align='center'>{flight.seatUsed}</td>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <td align='right'><button className='btn btn-primary'><Link to={`/flight/flight_update/${flightNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(flightNo) }>삭제</button></td>
+                  <td align='right'><button className='btn btn-primary'><Link to={`/flight/flight_update/${flight.flightNo}`}>수정</Link></button></td>
+                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(flight.flightNo) }>삭제</button></td>
                 </div>
     
               </tr>

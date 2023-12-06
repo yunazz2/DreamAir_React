@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const MyBooking = ({bookingList}) => {
-  
+
   return (
     <div className="container p-4">
       <h1 className="text-center my-3">나의 탑승권 관리</h1>

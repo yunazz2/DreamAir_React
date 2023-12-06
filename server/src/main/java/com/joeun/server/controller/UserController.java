@@ -111,10 +111,11 @@ public class UserController {
 
     // 티켓 상세 조회
     @GetMapping("/booking/ticketInfo/{ticketNo}")
-    public ResponseEntity<?> viewTicket(@PathVariable Integer ticketNo) {
+    public ResponseEntity<?> viewTicket(@PathVariable Integer ticketNo, String userId) {
         log.info("[GET] - /user/booking/ticketInfo/" + ticketNo + " - 티켓 상세 조회");
         try {
             List<Booking> viewTicketDetail = bookingservice.selectTicket(ticketNo);
+            Users userInfo = userService.selectById(userId);
 
             if(viewTicketDetail == null) {
                 return new ResponseEntity<>(viewTicketDetail, HttpStatus.OK);

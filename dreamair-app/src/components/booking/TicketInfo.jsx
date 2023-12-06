@@ -2,8 +2,6 @@ import React from 'react'
 
 const TicketInfo = ({ticketNo, viewTicketDetail}) => {
 
-  console.log("티켓 인포 페이지 : " + viewTicketDetail);
-
   return (
     <div className="container p-4">
       <h1 className="text-center my-3">탑승권 조회</h1>
@@ -27,21 +25,12 @@ const TicketInfo = ({ticketNo, viewTicketDetail}) => {
 
         <tbody>
           <tr>
-            <td align='center'>{viewTicketDetail.ticketNo}</td>
-            <td align='center'>나오는거임??</td>
-            <td align='center'>{viewTicketDetail.ticketNo}</td>
-            <td align='center'>{viewTicketDetail.ticketNo}</td>
-            <td align='center'>{viewTicketDetail.ticketNo}</td>
+            <td align='center'>{viewTicketDetail[0]?.ticketNo}</td>
+            <td align='center'>{viewTicketDetail[0]?.departure}</td>
+            <td align='center'>{viewTicketDetail[0]?.destination}</td>
+            <td align='center'>{viewTicketDetail[0]?.departureDate}</td>
+            <td align='center'>{viewTicketDetail[0]?.seatNo}</td>
           </tr>
-          {/* {viewTicketDetail.map((ticketDetail, index) => (
-            <tr key={index}>
-              <td>{ticketDetail.ticketNo}</td>
-              <td>{ticketDetail.departure}</td>
-              <td>{ticketDetail.destination}</td>
-              <td>{ticketDetail.departureDate}</td>
-              <td>{ticketDetail.seatNo}</td>
-            </tr>
-          ))} */}
         </tbody>
       </table>
 
@@ -59,13 +48,11 @@ const TicketInfo = ({ticketNo, viewTicketDetail}) => {
         </thead>
 
         <tbody>
-          {/* {userInfo.map((user, index) => (
-            <tr key={index}>
-              <td>{user.name}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
-            </tr>
-          ))} */}
+          <tr>
+            <td align='center'></td>
+            <td align='center'></td>
+            <td align='center'></td>
+          </tr>
         </tbody>
       </table>
     </div>

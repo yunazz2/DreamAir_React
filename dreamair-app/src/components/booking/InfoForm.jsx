@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
-const InfoForm = () => {
+const InfoForm = ( {booking} ) => {
+  const [passengerNames, setPassengerNames] = useState([]);
+  const [firstNames, setFirstNames] = useState([]);
+  const [lastNames, setLastNames] = useState([]);
+  const [genders, setGenders] = useState([]);
+  const [births, setBirths] = useState([]);
+  const [pinTypes, setPinTypes] = useState([]);
+  const [phones, setPhones] = useState([]);
+  const [emails, setEmails] = useState([]);
   const [maleChecked, setMaleChecked] = useState(true);
 
   const handleMaleClick = () => {
@@ -11,6 +19,39 @@ const InfoForm = () => {
   const handleFemaleClick = () => {
     setMaleChecked(false);
   };
+
+  const handleChangeNames = (e) => { 
+    setPassengerNames(e.target.value)
+  }
+
+  const onSubmit = () => {
+    console.log();
+  }
+
+  // const [passengerData, setPassengerData] = useState(
+  //   [...Array(booking.pasCount)].map(() => ({
+  //     passengerName : '',
+  //     firstName: '',
+  //     lastName: '',
+  //     gender: '남자', // 초기값 설정
+  //     birth: '',
+  //     pinType: '1', // 초기값 설정
+  //     phone: '',
+  //     email: '',
+  //   }))
+  // );
+
+  // const handleInputChange = (index, fieldName, value) => {
+  //   const newPassengerData = [...passengerData];
+  //   newPassengerData[index][fieldName] = value;
+  //   setPassengerData(newPassengerData);
+  // };
+
+  // const handleInputChange = (index, value) => {
+  //   const newInputValues = [...passengerNames];
+  //   newInputValues[index] = value;
+  //   setPassengerNames(newInputValues);
+  // };
 
   return (
     <Container className="mt-5 py-3">
@@ -22,14 +63,22 @@ const InfoForm = () => {
       </div>
       <br /><br />
 
-      <Form action="/booking/info" method="post">
-        {/* {[...Array(booking.pasCount)].map((_, i) => (
-          <div key={i}>
+      <Form>
+        {/* {passengerData.map((passenger, i) => (
+          <div key={i}> */}
+        {[...Array(booking.pasCount)].map((_, i) => (
+        <div key={i}>
             <h2>탑승객 {i + 1}</h2>
+
             <Form.Group className="mb-3 row">
               <Form.Label className="col-md-2">이름</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" name="passengerNames" />
+                <Form.Control type="text" value={passengerNames} onChange={handleChangeNames} />
+
+                {/* {passengerNames.map((passengerName, index) => (
+                  <Form.Control type="text" key={index} value={passengerName} onChange={(e) => handleInputChange(index, e.target.value)} />
+                ))} */}
+                {/* <Form.Control type="text" value={passenger.passengerName} onChange={(e) => handleInputChange(i, 'passengerName', e.target.value)} /> */}
               </Col>
             </Form.Group>
 
@@ -103,7 +152,7 @@ const InfoForm = () => {
             </Form.Group>
 
           </div>
-        ))} */}
+        ))}
 
         <div className="input-group mb-3 row">
           <Form.Label className="col-md-2">비밀번호</Form.Label>
@@ -120,7 +169,7 @@ const InfoForm = () => {
           <a href="/" className="btn btn-lg btn-secondary">
             목록
           </a>
-          <Button type="submit" className="btn btn-lg btn-primary ms-3">
+          <Button onClick={onSubmit} className="btn btn-lg btn-primary ms-3">
             다음
           </Button>
         </div>

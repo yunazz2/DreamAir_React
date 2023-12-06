@@ -22,7 +22,8 @@ const AdminListContainer = () => {
     console.log(response.data);
     alert('삭제 완료')
 
-    navigate('/admin')
+    // navigate('/admin')
+    getAdminList();
   }
 
   useEffect(() => {

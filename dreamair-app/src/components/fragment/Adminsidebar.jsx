@@ -52,6 +52,7 @@ const Adminsidebar = () => {
               <li><span>탑승권 관리</span>
                 <ul className='Admin_submenu'>
                   <li><Link to="/admin/ticket_list" className="nav-link d-flex align-items-center gap-2">사용자 탑승권 관리</Link></li>
+                  <li><Link to="/qr" className="nav-link d-flex align-items-center gap-2">QR 목록</Link></li>
                 </ul>
               </li>
             </ul>

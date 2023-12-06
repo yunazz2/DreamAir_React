@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminList = ( {adminList, onDelete} ) => {
-
+ 
   return (
     <div className='container'>
         <h1 className="text-center my-5">관리자 관리</h1>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const FlightInsertForm = ({ flight, onInsert }) => {
+const FlightInsertForm = ({ onInsert }) => {
   
   const [flightName, setFlightName] = useState([])
   const [routeNo, setRouteNo] = useState([])
@@ -80,7 +80,7 @@ const FlightInsertForm = ({ flight, onInsert }) => {
 
         <div className="input-group mb-3 row">
           <label className="input-group-text col-md-2">항공기 이미지</label>
-          <input type="file" className="form-control col-md-10" name="file"/>
+          <input type="file" className="form-control col-md-10" name="file" multipart/>
         </div>
 
         <div className="input-group mb-3 row">
@@ -127,7 +127,7 @@ const FlightInsertForm = ({ flight, onInsert }) => {
       <hr className="my-4" />
 
       <div className="d-flex justify-content-between">
-        <button className='btn btn-primary' onClick={() => {onSubmit(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)}} >등록</button>
+        <button className='btn btn-primary' onClick={() => onSubmit(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)} >등록</button>
         <button className='btn btn-danger'><Link to="/flight">취소</Link></button>
       </div>
     </div>

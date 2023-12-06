@@ -1,5 +1,7 @@
 package com.joeun.server.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Users;
+import com.joeun.server.service.BookingService;
 import com.joeun.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @RestController
@@ -23,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BookingService bookingservice;
 
     // 회원 아이디로 회원 정보 조회
     @GetMapping("/{userId}")
@@ -73,6 +81,27 @@ public class UserController {
             int result2 = userService.deleteUsers(userId);
 
             return new ResponseEntity<>("회원 정보 삭제 완료", HttpStatus.OK);
+
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    // 예매 내역 조회 - 회원
+    @GetMapping("/bookingList/{userId}")
+    public ResponseEntity<?> selectBookingListByUser(@PathVariable String userId) {
+        log.info("[GET] - /user/bookingList/" + userId + "- 회원 예매 내역 조회");
+        try {
+            List<Booking> bookingList = bookingservice.selectBookingListByUser(userId);
+
+            if(bookingList == null) {
+                log.info("예매 내역 없음");
+            }
+            else {
+                log.info("예매 건 수 : " + bookingList.size());
+            }
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
 
         } catch (Exception e) {
             log.error(null, e);

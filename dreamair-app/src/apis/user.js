@@ -13,3 +13,6 @@ export const selectMileage = (userId) => axios.get(`/user/${userId}`)
 
 // 회원 탈퇴
 export const deleteAccount = (userId) => axios.delete(`/user/${userId}`)
+
+// 예매 내역 조회 - 회원
+export const selectBookingListByUser = (userId) => axios.get(`/user/bookingList/${userId}`)

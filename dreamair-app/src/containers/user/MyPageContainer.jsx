@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 // ⛄ 마이페이지
 const MyPageContainer = () => {
-    const userId = 'user'   // 우선 로그인된 유저 아이디가 user라고 하드 코딩
-    // const userId = getUserId(); // 세션에서 userId를 가져오는 함수 (예: 세션 스토리지, 상태 등)
+
+    sessionStorage.setItem('userId', 'user');   // 세션에 user라고 하드코딩하여 저장
+    const userId = sessionStorage.getItem('userId'); // 세션에서 userId를 가져옴
+    console.log(userId); // userId 로그 찍어보기
 
     return (
         <div className='container p-4'>

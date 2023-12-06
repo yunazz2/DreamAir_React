@@ -22,6 +22,8 @@ import TicketInfoContainer from './containers/booking/TicketInfoContainer'
 import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
 import Notice from './containers/booking/Notice';
+import SeatContainer from './containers/booking/SeatContainer';
+import SeatRtContainer from './containers/booking/SeatRtContainer'
 
 import AdminListContainer from './containers/admin/AdminListContainer';
 import UserListContainer from './containers/admin/UserListContainer';
@@ -78,6 +80,8 @@ function App() {
         <Route path='booking/bookingList' element={<BookingListContainer />} />
         <Route path='booking/info' element={<BookingInfoContainer />} />
         <Route path='booking/notice' element={<Notice />} />
+        <Route path='booking/seat' element={<SeatContainer />} />
+        <Route path='booking/seatRt' element={<SeatRtContainer />} />
       </Routes>
 
 

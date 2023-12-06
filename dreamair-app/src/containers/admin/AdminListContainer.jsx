@@ -11,6 +11,7 @@ import '../../styles/Paging.css'
 const AdminListContainer = () => {
   const {adminNo} = useParams();
   const [adminList, setAdminList] = useState([]);
+  
   const [currentPost, setCurrentPost] = useState([]);
   const [page, setPage] = useState(1);
   const postPerPage = 10; // 페이지 당 게시글 개수

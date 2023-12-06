@@ -24,7 +24,8 @@ const FlightListContainer = () => {
     alert('flight 삭제 완료')
 
     // ➡ 게시글 목록 이동
-    navigate('/flight')
+    // navigate('/flight')
+    getFlightList();
   }
 
   useEffect( () => {

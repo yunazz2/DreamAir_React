@@ -23,7 +23,8 @@ const ProductListContainer = () => {
     alert('삭제 완료')
 
     // ➡ 게시글 목록 이동
-    navigate('/product')
+    // navigate('/product')
+    getProductList();
   }
 
   useEffect( () => {

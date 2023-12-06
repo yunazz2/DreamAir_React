@@ -2,9 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const ProductList = ( {productList, productNo, onDelete}) => {
-  const handleDelete = () => {
-    onDelete(productNo)
-  }
+
   return (
     <div className='container'>
       <h1 className="text-center my-5">상품 관리</h1>
@@ -53,7 +51,7 @@ const ProductList = ( {productList, productNo, onDelete}) => {
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${product.productNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => handleDelete(productNo) }>삭제</button></td>
+                  <td align='right'><button className='btn btn-danger' onClick={ () => onDelete(product.productNo) }>삭제</button></td>
                 </div>
               </tr>
             ))}

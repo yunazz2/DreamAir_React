@@ -1,11 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const AdminList = ( {adminList, adminNo, onDelete} ) => {
-
-    const handleDelete = () => {
-        onDelete(adminNo)
-    }
+const AdminList = ( {adminList, onDelete} ) => {
 
   return (
     <div className='container'>
@@ -32,7 +28,7 @@ const AdminList = ( {adminList, adminNo, onDelete} ) => {
             <td>{admin.adminId}</td>
             <td>{admin.adminPw}</td>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => handleDelete(adminNo) }>삭제</button></td>
+                <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(admin.adminNo) }>삭제</button></td>
             </div>
         </tr>
         ))}

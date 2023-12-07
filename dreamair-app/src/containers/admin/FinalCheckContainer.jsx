@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as admin from '../../apis/admin'
 import FinalCheck from '../../components/admin/FinalCheck'
-import * as QR from '../../apis/qr'
 import Header from '../../components/fragment/Header'
 import Adminfooter from '../../components/fragment/Adminfooter'
 import Adminsidebar from '../../components/fragment/Adminsidebar'
@@ -10,17 +9,34 @@ import Adminsidebar from '../../components/fragment/Adminsidebar'
 const FinalCheckContainer = () => {
     
   const {ticketNo} = useParams();
-  const [pasTicketList, setPasTicketList] = useState([]);
+  const [ticket, setTicket] = useState([]);
+  // const [pasTicketList, setPasTicketList] = useState([]);
 
-  const getPasTicketList = async() => {
-    const response = await admin.pas_ticketList(ticketNo);
-    const data = await response.data;
-    console.log(data);
-    setPasTicketList(data);
-  } 
+  const getTicket = async() => {
+    try{
+      const response = await admin.pas_ticketList(ticketNo);
+      const data = response.data
+      console.log(data);
+      console.log('★★★★★★★★★★ pas_ticketList');
+      console.log('ticketNo' + ticketNo);
+      console.log('pas_ticketList' + data);
+      setTicket(data);
+    } catch(e) {
+      console.log(e);
+    }
+  }
+  // const getPasTicketList = async(ticketNo) => {
+  //   const response = await admin.pas_ticketList(ticketNo);
+  //   const data = await response.data;
+  //   console.log(data);
+  //   console.log('★★★★★★★★★★ pas_ticketList');
+  //   console.log('ticketNo' + ticketNo);
+  //   console.log('pas_ticketList' + data);
+  //   setPasTicketList(data);
+  // } 
   
   useEffect(() => {
-    getPasTicketList();
+    getTicket();
 }, [])
 
   return (
@@ -28,7 +44,7 @@ const FinalCheckContainer = () => {
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <FinalCheck pasTicketList={pasTicketList}/>  
+      <FinalCheck ticketNo={ticketNo} ticket={ticket} />  
     </div>
     <Adminfooter/> 
     </>

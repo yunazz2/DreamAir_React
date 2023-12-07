@@ -1,8 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
-const FinalCheck = ({pasTicketList, QR, ticketNo}) => {
-
+const FinalCheck = ( {ticketNo, ticket}) => {
   return (
     <div className='container'>
       <h1 className="text-center my-5">탑승권 관리 - 탑승 처리</h1>
@@ -51,7 +49,5 @@ const FinalCheck = ({pasTicketList, QR, ticketNo}) => {
       </div>
   );
 };
-
-
 
 export default FinalCheck

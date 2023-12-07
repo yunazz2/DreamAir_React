@@ -227,8 +227,7 @@ public class AdminController {
 
         return new ResponseEntity<>(ticketList, HttpStatus.OK);
     }
-
-    // 탑승권 처리 - 탑승 최종 확인 위한
+    
     @PostMapping("/Final_check")
     public ResponseEntity<?> ticket_CheckingPro(@RequestBody Booking ticket) {
         log.info("[POST] - /admin/Final_check");       

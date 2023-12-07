@@ -17,13 +17,12 @@ const IndexContainer = () => {
   const getMainList = async () => {
       const response = await index.mainList();
       const data = await response.data;
-      console.log("mainList" + data);
+      console.log(data);
       setMainList(data);
   }
 
   useEffect(() => {
       getMainList();
-      console.log("useEffect");
   }, [])
 
   return (

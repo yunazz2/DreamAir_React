@@ -65,10 +65,11 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody Product product) {
         log.info("[POST] - /product - 상품 등록");
+        log.info("productId : " + product.getProductId());
         try {
             int result = productService.product_insert(product);
             if( result > 0 )
-                return new ResponseEntity<>("상품 등록 완료", HttpStatus.CREATED);  // 201
+                return new ResponseEntity<>("상품 등록 완료", HttpStatus.OK);  // 201
             else
                 return new ResponseEntity<>("상품 등록 실패", HttpStatus.OK);  
 

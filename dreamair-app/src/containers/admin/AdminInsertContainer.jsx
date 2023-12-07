@@ -2,6 +2,9 @@ import React from 'react'
 import * as admin from '../../apis/admin'
 import AdminInsertForm from '../../components/admin/AdminInsertForm'
 import { useNavigate } from 'react-router-dom'
+import Header from '../../components/fragment/Header'
+import Adminfooter from '../../components/fragment/Adminfooter'
+import Adminsidebar from '../../components/fragment/Adminsidebar'
 
 const AdminInsertContainer = () => {
 
@@ -21,7 +24,12 @@ const AdminInsertContainer = () => {
 
   return (
     <>
-      <AdminInsertForm onInsert={onInsert} />
+        <Header/>
+        <div className='d-flex'>
+          <Adminsidebar/>
+          <AdminInsertForm onInsert={onInsert} />
+        </div>
+        <Adminfooter/> 
     </>
   )
 }

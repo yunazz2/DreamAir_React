@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TicketList = ({ticketList, ticketNo}) => {
+const TicketList = ({isLoading, ticketList}) => {
  
   return (
       <div>
-   
       <br />
-
-      {ticketList != null && (
+      { isLoading && (
+        <center>
+          <img src="/img/loading.gif" alt="loading" />
+        </center>
+      )}
+      { !isLoading && ticketList != null && (
         <table className="table table-striped table-hover table-bordered text-center align-middle">
           <thead>
             <tr className="table-primary">
+              <th>항공기 번호</th>
               <th>탑승권 번호</th>
               <th>탑승객 이름</th>
               <th>좌석 번호</th>
@@ -32,7 +36,8 @@ const TicketList = ({ticketList, ticketNo}) => {
               </tr>
             ) : (
               ticketList.map((ticket) => (
-                <tr>
+                <tr key={ticket.ticketNo}>        {/* 반복되는 요소에 key */}
+                  <td>{ticket.flightNo}</td>      {/* 항공기 번호 확인용으로 추가 */}
                   <td>{ticket.ticketNo}</td>
                   <td>{ticket.passengerName}</td>
                   <td>{ticket.seatNo}</td>
@@ -44,10 +49,8 @@ const TicketList = ({ticketList, ticketNo}) => {
                   <td>{ticket.isBoarded}</td>
                   <td>{ticket.boardingTime}</td>
                   <td colSpan="2">
-                    {/* <input type="hidden" className="ticketNo" value={ticket.ticketNo} />
-                    <input type="hidden" className="checkedIn" value={ticket.checkedIn} /> */}
                     {ticket.isBoarded === 0 ? (
-                      <button className="check_Button btn btn-primary active"><Link to={`/admin/Final_check?ticketNo=${ticket.ticketNo}`}>미탑승</Link></button>
+                      <button className="check_Button btn btn-primary active"><Link to={`/admin/Final_check/${ticket.ticketNo}`}>미탑승</Link></button>
                     ) : (
                       <button className="check_Button btn btn-primary disabled" type="button" data-bs-toggle="button" aria-disabled="true">탑승완료</button>
                     )}
@@ -58,6 +61,19 @@ const TicketList = ({ticketList, ticketNo}) => {
           </tbody>
         </table>
       )}
+
+      {ticketList == null && (
+        <table>
+        <tbody>
+        {ticketList.isEmpty() && (
+            <tr>
+                <td colSpan="12">등록된 탑승권 정보가 없습니다.</td>
+            </tr>
+            )}
+        </tbody>
+        </table>
+    )}
+
     </div>
 
   );

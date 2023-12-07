@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as boards from '../../apis/board'
 import BoardUpdateForm from '../../components/board/BoardUpdateForm'
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
 
 // ⛄ 게시글 수정
 const BoardUpdateContainer = () => {
@@ -49,11 +51,15 @@ const BoardUpdateContainer = () => {
     
     useEffect(() => {
         getBoard()
-    }, [])  // 의존성 배열을 빈 배열로 지정
+    }, [])
 
     return (
         <>
-            <BoardUpdateForm boardNo={boardNo} board={board} onUpdate={onUpdate} onDelete={onDelete} />
+            <Header/>
+            <div className='container'>
+                <BoardUpdateForm boardNo={boardNo} board={board} onUpdate={onUpdate} onDelete={onDelete} />
+            </div>
+            <Footer/>
         </>
     )
 }

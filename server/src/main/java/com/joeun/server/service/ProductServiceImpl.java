@@ -183,7 +183,7 @@ public class ProductServiceImpl implements ProductService {
         //파일 업로드 
         List<MultipartFile> fileList = product.getFile();
 
-        if( !fileList.isEmpty() )
+        if( !fileList.isEmpty() ){
         for (MultipartFile file : fileList) {
 
             if( file.isEmpty() ) continue;
@@ -226,14 +226,14 @@ public class ProductServiceImpl implements ProductService {
 
             fileMapper.insert(uploadedFile);
         }
-
+    }
 
         return result;
     }
 
     // 상품(항공권) 수정
     @Override
-    public int product_update(int productNo) throws Exception {
+    public int product_update (int productNo) throws Exception {
         int result = productMapper.product_update(productNo);
         return result;
     }

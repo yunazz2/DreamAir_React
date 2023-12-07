@@ -17,9 +17,12 @@ import MyBookingContainer from './containers/user/MyBookingContainer';
 import LogoutContainer from './containers/user/LogoutContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+import TicketInfoContainer from './containers/booking/TicketInfoContainer'
 
 import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
+import SeatContainer from './containers/booking/SeatContainer';
+import SeatRtContainer from './containers/booking/SeatRtContainer'
 import NoticeContainer from './containers/booking/NoticeContainer';
 import PaymentContainer from './containers/booking/PaymentContainer';
 import PaymentCompelteContainer from './containers/booking/PaymentCompelteContainer';
@@ -63,6 +66,7 @@ function App() {
         <Route path="/user/deleteaccount/:userId" element={<DeleteAccountContainer/>}/>
         <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
+        <Route path="/user/booking/ticketInfo/:ticketNo" element={<TicketInfoContainer/>}/>
       </Routes>
 
       {/* BOARD */}
@@ -77,6 +81,8 @@ function App() {
       <Routes>
         <Route path='booking/bookingList' element={<BookingListContainer />} />
         <Route path='booking/info' element={<BookingInfoContainer />} />
+        <Route path='booking/seat' element={<SeatContainer />} />
+        <Route path='booking/seatRt' element={<SeatRtContainer />} />
         <Route path='booking/notice' element={<NoticeContainer />} />
         <Route path='booking/payment' element={<PaymentContainer />} />
         <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />

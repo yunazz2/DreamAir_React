@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Files;
-import com.joeun.server.dto.Product;
 import com.joeun.server.dto.QR;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.AdminService;
@@ -151,7 +150,7 @@ public class AdminController {
     }
 
     // 탑승권 화면 - 탑승 최종 확인 위한
-    @GetMapping("final_check/{ticketNo}")
+    @GetMapping("/Final_check/{ticketNo}")
     public ResponseEntity<?> getOne(@PathVariable Integer ticketNo) {
         log.info("[GET] - /admin/Final_check");  
         try {
@@ -185,7 +184,7 @@ public class AdminController {
 
     // 탑승권 목록 조회
     @GetMapping(value="/ticket_list")
-    public ResponseEntity<?> ticket_listPro(Booking ticket, Product product) throws Exception {
+    public ResponseEntity<?> ticket_listPro(Booking ticket) throws Exception {
         log.info("[GET] - /admin/ticket_list");
 
         Date now = new Date();
@@ -230,7 +229,7 @@ public class AdminController {
     }
 
     // 탑승권 처리 - 탑승 최종 확인 위한
-    @PostMapping(value="/Final_check")
+    @PostMapping("/Final_check")
     public ResponseEntity<?> ticket_CheckingPro(@RequestBody Booking ticket) {
         log.info("[POST] - /admin/Final_check");       
         try {
@@ -248,7 +247,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping(value = "/Final_check_complete")
+    @GetMapping("/Final_check_complete")
     public ResponseEntity<?> finalcomplete( Booking ticket) {
         log.info("[GET] - /admin/Final_check_complete");
         int ticketNo = ticket.getTicketNo();
@@ -285,7 +284,7 @@ public class AdminController {
        
     }
 
-    @PostMapping(value = "/Final_check_complete")
+    @PostMapping("/Final_check_complete")
     public ResponseEntity<?> finalcomplete1(Booking ticket) throws Exception{
         log.info("[POST] - /admin/Final_check_complete");
         int ticketNo = ticket.getTicketNo();

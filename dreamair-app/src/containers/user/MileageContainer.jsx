@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import * as users from '../../apis/user'
+import * as userjs from '../../apis/user'
 import Mileage from '../../components/user/Mileage'
 
 // ⛄ 회원 마일리지 조회
@@ -14,7 +14,7 @@ const MileageContainer = () => {
 
   // 로그인 된 유저 ID로 마일리지 조회
   const getUser = async () => {
-    const response = await users.selectMileage(userId);
+    const response = await userjs.selectMileage(userId);
     const data = await response.data;
     console.log(data);
     setUser(data)

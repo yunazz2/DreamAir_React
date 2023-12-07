@@ -9,4 +9,4 @@ export const insert
 export const signIn = (userId, userPw) => axios.post("/login", {userId, userPw});
 
 // 최근 게시글 목록
-export const mainList = () => axios.get("/")
+export const mainList = () => axios.get("/mainList")

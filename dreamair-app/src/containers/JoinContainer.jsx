@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as users from '../apis/index'
-import Join from '../components/Join'
+import Join from '../components/index/Join'
 
 // ⛄ 회원 가입
 const JoinContainer = () => {

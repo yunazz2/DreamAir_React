@@ -59,7 +59,7 @@ const Header = () => {
               <li className="nav-item"><Link to="/user/productFlightList" className="nav-link link-body-emphasis px-2">출도착 항공편 조회</Link></li>
               <li className="nav-item"><Link to="/" className="nav-link link-body-emphasis px-2">항공권 예약</Link></li>
               <li className="nav-item"><Link to="/bus" className="nav-link link-body-emphasis px-2">공항 버스 예약</Link></li>
-              <li className="nav-item"><Link to="/board/list" className="nav-link link-body-emphasis px-2">게시판</Link></li>
+              <li className="nav-item"><Link to="/board" className="nav-link link-body-emphasis px-2">게시판</Link></li>
               <li className="nav-item"><Link to="/user" className="nav-link link-body-emphasis px-2">마이 페이지</Link></li>
             </ul>
           </div>

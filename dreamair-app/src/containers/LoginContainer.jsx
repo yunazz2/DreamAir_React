@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '../components/Login'
+import Login from '../components/index/Login'
 import * as users from '../apis/index'
 import { useNavigate } from 'react-router-dom'
 

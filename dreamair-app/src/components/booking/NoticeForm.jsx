@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
 import SelectedFlight from './SelectedFlight';
 
-const NoticeForm = ( {} ) => {
+const NoticeForm = ( { goBookingList, comeBookingList } ) => {
   return (
     <Container className="mt-5 py-3">
       <h1 style={{ textAlign: 'center' }}>탑승객 유의사항 안내</h1>
@@ -19,7 +19,10 @@ const NoticeForm = ( {} ) => {
         <Form.Control type="hidden" name="goFlightNo" value={bookingInfo.goFlightNo} />
         <Form.Control type="hidden" name="comeFlightNo" value={bookingInfo.comeFlightNo} /> */}
 
-        <SelectedFlight />
+        <SelectedFlight
+                        goBookingList={goBookingList}
+                        comeBookingList={comeBookingList}
+        />
 
         {/* 취소/환불 안내사항 */}
         <div className="notice_container mt-5" style={{ border: '1px solid rgb(247, 244, 244)' }}>

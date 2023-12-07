@@ -36,7 +36,7 @@ public class HomeController {
 
     // 메인 화면
     @GetMapping("mainList")
-    public ResponseEntity<?> home() {
+    public ResponseEntity<?> home(Principal principal) {
         // String loginId = principal != null ? principal.getName() : "guest";
         // String loginId = principal.getName();
         log.info("homeGET");

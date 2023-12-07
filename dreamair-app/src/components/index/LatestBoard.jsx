@@ -8,10 +8,10 @@ const LatestBoard = ({ mainList }) => {
         <h1 className="mt-5 ms-5">최근 게시글</h1>
 
         <Row className="board_container">
-          {/* {mainList.map((board) => (
+          {mainList.map((board) => (
             <Col key={board.boardNo} md={4}>
               <Card className="px-1">
-                <div className="img_container" style={{ height: '250px', overflow: 'hidden' }}>
+                {/* <div className="img_container" style={{ height: '250px', overflow: 'hidden' }}>
                   {board.thumbnail && (
                     <Card.Img
                       src={`/file/img/${board.thumbnail.fileNo}`}
@@ -19,7 +19,7 @@ const LatestBoard = ({ mainList }) => {
                       className="card-img-top w-100 p-4"
                     />
                   )}
-                </div>
+                </div> */}
                 <Card.Body>
                   <Card.Title>{board.title}</Card.Title>
                   <p className="card-text">
@@ -37,7 +37,7 @@ const LatestBoard = ({ mainList }) => {
                 </Card.Body>
               </Card>
             </Col>
-          ))} */}
+          ))}
         </Row>
       </Container>
     </section>

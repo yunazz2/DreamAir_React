@@ -1,5 +1,5 @@
 import React from 'react'
-import IndexContainer from '../containers/index/IndexContainer'
+import IndexContainer from '../containers/IndexContainer'
 
 const Index = () => {
   return (

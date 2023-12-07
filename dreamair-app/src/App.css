@@ -607,7 +607,7 @@ img:not([draggable]), embed, object, video {
 .start_departure {width: 20%;}
 .end_departure {width: 20%;}
 .calander {width: 40%;}
-.passenger {width: 10%;}
+.passenger {width: 50%;}
 .search_btn {width: 10%;}
 .none {display: none;}
 

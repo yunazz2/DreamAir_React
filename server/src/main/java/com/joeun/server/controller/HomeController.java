@@ -1,14 +1,21 @@
 package com.joeun.server.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joeun.server.dto.Board;
 import com.joeun.server.dto.Users;
+import com.joeun.server.service.BoardService;
 import com.joeun.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +30,36 @@ public class HomeController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardService boardService;
+
+    // 메인 화면
+    @GetMapping()
+    public ResponseEntity<?> home() {
+        // String loginId = principal != null ? principal.getName() : "guest";
+        // String loginId = principal.getName();
+
+        try {
+            // 최근 게시글 목록
+            List<Board> boardMainList = boardService.mainList();  // 수정된 부분
+            
+            if(boardMainList == null) {
+                log.info("조회된 게시글 없음");
+            }
+            else {
+                log.info("최근 게시글 개수 : " + boardMainList.size());
+                for (Board board : boardMainList) {
+                    log.info("게시글 정보 : " + board);
+                }
+            }
+
+            return new ResponseEntity<>(boardMainList, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // 회원 가입
     @PostMapping()

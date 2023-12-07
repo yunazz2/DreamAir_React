@@ -51,7 +51,7 @@ public class BookingController {
             // TODO: handle exception
         }
 
-
+        // bookingList, bookingInfo 값을 booking 객체에 담아서 리스트 페이지로 넘겨줘야함
         return new ResponseEntity<>( HttpStatus.OK);
     }
 

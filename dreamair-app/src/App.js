@@ -41,6 +41,7 @@ import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
 import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
 import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteContainer';
+import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
 
 
 function App() {
@@ -62,6 +63,8 @@ function App() {
         <Route path="/user/deleteaccount/:userId" element={<DeleteAccountContainer/>}/>
         <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
+        <Route path="/user/productFlightList" element={<ProductFlightListContainer/>}/>
+
       </Routes>
 
       {/* BOARD */}

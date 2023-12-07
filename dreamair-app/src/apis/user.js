@@ -13,3 +13,6 @@ export const selectMileage = (userId) => axios.get(`/user/${userId}`)
 
 // 회원 탈퇴
 export const deleteAccount = (userId) => axios.delete(`/user/${userId}`)
+
+// 출도착 항공편 조회
+export const productFlightList = () => axios.get('/user/productFlightList')

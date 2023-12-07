@@ -40,6 +40,7 @@ import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
 
 import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
+import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteContainer';
 
 
 function App() {
@@ -86,7 +87,8 @@ function App() {
         <Route path="/admin/user_list" element={<UserListContainer/>}/>
         <Route path="/admin/booking_list" element={<AdminBookingListContainer/>}/>
         <Route path="/admin/ticket_list" element={<TicketListContainer/>}/>
-        <Route path="/admin/Final_Check" element={<FinalCheckContainer/>}/>
+        <Route path="/admin/Final_Check/:ticketNo" element={<FinalCheckContainer/>}/>
+        <Route path="/admin/Final_Check_complete/:ticketNo" element={<FinalCheckCompleteContainer/>}/>
       </Routes>
 
       {/* PRODUCT */}

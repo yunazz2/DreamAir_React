@@ -152,7 +152,7 @@ public class AdminController {
     // 탑승권 화면 - 탑승 최종 확인 위한
     @GetMapping("/Final_check/{ticketNo}")
     public ResponseEntity<?> getOne(@PathVariable Integer ticketNo) {
-        log.info("[GET] - /admin/Final_check");  
+        log.info("[GET] - /admin/Final_check" + ticketNo + "탑승권 조회");  
         try {
             List<Booking> pasTicketList = adminService.pas_ticketList(ticketNo);
             if( pasTicketList == null )
@@ -247,7 +247,7 @@ public class AdminController {
     }
 
     @GetMapping("/Final_check_complete")
-    public ResponseEntity<?> finalcomplete( Booking ticket) {
+    public ResponseEntity<?> finalcomplete(Booking ticket) {
         log.info("[GET] - /admin/Final_check_complete");
         int ticketNo = ticket.getTicketNo();
         try {

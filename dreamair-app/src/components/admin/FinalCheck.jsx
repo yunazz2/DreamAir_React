@@ -1,10 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const FinalCheck = ( {ticketNo, ticket}) => {
+const FinalCheck = ({ticketNo, pasTicketList, qrList}) => {
+
   return (
     <div className='container'>
-      <h1 className="text-center my-5">탑승권 관리 - 탑승 처리</h1>
-        {pasTicketList.map((ticket) => (
+      <h1 className="text-center my-5 align-it">탑승권 관리 - 탑승 처리</h1>
+        <div className="btn-box d-grid gap-2 mb-4">
+           <button className="btn btn-primary btn-lg"><Link to={`admin/Final_check_complete/${ticketNo}`}></Link>탑승 완료</button>
+        </div>
+
+        {pasTicketList!= null && pasTicketList.map((ticket) => (
           <div key={ticket.ticketNo} className="boarding-pass" style={{ width: '1200px', height: '300px' }}>
             {/* Left Section */}
             <div className="left-section">
@@ -23,12 +29,17 @@ const FinalCheck = ( {ticketNo, ticket}) => {
                 <div className="passenger-detail-item"><strong>Seat : </strong>{ticket.seatNo}</div>
                 <div className="passenger-detail-item"><strong>Class : </strong>Economy</div>
               </div>
-              {/* QR 코드 */}
-              <div className="QRcode">
-                <Link href={QR.url} target="_blank" style={{ textDecoration: 'none' }}>
-                  <img src={`/qr/img?qrNo=${QR.qrNo}`} alt="QR코드" />
-                </Link>
-              </div>
+              {qrList!= null && qrList.map((QR) => (
+                <div key={QR.qrNo}>
+                  {/* QR 코드 */}
+                  <div className="QRcode">
+                    <Link href={QR.url} target="_blank" style={{ textDecoration: 'none' }}>
+                      <img src={`/qr/img?qrNo=${QR.qrNo}`} alt="QR코드" />
+                    </Link>
+                  </div>
+                </div>
+                  ))
+                }
               <div className="boarding-pass-footer">
                 <p>Boarding gate closes <span style={{ color: 'red' }}>10 minutes</span> prior to departure time.</p>
               </div>
@@ -42,10 +53,9 @@ const FinalCheck = ( {ticketNo, ticket}) => {
               <div className="section"><img src="/img/logo.png" alt="로고이미지" style={{ width: '30px', height: '30px' }} /></div>
             </div>
           </div>
-           ))}
-        <div className="btn-box d-grid gap-2">
-           <button className="btn btn-outline-primary btn-lg"><Link to={`admin/Final_check_complete/${ticketNo}`}></Link>탑승 완료</button>
-        </div>
+      ))}
+
+
       </div>
   );
 };

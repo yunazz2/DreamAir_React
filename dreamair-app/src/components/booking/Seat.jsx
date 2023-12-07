@@ -1,33 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Seat.module.css'
 import Swal from "sweetalert2";
 import $ from 'jquery';
 
 const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
-  // useEffect(() => {
-  //   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  //   const seatNoDepsInput = document.getElementById('seatNoDeps');
-
-  //   const selectedSeats = [];
-
-  //   checkboxes.forEach((checkbox) => {
-  //     checkbox.addEventListener('change', () => {
-  //       if (checkbox.classList.contains('checked')) {
-  //         checkbox.classList.remove('checked');
-  //         checkbox.checked = false;
-  //       }
-
-  //       // 선택된 좌석 처리 로직 추가
-  //     });
-  //   });
-
-  //   const interval = setInterval(() => {
-  //     // 실시간 예약 확인 로직 추가
-  //   }, 30000);
-
-  //   return () => clearInterval(interval); // 컴포넌트 언마운트 시 clearInterval
-  // }, []); // useEffect의 두 번째 매개변수인 빈 배열은 컴포넌트 마운트 시에만 실행되도록 함
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
   const seatStatus = bookingObject.seatStatus;
 
@@ -47,6 +25,19 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
       );
     }
   };
+
+  // checkbox가 클릭되었을 때 실행되는 함수
+  const handleCheckboxClick = (event, seatNo) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, seatNo]);
+    } else {
+      setSelectedSeats((prevSelectedSeats) =>
+        prevSelectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
+      );
+    }
+  };
+
 
   return (
     <div className={styles.seatContent}>
@@ -85,19 +76,24 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
                             style={{ marginRight: index % 4 === 3 ? '0' : '5px', marginBottom: '5px' }}
                             disabled
                             />
-                          ) : (
-                            <input
-                            type='checkbox'
-                            className={styles.seatBox}
-                            id={`seat-${seat.seatNo}`}
-                            style={{ marginRight: index % 4 === 3 ? '0' : '5px', marginBottom: '5px' }}
-                            />
-                          )}
-                          <label htmlFor={`seat-${seat.seatNo}`}></label>
-                          {(index + 1) % 4 === 0 && <br />} {/* 4열마다 줄바꿈 */}
-                        </React.Fragment>
-                      ))}
-                    </div>
+                            ) : (
+                              <input
+                                type="checkbox"
+                                className={styles.seatBox}
+                                id={`seat-${seat.seatNo}`}
+                                style={{
+                                  marginRight: index % 4 === 3 ? '0' : '5px',
+                                  marginBottom: '5px',
+                                }}
+                                checked={selectedSeats.includes(seat.seatNo)}
+                                onChange={(e) => handleCheckboxClick(e, seat.seatNo)}
+                              />
+                            )}
+                            <label htmlFor={`seat-${seat.seatNo}`}></label>
+                            {(index + 1) % 4 === 0 && <br />} {/* 4열마다 줄바꿈 */}
+                          </React.Fragment>
+                        ))}
+                      </div>
                   ) : (
                     <center>
                       <img src="/img/loading.gif" alt="loading" />

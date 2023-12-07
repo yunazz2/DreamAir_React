@@ -16,4 +16,4 @@ export const update = (boardNo, title, writer, content) => axios.put("/board", {
 export const remove = (boardNo) => axios.delete(`/board/${boardNo}`)
 
 // 메인 이미지 목록
-export const mainList = () => axios.get("/")
+// export const mainList = () => axios.get("/")

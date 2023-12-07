@@ -56,7 +56,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
                   <td>
                     <span>{booking.departureTime}</span>{' '}
                     <div style={{ display: 'inline-block' }}>
-                      <span>{booking.duration}</span> <br /> <img src="/img/화살표.webp" alt="화살표" />
+                      <span>{booking.duration}</span> <br /> <img src="/img/arrow.webp" alt="화살표" />
                     </div>{' '}
                     <span>{booking.destinationTime}</span>
                   </td>

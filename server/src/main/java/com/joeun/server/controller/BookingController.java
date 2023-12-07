@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,16 +44,25 @@ public class BookingController {
     // 항공권 조회 목록 -> 예매
     // 출발지 날짜 도착지(ticket), 탑승인원 왕복여부(booking) 를 정보()에 맞는 검색결과를 보여주기
     @GetMapping(value="/list")
-    public ResponseEntity<?> list(Booking bookingInfo) throws Exception {
-
+    public ResponseEntity<?> list(Booking booking) throws Exception {
+        log.info("bookingInfo : " + booking);
         try {
-            List<Booking> bookingList = bookingService.golist(bookingInfo);   //?
+            List<Booking> bookingList = bookingService.golist(booking);   //?
+
+            if(bookingList == null) {
+                log.info("조회된 항공권 없음");
+            }
+            else {
+                log.info("조회된 항공권 수 : " + bookingList.size());
+            }
+
+            // bookingList, bookingInfo 값을 booking 객체에 담아서 리스트 페이지로 넘겨줘야함
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        // bookingList, bookingInfo 값을 booking 객체에 담아서 리스트 페이지로 넘겨줘야함
-        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     // 가는 편

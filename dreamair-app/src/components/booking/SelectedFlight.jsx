@@ -44,6 +44,7 @@ const SelectedFlight = () => {
             </section>  
 
             <section>
+                {/* comBookingList 조건 걸어줘야함 */}
                 <h2>오는편</h2>
                 <Table striped bordered hover className="text-center align-middle">
                     <thead>

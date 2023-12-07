@@ -14,16 +14,17 @@ const IndexContainer = () => {
 
   const[mainList, setMainList] = useState([]);
 
-  // const getMainList = async () => {
-  //     const response = await index.mainList();
-  //     const data = await response.data;
-  //     console.log(data);
-  //     setMainList(data);
-  // }
+  const getMainList = async () => {
+      const response = await index.mainList();
+      const data = await response.data;
+      console.log("mainList" + data);
+      setMainList(data);
+  }
 
-  // useEffect(() => {
-  //     getMainList();
-  // }, [])
+  useEffect(() => {
+      getMainList();
+      console.log("useEffect");
+  }, [])
 
   return (
     <div>

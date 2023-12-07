@@ -10,7 +10,7 @@ const BoardListContainer = () => {
 
     // state 설정
     const [boardList, setBoardList] = useState([])
-    
+
     const [isLoading, setLoading] = useState(true)
 
     const [currentPost, setCurrentPost] = useState([]);

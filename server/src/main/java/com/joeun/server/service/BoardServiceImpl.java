@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.joeun.server.dto.Board;
 import com.joeun.server.dto.Files;
@@ -19,6 +21,10 @@ public class BoardServiceImpl implements BoardService {
 
     @Autowired
     private FileMapper fileMapper;
+
+    @Autowired
+    private FileService fileService;
+
 
     @Value("${upload.path}")            // application.properties 에 설정한 업로드 경로 속성명
     private String uploadPath;          // 업로드 경로
@@ -72,58 +78,35 @@ public class BoardServiceImpl implements BoardService {
         return board;
     }
 
-    // 게시글 등록
     @Override
+    @Transactional
     public int insert(Board board) throws Exception {
-        int result = boardMapper.insert(board);
-        String parentTable = "board";
+        int result = boardMapper.insert(board);         // 새로 생성된 데이터의 pk 가져옴
         int parentNo = boardMapper.maxPk();
+        board.setBoardNo(parentNo);
+
+        // ✅(New) 파일 업로드 
+        result += uploadFiles(board);
+
+        return result;
+    }
+
+    @Override
+    public int update(Board board) throws Exception {
+        int result = boardMapper.update(board);
 
         // 파일 업로드 
-        // List<MultipartFile> fileList = board.getFile();
-
-        // if( !fileList.isEmpty() )
-        // for (MultipartFile file : fileList) {
-
-        //     if( file.isEmpty() ) continue;
-
-        //     // 파일 정보 : 원본파일명, 파일 용량, 파일 데이터 
-        //     String originName = file.getOriginalFilename();
-        //     long fileSize = file.getSize();
-        //     byte[] fileData = file.getBytes();
-            
-        //     // UID_강아지.png
-        //     String fileName = UUID.randomUUID().toString() + "_" + originName;
-
-        //     // c:/upload/UID_강아지.png
-        //     String filePath = uploadPath + "/" + fileName;
-
-        //     // 파일업로드
-        //     File uploadFile = new File(uploadPath, fileName);
-        //     FileCopyUtils.copy(fileData, uploadFile);       // 파일 업로드
-
-        //     Files uploadedFile = new Files();
-        //     uploadedFile.setParentTable(parentTable);
-        //     uploadedFile.setParentNo(parentNo);
-        //     uploadedFile.setBoardNo(parentNo);
-        //     uploadedFile.setFileName(fileName);
-        //     uploadedFile.setFilePath(filePath);
-        //     uploadedFile.setOriginName(originName);
-        //     uploadedFile.setFileSize(fileSize);
-        //     uploadedFile.setFileCode(0);
-
-        //     fileMapper.insert(uploadedFile);
-        // }
+        result += uploadFiles(board);
 
         return result;
     }
 
     // 게시글 수정
-    @Override
-    public int update(Board board) throws Exception {
-        int result = boardMapper.update(board);
-        return result;
-    }
+    // @Override
+    // public int update(Board board) throws Exception {
+    //     int result = boardMapper.update(board);
+    //     return result;
+    // }
     
     // 게시글 삭제
     @Override
@@ -137,7 +120,21 @@ public class BoardServiceImpl implements BoardService {
     public void Views(int boardNo) throws Exception {
         boardMapper.views(boardNo);
     }
-    
-    
+
+    // ✅(New) 파일 업로드 
+    public int uploadFiles(Board board) throws Exception {
+        String parentTable = "board";
+        int parentNo = board.getBoardNo();
+        int result = 0;
+        
+        List<MultipartFile> fileList = board.getFiles();
+        if( fileList != null && !fileList.isEmpty() ) {
+            Files fileInfo = new Files();
+            fileInfo.setParentTable(parentTable);
+            fileInfo.setParentNo(parentNo);
+            result = fileService.uploadFiles(fileInfo, fileList);
+        }
+        return result;
+    }
+
 }
-  

@@ -3,14 +3,18 @@ package com.joeun.server.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.joeun.server.dto.Files;
 import com.joeun.server.mapper.FileMapper;
@@ -24,6 +28,10 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private FileMapper fileMapper;
 
+    @Value("${upload.path}")            // application.properties 에 설정한 업로드 경로 속성명
+    private String uploadPath;          // 업로드 경로
+
+    
     @Override
     public List<Files> list() throws Exception {
         List<Files> fileList = fileMapper.list();
@@ -177,5 +185,59 @@ public class FileServiceImpl implements FileService {
         return 1;
     }
 
+    @Override
+    public int uploadFiles(Files fileInfo, List<MultipartFile> fileList) throws Exception {
+        int result = 0;
+        for (MultipartFile file : fileList) {
+            result += uploadFile( fileInfo, file );
+        }
+        log.info(result + "개 파일을 업로드하였습니다.");
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public int upload(Files file) throws Exception {
+        int result = uploadFile(file, file.getFile());
+        if( result > 0 )
+            result = fileMapper.maxPk();        
+        return result;
+    }
+
+		public int uploadFile(Files fileInfo, MultipartFile file) throws Exception {
+        int result = 0;
+        if( file.isEmpty() ) return result;
+            
+        // 파일 정보 : 원본파일명, 파일 용량, 파일 데이터 
+        String originName = file.getOriginalFilename();
+        long fileSize = file.getSize();
+
+        // 업로드 경로
+        // 파일명 중복 방지 방법(정책)
+        // - 날짜_파일명.확장자
+        // - UID_파일명.확장자
+
+        // UID_강아지.png
+        String fileName = UUID.randomUUID().toString() + "_" + originName;
+
+        // c:/upload/UID_강아지.png
+        String filePath = uploadPath + "/" + fileName;
+
+        // - DB 에 파일 정보 등록
+        Files uploadedFile = new Files();
+        uploadedFile.setParentTable(fileInfo.getParentTable());
+        uploadedFile.setParentNo(fileInfo.getParentNo());
+        uploadedFile.setFileName(fileName);
+        uploadedFile.setFilePath(filePath);
+        uploadedFile.setOriginName(originName);
+        uploadedFile.setFileSize(fileSize);
+        uploadedFile.setFileCode(0);
+
+        // DB 에 데이터 등록
+        result = fileMapper.insert(uploadedFile);
+
+        return result;
+
+    }
     
 }

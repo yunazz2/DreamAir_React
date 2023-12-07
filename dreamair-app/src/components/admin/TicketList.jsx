@@ -5,7 +5,6 @@ const TicketList = ({isLoading, ticketList}) => {
  
   return (
       <div>
-   
       <br />
       { isLoading && (
         <center>
@@ -50,10 +49,8 @@ const TicketList = ({isLoading, ticketList}) => {
                   <td>{ticket.isBoarded}</td>
                   <td>{ticket.boardingTime}</td>
                   <td colSpan="2">
-                    {/* <input type="hidden" className="ticketNo" value={ticket.ticketNo} />
-                    <input type="hidden" className="checkedIn" value={ticket.checkedIn} /> */}
                     {ticket.isBoarded === 0 ? (
-                      <button className="check_Button btn btn-primary active"><Link to={`/admin/Final_check?ticketNo=${ticket.ticketNo}`}>미탑승</Link></button>
+                      <button className="check_Button btn btn-primary active"><Link to={`/admin/Final_check/${ticket.ticketNo}`}>미탑승</Link></button>
                     ) : (
                       <button className="check_Button btn btn-primary disabled" type="button" data-bs-toggle="button" aria-disabled="true">탑승완료</button>
                     )}
@@ -64,6 +61,19 @@ const TicketList = ({isLoading, ticketList}) => {
           </tbody>
         </table>
       )}
+
+      {ticketList == null && (
+        <table>
+        <tbody>
+        {ticketList.isEmpty() && (
+            <tr>
+                <td colSpan="12">등록된 탑승권 정보가 없습니다.</td>
+            </tr>
+            )}
+        </tbody>
+        </table>
+    )}
+
     </div>
 
   );

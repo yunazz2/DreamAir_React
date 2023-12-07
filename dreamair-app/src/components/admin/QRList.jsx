@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const QRList = ({qrNo, qrList, ticketNo}) => {
+const QRList = ({qrList, onDelete}) => {
   return (
     <div className='container'>
     <h1 className="text-center my-5">QR 코드 목록</h1>
@@ -19,10 +20,10 @@ const QRList = ({qrNo, qrList, ticketNo}) => {
             {qrList.map((qr) => (
                 <tr key={qr.qrNo}>
                     <td>{qr.qrNo}</td>
-                    <td><a href={qr.url} target="_blank" style={{ textDecoration: 'none' }}>
-                        <img src={`/qr/img?qrNo=${qr.qrNo}`} alt="" /></a>
+                    <td><Link to={qr.url} target="_blank" style={{ textDecoration: 'none' }}>
+                        <img src={`/qr/img?qrNo=${qr.qrNo}`} alt="" /></Link>
                     </td>
-                    <button className="btn btn-danger" data-qrno={qr.qrNo}>삭제</button>
+                    <td align='center'><button className='btn btn-danger' onClick={ () => onDelete(qr.qrNo) }>삭제</button></td>
                 </tr>
             ))}
        </tbody>

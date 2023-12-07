@@ -6,4 +6,4 @@ export const thumbnail = (fileNo) => axios.get(`/file/img/${fileNo}`)
 
 export const deleteFile = (fileNo) => axios.delete(`/file/${fileNo}`)
 
-export const uploadFile = (multipartFile) => axios.put('/file')
+export const uploadFile = (boardNo, file) => axios.put('/file', {boardNo, file} )

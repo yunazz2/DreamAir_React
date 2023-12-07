@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminList = ( {adminList, onDelete} ) => {
-
+ 
   return (
     <div className='container'>
         <h1 className="text-center my-5">관리자 관리</h1>
@@ -14,10 +14,10 @@ const AdminList = ( {adminList, onDelete} ) => {
         <table className="table table-striped table-hover table-bordered text-center align-middle">
             <thead>
              <tr className="table-primary">
-                <th>순번</th>
-                <th>관리자 ID</th>
-                <th>관리자 PW</th>
-                <th colSpan="2">비고</th>
+                <th align='center'>순번</th>
+                <th align='center'>관리자 ID</th>
+                <th align='center'>관리자 PW</th>
+                <th align='center'>비고</th>
              </tr>
             </thead>
         <tbody>
@@ -27,10 +27,7 @@ const AdminList = ( {adminList, onDelete} ) => {
             <td align='center'>{admin.adminNo}</td>
             <td align='center'>{admin.adminId}</td>
             <td align='center'>{admin.adminPw}</td>
-
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(admin.adminNo) }>삭제</button></td>
-            </div>
+            <td align='center'><button className='btn btn-danger' onClick={ () => onDelete(admin.adminNo) }>삭제</button></td>
         </tr>
         ))}
     </tbody>

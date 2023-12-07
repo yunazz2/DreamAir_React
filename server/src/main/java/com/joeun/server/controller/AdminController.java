@@ -150,7 +150,7 @@ public class AdminController {
     }
 
     // 탑승권 화면 - 탑승 최종 확인 위한
-    @GetMapping("final_check/{ticketNo}")
+    @GetMapping("/Final_check/{ticketNo}")
     public ResponseEntity<?> getOne(@PathVariable Integer ticketNo) {
         log.info("[GET] - /admin/Final_check");  
         try {
@@ -229,7 +229,7 @@ public class AdminController {
     }
 
     // 탑승권 처리 - 탑승 최종 확인 위한
-    @PostMapping(value="/Final_check")
+    @PostMapping("/Final_check")
     public ResponseEntity<?> ticket_CheckingPro(@RequestBody Booking ticket) {
         log.info("[POST] - /admin/Final_check");       
         try {
@@ -247,7 +247,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping(value = "/Final_check_complete")
+    @GetMapping("/Final_check_complete")
     public ResponseEntity<?> finalcomplete( Booking ticket) {
         log.info("[GET] - /admin/Final_check_complete");
         int ticketNo = ticket.getTicketNo();
@@ -284,7 +284,7 @@ public class AdminController {
        
     }
 
-    @PostMapping(value = "/Final_check_complete")
+    @PostMapping("/Final_check_complete")
     public ResponseEntity<?> finalcomplete1(Booking ticket) throws Exception{
         log.info("[POST] - /admin/Final_check_complete");
         int ticketNo = ticket.getTicketNo();

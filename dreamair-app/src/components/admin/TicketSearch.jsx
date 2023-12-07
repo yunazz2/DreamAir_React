@@ -48,7 +48,7 @@ const TicketSearch = ({ onSearch }) => {
             options={options}
           />
         </div>
-        <button onClick={() => {onSubmit()}} className="btn btn-outline-primary btn-lg">항공기 조회</button>
+        <button onClick={() => onSubmit(flightNo)} className="btn btn-outline-primary btn-lg">항공기 조회</button>
       </div>
   );
 };

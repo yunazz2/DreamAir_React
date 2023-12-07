@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import * as boards from '../../apis/board'
 import BoardRead from '../../components/board/BoardRead'
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
 
 // ⛄ 게시글 조회
 const BoardReadContainer = () => {
@@ -28,9 +30,13 @@ const BoardReadContainer = () => {
 
   return (
     <>
+      <Header/>
+      <div className='container'>
       <BoardRead boardNo={boardNo}
                  board={board}
-      />
+                 />
+      </div>
+      <Footer/>
     </>
   )
 }

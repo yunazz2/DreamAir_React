@@ -1,0 +1,43 @@
+/* 페이지 네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 0 auto;
+  }
+  
+  .pagination li {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(243, 219, 241);
+    transition: all 0.3s;
+  }
+  
+  .pagination li:hover,
+  .pagination li:active,
+  .pagination li.active {
+    background-color: rgb(243, 219, 241);
+    color: black;
+    font-weight: bold;
+  }
+  
+  .pagination li:nth-child(1),
+  .pagination li:nth-child(2),
+  .pagination li:nth-last-child(1),
+  .pagination li:nth-last-child(2) {
+    a {
+      align-items: baseline;
+      font-size: 20px;
+    }
+  }
+  
+  .pagination li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+  }

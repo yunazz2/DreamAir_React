@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as admin from '../../apis/admin'
 import FinalCheck from '../../components/admin/FinalCheck'
 import Header from '../../components/fragment/Header'
@@ -10,9 +10,14 @@ const FinalCheckContainer = () => {
     
   const {ticketNo} = useParams();
 
+  const navigate = useNavigate()
+
   const [pasTicketList, setPasTicketList] = useState([]);
   const [fileList, setFileList] = useState([]);
   const [qrList, setQrList] = useState([]);
+
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isBoarded, setIsBoarded] = useState(0); // 초기 값 : 미탑승(0)  -> 변경 값 : 탑승완료(1)
 
   const getPasTicketList = async() => {
     try{
@@ -33,16 +38,36 @@ const FinalCheckContainer = () => {
       console.log(e);
     }
   }
-  
-  const onClick = async () => {
-    try{
-      
-      navigate('/admin/Final_check_complete')
 
+  const onHandleValue = async () => {
+    try {
+      // setIsBoarded(1);
+      const response = await admin.ticket_update_b(ticketNo, 1)
+      const data = response.data;
+      console.log(data);
+    
+    }  catch(e) {
+      console.log(e);
+    }
+  }
+
+  const onHandleCheck = async (ticketNo) => {
+    try{
+      const check = window.confirm('최종 탑승 완료하시겠습니까?')
+      if(check){
+        setIsConfirmed(true);
+        onHandleValue().then(() => {
+          alert('DB 변경 완료');
+
+          navigate(`/admin/Final_check_complete/${ticketNo}`)
+        })
+        
+      } else {
+        setIsConfirmed(false);
+      }
     } catch(e) {
       console.log(e);
     }
-
   }
 
   useEffect(() => {
@@ -54,7 +79,7 @@ const FinalCheckContainer = () => {
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <FinalCheck ticketNo={ticketNo} pasTicketList={pasTicketList} qrList={qrList} onClick={onClick}/>  
+      <FinalCheck ticketNo={ticketNo} pasTicketList={pasTicketList} qrList={qrList} onHandleCheck={onHandleCheck}/>  
     </div>
     <Adminfooter/> 
     </>

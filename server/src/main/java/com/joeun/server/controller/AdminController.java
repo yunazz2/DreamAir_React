@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -297,4 +298,30 @@ public class AdminController {
 
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
+
+
+    @PutMapping("/Final_check_complete")
+    public ResponseEntity<?> putfinalcomplete(@RequestBody Booking ticket) throws Exception{
+        log.info("[PUT] - /admin/Final_check_complete");
+        int ticketNo = ticket.getTicketNo();
+        int isBoarded = ticket.getIsBoarded();
+        
+        log.info("ticket no : " + ticketNo);
+        log.info("isBoarded : " + isBoarded);
+
+        ticket.setTicketNo(ticketNo);
+        ticket.setIsBoarded(isBoarded);
+
+        
+        int result = adminService.ticket_update_b(ticketNo, isBoarded);
+
+        if( result > 0 )
+            return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("FAIL", HttpStatus.OK);
+    }
+
+
+
+
 }

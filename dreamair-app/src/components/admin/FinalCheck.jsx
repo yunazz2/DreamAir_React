@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const FinalCheck = ({ticketNo, pasTicketList, qrList}) => {
+const FinalCheck = ({ticketNo, pasTicketList, qrList, onHandleCheck}) => {
 
   return (
     <div className='container'>
       <h1 className="text-center my-5 align-it">탑승권 관리 - 탑승 처리</h1>
         <div className="btn-box d-grid gap-2 mb-4">
-           <button className="btn btn-primary btn-lg"><Link to={`admin/Final_check_complete/${ticketNo}`}></Link>탑승 완료</button>
+           <button className="btn btn-primary btn-lg" onClick={() => { onHandleCheck(ticketNo) }}>탑승 완료</button>
         </div>
 
         {pasTicketList!= null && pasTicketList.map((ticket) => (

@@ -2,7 +2,9 @@ package com.joeun.server.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +28,8 @@ import com.joeun.server.service.ProductService;
 import com.joeun.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @RestController
@@ -111,18 +116,24 @@ public class BookingController {
     
         return "redirect:/booking/seat";
     }
-    
-        
-    // 좌석 선택
-    @GetMapping(value="/seat")
-    public String seat(Model model, @ModelAttribute("booking") Booking booking) throws Exception {
 
-        int productNoDepValue = booking.getProductNoDeps()[0];
-        int productNoDesValue = booking.getProductNoDeps()[0];
+    // 가는 편 좌석 선택
+    @GetMapping("/seat")
+    public ResponseEntity<?> seat(@RequestParam int pasCount, @RequestParam int productNoDeps) throws Exception {
+
+        // 여기부터
+        Booking booking = new Booking();
+        
+        int productNoDepValue = productNoDeps;
+        int productNoDesValue = productNoDeps;
+        // 여기까지는 테스트를 위해 임시로 값 넣어둔 거(매개 변수도)
+        
+        // int productNoDepValue = booking.getProductNoDeps()[0];
+        // int productNoDesValue = booking.getProductNoDeps()[0];
 
         String departure = bookingService.selectDeparture(productNoDepValue);
         String destination = bookingService.selectDestination(productNoDesValue);
-        
+
         // 출발지명과 도착지명으로 노선 조회해서 항공기 번호 부여
         int routeNoToFlightNo = bookingService.selectRouteNo(departure, destination);
         booking.setFlightNo(routeNoToFlightNo);
@@ -138,25 +149,23 @@ public class BookingController {
         booking.setPassengerNoss(selectLastPasNoss);
         
         log.info("가는 편 페이지 부킹 객체 : " + booking);
-        
-        // 모델에 등록
-        model.addAttribute("booking", booking);
-        model.addAttribute("seatStatus", seatStatus);
 
-        return "booking/seat";
+        // seatStatus와 selectLastPasNos를 Map으로 묶어서 반환
+        Map<String, Object> bookingObject = new HashMap<>();
+        bookingObject.put("seatStatus", seatStatus);
+        bookingObject.put("selectLastPasNos", selectLastPasNoss);
+
+        return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
-
 
     // 예약된 좌석 데이터 가져오기
-    @ResponseBody       // 데이터만 응답
-    @GetMapping(value="/booked")
-    public List<Booking> bookedSeatList(int flightNo) throws Exception {
-        log.info("filghtNo : " + flightNo);
-        List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
-        return bookedSeatList;
-    }
-    
+    @GetMapping("/seatStatus/{flightNo}")
+    public ResponseEntity<?> bookedSeatList(@PathVariable Integer flightNo) throws Exception {
 
+        List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
+        
+        return new ResponseEntity<>(bookedSeatList, HttpStatus.OK);
+    }
 
     // 왕복 여부에 따라 페이지 처리
     @PostMapping(value = "/seat")

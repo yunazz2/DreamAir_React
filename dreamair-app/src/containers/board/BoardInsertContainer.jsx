@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { isRouteErrorResponse, useNavigate } from 'react-router-dom'
 import * as boards from '../../apis/board'
 import BoardInsertForm from '../../components/board/BoardInsertForm'
 import Header from '../../components/fragment/Header'
@@ -10,20 +10,20 @@ const BoardInsertContainer = () => {
 
   const navigate = useNavigate()
 
-  const onInsert = async (title, writer, content) => {
-    try {
-      const response = await boards.insert(title, writer, content)
+  const onInsert = async (formData, headers) => {
+    try{
+      const response = await boards.insert(formData, headers)
 
-      alert('등록 완료')
+      alert('등록 완료');
       console.log(response.data);
 
-      // 👉 게시글 목록 이동
+      // ➡ 게시글 목록 이동
       navigate('/board')
     }
     catch(e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <>

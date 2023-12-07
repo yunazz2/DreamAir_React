@@ -37,12 +37,16 @@ const UserListContainer = () => {
   };
 
   const onDelete = async (userNo) => {
+    try{
     const response = await admin.user_delete(userNo);
     const data = await response.data;
+    alert('삭제 완료');
     console.log(data);
-
-    navigate('/admin/user_list');
+    getUserList();
+  } catch (error) {
+    console.error('Error deleting user:', error);
   }
+};
   useEffect(() => {
       getUserList();
   }, [])

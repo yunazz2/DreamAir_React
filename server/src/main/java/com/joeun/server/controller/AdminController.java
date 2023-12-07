@@ -121,7 +121,7 @@ public class AdminController {
     public ResponseEntity<?> user_destroy(@PathVariable Integer userNo) {
         log.info("[DELETE] - /admin/user_list" + userNo + " - 사용자 삭제");
         try {
-            int result = adminService.admin_delete(userNo);
+            int result = adminService.user_delete(userNo);
             if( result > 0 )
                 return new ResponseEntity<>("사용자 삭제 완료", HttpStatus.OK); 
             else

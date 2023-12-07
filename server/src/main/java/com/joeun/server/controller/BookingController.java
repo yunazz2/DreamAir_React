@@ -255,28 +255,36 @@ public class BookingController {
             List<Booking> goBookingList = new ArrayList<Booking>();
             List<Booking> comeBookingList = new ArrayList<Booking>();
             
+            // 회원 : userNo 추출, 비회원 : userNo2 추출
+            // Users user = userService.selectById2(principal, request);
+            // if ( principal == null ) {
+            //     log.info("비회원 유저번호 : " + user.getUserNo2());
+            // } else {
+            //     log.info("회원 유저번호 : " + user.getUserNo());
+            // }
+
             if (booking.getRoundTrip().equals("편도")) {
                 // 편도 조회
                 goBookingList = bookingService.goScheduleList(booking);
+
+                return new ResponseEntity<>(goBookingList, HttpStatus.OK);
             } else {
                 // 왕복 조회
                 goBookingList = bookingService.goScheduleList(booking);
                 comeBookingList = bookingService.comeScheduleList(booking);
-            }
-            
-            // 회원 : userNo 추출, 비회원 : userNo2 추출
-            Users user = userService.selectById2(principal, request);
-            if ( principal == null ) {
-                log.info("비회원 유저번호 : " + user.getUserNo2());
-            } else {
-                log.info("회원 유저번호 : " + user.getUserNo());
+
+                Map<String, Object> response = new HashMap<>();
+                response.put("goBookingList", goBookingList);
+                response.put("comeBookingList", comeBookingList);
+                
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
-        return new ResponseEntity<>(HttpStatus.OK);
         // model.addAttribute("goBookingList", goBookingList);
         // model.addAttribute("comeBookingList", comeBookingList);
         // model.addAttribute("bookingInfo", booking);

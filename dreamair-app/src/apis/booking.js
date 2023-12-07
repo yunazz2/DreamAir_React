@@ -7,4 +7,4 @@ export const list = (roundTrip, departure, destination, departureDate, pasCount 
 export const getNotice = (roundTrip, pasCount, passengerNames, phones, seatNoDeps) => axios.get("/booking/notice", { params : { roundTrip, pasCount, passengerNames, phones, seatNoDeps } })
 
 // 결제 정보 조회
-export const getPayment = (roundTrip, pasCount, passengerNames, phones, seatNoDeps, payment) => axios.get("/booking/notice", { params : { roundTrip, pasCount, passengerNames, phones, seatNoDeps, payment } })
+export const getPayment = (roundTrip, pasCount, passengerNames, phones, seatNoDepss, payment) => axios.get("/booking/payment", { params : { roundTrip, pasCount, passengerNames, phones, seatNoDepss, payment } })

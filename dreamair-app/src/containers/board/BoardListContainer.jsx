@@ -40,7 +40,7 @@ const BoardListContainer = () => {
         setLoading(true)
         getBoardList();
         setLoading(false)
-    }, [])  // 의존성 배열을 빈 배열로 지정
+    }, [])
 
     return (
     <>

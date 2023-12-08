@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Index from './pages/Index';
 
@@ -8,39 +8,42 @@ import BoardListContainer from './containers/board/BoardListContainer';
 import BoardReadContainer from './containers/board/BoardReadContainer';
 import BoardUpdateContainer from './containers/board/BoardUpdateContainer';
 
-import MyPageContainer from './containers/user/MyPageContainer';
-import UserUpdateContainer from './containers/user/UserUpdateContainer';
-import CheckInContainer from './containers/user/CheckInContainer';
-import MileageContainer from './containers/user/MileageContainer';
-import DeleteAccountContainer from './containers/user/DeleteAccountContainer';
-import MyBookingContainer from './containers/user/MyBookingContainer';
-import LogoutContainer from './containers/user/LogoutContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+import CheckInContainer from './containers/user/CheckInContainer';
+import DeleteAccountContainer from './containers/user/DeleteAccountContainer';
+import LogoutContainer from './containers/user/LogoutContainer';
+import MileageContainer from './containers/user/MileageContainer';
+import MyBookingContainer from './containers/user/MyBookingContainer';
+import MyPageContainer from './containers/user/MyPageContainer';
+import UserUpdateContainer from './containers/user/UserUpdateContainer';
 
-import BookingListContainer from './containers/booking/BookingListContainer';
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
+import BookingListContainer from './containers/booking/BookingListContainer';
 import Notice from './containers/booking/Notice';
 
-import AdminListContainer from './containers/admin/AdminListContainer';
-import UserListContainer from './containers/admin/UserListContainer';
 import AdminBookingListContainer from './containers/admin/AdminBookingListContainer';
-import TicketListContainer from './containers/admin/TicketListContainer';
+import AdminInsertContainer from './containers/admin/AdminInsertContainer';
+import AdminListContainer from './containers/admin/AdminListContainer';
 import FinalCheckContainer from './containers/admin/FinalCheckContainer';
 import QRListContainer from './containers/admin/QRListContainer';
-import AdminInsertContainer from './containers/admin/AdminInsertContainer';
+import TicketListContainer from './containers/admin/TicketListContainer';
+import UserListContainer from './containers/admin/UserListContainer';
 
-import ProductListContainer from './containers/product/ProductListContainer';
 import ProductInsertContainer from './containers/product/ProductInsertContainer';
+import ProductListContainer from './containers/product/ProductListContainer';
 import ProductUpdateContainer from './containers/product/ProductUpdateContainer';
 
-import FlightListContainer from './containers/flight/FlightListContainer';
 import FlightInsertContainer from './containers/flight/FlightInsertContainer';
+import FlightListContainer from './containers/flight/FlightListContainer';
 import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
 
+import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteContainer';
+import CommentInsertContainer from './containers/board/CommentInsertContainer';
+import CommentListContainer from './containers/board/CommentListContainer';
+import CommentUpdateContainer from './containers/board/CommentUpdateContainer';
 import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
-import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteContainer';
 import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
 
 
@@ -73,6 +76,13 @@ function App() {
         <Route path="/board/:boardNo" element={<BoardReadContainer/>}/>
         <Route path="/board/insert" element={<BoardInsertContainer/>}/>
         <Route path="/board/update/:boardNo" element={<BoardUpdateContainer/>}/>
+      </Routes>
+
+      {/* COMMENT */}
+      <Routes>
+        <Route path="/comment" element={<CommentListContainer/>}/>
+        <Route path="/comment/comment_insert" element={<CommentInsertContainer/>}/>
+        <Route path="/comment/comment_update/:boardNo/:commentNo" element={<CommentUpdateContainer/>}/>
       </Routes>
 
       {/* booking */}

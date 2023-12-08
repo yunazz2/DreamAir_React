@@ -5,6 +5,10 @@ import * as files from '../../apis/files';
 import BoardRead from '../../components/board/BoardRead'
 import Header from '../../components/fragment/Header'
 import Footer from '../../components/fragment/Footer'
+import CommentInsertContainer from './CommentInsertContainer';
+import CommentList from '../../components/board/CommentList';
+import CommentListContainer from './CommentListContainer';
+import { commentList } from '../../apis/comment';
 
 // ⛄ 게시글 조회
 const BoardReadContainer = () => {
@@ -44,8 +48,6 @@ const BoardReadContainer = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-
 }
 
   useEffect(() => {
@@ -61,6 +63,8 @@ const BoardReadContainer = () => {
                  fileList={fileList}
                  onDownload={(fileNo, fileName) => onDownload(fileNo, fileName)}
                  />
+      <CommentInsertContainer/>
+      <CommentListContainer commentList={commentList}/>
       </div>
       <Footer/>
     </>

@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Index from './pages/Index';
+
+import IndexContainer from './containers/IndexContainer';
 
 import BoardInsertContainer from './containers/board/BoardInsertContainer';
 import BoardListContainer from './containers/board/BoardListContainer';
@@ -19,13 +20,13 @@ import MyPageContainer from './containers/user/MyPageContainer';
 import UserUpdateContainer from './containers/user/UserUpdateContainer';
 
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
-import TicketInfoContainer from './containers/booking/TicketInfoContainer'
-import SeatContainer from './containers/booking/SeatContainer';
-import SeatRtContainer from './containers/booking/SeatRtContainer'
-import NoticeContainer from './containers/booking/NoticeContainer';
-import PaymentContainer from './containers/booking/PaymentContainer';
-import PaymentCompelteContainer from './containers/booking/PaymentCompelteContainer';
 import BookingListContainer from './containers/booking/BookingListContainer';
+import NoticeContainer from './containers/booking/NoticeContainer';
+import PaymentCompelteContainer from './containers/booking/PaymentCompelteContainer';
+import PaymentContainer from './containers/booking/PaymentContainer';
+import SeatContainer from './containers/booking/SeatContainer';
+import SeatRtContainer from './containers/booking/SeatRtContainer';
+import TicketInfoContainer from './containers/booking/TicketInfoContainer';
 
 import AdminBookingListContainer from './containers/admin/AdminBookingListContainer';
 import AdminInsertContainer from './containers/admin/AdminInsertContainer';
@@ -47,10 +48,9 @@ import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteCo
 import CommentInsertContainer from './containers/board/CommentInsertContainer';
 import CommentListContainer from './containers/board/CommentListContainer';
 import CommentUpdateContainer from './containers/board/CommentUpdateContainer';
-import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
-import BookingContextProvider from './contexts/BookingContextProvider'
 import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
+import BookingContextProvider from './contexts/BookingContextProvider';
 
 
 function App() {
@@ -58,6 +58,7 @@ function App() {
     <BrowserRouter>
       {/* index */}
       <Routes>
+        <Route path="/" element={<IndexContainer/>}/>
         <Route path="/join" element={<JoinContainer/>}/>
         <Route path="/login" element={<LoginContainer/>}/>
       </Routes>

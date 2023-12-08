@@ -38,11 +38,19 @@ const SeatContainer = () => {
   }
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     getBookingObject();
     getBookedList();
-    setLoading(false)
-  }, [])
+    setLoading(false);
+
+    // 10초마다 getBookingObject 함수 실행
+    // const interval = setInterval(() => {
+    //   getBookingObject();
+    // }, 10000);
+
+    // // 컴포넌트가 언마운트될 때 interval을 클리어하여 메모리 누수 방지
+    // return () => clearInterval(interval);
+  }, []);
 
   return (
     <>

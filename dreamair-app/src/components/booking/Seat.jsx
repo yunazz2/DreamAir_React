@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Seat.module.css'
 import Swal from "sweetalert2";
-import $ from 'jquery';
 
 const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
@@ -26,18 +25,6 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
     }
   };
 
-  // checkbox가 클릭되었을 때 실행되는 함수
-  const handleCheckboxClick = (event, seatNo) => {
-    const isChecked = event.target.checked;
-    if (isChecked) {
-      setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, seatNo]);
-    } else {
-      setSelectedSeats((prevSelectedSeats) =>
-        prevSelectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
-      );
-    }
-  };
-
 
   return (
     <div className={styles.seatContent}>
@@ -55,7 +42,6 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
       
       <div className={styles.seatInnerWrap}>
-        {/* 이 부분에서 seatStatus가 배열인지 여부와 값이 있는지를 확인하고 map 함수를 사용 */}
         <div className={styles.seatInnerLeft}>
           <div className={styles.left1}>
             <div className={styles.nameView}></div>
@@ -85,8 +71,6 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
                                   marginRight: index % 4 === 3 ? '0' : '5px',
                                   marginBottom: '5px',
                                 }}
-                                checked={selectedSeats.includes(seat.seatNo)}
-                                onChange={(e) => handleCheckboxClick(e, seat.seatNo)}
                               />
                             )}
                             <label htmlFor={`seat-${seat.seatNo}`}></label>
@@ -95,7 +79,7 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
                         ))}
                       </div>
                   ) : (
-                    <center>
+                    <center>  {/* 로딩 이미지 */}
                       <img src="/img/loading.gif" alt="loading" />
                     </center>
                   )}
@@ -115,7 +99,8 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
         </div>
 
         <div className={styles.seatInnerRightDown}>
-          <div className={styles.passengerName}>탑승객명
+          <div className={styles.passengerName}>
+            <p>탑승객명</p>
             {/* <h5 th:each="passenger : ${booking.passengerNames}">
               <span th:text="${passenger}"></span>
             </h5> */}

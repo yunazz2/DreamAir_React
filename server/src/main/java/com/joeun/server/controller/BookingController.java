@@ -148,7 +148,7 @@ public class BookingController {
         
         booking.setPassengerNoss(selectLastPasNoss);
         
-        log.info("가는 편 페이지 부킹 객체 : " + booking);
+        // log.info("가는 편 페이지 부킹 객체 : " + booking);
 
         // seatStatus와 selectLastPasNos를 Map으로 묶어서 반환
         Map<String, Object> bookingObject = new HashMap<>();

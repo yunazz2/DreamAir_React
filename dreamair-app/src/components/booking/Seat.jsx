@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Seat.module.css'
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
@@ -8,22 +9,48 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
   const seatStatus = bookingObject.seatStatus;
 
+  const navigate = useNavigate();
+
+  const nextPage = () => {
+    navigate(`/booking/SeatRt/${pasCount}/${roundTrip}`, {
+      state: {
+        selectedSeats : selectedSeats
+      }})
+  }
 
   // 체크박스 변경 시 처리하는 함수
   const handleCheckboxChange = (seatNo) => {
-    // 이미 선택된 좌석이라면 제거, 아니면 추가
     const updatedSeats = selectedSeats.includes(seatNo)
       ? selectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
-      : [...selectedSeats, seatNo];
+      : selectedSeats.length < pasCount
+      ? [...selectedSeats, seatNo]
+      : selectedSeats;
 
     setSelectedSeats(updatedSeats);
   };
 
+  // seatStatus 로딩 시, 예매 완료된 좌석을 유저가 선택했다면 해당 좌석 checked 속성 제거
+  useEffect(() => {
+    const updatedSelectedSeats = selectedSeats.filter((seatNo) => {
+      const seat = seatStatus.find((seat) => seat.seatNo === seatNo);
+      if (seat && seat.status == 1) {
+        Swal.fire({
+          icon: 'error',
+          title: '예매가 완료된 좌석입니다.',
+          text: `좌석 ${seat.seatNo}은(는) 이미 예매가 완료되었습니다.`,
+        });
+        return false; // 해당 좌석 제거
+      }
+      return true; // 다른 좌석은 유지
+    });
+    setSelectedSeats(updatedSelectedSeats);
+  }, [seatStatus]);
+  
   // 왕복 여부에 따른 버튼 노출
   const renderButton = () => {
     if (roundTrip === '왕복') {
       return (
-        <button type="button" className={styles.seatInnerBottom} id="btn">
+        <button type="button" className={styles.seatInnerBottom} id="btn" onClick={nextPage}>
           다음 단계로
         </button>
       );
@@ -82,7 +109,10 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
                                   marginBottom: '5px',
                                 }}
                                 checked={selectedSeats.includes(seat.seatNo)} // 체크 여부 확인
-                                onChange={() => handleCheckboxChange(seat.seatNo)} // onChange 이벤트 추가
+                                onChange={(e) => {
+                                  handleCheckboxChange(seat.seatNo);
+                                  e.target.checked = selectedSeats.includes(seat.seatNo); // input 태그의 checked 속성 업데이트
+                                }}
                               />
                             )}
                             <label htmlFor={`seat-${seat.seatNo}`}></label>
@@ -103,9 +133,9 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
         <div className={styles.seatInnerRight}>
           <div className={styles.seatInnerRightTop}>
               <div className={styles.seatInfo}>
-                  <div className={styles.seatInfoBookSeat}><img alt="" src="/img/bookableSeat.png" /> 선택 가능 좌석 </div>
-                  <div className={styles.seatInfoBookingSeat}><img alt="" src="/img/bookingSeat.png" /> 선택한 좌석 </div>
-                  <div className={styles.seatInfoBookedSeat}><img alt="" src="/img/bookedSeat.png" /> 선택 불가 좌석 </div>
+                  <div className={styles.seatInfoBookSeat}><img alt="선택 가능 좌석" src="/img/bookableSeat.png" /> 선택 가능 좌석 </div>
+                  <div className={styles.seatInfoBookingSeat}><img alt="선택한 좌석" src="/img/bookingSeat.png" /> 선택한 좌석 </div>
+                  <div className={styles.seatInfoBookedSeat}><img alt="선택 불가 좌석" src="/img/bookedSeat.png" /> 선택 불가 좌석 </div>
               </div>
           </div>
         </div>
@@ -128,7 +158,12 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
           <br />
 
           <div className={styles.goSeat}>가는 편 좌석
-            <input type="text" style={{padding: "0", height: "17px"}} readOnly />
+            <input type="text"
+            className={styles.seatNoDeps}
+            id="seatNoDeps"
+            style={{padding: "0", height: "17px"}}
+            value={selectedSeats.join(', ')} // 선택된 좌석 번호 출력
+            readOnly />
           </div>
 
         </div>

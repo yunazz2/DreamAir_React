@@ -1,8 +1,11 @@
 import React from 'react'
+import SeatRt from '../../components/booking/SeatRt'
 
 const SeatRtContainer = () => {
   return (
-    <div>SeatRtContainer</div>
+    <>
+      <SeatRt />
+    </>
   )
 }
 

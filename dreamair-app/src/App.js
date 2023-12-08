@@ -82,7 +82,7 @@ function App() {
         <Route path='booking/bookingList' element={<BookingListContainer />} />
         <Route path='booking/info' element={<BookingInfoContainer />} />
         <Route path='booking/seat/:pasCount/:roundTrip' element={<SeatContainer />} />
-        <Route path='booking/seatRt' element={<SeatRtContainer />} />
+        <Route path='booking/seatRt/:pasCount/:roundTrip' element={<SeatRtContainer />} />
         <Route path='booking/notice' element={<NoticeContainer />} />
         <Route path='booking/payment' element={<PaymentContainer />} />
         <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />

@@ -8,6 +8,17 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
 
   const seatStatus = bookingObject.seatStatus;
 
+
+  // 체크박스 변경 시 처리하는 함수
+  const handleCheckboxChange = (seatNo) => {
+    // 이미 선택된 좌석이라면 제거, 아니면 추가
+    const updatedSeats = selectedSeats.includes(seatNo)
+      ? selectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
+      : [...selectedSeats, seatNo];
+
+    setSelectedSeats(updatedSeats);
+  };
+
   // 왕복 여부에 따른 버튼 노출
   const renderButton = () => {
     if (roundTrip === '왕복') {
@@ -24,7 +35,6 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
       );
     }
   };
-
 
   return (
     <div className={styles.seatContent}>
@@ -71,6 +81,8 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
                                   marginRight: index % 4 === 3 ? '0' : '5px',
                                   marginBottom: '5px',
                                 }}
+                                checked={selectedSeats.includes(seat.seatNo)} // 체크 여부 확인
+                                onChange={() => handleCheckboxChange(seat.seatNo)} // onChange 이벤트 추가
                               />
                             )}
                             <label htmlFor={`seat-${seat.seatNo}`}></label>

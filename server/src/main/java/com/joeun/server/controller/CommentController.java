@@ -79,7 +79,7 @@ public class CommentController {
             // comment.setBoard_no(boardNo);
 
             int result = commentService.insert(comment);
-            boardNo = comment.getParent_no();
+            boardNo = comment.getParentNo();
             log.info("댓글 쓰기 처리 후, boardNo : " + boardNo);
 
             if( result > 0 )
@@ -102,7 +102,7 @@ public class CommentController {
             comment = commentService.select(commentNo);
 
             int result = commentService.update(comment);
-            int boardNo = comment.getParent_no();
+            int boardNo = comment.getParentNo();
             log.info("boardNo (parent_no) 확인 : " + boardNo);
 
             if( result > 0 )

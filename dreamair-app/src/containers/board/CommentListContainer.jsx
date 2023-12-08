@@ -10,16 +10,16 @@ const CommentListContainer = () => {
   const {boardNo} = useState('')
   const [commentList, setCommentList] = useState([])
 
-  const getCommentList = async () => {
-    const response = await comments.commentList();
+  const getCommentList = async (boardNo) => {
+    const response = await comments.commentList(boardNo);
     const data = await response.data;
     console.log(data);
     setCommentList(data);
   }
 
   useEffect(() => {
-    getCommentList();
-}, [])
+    getCommentList(boardNo);
+}, [boardNo])
 
 const onUpdate = async(boardNo, commentNo, content) => {
   try {

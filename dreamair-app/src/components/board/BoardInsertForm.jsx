@@ -151,9 +151,9 @@ const BoardInsertForm = ({ onInsert }) => {
           <input type="file" className="form-control" onChange={handleFileChange} multiple/>
         </div>
 
-        <div className="mb-3">
-          <button className="btn btn-secondary me-2"><Link to="/board">목록</Link></button>
-          <button type="button" className="btn btn-primary" onClick={onSubmit}>등록</button>
+        <div className="btn-box mb-3 text-center">
+          <button className="btn btn-basic btn-secondary me-2"><Link to="/board">목록</Link></button>
+          <button className="btn btn-basic btn-primary" onClick={onSubmit}>등록</button>
         </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as format from '../../apis/format'
 
 const UserList = ({userList, userNo, onDelete}) => {
 
@@ -36,8 +37,8 @@ const UserList = ({userList, userNo, onDelete}) => {
                   <td>{user.address}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
-                  <td>{user.regDate}</td>
-                  <td>{user.updDate}</td>
+                  <td>{format.formatDate(user.regDate)}</td>
+                  <td>{format.formatDate(user.updDate)}</td>
 
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(user.userNo) }>삭제</button></td>

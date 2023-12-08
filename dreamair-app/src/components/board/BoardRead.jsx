@@ -73,9 +73,9 @@ const BoardRead = ({ boardNo, board, fileList, onDownload }) => {
         </div>
 
         <div className="card-footer">
-          <div className="d-flex justify-content-end">
-            <Link to="/board" className="btn btn-secondary me-2">목록</Link>
-            <Link to={`/board/update/${boardNo}`} className="btn btn-primary">수정</Link>
+          <div className="btn-box d-flex">
+            <button className="btn btn-basic btn-secondary me-2"><Link to="/board" >목록</Link></button>
+            <button className="btn btn-basic btn-primary"><Link to={`/board/update/${boardNo}`}>수정</Link></button>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ const CommentInsertForm = ({boardNo, onInsert}) => {
                 </div>
             </div>
             <div className="btn-box">
-                <button id="btn-comment-insert" className="btn btn-primary" onClick={ () => onSubmit(boardNo, writer, content) }>등록</button>
+                <button id="btn-comment-insert" className="btn btn-basic btn-primary" onClick={ () => onSubmit(boardNo, writer, content) }>등록</button>
             </div>
         </div>
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as format from '../../apis/format'
 
 const ProductList = ( {productList, productNo, onDelete}) => {
 
@@ -46,10 +47,10 @@ const ProductList = ( {productList, productNo, onDelete}) => {
                 <td align='center'>{product.destination}</td>
                 <td align='center'>{product.departureTime}</td>
                 <td align='center'>{product.destinationTime}</td>
-                <td align='center'>{product.productRegDate} </td>
-                <td align='center'>{product.productUpdDate}</td>
+                <td align='center'>{format.formatDate(product.productRegDate)} </td>
+                <td align='center'>{format.formatDate(product.productUpdDate)}</td>
 
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div className="btn-box">
                   <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${product.productNo}`}>수정</Link></button></td>
                   <td align='right'><button className='btn btn-danger' onClick={ () => onDelete(product.productNo) }>삭제</button></td>
                 </div>

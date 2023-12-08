@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as format from '../../apis/format'
 
 const CommentList = ({ commentList, onDelete, onUpdate }) => {
   return (
@@ -11,11 +12,11 @@ const CommentList = ({ commentList, onDelete, onUpdate }) => {
             <li key={comment.commentNo} className="mb-2">
               <strong id={`cmW_${comment.commentNo}`}>작성자 : {comment.writer}</strong>:
               <span id={`cmC_${comment.commentNo}`}>댓글 : {comment.content}</span>
-              <span id={`cmC_${comment.commentNo}`}>등록일자 : {comment.regDate}</span>
-              <span id={`cmC_${comment.commentNo}`}>수정일자 : {comment.updDate}</span>
+              <span id={`cmC_${comment.commentNo}`}>등록일자 : {format.formatDate(comment.regDate)}</span>
+              <span id={`cmC_${comment.commentNo}`}>수정일자 : {format.formatDate(comment.updDate)}</span>
               <div className="item">
-                <Link to="#" className="1" id={`cmBtnUpd_${comment.commentNo}`} onClick={() => onUpdate(comment.commentNo)}>수정</Link>
-                <Link to="#" className="1" onClick={() => onDelete(comment.commentNo)}>삭제</Link>
+                <button className='btn btn-primary btn-basic'><Link to="#" className="1" id={`cmBtnUpd_${comment.commentNo}`} onClick={() => onUpdate(comment.commentNo)}>수정</Link></button>
+                <button className='btn btn-danger btn-basic'><Link to="#" className="1" onClick={() => onDelete(comment.commentNo)}>삭제</Link></button>
               </div>
             </li>
           ))}

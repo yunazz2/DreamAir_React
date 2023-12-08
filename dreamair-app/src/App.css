@@ -963,3 +963,19 @@ height: auto; /* 이미지 비율을 유지하면서 높이 자동 조절 */
   height: 60%; /* 두 입력 상자의 높이를 100%로 설정하여 부모 컨테이너에 맞게 만듭니다. */
 }
 
+/* 버튼 */
+.btn-triple {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-basic {
+  width: 80px;
+}

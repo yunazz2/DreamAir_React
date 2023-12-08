@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // board 넘버에 대한 댓글
-export const commentList = (boardNo) => axios.get(`/comment/${boardNo}`)
+// export const commentList = (boardNo) => axios.get(`/comment/${boardNo}`)
+export const commentList = () => axios.get(`/comment/`)
 
 // 댓글 조회
 export const commentSelect = (commentNo) => axios.get(`/comment/${commentNo}`)

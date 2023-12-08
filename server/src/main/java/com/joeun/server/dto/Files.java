@@ -10,7 +10,6 @@ import lombok.Data;
 public class Files {
 
     private int fileNo;
-    private int boardNo;
     private String parentTable;
     private int parentNo;
     private String fileName;
@@ -20,6 +19,8 @@ public class Files {
     private Date regDate;
     private Date updDate;
     private int fileCode;
+    private int boardNo;
     private String fileType;
+
     MultipartFile file;
 }

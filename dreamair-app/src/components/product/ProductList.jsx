@@ -34,7 +34,7 @@ const ProductList = ( {productList, productNo, onDelete}) => {
             </tr>
           </thead>
           <tbody>
-            {productList.map((product) => (
+            {productList!==null && productList.map((product) => (
               <tr key={product.productNo}>
                 {/* <td><Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link></td> */}
                 <td align='center'>{product.productNo}</td>

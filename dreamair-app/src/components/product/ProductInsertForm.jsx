@@ -226,7 +226,7 @@ const ProductInsertForm = ({ onInsert }) => {
 
           <hr className="my-4" />
 
-          <div className="d-flex justify-content-between">
+          <div className="btn-box">
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
             <button className='btn btn-primary' onClick={ onSubmit }>등록</button>
           </div>

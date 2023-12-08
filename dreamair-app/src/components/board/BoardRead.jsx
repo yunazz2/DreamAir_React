@@ -23,7 +23,7 @@ const BoardRead = ({ boardNo, board, fileList, onDownload }) => {
         <div className="card-body">
           <div className="mb-3">
             <label htmlFor="boardNo" className="form-label fw-bold">번호</label>
-            <input type="text" className="form-control" id="boardNo" value={board.boardNo} readOnly />
+            <input type="text" className="form-control" id="boardNo" value={boardNo} readOnly />
           </div>
 
           <div className="mb-3">
@@ -57,10 +57,10 @@ const BoardRead = ({ boardNo, board, fileList, onDownload }) => {
 
           <div className="mb-3">
             <label htmlFor="file" className="form-label fw-bold">파일</label>
-            {fileList.map((file) => (
-              <div className='file-box' key={file.no}>
+            {fileList!==null && fileList.map((file) => (
+              <div className='file-box' key={file.fileNo}>
                 <div className="item">
-                  <img src={`/file/img/${file.no}`} alt={file.fileName} className="img-fluid" />
+                  <img src={`/file/img/${file.fileNo}`} alt={file.fileName} className="img-fluid" />
                   <span>{file.originName}({format.byteToUnit(file.fileSize)})</span>
                 </div>
 

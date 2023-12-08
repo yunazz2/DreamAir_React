@@ -11,7 +11,7 @@ import CommentListContainer from './CommentListContainer';
 // ⛄ 게시글 조회
 const BoardReadContainer = () => {
 
-  const {boardNo} = useParams()
+  const {boardNo} = useParams();
 
   const [board, setBoard] = useState({});
   const [fileList, setFileList] = useState([]);

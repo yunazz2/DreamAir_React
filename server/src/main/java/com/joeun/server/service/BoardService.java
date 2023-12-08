@@ -25,7 +25,7 @@ public interface BoardService {
     public int remove(int boardNo) throws Exception;
     
     // 조회수 증가
-    public void Views(int boardNo) throws Exception;
+    public int Views(int count, int boardNo) throws Exception;
     
 }
  

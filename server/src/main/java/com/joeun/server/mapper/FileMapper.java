@@ -40,5 +40,6 @@ public interface FileMapper {
 
     // 파일 번호(기본키) 최댓값
     public int maxPk() throws Exception;
+
 }
 

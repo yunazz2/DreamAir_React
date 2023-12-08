@@ -14,9 +14,40 @@ const SearchFlightForm = () => {
 
   const {booking, setBooking} = useContext(BookingContext);
 
+  // const [roundTrip, setRoundTrip] = useState('왕복 가는편');
+  // const [departure, setDeparture] = useState('출발지');
+  // const [destination, setDestination] = useState('도착지');
   const [departureDate, setDepartureDate] = useState('');
+  const [pasCount, setPasCount] = useState(1);
   const [showPassengerBox, setShowPassengerBox] = useState(false);
   
+  // const booking = {
+  //   roundTrip : roundTrip,
+  //   departure : departure,
+  //   destination : destination,
+  //   departureDate : departureDate,
+  //   pasCount : pasCount
+  // }
+  
+  // 왕복 날짜
+  // const [dateRange, setDateRange] = useState({
+  //   startDate: moment(),
+  //   endDate: moment(),
+  // });
+
+  // 왕복 날짜 이벤트
+  // const handleDateRangeChange = (event, picker) => {
+  //   setDateRange({
+  //     startDate: picker.startDate.format('YYYY/MM/DD'),
+  //     endDate: picker.endDate.format('YYYY/MM/DD'),
+  //   })
+  // }
+
+  // 왕복 날짜 useEffect
+  // useEffect( () => {
+    //   setDepartureDate(`${dateRange.startDate} ~ ${dateRange.endDate}`)
+    // }, [dateRange])
+    
     
   // ------------ 왕복 -------------
   const [startDate, setStartDate] = useState(new Date());
@@ -32,14 +63,13 @@ const SearchFlightForm = () => {
     const endMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(end);
     const endDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(end);
 
-    const departureDate = `${startYear}/${startMonth}/${startDay} ~ ${endYear}/${endMonth}/${endDay}`;
+    const formattedDate = `${startYear}/${startMonth}/${startDay} ~ ${endYear}/${endMonth}/${endDay}`;
 
     setStartDate(start);
     setEndDate(end);
-    setBooking({...booking, departureDate})
+    setDepartureDate(formattedDate)
   };
-  // ------------ 왕복 -------------
-  
+
   // ------------ 편도 -------------
   const [singleDate, setSingleDate] = useState(new Date());
   
@@ -47,12 +77,15 @@ const SearchFlightForm = () => {
     const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
     const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date);
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
-    const departureDate = `${year}/${month}/${day}`;
-    
+    const formattedDate = `${year}/${month}/${day}`;
+
     setSingleDate(date);
-    setBooking({...booking, departureDate})
+    setDepartureDate(formattedDate)
   };
-  // ------------ 편도 -------------
+
+  // useEffect( () => {
+  //   setDepartureDate(singleDate)
+  // }, [singleDate])
 
   const handleRoundTripChange = (value) => {
     const roundTrip = value
@@ -60,45 +93,42 @@ const SearchFlightForm = () => {
   };
 
   const handleDepartureChange = (value) => {
-    const departure = value
-    setBooking({...booking, departure})
+    const ad = value
+    setBooking({...booking, ad})
   };
 
   const handleDestinationChange = (value) => {
-    const destination = value
-    setBooking({...booking, destination})
+    setBooking(value)
   };
+
+  // const handleDepartureDateChange = (e) => {
+  //   console.log(e.target.value); 
+  //   setDepartureDate(e.target.value);
+  // };
 
   // ------------------ 탑승객 ---------------------
-  const pasCount = booking.pasCount
-
   const handlePasCountChange = (value) => {
     console.log(value);
-    setBooking({...booking, pasCount})
+    setPasCount(value);
   };
-  
+
   useEffect( () => {
     handlePasCountChange(pasCount)
   }, [pasCount])
-  
+
   const handleIconClick = () => {
     setShowPassengerBox(true);
   };
-  
+
   const handleDecrease = () => {
-    if (booking.pasCount > 1) {
-      --pasCount
-      // setBooking({...booking, pasCount})
+    if (pasCount > 1) {
+      setPasCount(pasCount - 1);
     }
   };
-  
+
   const handleIncrease = () => {
-    ++pasCount
-    // setBooking({...booking, pasCount})
+    setPasCount(pasCount + 1);
   };
-   // ------------------ 탑승객 ---------------------
-
-
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -107,9 +137,6 @@ const SearchFlightForm = () => {
     console.log("roundTrip : " + booking.roundTrip);
     console.log("roundTrip : " + booking.departure);
     console.log("roundTrip : " + booking.destination);
-    console.log("roundTrip : " + booking.pasCount);
-    console.log("roundTrip : " + booking.departureDate);
-
     console.log(departureDate);
     alert(departureDate)
     console.log('폼 제출됨!');
@@ -194,6 +221,12 @@ const SearchFlightForm = () => {
                                   dateFormat="yyyy/MM/dd"
                                   locale={ko} 
                                 />
+
+                                {/* <DateRangePicker
+                                  startDate={dateRange.startDate}
+                                  endDate={dateRange.endDate}
+                                  onApply={handleDateRangeChange}
+                                  />  */}
                                 <Form.Control
                                   type="text"
                                   placeholder="yyyy/mm/dd"
@@ -206,6 +239,7 @@ const SearchFlightForm = () => {
                           {(booking.roundTrip === '편도') && (
                             <Form.Floating>
                                 <DatePicker
+                                  // showIcon
                                   selected={singleDate}
                                   onChange={handleDateChange}
                                   dateFormat="yyyy/MM/dd" 

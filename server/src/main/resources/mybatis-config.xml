@@ -19,6 +19,18 @@
 			<typeAlias alias="UserAuth"  type="com.joeun.shop.dto.UserAuth"/>
 			
 		-->
+
+		<typeAlias alias="Admin"  type="com.joeun.server.dto.Admin"/>
+		<typeAlias alias="Auth"  type="com.joeun.server.dto.Auth"/>
+		<typeAlias alias="Board"  type="com.joeun.server.dto.Board"/>
+		<typeAlias alias="Booking"  type="com.joeun.server.dto.Booking"/>
+		<typeAlias alias="Comment"  type="com.joeun.server.dto.Comment"/>
+		<typeAlias alias="CustomUser"  type="com.joeun.server.dto.CustomUser"/>
+		<typeAlias alias="Files"  type="com.joeun.server.dto.Files"/>
+		<typeAlias alias="Product"  type="com.joeun.server.dto.Product"/>
+		<typeAlias alias="ProductIo"  type="com.joeun.server.dto.ProductIo"/>
+		<typeAlias alias="QR"  type="com.joeun.server.dto.QR"/>
+		<typeAlias alias="Users"  type="com.joeun.server.dto.Users"/>
 		
 		<!-- 테이블과 매핑할 DTO가 있는 패키지 경로 지정 -->
 		<package name="com.joeun.server.dto"/>

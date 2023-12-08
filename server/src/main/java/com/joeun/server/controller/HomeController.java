@@ -35,10 +35,11 @@ public class HomeController {
     private BoardService boardService;
 
     // 메인 화면
-    @GetMapping("/mainList")
-    public ResponseEntity<?> home() {
+    @GetMapping("mainList")
+    public ResponseEntity<?> home(Principal principal) {
         // String loginId = principal != null ? principal.getName() : "guest";
         // String loginId = principal.getName();
+        log.info("homeGET");
 
         try {
             // 최근 게시글 목록

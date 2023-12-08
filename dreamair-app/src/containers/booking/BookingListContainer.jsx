@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import BookingListForm from '../../components/booking/BookingListForm';
+import * as booking from '../../apis/booking'
 
 const BookingListContainer = () => {
   
@@ -11,26 +12,25 @@ const BookingListContainer = () => {
   const [pasCount, setPasCount] = useState(1);
   const [bookingList, setBookingList] = useState([]);
 
-  const booking = {
+  // 인덱스 페이지에서 받아와야할 값 
+  const bookingInfo = {
     roundTrip : roundTrip,
     departure : departure,
     destination : destination,
-    departureDate : departureDate,
-    pasCount : pasCount
+    departureDate : departureDate, 
+    pasCount : pasCount    
   }
-  
-  const bookingItem = {
-    productNo : '1',
-    routeNo : '1',
-    fligtName : 'air001',
-    departureTime : '15:00',
-    duration : '1시간',
-    destinationTime : '16:00',
-    productPrice : 50000,
-    seatRemaining : 40,
-  }
+      
+  const getBookingList = async () => {
+    const response = await booking.list(roundTrip, departure, destination, departureDate, pasCount );    
+    const data = await response.data
+    console.log(data);
+    setBookingList(data);
+  };
 
-  // setBookingList(bookingItem)
+  useEffect(() => {
+    getBookingList()
+  },[])
 
   return (
     <Container className="mt-5 py-3">
@@ -47,7 +47,7 @@ const BookingListContainer = () => {
 
       {/* 항공권 목록을 보여주는 섹션 */}
       <section id="goWay">
-        <BookingListForm bookingInfo={booking} bookingList={bookingList} />
+        <BookingListForm bookingInfo={bookingInfo} bookingList={bookingList} />
       </section>
 
       {/* 오는편 */}

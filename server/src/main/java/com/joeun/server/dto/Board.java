@@ -21,12 +21,15 @@ public class Board {
     private int userNo;
     private int adminNo;
     private int like;
-    private List<Files> files;
     private Files thumbnail;
     private String fileName;
     private String fileType;
-    
-    private List<MultipartFile> file;
+
+    // ✅ 파일
+    private List<MultipartFile> files;
+
+    // ❌ 삭제할 파일 번호 목록
+    private List<Integer> deleteFileNoList;
 
 
 }

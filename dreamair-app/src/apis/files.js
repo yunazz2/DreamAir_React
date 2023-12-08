@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-export const fileDownload = (fileNo) => axios.get(`/file/${fileNo}`)
+// 업로드
+export const upload = (formData, headers) => axios.post(`/file/upload`, formData, headers)
 
-export const thumbnail = (fileNo) => axios.get(`/file/img/${fileNo}`)
+// 다운로드
+export const download = (fileNo) => axios.get(`/file/${fileNo}`, {responseType: 'blob'} )
 
-export const deleteFile = (fileNo) => axios.delete(`/file/${fileNo}`)
-
-export const uploadFile = (boardNo, file) => axios.put('/file', {boardNo, file} )
+// 파일 삭제
+export const remove = (fileNo) => axios.delete(`/file/${fileNo}`)

@@ -21,38 +21,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            📄 파일 번호 3
      -->
     <select id="listByParent" resultType="Files">
-        SELECT a.*
-        , CASE WHEN INSTR(UPPER(origin_name), 'PNG') > 0 then 'img'
-				   WHEN INSTR(UPPER(origin_name), 'GIF') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'JPG') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'JPEG') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'BMP') > 0 then 'img'
-			       ELSE 'imgx'
-			       END fileType
-        FROM file a
-        WHERE a.parent_table = #{parentTable}
-          AND a.parent_no = #{parentNo}
-        ORDER BY a.reg_date DESC
+        SELECT *
+        FROM file
+        WHERE parent_table = #{parentTable}
+          AND parent_no = #{parentNo}
+        ORDER BY reg_date DESC
     </select>
 
     <!-- 파일 조회 -->
     <select id="select" resultType="Files">
-        SELECT a.*
-			, CASE WHEN INSTR(UPPER(origin_name), 'PNG') > 0 then 'img'
-				   WHEN INSTR(UPPER(origin_name), 'GIF') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'JPG') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'JPEG') > 0 then 'img'
-			       WHEN INSTR(UPPER(origin_name), 'BMP') > 0 then 'img'
-			       ELSE 'imgx'
-			       END fileType
-        FROM file a
-        WHERE a.file_no = #{fileNo}
+        SELECT *
+        FROM file
+        WHERE file_no = #{fileNo}
     </select>
 
     <!-- 파일 등록 -->
     <insert id="insert">
-        INSERT INTO file( parent_table, parent_no, file_name, origin_name, file_path, file_size, file_code, board_no )
-        VALUES ( #{parentTable}, #{parentNo}, #{fileName}, #{originName}, #{filePath}, #{fileSize}, #{fileCode}, #{boardNo} )
+        INSERT INTO file( parent_table, parent_no, file_name, origin_name, file_path, file_size, file_code )
+        VALUES ( #{parentTable}, #{parentNo}, #{fileName}, #{originName}, #{filePath}, #{fileSize}, #{fileCode} )
     </insert>
 
     <!-- 파일 수정 -->
@@ -65,13 +51,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               ,file_path = #{filePath}
               ,file_size = #{fileSize}
               ,file_code = #{fileCode}
-        WHERE file_no = #{fileNo}
+        WHERE file_no = #{file_No}
     </update>
 
     <!-- 파일 삭제 -->
     <delete id="delete">
         DELETE FROM file
-        WHERE board_no = #{boardNo}
+        WHERE file_no = #{fileNo}
     </delete>
 
 
@@ -81,11 +67,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE parent_table = #{parentTable}
           AND parent_no = #{parentNo}
     </delete>
-    
+
+    <!-- 게시글 번호 최댓값 -->
+    <select id="maxPk" resultType="int">
+        SELECT MAX(file_no)
+        FROM file
+    </select>
+
     <select id="selectFilesByBoardNo" resultType="Files">
         SELECT * FROM Files WHERE parentNo = #{boardNo}
     </select>
-
 
     <!-- 썸네일 조회 -->
     <select id="selectThumbnail" resultType="Files">
@@ -102,5 +93,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           AND a.parent_no = #{parentNo}
           AND a.file_code = 0
     </select>
+
 
 </mapper>

@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import * as admin from '../../apis/admin'
-import UserList from '../../components/admin/UserList';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/fragment/Header'
-import Adminfooter from '../../components/fragment/Adminfooter'
-import Adminsidebar from '../../components/fragment/Adminsidebar'
+import React, { useEffect, useState } from 'react';
 import Pagination from 'react-js-pagination';
-import '../../styles/Paging.css'
+import * as admin from '../../apis/admin';
+import UserList from '../../components/admin/UserList';
+import Adminfooter from '../../components/fragment/Adminfooter';
+import Adminsidebar from '../../components/fragment/Adminsidebar';
+import Header from '../../components/fragment/Header';
+import '../../styles/Paging.css';
 
 const UserListContainer = () => {
-
-  const navigate = useNavigate()
 
   const [userList, setUserList] = useState([]);
 
@@ -37,12 +34,16 @@ const UserListContainer = () => {
   };
 
   const onDelete = async (userNo) => {
+    try{
     const response = await admin.user_delete(userNo);
     const data = await response.data;
+    alert('삭제 완료');
     console.log(data);
-
-    navigate('/admin/user_list');
+    getUserList();
+  } catch (error) {
+    console.error('Error deleting user:', error);
   }
+};
   useEffect(() => {
       getUserList();
   }, [])

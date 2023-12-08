@@ -932,3 +932,50 @@ height: auto; /* 이미지 비율을 유지하면서 높이 자동 조절 */
 .busre_privacy-policy strong {
   color: #0056b3;
 }
+
+/* 댓글 */
+.comment_container, .commentList-box {
+  border: 1px solid rgb(240, 240, 252);
+  border-radius: 5px;
+  min-height: 200px;
+}
+
+.comment-box {
+  display: flex;
+
+}
+
+.comment-box .form-group {
+  flex: 1;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.comment-box .form-group > #comment-writer {
+  flex: 30%;
+}
+
+.comment-box .form-group > #comment-content {
+  flex: 70%;
+}
+
+.comment-box .form-control {
+  height: 60%; /* 두 입력 상자의 높이를 100%로 설정하여 부모 컨테이너에 맞게 만듭니다. */
+}
+
+/* 버튼 */
+.btn-triple {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-basic {
+  width: 80px;
+}

@@ -34,3 +34,6 @@ import axios from 'axios';
 
  // 탑승권 조회 - ticketNo
  export const pas_ticketList = (ticketNo) => axios.get(`/admin/Final_check/${ticketNo}`)
+
+ // 탑승권 정보 변경 (탑승 처리)
+ export const ticket_update_b = (ticketNo, isBoarded) => axios.put("/admin/Final_check_complete", {ticketNo, isBoarded} )

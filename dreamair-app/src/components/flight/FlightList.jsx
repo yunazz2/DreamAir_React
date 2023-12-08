@@ -6,9 +6,7 @@ const FlightList = ( { flightList, onDelete }) => {
   return (
     <div className='container'>
       <h1 className="text-center my-5">항공기 관리</h1>
-      <div className="btn-box d-grid gap-2">
-      <button className='btn btn-outline-primary btn-lg'><Link to="/flight/flight_insert">항공기 정보 등록</Link></button>
-      </div>
+          <button className='btn btn-outline-primary btn-lg'><Link to="/flight/flight_insert" className='btn-Link'>항공기 정보 등록</Link></button>
       <br />
 
       {flightList != null && (
@@ -45,10 +43,12 @@ const FlightList = ( { flightList, onDelete }) => {
                 <td align='center'>{flight.seatRemaining}</td>
                 <td align='center'>{flight.seatUsed}</td>
 
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <td align='right'><button className='btn btn-primary'><Link to={`/flight/flight_update/${flight.flightNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => onDelete(flight.flightNo) }>삭제</button></td>
-                </div>
+                <td colSpan={2}>
+                  <div className="btn-box">
+                    <button className='btn btn-primary'><Link to={`/flight/flight_update/${flight.flightNo}`}>수정</Link></button>
+                    <button className='btn btn-danger' onClick={ () => onDelete(flight.flightNo) }>삭제</button>
+                  </div>
+                </td>
     
               </tr>
             ))}

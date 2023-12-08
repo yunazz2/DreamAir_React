@@ -54,7 +54,7 @@ const QRListContainer = () => {
         <Header/>
         <div className='d-flex'>
             <Adminsidebar/>
-            <QRList qrList = {currentPost} qrNo = {qrNo}/>
+            <QRList qrList = {currentPost} qrNo = {qrNo} onDelete={onDelete}/>
         </div>
         <Pagination activePage={page}
                       itemsCountPerPage={postPerPage}

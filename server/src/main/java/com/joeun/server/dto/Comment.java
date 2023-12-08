@@ -8,9 +8,7 @@ import lombok.Data;
 public class Comment {
 
     private int commentNo;
-    private int board_no;
-    private String parent_table;
-    private int parent_no;
+    private int boardNo;
     private int parentNo;
     private String writer;
     private String content;
@@ -18,8 +16,8 @@ public class Comment {
     private int superNo;
     private int depthNo;
     private int seqNo;
-    private Date reg_date;
-    private Date upd_date;
+    private Date regDate;
+    private Date updDate;
     private int subCount;
     private String parentTable;
 }

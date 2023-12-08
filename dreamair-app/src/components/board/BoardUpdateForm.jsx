@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as format from '../../apis/format'
 
 const BoardUpdateForm = ({ boardNo, board, onUpdate, onDelete }) => {
   // ⭐ state 설정
@@ -47,7 +48,7 @@ const BoardUpdateForm = ({ boardNo, board, onUpdate, onDelete }) => {
 
           <div className="mb-3">
             <label htmlFor="regDate" className="form-label fw-bold">등록일자</label>
-            <input type="text" className="form-control" id="regDate" value={board.regDate} readOnly />
+            <input type="text" className="form-control" id="regDate" value={format.formatDate(board.regDate)} readOnly />
           </div>
 
           <div className="mb-3">
@@ -80,11 +81,13 @@ const BoardUpdateForm = ({ boardNo, board, onUpdate, onDelete }) => {
             </ul>
           </div> */}
         </div>
-        <div className="card-footer">
-          <div className="d-flex justify-content-end">
-            <button className="btn btn-primary me-2" onClick={onSubmit}>수정</button>
-            <button className="btn btn-danger me-2" onClick={() => onDelete(boardNo)}>삭제</button>
-            <Link to="/board" className="btn btn-secondary">목록</Link>
+        <div className="card-footer btn-triple">
+          <div>
+            <button className='btn btn-secondary me-2'><Link to="/board">목록</Link></button>
+          </div>
+          <div className="btn-box">
+            <button className="btn btn-basic btn-primary me-2" onClick={onSubmit}>수정</button>
+            <button className="btn btn-basic btn-danger me-2" onClick={() => onDelete(boardNo)}>삭제</button>
           </div>
         </div>
       </div>

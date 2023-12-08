@@ -45,14 +45,13 @@ import FlightUpdateContainer from './containers/flight/FlightUpdateContainer';
 
 import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
-
+import BookingContextProvider from './contexts/BookingContextProvider'
 
 function App() {
   return (
     <BrowserRouter>
       {/* index */}
       <Routes>
-        <Route path="/" element={<Index/>}/>
         <Route path="/join" element={<JoinContainer/>}/>
         <Route path="/login" element={<LoginContainer/>}/>
       </Routes>
@@ -78,15 +77,18 @@ function App() {
       </Routes>
 
       {/* booking */}
-      <Routes>
-        <Route path='booking/bookingList' element={<BookingListContainer />} />
-        <Route path='booking/info' element={<BookingInfoContainer />} />
-        <Route path='booking/seat' element={<SeatContainer />} />
-        <Route path='booking/seatRt' element={<SeatRtContainer />} />
-        <Route path='booking/notice' element={<NoticeContainer />} />
-        <Route path='booking/payment' element={<PaymentContainer />} />
-        <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />
-      </Routes>
+      <BookingContextProvider>
+        <Routes>
+          <Route path="/" element={<Index/>}/>
+          <Route path='booking/bookingList' element={<BookingListContainer />} />
+          <Route path='booking/info' element={<BookingInfoContainer />} />
+          <Route path='booking/seat' element={<SeatContainer />} />
+          <Route path='booking/seatRt' element={<SeatRtContainer />} />
+          <Route path='booking/notice' element={<NoticeContainer />} />
+          <Route path='booking/payment' element={<PaymentContainer />} />
+          <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />
+        </Routes>
+      </BookingContextProvider>
 
 
       {/* ADMIN */}

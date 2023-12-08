@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header>
-      <div className="header_container">
+    <header className="header_container">
+      <div>
         <nav className="navbar navbar-expand-md navbar-dark bg-dark w-100 position-absolute start-0 top-0 py-4" style={{ height: '30px' }}>
           <div className="container-fluid">
             <div className="collapse navbar-collapse py-5" id="navbarCollapse" style={{ justifyContent: 'flex-end' }}>

@@ -75,8 +75,8 @@ public class CommentController {
     public ResponseEntity<?> create(@RequestBody Comment comment, int boardNo) {
         log.info("[POST] - /comment - 댓글 등록");
         try {
-            comment.setParentTable("board");
-            comment.setBoard_no(boardNo);
+            // comment.setParentTable("board");
+            // comment.setBoard_no(boardNo);
 
             int result = commentService.insert(comment);
             boardNo = comment.getParent_no();

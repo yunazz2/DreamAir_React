@@ -29,9 +29,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int insert(Comment comment) throws Exception {
+         int boardNo = comment.getBoardNo();
+         comment.setParentTable("board");
+         comment.setParentNo(boardNo);
          int result = commentMapper.insert(comment);
-        String parentTable = "parentNo";
-        
+
         return result;
     }
 

@@ -6,9 +6,7 @@ import BoardRead from '../../components/board/BoardRead'
 import Header from '../../components/fragment/Header'
 import Footer from '../../components/fragment/Footer'
 import CommentInsertContainer from './CommentInsertContainer';
-import CommentList from '../../components/board/CommentList';
 import CommentListContainer from './CommentListContainer';
-import { commentList } from '../../apis/comment';
 
 // ⛄ 게시글 조회
 const BoardReadContainer = () => {
@@ -64,7 +62,7 @@ const BoardReadContainer = () => {
                  onDownload={(fileNo, fileName) => onDownload(fileNo, fileName)}
                  />
       <CommentInsertContainer/>
-      <CommentListContainer commentList={commentList}/>
+      <CommentListContainer/>
       </div>
       <Footer/>
     </>

@@ -92,16 +92,16 @@ const BoardInsertForm = ({ onInsert }) => {
       <h1 className='my-4 text-center'>게시글 등록</h1>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">제목</label>
-          <input type="text" className="form-control" id="title" value={title} onChange={handleChangeTitle}/>
+          <input type="text" className="form-input form-control" id="title" value={title} onChange={handleChangeTitle}/>
         </div>
 
         <div className="mb-3">
           <label htmlFor="writer" className="form-label">작성자</label>
-          <input type="text" className="form-control" id="writer" value={writer} onChange={handleChangeWriter}/>
+          <input type="text" className="form-input form-control" id="writer" value={writer} onChange={handleChangeWriter}/>
         </div>
 
         <div className="mb-3">
-          <label htmlFor="content" className="form-label">내용</label>
+          <label htmlFor="content" className="form-input form-label">내용</label>
           {/* <textarea className="form-control" id="content" rows="5" value={content} onChange={handleChangeContent}></textarea> */}
           <CKEditor
                                 editor={ ClassicEditor }

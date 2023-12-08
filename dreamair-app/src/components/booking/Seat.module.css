@@ -1,18 +1,18 @@
-@charset "UTF-8";
 * {
 	padding: 0;
 	margin: 0;
 }
 
-.seatContent {
-	margin-top: 10px;
-	width: 100%;
+.wrap {
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
-.seat-header {
-	text-align: center;
-	padding: 5px 16px;
-    background-color: #f1f1f1;
+.seatContent {
+	width: 1000px;
 }
 
 .seatHeader2 {
@@ -26,18 +26,20 @@
     color: white;
 }
 
-.seat-body {
+.seatInnerWrap {
+	display: flex;
 	justify-content: center;
-	padding: 2px;
-	margin-top: 20px;
-	width: 100%;
-	height: 550px;
 }
 
 .seatInnerLeft {
 	width: 55%;
 	background-color: white;
 	float: left;
+	height: 100%;
+}
+
+.loadingImg {
+	width: 100%;
 	height: 100%;
 }
 
@@ -55,14 +57,34 @@
     margin-bottom: 10px;
 }
 
-.seatInnerBottom {
-	background-color: #94e1ff;
-	width: 45%;
-	margin: 0 auto;
-	display: inline-block;
-	margin-left: 210px;
-	height: 55px;
-	margin-top: 15px;
+.seatInnerRightDown {
+	height: 334px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: #94e1ff solid 1px;
+    margin-left: 10px;
+}
+
+.seatInnerRightDown input {
+	background: transparent;
+	margin-bottom: 5px;
+}
+
+.seatInnerRightDown div {
+   font-size:18px;
+   margin-bottom: 5px;
+}
+
+.seatInnerRightDown input[type="text"]{
+    height: 0;
+    padding: 0 15px;
+    margin-right: 10px;
+    border: 1px solid #f3f3f3;
+    border-bottom: 1px solid #ddd;
+    color: #222;
+    background-color: #f3f3f3;
+    font-size: 16px;
+    line-height: 40px;
 }
 
 .left1 {
@@ -91,7 +113,6 @@
 	opacity: 1;
 }
 
-
 input[type="text"] {
 	border: none;
 	cursor: unset;
@@ -102,19 +123,17 @@ input:focus {
 	outline: none;
 }
 
+.seatNoDeps {
+	display: flex;
+	justify-content: center;
+}
 .seat1 {
 	width: inherit;
+	margin-top: 30px;
 	display: inline-table;
-	margin-left: 38%;
-	width: fit-content;	
-}
-
-.seatCol {
-	margin-left: 65px;
 }
 
 /* 체크 박스 여기 */
-
 input[type=checkbox] {
 	/* checkbox의 실제 체크박스 부분을 숨깁니다. */
 	-webkit-appearance: none;
@@ -141,7 +160,6 @@ input[type=checkbox] {
 	background-image: url('../../../public/img/bookingSeat.png');
 }
 
-
 .seat1 .seatBox:disabled {
 	background-image: url('../../../public/img/bookedSeat.png');
 	cursor: default;
@@ -150,15 +168,6 @@ input[type=checkbox] {
 .seat1 label {
 	display: none;
 }
-
-
-/* input[type=checkbox] {
-	display: none;
-}
-
-input[type=checkbox]:disabled {
-	display: none;
-} */
 
 .bookable {
 	cursor: pointer;
@@ -179,15 +188,6 @@ input[type=checkbox]:disabled {
 	height: 30px;
 }
 
-.over {
-	display: inline-block;
-	cursor: pointer;
-	line-height: 22px;
-	padding-left: 22px;
-	background: url('../../../public/img/bookingSeat.png') left/22px no-repeat;
-	height: 30px;
-}
-
 .booked {
 	display: inline-block;
 	cursor: pointer;
@@ -200,120 +200,34 @@ input[type=checkbox]:disabled {
 label {
 	margin-left: 5px;
 }
-.depSeat,.arrSeat {
-	justify-content: center;
-}
-.seatInnerBottom2 {
-	margin-top: 30px;
-    float: left;
-    margin-left: 185px;
-    text-align: center;
-}
 
 .seatInfoBookSeat{
 	margin-right: 15px;
     float: left;
+}
 
-}
-.seatInnerRightDown {
-	height: 334px;
-    padding: 15px;
-    box-sizing: border-box;
-    border: #94e1ff solid 1px;
-    margin-left: 10px;
-}
 .seatInfoBookedSeat {
 	margin-top: 10px;
 }
-.seatInnerRightDown input {
-     background: transparent;
-     margin-bottom: 5px;
- }
-.seatInnerRightDown div {
-	font-size:18px;
-	margin-bottom: 5px;
- }
- input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hover, input[type="number"]:hover {
-    border: none;
-    background-color: transparent;
-}
-#btn ,#btn2 ,#btn3 {
-	height: 50px;
-    border-radius: 4px;
-    background-color: #000000;
-    border: none;
-    color: #FFFFFF;
-    font-size: 18px;
-    transition: all 0.5s;
-    cursor: pointer;
-}
 
-#btn span, #btn2 span, #btn3 span {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	transition: 0.5s;
-}
-
-#btn span:after,  #btn3 span:after{
-	content: '\00bb';
-	position: absolute;
-	opacity: 0;
-	top: 0;
-	right: -20px;
-	transition: 0.5s;
-}
-#btn2 span:before {
-	content: '\00AB';
-  	position: absolute;
-  	opacity: 0;
-  	top: 0;
-  	left: -20px;
- 	transition: 0.5s;
-}
-#btn:hover span,  #btn3:hover span{
-	padding-right: 25px;
-}
-#btn2:hover span{
-	padding-left: 25px;
-}
-#btn:hover span:after,  #btn3:hover span:after{
-	opacity: 1;
-	right: 0;
-}
-#btn2:hover span:before {
-	opacity: 1;
-	left: 0;
-}
-#btn2 {
-    position: relative;
-    float: left;
-    display: inline;
-    bottom: 11px;
-    width: 200px;
-}
-#btn3 {
-    position: relative;
-    left: 165px;
-    width: 200px;
-    bottom: 61px;
-}
-
-.seatInnerRightDown input[type="text"]{
-    height: 0;
-    padding: 0 15px;
-    margin-right: 10px;
-    border: 1px solid #f3f3f3;
-    border-bottom: 1px solid #ddd;
-    color: #222;
-    background-color: #f3f3f3;
-    font-size: 16px;
-    line-height: 40px;
-}
 .goSeat, .backSeat{
 	border-bottom: 1px #94e1ff solid;
 }
+
 input[type="text"]:hover{
 	    border: 1px solid #ccc;
     background-color: white;
+}
+
+.buttonBox {
+	display: flex;
+	justify-content: center;
+}
+
+.buttonBox .bottomButton {
+	background-color: #94e1ff;
+	width: 40%;
+	margin: 0 auto;
+	height: 55px;
+	margin-top: 15px;
 }

@@ -10,8 +10,9 @@ const SeatContainer = () => {
   const { pasCount, roundTrip } = useParams();
   const [bookedList, setBookedList] = useState([]);
   const [bookingObject, setBookingObject] = useState([]);
-  const flightNo = 1;
   const [isLoading, setLoading] = useState(true)
+
+  const flightNo = 1; // 테스트를 위해 임시 값 세팅
 
   // 테스트를 위해 임의로 부킹 객체 생성
   const booking = {
@@ -43,10 +44,10 @@ const SeatContainer = () => {
     getBookedList();
     setLoading(false);
 
-    // 30초마다 getBookingObject 함수 실행
+    // 10초마다 getBookingObject 함수 실행
     const interval = setInterval(() => {
       getBookingObject();
-    }, 30000);
+    }, 10000);
 
     // 컴포넌트가 언마운트될 때 interval을 클리어하여 메모리 누수 방지
     return () => clearInterval(interval);
@@ -55,7 +56,7 @@ const SeatContainer = () => {
   return (
     <>
       <Header />
-      <Seat pasCount={pasCount} roundTrip={roundTrip} bookingObject={bookingObject} isLoading = {isLoading} />
+      <Seat pasCount={pasCount} roundTrip={roundTrip} bookingObject={bookingObject} isLoading={isLoading} />
       <Footer />
     </>
   )

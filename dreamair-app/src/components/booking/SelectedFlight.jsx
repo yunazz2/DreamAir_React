@@ -49,7 +49,7 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
                 </Table>
             </section>  
 
-            {comeBookingList == null && 
+            {comeBookingList && 
                 <section>
                     <h2>오는편</h2>
                     <Table striped bordered hover className="text-center align-middle">

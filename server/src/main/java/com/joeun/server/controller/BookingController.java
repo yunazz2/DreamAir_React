@@ -42,14 +42,13 @@ public class BookingController {
 
     @Autowired
     private ProductService productService;
-    
-    // 항공권 조회 목록 -> 예매
-    // 출발지 날짜 도착지(ticket), 탑승인원 왕복여부(booking) 를 정보()에 맞는 검색결과를 보여주기
-    @GetMapping(value="/list")
-    public ResponseEntity<?> list(Booking booking) throws Exception {
-        log.info("bookingInfo : " + booking);
+
+    // 가는 편 항공권 목록 조회
+    @GetMapping(value="/goList")
+    public ResponseEntity<?> goList(Booking booking) {
+        log.info("goList : " + booking);
         try {
-            List<Booking> bookingList = bookingService.golist(booking);   //?
+            List<Booking> bookingList = bookingService.golist(booking);   
 
             if(bookingList == null) {
                 log.info("조회된 항공권 없음");
@@ -58,38 +57,34 @@ public class BookingController {
                 log.info("조회된 항공권 수 : " + bookingList.size());
             }
 
-            // bookingList, bookingInfo 값을 booking 객체에 담아서 리스트 페이지로 넘겨줘야함
             return new ResponseEntity<>(bookingList, HttpStatus.OK);
         } catch (Exception e) {
             log.error(null, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-    }
-
-    // 가는 편
-    @GetMapping(value="/component/golist")
-    public String gobookingList(Model model, Booking booking) throws Exception {
-        log.info("편도 여부: " + booking.getRoundTrip());
-        log.info("편도 인원수: " + booking.getPasCount());
         
-        List<Booking> bookingList = bookingService.golist(booking);
-        model.addAttribute("bookingList", bookingList);
-        model.addAttribute("bookingInfo", booking);
-        return "UI/component/booking/list";
     }
-    
-    // 오는 편
-    @GetMapping(value="/component/comelist")
-    public String comebookingList(Model model, Booking booking) throws Exception {
-        log.info("오는편 출발지 : " + booking.getDeparture());
-        log.info("오는편 상품번호(가는편) : " + booking.getProductNoDep());
-        log.info("오는편 노선번호(오는편) : " + booking.getRouteNoDes());
 
-        List<Booking> bookingList = bookingService.comelist(booking);
-        model.addAttribute("bookingList", bookingList);
-        model.addAttribute("bookingInfo", booking);
-        return "UI/component/booking/list";
+    // 오는 편 항공권 목록 조회
+    @GetMapping(value="/comeList")
+    public ResponseEntity<?> comeList(Booking booking) {
+        log.info("comeList : " + booking);
+        try {
+            List<Booking> bookingList = bookingService.comelist(booking);   
+
+            if(bookingList == null) {
+                log.info("조회된 항공권 없음");
+            }
+            else {
+                log.info("조회된 항공권 수 : " + bookingList.size());
+            }
+
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
     
     // 탑승객 정보 입력

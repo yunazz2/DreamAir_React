@@ -12,7 +12,7 @@ import '../styles/reset.css';
 
 const IndexContainer = () => {
 
-  const[mainList, setMainList] = useState([]);
+  const [mainList, setMainList] = useState([]);
 
   const getMainList = async () => {
       const response = await index.mainList();

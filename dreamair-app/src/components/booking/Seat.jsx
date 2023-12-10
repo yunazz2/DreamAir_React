@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './Seat.module.css'
+import { BookingContext } from '../../contexts/BookingContextProvider'
 
 const Seat = () => {
 
-  
+  const {booking, setBooking} = useContext(BookingContext)
+  console.log("productDep "+ booking.productNoDep);
+  console.log("productDes "+ booking.productNoDes);
+  console.log("routeDep" + booking.routeNoDep);
+  console.log("routeDes" + booking.routeNoDes);
 
   return (
     <div className={styles.seatContent}>

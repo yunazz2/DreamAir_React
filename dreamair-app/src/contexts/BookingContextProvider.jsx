@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+// 결제 완료 이후에 context 해제 해야함
 export const BookingContext = React.createContext()
 BookingContext.displayName = 'BookingContextName'
 

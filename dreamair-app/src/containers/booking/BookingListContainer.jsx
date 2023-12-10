@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import BookingListForm from '../../components/booking/BookingListForm';
-import * as booking from '../../apis/booking'
+import * as bookingAPI from '../../apis/booking'
+import { BookingContext } from '../../contexts/BookingContextProvider';
 
 const BookingListContainer = () => {
-  
-  const [roundTrip, setRoundTrip] = useState('편도');
-  const [departure, setDeparture] = useState('김포');
-  const [destination, setDestination] = useState('제주');
-  const [departureDate, setDepartureDate] = useState('2023/11/22');
-  const [pasCount, setPasCount] = useState(1);
+
+  const {booking, setBooking} = useContext(BookingContext);
   const [bookingList, setBookingList] = useState([]);
 
-  // 인덱스 페이지에서 받아와야할 값 
+  const roundTrip = booking.roundTrip;
+  const departure = booking.departure;
+  const destination = booking.destination;
+  const departureDate = booking.departureDate;
+  const pasCount = booking.pasCount
+  
+
   const bookingInfo = {
     roundTrip : roundTrip,
     departure : departure,
@@ -20,12 +23,19 @@ const BookingListContainer = () => {
     departureDate : departureDate, 
     pasCount : pasCount    
   }
-      
+  
   const getBookingList = async () => {
-    const response = await booking.list(roundTrip, departure, destination, departureDate, pasCount );    
-    const data = await response.data
-    console.log(data);
-    setBookingList(data);
+    if (roundTrip === ('왕복 가는편' || '편도') ) {
+      const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
+      const data = await response.data
+      console.log("항공권 : " + data);
+      setBookingList(data);
+    } else {
+      const response = await bookingAPI.comeList(roundTrip, departure, destination, departureDate, pasCount );    
+      const data = await response.data
+      console.log("항공권 : " + data);
+      setBookingList(data);
+    }
   };
 
   useEffect(() => {
@@ -40,19 +50,10 @@ const BookingListContainer = () => {
         <Image src="/img/searchTicket.png" alt="조회" />
       </div>
       <br />
-      {/* 출발지 - 목적지를 보여주는 섹션 */}
-      <section>
-        <div id="flight_box">{/* 출발지 - 목적지를 보여주는 박스 */}</div>
-      </section>
 
       {/* 항공권 목록을 보여주는 섹션 */}
-      <section id="goWay">
+      <section>
         <BookingListForm bookingInfo={bookingInfo} bookingList={bookingList} />
-      </section>
-
-      {/* 오는편 */}
-      <section id="comeWay">
-        {/* <BookingListForm /> */}
       </section>
 
       <div className="d-flex justify-content-between">

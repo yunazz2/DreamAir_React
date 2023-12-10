@@ -9,6 +9,7 @@ import * as index from '../apis/index'
 import '../styles/bookingMain.css';
 import '../styles/style.css';
 import '../styles/reset.css';
+import Header from '../components/fragment/Header'
 
 const IndexContainer = () => {
 
@@ -26,13 +27,16 @@ const IndexContainer = () => {
   }, [])
 
   return (
-    <div>
-      <SearchFlight />
-      <QuickMenu />
-      <RecommendedSpots />
-      <LatestBoard mainList={mainList}/>
-      <TripSlide />
-    </div>
+    <>
+      <Header />
+      <div>
+        <SearchFlight />
+        <QuickMenu />
+        <RecommendedSpots />
+        <LatestBoard mainList={mainList}/>
+        <TripSlide />
+      </div>
+    </>
   )
 }
 

@@ -27,7 +27,7 @@ const IndexContainer = () => {
 
   return (
     <div>
-      <SearchFlight />
+      {/* <SearchFlight /> */}
       <QuickMenu />
       <RecommendedSpots />
       <LatestBoard mainList={mainList}/>

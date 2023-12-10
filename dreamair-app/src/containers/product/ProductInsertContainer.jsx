@@ -10,20 +10,10 @@ const ProductInsertContainer = () => {
 
   const navigate = useNavigate()
 
-  const onInsert = async (productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) => {
+  const onInsert = async (formData, headers) => {
     try {
-      const Product = {
-        productId,
-        routeNo, 
-        name, 
-        productCat, 
-        productPrice, 
-        departure, 
-        destination, 
-        description, 
-        unitsInStock,
-      }
-      const response = await products.product_insert(Product) 
+
+      const response = await products.product_insert(formData, headers) 
       alert('등록 완료')
       console.log(response.data);
 

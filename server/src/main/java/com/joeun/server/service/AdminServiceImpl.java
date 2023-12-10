@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Auth;
 import com.joeun.server.dto.Booking;
+import com.joeun.server.dto.Files;
 import com.joeun.server.dto.Users;
 import com.joeun.server.mapper.AdminMapper;
 

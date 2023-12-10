@@ -31,7 +31,7 @@ public interface BoardMapper {
     public int maxPk() throws Exception;
     
     // 게시글 조회수
-    public void views(int boardNo) throws Exception;
+    public int views(int count, int boardNo) throws Exception;
     
 }
 

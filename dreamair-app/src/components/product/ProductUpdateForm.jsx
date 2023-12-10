@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import * as filesApi from '../../apis/files'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const ProductUpdateForm = ({productNo, product, onUpdate}) => {
+const ProductUpdateForm = ({productNo, product, onUpdate, onDelete, onDownload, onDeleteFile}) => {
 
   const [productId, setProductId] = useState([])
   const [routeNo, setRouteNo] = useState([])
@@ -12,6 +15,9 @@ const ProductUpdateForm = ({productNo, product, onUpdate}) => {
   const [destination, setDestination] = useState([])
   const [description, setDescription] = useState([])
   const [unitsInStock, setUnitsInStock] = useState([])
+
+  const [files, setFiles] = useState(null);           // ✅ files state 추가
+  const [fileNoList, setFileList] = useState([])      // ✅ 파일 선택 삭제 - deleteFileNoList
 
   const handleChangeProductId = (e) => {
     setProductId(e.target.value)
@@ -50,8 +56,64 @@ const ProductUpdateForm = ({productNo, product, onUpdate}) => {
   }
 
   const handleUpdate = () => {
-    onUpdate(productNo, productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
+    const formData = new FormData();
+    formData.append('productId', productId);
+    formData.append('routeNo', routeNo);
+    formData.append('name', name);
+    formData.append('productCat', productCat);
+    formData.append('productPrice', productPrice);
+    formData.append('departure', departure);
+    formData.append('destination', destination);
+    formData.append('description', description);
+    formData.append('unitsInStock', unitsInStock);
+
+    console.log(`fileNoList --------------------------------------`);
+    console.log(fileNoList);
+    formData.append('deleteFileNoList', fileNoList);
+
+    const headers = {
+        headers: {
+            'Content-Type' : 'multipart/form-data',
+        },
+    };
+    
+    if (files) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[${i}]`, files[i]);
+        }
+    }
+
+    onUpdate(formData, headers);
   }
+
+  const handleDelete = () => {
+    const check = window.confirm('정말로 삭제하시겠습니까?')
+    if( check ) 
+        onDelete(productNo)
+}
+
+    const handleDownload = (fileNo, fileName) => {
+        onDownload(fileNo, fileName)
+    }
+
+    const handleDeleteFile =(fileNo) => {
+
+        const check = window.confirm('정말로 삭제하시겠습니까?')
+        if( check )
+            onDeleteFile(fileNo)
+    }
+
+    // ✅ 파일 핸들러 추가
+    const handleFileChange = (e) => {
+        setFiles(e.target.files);
+    };
+
+
+    // 파일 번호 체크
+    const checkFileNo = (productNo) => {
+        setFileList( [...fileNoList, productNo] )
+    }
+
 
   useEffect(() => {
     if(product) {
@@ -66,6 +128,51 @@ const ProductUpdateForm = ({productNo, product, onUpdate}) => {
     setUnitsInStock(product.unitsInStock);
     }
   }, [product])
+
+  const customUploadAdapter = (loader) => {
+    return {
+      upload() {
+        return new Promise( (resolve, reject) => {
+          const formData = new FormData();
+          loader.file.then( async (file) => {
+                console.log(file);
+                formData.append("parentTable", 'editor');
+                formData.append("file", file);
+
+                const headers = {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data',
+                    },
+                };
+
+                let response = await filesApi.upload(formData, headers);
+                let data = await response.data;
+                console.log(`data : ${data}`);
+                
+                let newFileNo = data;
+
+                await resolve({
+                    default: `/file/img/${newFileNo}`
+                })
+                // axios
+                //   .post("http://localhost:8080/api/v0/file/upload", formData)
+                //   .then((res) => {
+                //     resolve({
+                //       default: res.data.data.uri,
+                //     });
+                //   })
+                //   .catch((err) => reject(err));
+          });
+        });
+      },
+    };
+};
+
+  function uploadPlugin(editor) {
+      editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+          return customUploadAdapter(loader);
+      };
+  }
   
   return (
     <div className="container">
@@ -79,7 +186,7 @@ const ProductUpdateForm = ({productNo, product, onUpdate}) => {
 
         <div className="input-group mb-3 row">
           <label className="input-group-text col-md-2" id="">상품 이미지</label>
-          <input type="file" className="form-control col-md-10" name="file"/>
+          <input type="file" className="form-control col-md-10" name="file" multiple/>
         </div>
 
         <div className="input-group mb-3 row">
@@ -99,7 +206,51 @@ const ProductUpdateForm = ({productNo, product, onUpdate}) => {
 
         <div className="input-group mb-3 row">
           <label className="input-group-text w-100" id="">상세 정보</label>
-          <textarea className="form-control" name="description" style={{ height: '200px !important' }} value={description} onChange={handleChangeDescription}/>
+          {/* <textarea className="form-control" name="description" style={{ height: '200px !important' }} value={description} onChange={handleChangeDescription}/> */}
+          { description && 
+                            <CKEditor editor={ ClassicEditor }
+                                    config={{
+                                        placeholder: "내용을 입력하세요.",
+                                        toolbar: {
+                                            items: [
+                                                'undo', 'redo',
+                                                '|', 'heading',
+                                                '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                                                '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                                                '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent',
+                                                '|', 'link', 'uploadImage', 'blockQuote', 'codeBlock',
+                                                '|', 'mediaEmbed',
+                                            ],
+                                            shouldNotGroupWhenFull: false
+                                        },
+                                        editorConfig: {
+                                            height: 500, // Set the desired height in pixels
+                                        },
+                                        alignment: {
+                                            options: ['left', 'center', 'right', 'justify'],
+                                        },
+                                        
+                                        extraPlugins: [uploadPlugin]            // 업로드 플러그인
+                                    }}
+                                    data={ description }
+                                    onReady={ editor => {
+                                        // You can store the "editor" and use when it is needed.
+                                        console.log( 'Editor is ready to use!', editor );
+                                    } }
+                                    onChange={ ( event, editor ) => {
+                                        const data = editor.getData();
+                                        console.log( { event, editor, data } );
+                                        setDescription(data);
+                                    } }
+                                    onBlur={ ( event, editor ) => {
+                                        console.log( 'Blur.', editor );
+                                    } }
+                                    onFocus={ ( event, editor ) => {
+                                        console.log( 'Focus.', editor );
+                                    } }
+                            />
+                        
+                        }
         </div>
 
         <div className="input-group mb-3 row">

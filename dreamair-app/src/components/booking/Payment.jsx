@@ -3,7 +3,7 @@ import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import SelectedFlight from './SelectedFlight';
 // import '../../styles/payment.css'
 
-const Payment = () => {
+const Payment = ( {goBookingList, comeBookingList} ) => {
 
     const handlePayment = () => {
         // 결제 로직을 처리하세요.
@@ -16,7 +16,7 @@ const Payment = () => {
             <Form id="fm">
                 {/* 필요한 hidden input 요소들을 추가하세요. */}
 
-                <SelectedFlight />
+                <SelectedFlight goBookingList={goBookingList} comeBookingList={comeBookingList} />
 
                 <Form.Group controlId="productName">
                 <Form.Label>상품명:</Form.Label>

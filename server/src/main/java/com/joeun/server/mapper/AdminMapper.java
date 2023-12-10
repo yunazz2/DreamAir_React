@@ -56,7 +56,7 @@ public interface AdminMapper {
 
     // 탑승 처리 - (탑승완료1, 미탑승0)
     public int ticket_update_c(@Param("ticketNo") int ticketNo, @Param("checkedIn") int checkedIn) throws Exception;
-    public int ticket_update_b(@Param("ticketNo") int ticketNo, @Param("checkedIn") int isBoarded) throws Exception;
+    public int ticket_update_b(@Param("ticketNo") int ticketNo, @Param("isBoarded") int isBoarded) throws Exception;
 
     // 탑승권 조회 - ticketNo
     public List<Booking> pas_ticketList(@Param("ticketNo") int ticketNo) throws Exception;

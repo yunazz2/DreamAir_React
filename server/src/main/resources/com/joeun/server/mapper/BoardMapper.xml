@@ -62,6 +62,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE board_no = #{boardNo}
     </update>
 
-
-
 </mapper>

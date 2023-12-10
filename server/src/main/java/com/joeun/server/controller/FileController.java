@@ -1,77 +1,131 @@
 package com.joeun.server.controller;
 
-import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.joeun.server.dto.Files;
 import com.joeun.server.service.FileService;
+import com.joeun.server.util.MediaUtil;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/file")
 public class FileController {
 
-    @Autowired
-    private FileService fileService;
+  @Autowired
+  private FileService fileService;
 
-    /**
-     * 파일 다운로드
-     * @param fileNo
-     * @param response
-     * @throws Exception
-     */
-    @GetMapping(value="/{fileNo}")
-    public void fileDownload( @PathVariable("fileNo") int fileNo
-                             ,HttpServletResponse response  ) throws Exception {
+	@Autowired
+	private ResourceLoader resourceLoader;
 
-        int result = fileService.download(fileNo, response);
-        
-        if( result == 0 ) {
-             response.setStatus(response.SC_BAD_REQUEST);
-        }
-    }
 
-    /**
-     * 썸네일 이미지
-     * @param fileNo
-     * @param response
-     * @throws Exception
-     */
-    @GetMapping(value="/img/{fileNo}")
-    public void thumbnail( @PathVariable("fileNo") int fileNo
-                             ,HttpServletResponse response  ) throws Exception {
 
-        int result = fileService.thumbnail(fileNo, response);
-        
-        if( result == 0 ) {
-             response.setStatus(response.SC_BAD_REQUEST);
-        }
-    }
-    
-    /**
+	/**
+	 * 파일 다운로드
+	 * @param fileNo
+	 * @param response
+	 * @throws Exception
+	 */
+	@GetMapping("/{fileNo}")
+	public void fileDownload(@PathVariable("fileNo") int fileNo
+							,HttpServletResponse response) throws Exception {
+		
+		// 파일 조회
+		Files file = fileService.select(fileNo);
+		
+		// 파일이 존재하지 않으면,
+		if( file == null ) {
+			// 응답 상태코드 : 400, 클라이언트의 요청이 잘못되었음을 나타내는 상태코드
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		
+		String fileName = file.getFileName();	// 파일 명
+		String filePath = file.getFilePath();	// 파일 경로
+		
+		// 파일 다운로드를 위한 헤더 세팅
+		// - ContentType 			: application/octet-straem
+		// - Content-Disposition 	: attachment; fileanme="파일명.확장자"
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		
+		// 파일 입력
+		File downloadFile = new File(filePath);
+		FileInputStream fis = new FileInputStream(downloadFile);
+		ServletOutputStream sos = response.getOutputStream();
+
+		// 다운로드
+		FileCopyUtils.copy(fis, sos);
+		
+	}
+
+	/**
+	 * 이미지 썸네일 
+	 * @param no
+	 * @param response
+	 * @throws Exception
+	 */
+	@GetMapping("/img/{fileNo}")
+	public void showImg(@PathVariable Integer fileNo, HttpServletResponse response) throws Exception {
+
+		Files file = fileService.select(fileNo);
+		String filePath = (file != null) ? file.getFilePath() : null;
+		Resource resource = resourceLoader.getResource("classpath:static/img/no-image.png");
+
+		File imgFile;
+
+		if (filePath == null || !(imgFile = new File(filePath)).exists()) {
+			// 파일이 존재하지 않거나 파일 경로가 null인 경우
+			imgFile = resource.getFile();
+		}
+
+		String ext = filePath.substring(filePath.lastIndexOf(".") + 1);
+		MediaType mType = MediaUtil.getMediaType(ext);
+
+		if (mType == null) {
+			// 이미지 타입이 아닐 경우
+			response.setContentType(MediaType.IMAGE_PNG_VALUE); // 기본적으로 PNG로 설정
+			imgFile = resource.getFile();
+		} else {
+			// 이미지 타입일 경우
+			response.setContentType(mType.toString());
+		}
+
+		FileInputStream fis = new FileInputStream(imgFile);
+		ServletOutputStream sos = response.getOutputStream();
+		FileCopyUtils.copy(fis, sos);
+	}
+	
+
+	
+	 /**
      *  파일 삭제
      * @param file
      * @return
      * @throws Exception
      */
-    @DeleteMapping("")
-    // public ResponseEntity<String> deleteFile(@RequestBody Files file) throws Exception {
-    public ResponseEntity<String> deleteFile(Files file) throws Exception {
+    @DeleteMapping("/{fileNo}")
+    public ResponseEntity<String> deleteFile(@PathVariable Integer fileNo) throws Exception {
         log.info("[DELETE] - /file");
-        int fileNo = file.getFileNo();
         log.info("fileNo : " + fileNo);
         if( fileNo == 0 )
             return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);       
@@ -83,29 +137,6 @@ public class FileController {
         
         return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
     }
+
     
-
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
-        if (multipartFile.isEmpty()) {
-           return new ResponseEntity<String>("FAIL", HttpStatus.OK);   
-        }
-
-        String fileName = multipartFile.getOriginalFilename(); // 파일 이름
-        String filePath = "/your/directory/path/" + fileName; // 실제 파일 저장 경로, 실제 서비스에서는 수정 필요
-
-        // 파일 저장 로직 (FileOutputStream 사용)
-
-        Files file = new Files();
-        file.setFileName(fileName);
-        file.setOriginName(fileName);
-        file.setFilePath(filePath);
-        file.setFileSize(multipartFile.getSize());
-        // ... (다른 필요한 정보 저장)
-
-        fileService.insert(file); // 파일 정보 DB 저장
-
-        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-    }
-
 }

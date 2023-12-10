@@ -18,5 +18,7 @@ export const deleteAccount = (userId) => axios.delete(`/user/${userId}`)
 export const selectBookingListByUser = (userId) => axios.get(`/user/bookingList/${userId}`)
 
 // 티켓 상세 조회
-// export const viewTicket = (ticketNo, userId) => axios.get(`/user/booking/ticketInfo/${ticketNo}`, {ticketNo, userId})
 export const viewTicket = (ticketNo, userId) => axios.get(`/user/booking/ticketInfo/${ticketNo}?userId=${userId}`);
+
+// 출도착 항공편 조회
+export const productFlightList = () => axios.get('/user/productFlightList')

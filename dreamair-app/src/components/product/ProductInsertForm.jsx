@@ -1,18 +1,90 @@
 import React, {  useState } from 'react'
 import { Link } from 'react-router-dom';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as filesApi from '../../apis/files'
 
-const ProductInsertForm = ({ onInsert}) => {
+const ProductInsertForm = ({ onInsert }) => {
   
-  const [productId, setProductId] = useState([])
-  const [routeNo, setRouteNo] = useState([])
-  const [name, setName] = useState([])
-  const [productCat, setProductCat] = useState([])
-  const [productPrice, setProductPrice] = useState([])
-  const [departure, setDeparture] = useState([])
-  const [destination, setDestination] = useState([])
-  const [description, setDescription] = useState([])
-  const [unitsInStock, setUnitsInStock] = useState([])
+    const [productId, setProductId] = useState([])
+    const [routeNo, setRouteNo] = useState([])
+    const [name, setName] = useState([])
+    const [productCat, setProductCat] = useState([])
+    const [productPrice, setProductPrice] = useState([])
+    const [departure, setDeparture] = useState([])
+    const [destination, setDestination] = useState([])
+    const [description, setDescription] = useState([])
+    const [unitsInStock, setUnitsInStock] = useState([])
+    const [files, setFiles] = useState(null)
 
+    const handleFileChange = (e) => {
+        setFiles(e.target.files);
+    };
+
+    const onSubmit = () => {
+        const formData = new FormData();
+    //    onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
+        formData.append('productId', productId);
+        formData.append('routeNo', routeNo);
+        formData.append('name', name);
+        formData.append('productCat', productCat);
+        formData.append('productPrice', productPrice);
+        formData.append('departure', departure);
+        formData.append('destination', destination);
+        formData.append('description', description);
+        formData.append('unitsInStock', unitsInStock);
+
+        const headers = {
+            headers: {
+                'Content-Type' : 'multipart/form-data',
+            },
+        };
+
+        if (files) {
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`files[${i}]`, files[i]);
+            }
+        }
+
+        onInsert(formData, headers)                             // formData 사용 ⭕
+    }
+
+    const customUploadAdapter = (loader) => {
+        return {
+        upload() {
+            return new Promise( (resolve, reject) => {
+            const formData = new FormData();
+            loader.file.then( async (file) => {
+                    console.log(file);
+                    formData.append("parentTable", 'editor');
+                    formData.append("file", file);
+
+                    const headers = {
+                        headers: {
+                            'Content-Type' : 'multipart/form-data',
+                        },
+                    };
+
+                    let response = await filesApi.upload(formData, headers);
+                    let data = await response.data;
+                    console.log(`data : ${data}`);
+                    
+                    let newFileNo = data;
+
+                    await resolve({
+                        default: `/file/img/${newFileNo}`
+                    })
+            });
+            });
+        },
+        };
+    };
+
+    function uploadPlugin(editor) {
+        editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+            return customUploadAdapter(loader);
+        };
+    }
   const handleChangeProductId = (e) => {
     setProductId(e.target.value)
   }
@@ -48,24 +120,6 @@ const ProductInsertForm = ({ onInsert}) => {
   const handleChangeUnitsInStock = (e) => {
     setUnitsInStock(e.target.value)
   }
-
-  const onSubmit = () => {
-    onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
-  }
-
-  // useEffect(() => {
-  //   if(product) {
-  //   setProductId(product.productId);
-  //   setRouteNo(product.routeNo);
-  //   setName(product.name);
-  //   setProductCat(product.productCat);
-  //   setProductPrice(product.productPrice);
-  //   setDestination(product.destination);
-  //   setDeparture(product.departure);
-  //   setDescription(product.description);
-  //   setUnitsInStock(product.unitsInStock);
-  //   }
-  // }, [product])
   
   return (
     
@@ -84,7 +138,7 @@ const ProductInsertForm = ({ onInsert}) => {
 
           <div className="input-group mb-3 row">
             <label className="input-group-text col-md-2" id="">상품 이미지</label>
-            <input type="file" className="form-control col-md-10" name="file"/>
+            <input type="file" className="form-control col-md-10" name="file" onChange={handleFileChange} multiple/>
           </div>
 
           <div className="input-group mb-3 row">
@@ -94,7 +148,35 @@ const ProductInsertForm = ({ onInsert}) => {
 
           <div className="input-group mb-3 row">
             <label className="input-group-text w-100" id="">상세 정보</label>
-            <textarea className="form-control" name="description" style={{ height: '200px' }} value={description} onChange={handleChangeDescription}/>
+            {/* <textarea className="form-control" name="description" style={{ height: '200px' }} value={description} onChange={handleChangeDescription}/> */}
+            <CKEditor
+                                editor={ ClassicEditor }
+                                config={{
+                                    placeholder: "내용을 입력하세요.",
+                                    editorConfig: {
+                                        height: 500, // Set the desired height in pixels
+                                    },
+                                    alignment: {
+                                        options: ['left', 'center', 'right', 'justify'],
+                                    },
+
+                                    extraPlugins: [uploadPlugin]            // 업로드 플러그인
+                                }}
+                                data=""
+                                onReady={ editor => {
+                                    console.log( 'Editor is ready to use!', editor );
+                                } }
+                                onChange={ ( event, editor ) => {
+                                    const data = editor.getData();
+                                    console.log( { event, editor, data } );
+                                } }
+                                onBlur={ ( event, editor ) => {
+                                    console.log( 'Blur.', editor );
+                                } }
+                                onFocus={ ( event, editor ) => {
+                                    console.log( 'Focus.', editor );
+                                } }
+                            />
           </div>
 
           <div className="input-group mb-3 row">
@@ -144,9 +226,9 @@ const ProductInsertForm = ({ onInsert}) => {
 
           <hr className="my-4" />
 
-          <div className="d-flex justify-content-between">
+          <div className="btn-box">
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
-            <button className='btn btn-primary' onClick={ () => onSubmit(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock) }>등록</button>
+            <button className='btn btn-primary' onClick={ onSubmit }>등록</button>
           </div>
           </form>
       </div>

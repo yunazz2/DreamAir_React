@@ -11,6 +11,8 @@ const BoardListContainer = () => {
     // state 설정
     const [boardList, setBoardList] = useState([])
 
+    const [isLoading, setLoading] = useState(true)
+
     const [currentPost, setCurrentPost] = useState([]);
     const [page, setPage] = useState(1);
     const postPerPage = 3; // 페이지 당 게시글 개수
@@ -35,14 +37,16 @@ const BoardListContainer = () => {
     };
 
     useEffect(() => {
+        setLoading(true)
         getBoardList();
-    }, [])  // 의존성 배열을 빈 배열로 지정
+        setLoading(false)
+    }, [])
 
     return (
     <>
         <Header/>
         <div className='container'>
-        <BoardList boardList={currentPost}></BoardList>
+        <BoardList isLoading = {isLoading} boardList={currentPost}></BoardList>
         <Pagination
           activePage={page}
           itemsCountPerPage={postPerPage}

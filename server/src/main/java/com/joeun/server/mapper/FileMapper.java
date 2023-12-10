@@ -37,5 +37,9 @@ public interface FileMapper {
     
     // 파일 조회
     public Files selectThumbnail(Files file) throws Exception;
+
+    // 파일 번호(기본키) 최댓값
+    public int maxPk() throws Exception;
+
 }
 

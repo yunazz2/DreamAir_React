@@ -16,25 +16,23 @@ const SeatContainer = () => {
     const fetchData = async () => {
       try {
         // 지금은 이렇게 하드코딩해서 테스트하지만, 추후 booking 객체에서 저장된 값을 뽑아야 함
-        const flightNo = 5;
-        const productNoDeps = 5;
-        const pasCount = booking.pasCount;
-        const roundTrip = booking.roundTrip;
-        const passengerNames = booking.passengerNames;
+        const productNoDess = 5;
+        const destination = booking.destination;
+        const departure = '제주';
 
         // 데이터 가져오기 전에 로딩 상태 설정
         setLoading(true);
 
         // booking 정보 설정
-        setBooking(prevBooking => ({ ...prevBooking, flightNo, productNoDeps, pasCount, roundTrip, passengerNames }));
+        setBooking(prevBooking => ({ ...prevBooking, productNoDess, departure, destination }));
 
         // 좌석 현황 가져오기
-        const bookingResponse = await bookingjs.selectSeatStatus({ ...booking, flightNo, productNoDeps, pasCount, roundTrip, passengerNames });
+        const bookingResponse = await bookingjs.selectDesSeatStatus({...booking, productNoDess, departure, destination });
         const bookingData = bookingResponse.data;
         setBookingObject(bookingData);
 
         // 예매 완료된 좌석 현황 가져오기
-        const bookedListResponse = await bookingjs.bookedSeatList(flightNo);
+        const bookedListResponse = await bookingjs.bookedSeatList(booking.flightNo);
         const bookedListData = bookedListResponse.data;
         setBookedList(bookedListData);
 

@@ -14,9 +14,13 @@ const Seat = ({bookingObject, isLoading}) => {
   
   const navigate = useNavigate();
 
+  const pasCount = booking.pasCount;
+  const roundTrip = booking.roundTrip;
+  const passengerNames = booking.passengerNames;
+
   // 왕복일 시 - 다음 단계로 버튼
   const handleNextStepClick = () => {
-    setBooking({ ...booking, seatNoDeps: selectedSeats.join(', ') });
+    setBooking({ ...booking, pasCount, roundTrip, passengerNames, seatNoDeps: selectedSeats.join(', ') });
     // selectedSeats(선택된 좌석 정보)를 seatNoDeps(가는 편 좌석) 변수에 저장
     navigate('/booking/SeatRt');
   };

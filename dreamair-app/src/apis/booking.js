@@ -6,8 +6,11 @@ export const goList = (roundTrip, departure, destination, departureDate, pasCoun
 // 오는편 항공권 조회 목록
 export const comeList = (roundTrip, departure, destination, departureDate, pasCount ) => axios.get("/booking/comeList", { params : { roundTrip, departure, destination, departureDate, pasCount } })
 
-// 좌석 현황
-export const selectSeatStatus = (booking) => axios.get(`/booking/seat?productNoDeps=${booking.productNoDeps}`)
+// 가는 편 좌석 현황
+export const selectDepSeatStatus = (booking) => axios.get(`/booking/seat?productNoDeps=${booking.productNoDeps}`)
+
+// 오는 편 좌석 현황
+export const selectDesSeatStatus = (booking) => axios.get(`/booking/seat_rt?departure=${booking.departure}&destination=${booking.destination}`)
 
 // 예매 완료된 좌석 현황 불러오기
 export const bookedSeatList = (flightNo) => axios.get(`/booking/seatStatus/${flightNo}`)

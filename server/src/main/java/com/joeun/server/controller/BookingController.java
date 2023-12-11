@@ -166,11 +166,12 @@ public class BookingController {
     
     // 오는 편 좌석 선택
     @GetMapping(value="/seat_rt")
-    public String seatRt(Model model, @ModelAttribute("booking") Booking booking) throws Exception {
+    public ResponseEntity<?> seatRt(Booking booking) throws Exception {
 
+        String departure = booking.getDeparture();
         String destination = booking.getDestination();
 
-        int routeNoToFlightNo = bookingService.selectRouteNoByDes(destination);
+        int routeNoToFlightNo = bookingService.selectRouteNo(departure, destination);
 
         booking.setFlightNo(routeNoToFlightNo);
         booking.setComeFlightNo(booking.getFlightNo());
@@ -179,13 +180,8 @@ public class BookingController {
 
         log.info("오는 편 페이지 부킹 객체 : " + booking);
 
-        // 모델에 등록
-        model.addAttribute("booking", booking);
-        model.addAttribute("seatStatus", seatStatus);
-        
-        return "booking/seat_rt";
+        return new ResponseEntity<>(seatStatus, HttpStatus.OK);
     }
-
 
     // 탑승객 유의사항
     @GetMapping(value="/notice")

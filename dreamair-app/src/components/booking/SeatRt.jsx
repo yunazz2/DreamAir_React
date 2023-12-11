@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router';
 
 const SeatRt = ({bookingObject, isLoading}) => {
 
-  // notice 페이지로 넘겨야 할 값 : phone, passengerNames, selectedSeats, goFlightNo
+  // notice 페이지로 넘겨야 할 값 : phone, passengerNames, selectedSeats, goFlightNo, comeFlightNo
   const {booking, setBooking} = useContext(BookingContext);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  const seatStatus = bookingObject.seatStatus;
+  const seatStatus = bookingObject;
 
   const navigate = useNavigate();
 

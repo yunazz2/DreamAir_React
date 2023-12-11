@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { DateRangePicker } from 'react-bootstrap-daterangepicker';
 import 'bootstrap-daterangepicker/daterangepicker.css';
-import moment from 'moment';
 import 'moment/locale/ko';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import { addDays } from 'date-fns';
 import { BookingContext } from '../../contexts/BookingContextProvider';
+import { Link } from 'react-router-dom';
 
 const SearchFlightForm = () => {
 
   const {booking, setBooking} = useContext(BookingContext);
-
-  const [departureDate, setDepartureDate] = useState('');
   const [showPassengerBox, setShowPassengerBox] = useState(false);
   
-    
   // ------------ 왕복 -------------
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -70,7 +66,7 @@ const SearchFlightForm = () => {
   };
 
   // ------------------ 탑승객 ---------------------
-  const pasCount = booking.pasCount
+  let pasCount = booking.pasCount
 
   const handlePasCountChange = (value) => {
     console.log(value);
@@ -88,30 +84,25 @@ const SearchFlightForm = () => {
   const handleDecrease = () => {
     if (booking.pasCount > 1) {
       --pasCount
-      // setBooking({...booking, pasCount})
+      setBooking({...booking, pasCount})
     }
   };
   
   const handleIncrease = () => {
     ++pasCount
-    // setBooking({...booking, pasCount})
+    setBooking({...booking, pasCount})
   };
    // ------------------ 탑승객 ---------------------
 
-
-
   const handleSubmit = (e) => {
     // e.preventDefault();
-    // 여기에 폼 제출 로직을 추가하세요.
 
     console.log("roundTrip : " + booking.roundTrip);
-    console.log("roundTrip : " + booking.departure);
-    console.log("roundTrip : " + booking.destination);
-    console.log("roundTrip : " + booking.pasCount);
-    console.log("roundTrip : " + booking.departureDate);
+    console.log("departure : " + booking.departure);
+    console.log("destination : " + booking.destination);
+    console.log("pasCount : " + booking.pasCount);
+    console.log("departureDate : " + booking.departureDate);
 
-    console.log(departureDate);
-    alert(departureDate)
     console.log('폼 제출됨!');
   };
 
@@ -255,9 +246,11 @@ const SearchFlightForm = () => {
                     </Row>
 
                     <div className="search_btn pt-2">
-                      <Button id="booking_btn" onClick={handleSubmit} className="btn btn-primary">
-                        검색
-                      </Button>
+                      <Link to="/booking/bookingList">
+                        <Button id="booking_btn" onClick={handleSubmit} className="btn btn-primary">
+                          검색
+                        </Button>
+                      </Link>
                     </div>
                   </Form>
                 </div>

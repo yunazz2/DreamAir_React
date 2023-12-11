@@ -20,7 +20,7 @@
 			
 		-->
 
-		<typeAlias alias="Admin"  type="com.joeun.server.dto.Admin"/>
+		<!-- <typeAlias alias="Admin"  type="com.joeun.server.dto.Admin"/>
 		<typeAlias alias="Auth"  type="com.joeun.server.dto.Auth"/>
 		<typeAlias alias="Board"  type="com.joeun.server.dto.Board"/>
 		<typeAlias alias="Booking"  type="com.joeun.server.dto.Booking"/>
@@ -30,7 +30,7 @@
 		<typeAlias alias="Product"  type="com.joeun.server.dto.Product"/>
 		<typeAlias alias="ProductIo"  type="com.joeun.server.dto.ProductIo"/>
 		<typeAlias alias="QR"  type="com.joeun.server.dto.QR"/>
-		<typeAlias alias="Users"  type="com.joeun.server.dto.Users"/>
+		<typeAlias alias="Users"  type="com.joeun.server.dto.Users"/> -->
 		
 		<!-- 테이블과 매핑할 DTO가 있는 패키지 경로 지정 -->
 		<package name="com.joeun.server.dto"/>

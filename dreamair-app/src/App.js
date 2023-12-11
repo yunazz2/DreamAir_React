@@ -58,7 +58,6 @@ function App() {
     <BrowserRouter>
       {/* index */}
       <Routes>
-        <Route path="/" element={<IndexContainer/>}/>
         <Route path="/join" element={<JoinContainer/>}/>
         <Route path="/login" element={<LoginContainer/>}/>
       </Routes>
@@ -95,10 +94,11 @@ function App() {
       {/* booking */}
       <BookingContextProvider>
         <Routes>
+          <Route path="/" element={<IndexContainer/>}/>
           <Route path='booking/bookingList' element={<BookingListContainer />} />
           <Route path='booking/info' element={<BookingInfoContainer />} />
-          <Route path='booking/seat/:pasCount/:roundTrip' element={<SeatContainer />} />
-          <Route path='booking/seatRt/:pasCount/:roundTrip' element={<SeatRtContainer />} />
+          <Route path='booking/seat' element={<SeatContainer />} />
+          <Route path='booking/seatRt' element={<SeatRtContainer />} />
           <Route path='booking/notice' element={<NoticeContainer />} />
           <Route path='booking/payment' element={<PaymentContainer />} />
           <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />

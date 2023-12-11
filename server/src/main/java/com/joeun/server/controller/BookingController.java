@@ -123,17 +123,10 @@ public class BookingController {
 
     // 가는 편 좌석 선택
     @GetMapping("/seat")
-    public ResponseEntity<?> seat(@RequestParam int pasCount, @RequestParam int productNoDeps) throws Exception {
-
-        // 여기부터
-        Booking booking = new Booking();
+    public ResponseEntity<?> seat(Booking booking) throws Exception {
         
-        int productNoDepValue = productNoDeps;
-        int productNoDesValue = productNoDeps;
-        // 여기까지는 테스트를 위해 임시로 값 넣어둔 거(매개 변수도)
-        
-        // int productNoDepValue = booking.getProductNoDeps()[0];
-        // int productNoDesValue = booking.getProductNoDeps()[0];
+        int productNoDepValue = booking.getProductNoDeps()[0];
+        int productNoDesValue = booking.getProductNoDeps()[0];
 
         String departure = bookingService.selectDeparture(productNoDepValue);
         String destination = bookingService.selectDestination(productNoDesValue);

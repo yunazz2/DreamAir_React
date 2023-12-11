@@ -10,6 +10,7 @@ import '../styles/bookingMain.css';
 import '../styles/style.css';
 import '../styles/reset.css';
 import Header from '../components/fragment/Header'
+import Footer from '../components/fragment/Footer'
 
 const IndexContainer = () => {
 
@@ -36,6 +37,7 @@ const IndexContainer = () => {
         <LatestBoard mainList={mainList}/>
         <TripSlide />
       </div>
+      <Footer />
     </>
   )
 }

@@ -1,11 +1,84 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import SelectedFlight from './SelectedFlight';
+import { BookingContext } from '../../contexts/BookingContextProvider';
 // import '../../styles/payment.css'
 
 const Payment = ( {goBookingList, comeBookingList} ) => {
 
+    const {booking, setBooking} = useContext(BookingContext)
+
+    
+    const [name, setName] = useState('')
+    const [tel, setTel] = useState('')
+    const [email, setEmail] = useState('')
+    const [price, setPrice] = useState(0)
+
+    // const goPrice = 0
+    // goBookingList.map
+
+    // console.log("goPrice : " + goPrice);
+    // console.log("comeBookingList.productPrice[0] : " + comeBooking.productPrice);
+    // console.log("booking.pasCount : " + booking.pasCount);
+
+    const setTotalPrice = () => {
+
+        // if (booking.roundTrip === '왕복') {
+        //     const goPrice = goBookingList.productPrice[0] * booking.pasCount
+        //     const comePrice = comeBookingList.productPrice[0] * booking.pasCount
+        //     const totalPrice = goPrice + comePrice
+        //     setPrice(totalPrice)    
+        // } else if (booking.roundTrip === '편도') {
+        //     const goPrice = goBookingList.productPrice[0] * booking.pasCount
+        //     setPrice(goPrice)    
+        // }
+    }
+
+    // useEffect(() => {
+    //     setTotalPrice()
+    // },[price])
+    
+    
+    const handleChangeName = (e) => {
+        setName(e.target.value)
+    }
+
+    const handleChangeTel = (e) => {
+        setTel(e.target.value)
+    }
+
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+
     const handlePayment = () => {
+        // status='예매완료', userNo(회원), userNo2(비회원), names, productIdDeps, productIdDess, productPriceDep, productPriceDes
+        const status = '예매완료'
+        const names = []
+        const productIdDeps = []
+        const productIdDess = []
+        // const userNo = ''
+        // const userNo2 = ''
+
+        if(booking.roundTrip === '왕복') {
+            goBookingList.forEach(bookingItem => {
+                names.push(bookingItem.passengerName)
+                productIdDeps.push(bookingItem.productId)
+            });
+            
+            comeBookingList.forEach(bookingItem => {
+                productIdDess.push(bookingItem.productId)
+            });
+            setBooking({ ...booking, status, names, productIdDeps, productIdDess })
+        } else if(booking.roundTrip === '편도') {
+            goBookingList.forEach(bookingItem => {
+                names.push(bookingItem.passengerName)
+                productIdDeps.push(bookingItem.productId)
+            });
+            setBooking({ ...booking, status, names, productIdDeps })
+        }
+
         // 결제 로직을 처리하세요.
         console.log('결제 처리 로직');
     };
@@ -14,35 +87,33 @@ const Payment = ( {goBookingList, comeBookingList} ) => {
         <Container className="container-pay">
             <h1>주문/결제</h1>
             <Form id="fm">
-                {/* 필요한 hidden input 요소들을 추가하세요. */}
-
                 <SelectedFlight goBookingList={goBookingList} comeBookingList={comeBookingList} />
 
                 <Form.Group controlId="productName">
                 <Form.Label>상품명:</Form.Label>
-                <Form.Control type="text" name="productName" readOnly />
+                <Form.Control type="text" value='항공권' readOnly />
                 </Form.Group>
 
                 <Form.Group controlId="price">
                 <Form.Label>결제금액:</Form.Label>
-                <Form.Control type="text" name="price" readOnly />
+                <Form.Control type="text"  readOnly />
                 </Form.Group>
 
                 <Row className="mb-3">
                 <Col md={6}>
                     <Form.Label>이름:</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="이름 입력" />
+                    <Form.Control type="text" onChange={handleChangeName} value={name} placeholder="이름 입력" />
                 </Col>
 
                 <Col md={6}>
                     <Form.Label>연락처:</Form.Label>
-                    <Form.Control type="text" name="tel" placeholder="연락처 입력" />
+                    <Form.Control type="text" onChange={handleChangeTel} value={tel} placeholder="연락처 입력" />
                 </Col>
                 </Row>
 
                 <Form.Group controlId="email">
                 <Form.Label>이메일:</Form.Label>
-                <Form.Control type="email" name="email" placeholder="이메일 입력" />
+                <Form.Control type="email" onChange={handleChangeEmail} value={email} placeholder="이메일 입력" />
                 </Form.Group>
 
                 <div className="privacy-policy">

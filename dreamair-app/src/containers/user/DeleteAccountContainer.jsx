@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as userjs from '../../apis/user'
 import DeleteAccount from '../../components/user/DeleteAccount'
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
+import Sidebar from '../../components/fragment/Sidebar'
 
 // ⛄ 회원 탈퇴
 const DeleteAccountContainer = () => {
@@ -23,7 +26,12 @@ const DeleteAccountContainer = () => {
 
   return (
     <>
-      <DeleteAccount userId={userId} onDelete={onDelete} />
+      <Header />
+      <div className='d-flex'>
+        <Sidebar />
+        <DeleteAccount userId={userId} onDelete={onDelete} />
+      </div>
+      <Footer />
     </>
   )
 }

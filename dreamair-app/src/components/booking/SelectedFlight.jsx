@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Form, Table } from 'react-bootstrap'
+import { BookingContext } from '../../contexts/BookingContextProvider'
 
 const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
+
     return (
         <div>
             <section>
@@ -29,20 +31,16 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
                         )}
                         
                         {goBookingList &&
-                            goBookingList.map((booking) => (
-                                <tr key={booking.passengerNo}>
-                                <td>{`${booking.departure} → ${booking.destination}`}</td>
-                                <td>{booking.flightName}</td>
-                                <td>{booking.departureDate}</td>
-                                <td>{booking.destinationDate}</td>
+                            goBookingList.map((bookingItem) => (
+                                <tr key={bookingItem.passengerNo}>
+                                <td>{`${bookingItem.departure} → ${bookingItem.destination}`}</td>
+                                <td>{bookingItem.flightName}</td>
+                                <td>{bookingItem.departureDate}</td>
+                                <td>{bookingItem.destinationDate}</td>
                                 <td>일반석</td>
-                                <td>{booking.productPrice}</td>
-                                <td>{booking.seatNoDep}</td>
-                                <td>{booking.passengerName}</td>
-                                {/* <Form.Control type="hidden" name="passengerNames" value={bookingInfo.passengerName} />
-                                <Form.Control type="hidden" name="passengerNos" value={bookingInfo.passengerNo} />
-                                <Form.Control type="hidden" name="phones" value={bookingInfo.phone} />
-                                <Form.Control type="hidden" name="seatNoDepss" value={bookingInfo.seatNoDep} /> */}
+                                <td>{bookingItem.productPrice}</td>
+                                <td>{bookingItem.seatNoDep}</td>
+                                <td>{bookingItem.passengerName}</td>
                                 </tr>
                             ))}
                     </tbody>
@@ -75,17 +73,16 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
                             )}
 
 
-                            {comeBookingList.map((booking) => (
-                                <tr key={booking.passengerNo}>
-                                <td>{`${booking.departure} → ${booking.destination}`}</td>
-                                <td>{booking.flightName}</td>
-                                <td>{booking.departureDate}</td>
-                                <td>{booking.destinationDate}</td>
+                            {comeBookingList.map((bookingItem) => (
+                                <tr key={bookingItem.passengerNo}>
+                                <td>{`${bookingItem.departure} → ${bookingItem.destination}`}</td>
+                                <td>{bookingItem.flightName}</td>
+                                <td>{bookingItem.departureDate}</td>
+                                <td>{bookingItem.destinationDate}</td>
                                 <td>일반석</td>
-                                <td>{booking.productPrice}</td>
-                                <td>{booking.seatNoDes}</td>
-                                <td>{booking.passengerName}</td>
-                                {/* <Form.Control type="hidden" name="seatNoDesss" value={bookingInfo.seatNoDes} /> */}
+                                <td>{bookingItem.productPrice}</td>
+                                <td>{bookingItem.seatNoDes}</td>
+                                <td>{bookingItem.passengerName}</td>
                                 </tr>
                             ))}
                         </tbody>

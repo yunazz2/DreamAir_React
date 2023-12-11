@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
+  
+  sessionStorage.setItem('userId', 'user');
+  const userId = sessionStorage.getItem('userId'); // 세션에서 userId를 가져옴
 
   return (
     <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -16,10 +19,10 @@ const Sidebar = () => {
             {/* 회원 메뉴 */}
             {/* {isAuthenticated && ( */}
                 <li className="nav-item"><Link to="/user" className="nav-link d-flex align-items-center gap-2" aria-current="page">마이페이지</Link></li>
-                <li className="nav-item"><Link to="/user/update" className="nav-link d-flex align-items-center gap-2">회원 정보 수정</Link></li>
-                <li className="nav-item"><Link to="/user/checkin" className="nav-link d-flex align-items-center gap-2">체크인</Link></li>
-                <li className="nav-item"><Link to="/user/mileage" className="nav-link d-flex align-items-center gap-2">마일리지 조회</Link></li>
-                <li className="nav-item"><Link to="/user/delete" className="nav-link d-flex align-items-center gap-2">회원 탈퇴</Link></li>
+                <li className="nav-item"><Link to={`/user/update/${userId}`} className="nav-link d-flex align-items-center gap-2">회원 정보 수정</Link></li>
+                <li className="nav-item"><Link to={`/user/checkin/${userId}`} className="nav-link d-flex align-items-center gap-2">체크인</Link></li>
+                <li className="nav-item"><Link to={`/user/mileage/${userId}`} className="nav-link d-flex align-items-center gap-2">마일리지 조회</Link></li>
+                <li className="nav-item"><Link to={`/user/deleteaccount/${userId}`} className="nav-link d-flex align-items-center gap-2">회원 탈퇴</Link></li>
                
             {/* )} */}
 

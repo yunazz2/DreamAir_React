@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as userjs from '../../apis/user'
 import UserUpdateForm from '../../components/user/UserUpdateForm'
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
+import Sidebar from '../../components/fragment/Sidebar'
 
 
 // ⛄ 회원 정보 수정
@@ -42,7 +45,12 @@ const UserUpdateContainer = () => {
 
   return (
     <>
-      <UserUpdateForm userId={userId} user={user} onUpdate={onUpdate} />
+      <Header />
+      <div className='d-flex'>
+        <Sidebar />
+        <UserUpdateForm userId={userId} user={user} onUpdate={onUpdate} />
+      </div>
+      <Footer />
     </>
   )
 }

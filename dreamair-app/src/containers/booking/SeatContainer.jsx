@@ -16,24 +16,24 @@ const SeatContainer = () => {
     const fetchData = async () => {
       try {
         // 지금은 이렇게 하드코딩해서 테스트하지만, 추후 booking 객체에서 저장된 값을 뽑아야 함
-        const flightNo = 1;
+        const productNoDeps = 1;
         const pasCount = 2;
         const roundTrip = '왕복';
-        const productNoDeps = 1;
+        const passengerNames = ['1', '2'];
 
         // 데이터 가져오기 전에 로딩 상태 설정
         setLoading(true);
 
         // booking 정보 설정
-        setBooking(prevBooking => ({ ...prevBooking, flightNo, pasCount, roundTrip, productNoDeps }));
+        setBooking(prevBooking => ({ ...prevBooking, productNoDeps, pasCount, roundTrip, passengerNames }));
 
         // 좌석 현황 가져오기
-        const bookingResponse = await bookingjs.selectSeatStatus({ ...booking, flightNo, pasCount, roundTrip, productNoDeps });
+        const bookingResponse = await bookingjs.selectDepSeatStatus({ ...booking, productNoDeps, pasCount, roundTrip, passengerNames });
         const bookingData = bookingResponse.data;
         setBookingObject(bookingData);
 
         // 예매 완료된 좌석 현황 가져오기
-        const bookedListResponse = await bookingjs.bookedSeatList(flightNo);
+        const bookedListResponse = await bookingjs.bookedSeatList(booking.flightNo);
         const bookedListData = bookedListResponse.data;
         setBookedList(bookedListData);
 
@@ -54,10 +54,11 @@ const SeatContainer = () => {
     return () => clearInterval(interval);
   }, [setBooking]);
 
+
   return (
     <>
       <Header />
-      <Seat pasCount={booking.pasCount} roundTrip={booking.roundTrip} bookingObject={bookingObject} isLoading={isLoading} />
+      <Seat bookingObject={bookingObject} isLoading={isLoading} />
       <Footer />
     </>
   );

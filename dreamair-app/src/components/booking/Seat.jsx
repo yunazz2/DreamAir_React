@@ -1,28 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Seat.module.css'
 import Swal from "sweetalert2";
 import { useNavigate } from 'react-router-dom';
+import { BookingContext } from '../../contexts/BookingContextProvider';
 
-const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
+const Seat = ({bookingObject, isLoading}) => {
 
+  // notice 페이지로 넘겨야 할 값 : phone, passengerNames, selectedSeats, goFlightNo
+  const {booking, setBooking} = useContext(BookingContext);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const seatStatus = bookingObject.seatStatus;
-
+  
   const navigate = useNavigate();
 
-  const nextPage = () => {
-    navigate(`/booking/SeatRt/${pasCount}/${roundTrip}`, {
-      state: {
-        selectedSeats : selectedSeats
-      }})
-  }
+  const pasCount = booking.pasCount;
+  const roundTrip = booking.roundTrip;
+  const passengerNames = booking.passengerNames;
 
-  // 체크박스 변경 시 처리하는 함수
+  // 왕복일 시 - 다음 단계로 버튼
+  const handleNextStepClick = () => {
+    setBooking({ ...booking, pasCount, roundTrip, passengerNames, seatNoDeps: selectedSeats.join(', ') });
+    // selectedSeats(선택된 좌석 정보)를 seatNoDeps(가는 편 좌석) 변수에 저장
+    navigate('/booking/SeatRt');
+  };
+  
+  // 편도일 시 - 선택 완료 버튼
+  const handleCompleteClick = () => {
+    setBooking({ ...booking, seatNoDeps: selectedSeats.join(', ') });
+    // selectedSeats(선택된 좌석 정보)를 seatNoDeps(가는 편 좌석) 변수에 저장
+    navigate('/booking/notice');
+  };
+
+  // 선택된 좌석 정보
   const handleCheckboxChange = (seatNo) => {
     const updatedSeats = selectedSeats.includes(seatNo)
       ? selectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
-      : selectedSeats.length < pasCount
+      : selectedSeats.length < booking.pasCount
       ? [...selectedSeats, seatNo]
       : selectedSeats;
 
@@ -48,21 +62,22 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
   
   // 왕복 여부에 따른 버튼 노출
   const renderButton = () => {
-    if (roundTrip === '왕복') {
+    if (booking.roundTrip === '왕복') {
       return (
-        <button type="button" className={styles.bottomButton} id="btn" onClick={nextPage}>
+        <button type="button" className={styles.bottomButton} id="btn" onClick={handleNextStepClick}>
           다음 단계로
         </button>
       );
     } else {
       return (
-        <button type="button" className={styles.bottomButton} id="btn">
+        <button type="button" className={styles.bottomButton} id="btn" onClick={handleCompleteClick}>
           선택 완료
         </button>
       );
     }
   };
 
+  // 화면
   return (
     <div className={styles.wrap}>
       <div className={styles.seatContent}>
@@ -80,7 +95,6 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
           <h2>가는 편</h2>
         </div>
 
-        
         <div className={styles.seatInnerWrap}>
           <div className={styles.seatInnerLeft}>
             <div className={styles.left1}>
@@ -145,16 +159,16 @@ const Seat = ({pasCount, roundTrip, bookingObject, isLoading}) => {
             <div className={styles.seatInnerRightDown}>
               <div className={styles.passengerName}>
                 <p>탑승객명</p>
-                {/* <h5 th:each="passenger : ${booking.passengerNames}">
-                  <span th:text="${passenger}"></span>
-                </h5> */}
+                {booking.passengerNames && booking.passengerNames.map((passenger, index) => (
+                  <h4 key={index}>{passenger}</h4>
+                ))}
               </div>
 
               <br />
             
               <div className={styles.pasCount}>
                 <p>인원 수</p>
-                <p>{pasCount}명</p>
+                <h4>{booking.pasCount}명</h4>
               </div>
 
               <br />

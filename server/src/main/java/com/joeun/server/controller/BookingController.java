@@ -163,31 +163,15 @@ public class BookingController {
         
         return new ResponseEntity<>(bookedSeatList, HttpStatus.OK);
     }
-
-    // 왕복 여부에 따라 페이지 처리
-    @PostMapping(value = "/seat")
-    public String seatPro(Model model, @ModelAttribute("booking") Booking booking) {
-
-        if ("왕복".equals(booking.getRoundTrip())) {
-            // "왕복"일 경우 seat_rt 페이지로 이동
-            return "redirect:/booking/seat_rt";
-        } else {
-            // "왕복"이 아닐 경우 notice 페이지로 이동
-
-            // JavaScript 코드 추가
-            model.addAttribute("booking", booking);
-            return "booking/notice";
-        }
-    }
-
     
-    // 좌석 선택 - 왕복일 시
+    // 오는 편 좌석 선택
     @GetMapping(value="/seat_rt")
-    public String seatRt(Model model, @ModelAttribute("booking") Booking booking) throws Exception {
+    public ResponseEntity<?> seatRt(Booking booking) throws Exception {
 
+        String departure = booking.getDeparture();
         String destination = booking.getDestination();
 
-        int routeNoToFlightNo = bookingService.selectRouteNoByDes(destination);
+        int routeNoToFlightNo = bookingService.selectRouteNo(departure, destination);
 
         booking.setFlightNo(routeNoToFlightNo);
         booking.setComeFlightNo(booking.getFlightNo());
@@ -196,13 +180,8 @@ public class BookingController {
 
         log.info("오는 편 페이지 부킹 객체 : " + booking);
 
-        // 모델에 등록
-        model.addAttribute("booking", booking);
-        model.addAttribute("seatStatus", seatStatus);
-        
-        return "booking/seat_rt";
+        return new ResponseEntity<>(seatStatus, HttpStatus.OK);
     }
-
 
     // 탑승객 유의사항
     @GetMapping(value="/notice")

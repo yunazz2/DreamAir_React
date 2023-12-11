@@ -38,6 +38,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int update(Comment comment) throws Exception {
+         int boardNo = comment.getBoardNo();
+         comment.setParentTable("board");
+         comment.setParentNo(boardNo);
         int result = commentMapper.update(comment);
         return result;
     }
@@ -46,7 +49,6 @@ public class CommentServiceImpl implements CommentService {
     public int delete(int commentNo) throws Exception {
         int result = commentMapper.delete(commentNo);
         return result;
-        
     }
 
     @Override

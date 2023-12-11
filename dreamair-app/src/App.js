@@ -52,6 +52,10 @@ import ReservationContainer from './containers/bus/ReservationContainer';
 import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
 import BookingContextProvider from './contexts/BookingContextProvider';
 
+import NotFound from './pages/error/NotFound';
+import ServerError from './pages/error/ServerError';
+import Test from './pages/error/Test';
+
 
 function App() {
   return (
@@ -141,6 +145,16 @@ function App() {
       <Routes>
         <Route path="/qr" element={<QRListContainer/>}/>
       </Routes>
+
+
+      {/* Error */}
+      <Routes>
+        <Route path="/error/404" element={ <NotFound /> } />     {/* TODO : 404 페이지 꾸미기 */}
+        <Route path="/error/500" element={ <ServerError /> } />  {/* TODO : 500 페이지 꾸미기 */}
+        <Route path="/error/test" element={ <Test /> } />        {/* TODO : 500 페이지 꾸미기 */}
+        <Route path="/*" element={ <NotFound /> } />             {/* Info : 맨 마지막에 있어야합니다. */}
+      </Routes>
+
     </BrowserRouter>
 
   );

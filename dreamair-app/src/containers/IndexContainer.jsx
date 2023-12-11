@@ -31,7 +31,7 @@ const IndexContainer = () => {
     <>
       <Header />
       <div>
-        {/* <SearchFlight /> */}
+        <SearchFlight />
         <QuickMenu />
         <RecommendedSpots />
         <LatestBoard mainList={mainList}/>

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             )
             VALUES(
                 #{parentTable}, #{parentNo}, #{writer}, #{content},
-                #{groupNo}, #{superNo}, #{depthNo}, #{seqNo}, #{subCount}, #{parentNo}, #{boardNo}
+                #{groupNo}, #{superNo}, #{depthNo}, #{seqNo}, #{subCount}, #{boardNo}
             )
         </insert>
         

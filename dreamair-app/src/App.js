@@ -81,7 +81,7 @@ function App() {
       {/* COMMENT */}
       <Routes>
         <Route path="/comment/:boardNo" element={<CommentListContainer/>}/>
-        <Route path="/comment/comment_insert" element={<CommentInsertContainer/>}/>
+        <Route path="/comment/comment_insert/:boardNo" element={<CommentInsertContainer/>}/>
         <Route path="/comment/comment_update/:boardNo/:commentNo" element={<CommentUpdateContainer/>}/>
       </Routes>
 

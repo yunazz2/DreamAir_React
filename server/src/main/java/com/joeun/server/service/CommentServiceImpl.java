@@ -17,7 +17,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> list() throws Exception {
        List<Comment> commentList = commentMapper.list();
-
        return commentList;
     }
 

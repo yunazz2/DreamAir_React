@@ -71,12 +71,12 @@ public class CommentController {
     }
     
     // 댓글 등록
-    @PostMapping()
-    public ResponseEntity<?> create(@RequestBody Comment comment, int boardNo) {
+    @PostMapping("/{boardNo}")
+    public ResponseEntity<?> create(@RequestBody Comment comment, @PathVariable int boardNo) {
         log.info("[POST] - /comment - 댓글 등록");
         try {
-            // comment.setParentTable("board");
-            // comment.setBoard_no(boardNo);
+            comment.setParentTable("board");
+            comment.setBoardNo(boardNo);
 
             int result = commentService.insert(comment);
             boardNo = comment.getParentNo();
@@ -94,7 +94,7 @@ public class CommentController {
     }
     
     // 댓글 수정
-    @PutMapping()
+    @PutMapping("/{boardNo}")
     public ResponseEntity<?> update(@RequestBody Comment comment) {
         log.info("[PUT] - /comment - 댓글 수정");
         try {
@@ -116,7 +116,7 @@ public class CommentController {
     }
     
     // 댓글 삭제
-    @DeleteMapping("/{commentNo}")
+    @DeleteMapping("/{boardNo}/{commentNo}")
     public ResponseEntity<?> destroy(@PathVariable Integer commentNo) {
         log.info("[DELETE] - /comment/" + commentNo + " - 댓글 삭제");
         try {

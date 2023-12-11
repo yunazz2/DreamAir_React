@@ -2,15 +2,11 @@ import React, { useState } from 'react'
 import InfoForm from '../../components/booking/InfoForm'
 
 const BookingInfoContainer = () => {
-    const [pasCount, setPasCount] = useState(2);
 
-    const booking = {
-        pasCount : pasCount
-    }
-
+    // axios post 정의하고 props로 내려주기
     return (
         <div>
-            <InfoForm booking={booking} />;
+            <InfoForm />;
         </div>
     )
 }

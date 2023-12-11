@@ -1,0 +1,233 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap {
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.seatContent {
+	width: 1000px;
+}
+
+.seatHeader2 {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	background-color: #b6b6b6;
+    height: 95px;
+    color: white;
+}
+
+.seatInnerWrap {
+	display: flex;
+	justify-content: center;
+}
+
+.seatInnerLeft {
+	width: 55%;
+	background-color: white;
+	float: left;
+	height: 100%;
+}
+
+.loadingImg {
+	width: 100%;
+	height: 100%;
+}
+
+.seatInnerRight {
+	width: 45%;
+	float: left;
+	height: 100%;
+}
+
+.seatInnerRightTop {
+	height: 57%;
+    padding: 15px;
+    margin-left: 10px;
+    border: 1px solid #94e1ff;
+    margin-bottom: 10px;
+}
+
+.seatInnerRightDown {
+	height: 334px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: #94e1ff solid 1px;
+    margin-left: 10px;
+}
+
+.seatInnerRightDown input {
+	background: transparent;
+	margin-bottom: 5px;
+}
+
+.seatInnerRightDown div {
+   font-size:18px;
+   margin-bottom: 5px;
+}
+
+.seatInnerRightDown input[type="text"]{
+    height: 0;
+    padding: 0 15px;
+    margin-right: 10px;
+    border: 1px solid #f3f3f3;
+    border-bottom: 1px solid #ddd;
+    color: #222;
+    background-color: #f3f3f3;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.left1 {
+	height: inherit;
+}
+
+.nameView {
+	background-color: #fffbc6;
+    height: 50px;
+}
+
+.seatView {
+	overflow-y: scroll;
+	width: 100%;
+	/* height: -webkit-fill-available; */
+	height: 365px;
+	background-image: url('../../../public/img/backgroundTest.png');
+	background-attachment:local;
+	background-position-x: center;
+}
+
+.seatView input {
+	-webkit-appearance: checkbox;
+	width: 10px;
+	height: 10px;
+	opacity: 1;
+}
+
+input[type="text"] {
+	border: none;
+	cursor: unset;
+	font-size: 17px;
+}
+
+input:focus {
+	outline: none;
+}
+
+.seatNoDeps {
+	display: flex;
+	justify-content: center;
+}
+.seat1 {
+	width: inherit;
+	margin-top: 30px;
+	display: inline-table;
+}
+
+/* 체크 박스 여기 */
+input[type=checkbox] {
+	/* checkbox의 실제 체크박스 부분을 숨깁니다. */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	outline: none;
+
+	/* checkbox의 크기와 여백을 조정합니다. */
+	width: 20px; /* 원하는 크기로 조정하세요 */
+	height: 20px; /* 원하는 크기로 조정하세요 */
+	margin: 5px 15px 5px 5px; /* 원하는 여백으로 조정하세요 */
+
+	
+	/* 배경 이미지 설정 */
+	background-image: url('../../../public/img/bookableSeat.png');
+	background-size: cover; /* 이미지를 적절하게 확대/축소하여 채우도록 설정합니다. */
+
+	cursor: pointer;
+}
+
+/* .seat1 .seatBox:checked { */
+.seat1 .seatBox:checked { 
+	background-image: url('../../../public/img/bookingSeat.png');
+}
+
+.seat1 .seatBox:disabled {
+	background-image: url('../../../public/img/bookedSeat.png');
+	cursor: default;
+}
+
+.seat1 label {
+	display: none;
+}
+
+.bookable {
+	cursor: pointer;
+	display: inline-block;
+	cursor: pointer;
+	line-height: 22px;
+	padding-left: 22px;
+	background: url('../../../public/img/bookableSeat.png') left/22px no-repeat;
+	height: 30px;
+}
+
+.booking {
+	display: inline-block;
+	cursor: pointer;
+	line-height: 22px;
+	padding-left: 22px;
+	background: url('../../../public/img/bookingSeat.png') left/22px no-repeat;
+	height: 30px;
+}
+
+.booked {
+	display: inline-block;
+	cursor: pointer;
+	line-height: 22px;
+	padding-left: 22px;
+	background: url('../../../public/img/bookedSeat.png') left/22px no-repeat;
+	height: 30px;
+}
+
+label {
+	margin-left: 5px;
+}
+
+.seatInfoBookSeat{
+	margin-right: 15px;
+    float: left;
+}
+
+.seatInfoBookedSeat {
+	margin-top: 10px;
+}
+
+.goSeat, .backSeat{
+	border-bottom: 1px #94e1ff solid;
+}
+
+input[type="text"]:hover{
+	    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.buttonBox {
+	display: flex;
+	justify-content: center;
+}
+
+.buttonBox .bottomButton {
+	background-color: #94e1ff;
+	width: 40%;
+	margin: 0 auto;
+	height: 55px;
+	margin-top: 15px;
+}

@@ -24,7 +24,7 @@ const Header = () => {
               <React.Fragment>
                 <div className="dropdown text-end mx-3">
                   <Link to="#" className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle me-2" />
+                    <img src='/img/user.png' alt="user" width="32" height="32"/>
                     {/* <strong sec:authentication="principal.users.userId">아이디</strong> */}
                   </Link>
                   <ul className="dropdown-menu text-small">

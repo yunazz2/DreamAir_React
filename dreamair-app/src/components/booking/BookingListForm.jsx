@@ -1,28 +1,66 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { BookingContext } from '../../contexts/BookingContextProvider';
 
 const BookingListForm = ({ bookingInfo, bookingList }) => {
+
+  const {booking, setBooking} = useContext(BookingContext);
+
+  const handleLinkClick = (bookingItem) => {
+    const roundTrip = '왕복'
+    const productNoDep = bookingItem.productNo
+    const routeNoDep = bookingItem.routeNo
+    setBooking({ ...booking, roundTrip, productNoDep, routeNoDep })
+  }
+
+  const handleSubmit = (bookingItem) => {
+
+    if(bookingInfo.roundTrip === ('편도')) {
+      const productNoDep = bookingItem.productNo
+      const routeNoDep = bookingItem.routeNo
+      setBooking({ ...booking, productNoDep, routeNoDep})
+    } else if(bookingInfo.roundTrip == ('왕복')) {
+      const productNoDes = bookingItem.productNo
+      const routeNoDes = bookingItem.routeNo
+      setBooking({ ...booking, productNoDes, routeNoDes})
+    }
+
+  }
+
   return (
     <div className="container mt-5 py-3">
-      <h1 style={{ textAlign: 'center' }}>항공권 조회</h1>
-      <br />
-      <div className="img_container text-center">
-        <img src="/img/searchTicket.png" alt="조회" />
-      </div>
-      <br />
-      <section>
-        <h2 style={{ textAlign: 'center' }}>
-          {bookingInfo.roundTrip === '편도' || bookingInfo.roundTrip === '왕복 가는편' ? '가는편' : '오는편'}
-        </h2>
-        <br />
-        <h2 style={{ textAlign: 'center' }}>
-          <i className="fa fa-solid fa-plane-departure" style={{ color: 'skyblue' }}></i>{' '}
-          <span>{bookingInfo.departure} → </span>
-          <i className="fa fa-solid fa-plane-arrival" style={{ color: 'skyblue' }}></i>{' '}
-          <span>{bookingInfo.destination}</span>
-        </h2>
-      </section>
+          {(bookingInfo.roundTrip === '편도' || bookingInfo.roundTrip === '왕복 가는편') && 
+            <section>
+              <h2 style={{ textAlign: 'center' }}>
+                가는편
+              </h2>
+              <br />
+              <h2 style={{ textAlign: 'center' }}>
+                <i className="fa fa-solid fa-plane-departure" style={{ color: 'skyblue' }}></i>{' '}
+                <span>{bookingInfo.departure} → </span>
+                <i className="fa fa-solid fa-plane-arrival" style={{ color: 'skyblue' }}></i>{' '}
+                <span>{bookingInfo.destination}</span>
+              </h2>
+            </section>
+          }
 
-      <form action="/booking/info" id="fm" method="get">
+          {bookingInfo.roundTrip === '왕복' && 
+            <section>
+              <h2 style={{ textAlign: 'center' }}>
+                오는편
+              </h2>
+              <br />
+              <h2 style={{ textAlign: 'center' }}>
+                <i className="fa fa-solid fa-plane-departure" style={{ color: 'skyblue' }}></i>{' '}
+                <span>{bookingInfo.destination} → </span>
+                <i className="fa fa-solid fa-plane-arrival" style={{ color: 'skyblue' }}></i>{' '}
+                <span>{bookingInfo.departure}</span>
+              </h2>
+            </section>
+          }
+        
+
+      <form id="fm">
         <table className="table table-striped table-hover table-bordered text-center align-middle mt-5">
           <thead>
             <tr className="table-primary">
@@ -45,32 +83,32 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
             )}
 
             {bookingList &&
-              bookingList.map((booking) => (
-                <tr key={booking.flightName}>
+              bookingList.map((bookingItem) => (
+                <tr key={bookingItem.routeNo}>
                   <td>
                     <i className="fa fa-solid fa-plane fa-2x" style={{ color: 'skyblue' }}></i>
                     <br />
-                    <span>{booking.flightName}</span>
+                    <span>{bookingItem.flightName}</span>
                   </td>
                   <td>
-                    <span>{booking.departureTime}</span>{' '}
+                    <span>{bookingItem.departureTime}</span>{' '}
                     <div style={{ display: 'inline-block' }}>
-                      <span>{booking.duration}</span> <br /> <img src="/img/화살표.webp" alt="화살표" />
+                      <span>{bookingItem.duration}</span> <br /> <img src="/img/arrow.webp" alt="화살표" />
                     </div>{' '}
-                    <span>{booking.destinationTime}</span>
+                    <span>{bookingItem.destinationTime}</span>
                   </td>
                   <td>
                     <img src="/img/logo.png" alt="" width="25" />
                     DreamAir
                   </td>
                   <td>
-                    <span>{booking.flightName}</span>
+                    <span>{bookingItem.flightName}</span>
                   </td>
                   <td>
-                    <span>{booking.productPrice}</span>
+                    <span>{bookingItem.productPrice}</span>
                   </td>
                   <td>
-                    <span>{booking.seatRemaining}</span>
+                    <span>{bookingItem.seatRemaining}</span>
                   </td>
                   <td>
                     <a href="" className="btn btn-outline-primary btn-lg">
@@ -80,27 +118,25 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
                   <td>
                     {bookingInfo.roundTrip === '편도' && (
                       <>
-                        <input type="hidden" name="productNoDep" value={booking.productNo} />
-                        <input type="hidden" name="routeNoDep" value={booking.routeNo} />
-                        <input type="submit" value="예매하기" className="btn btn-outline-primary btn-lg" />
+                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                          예매하기
+                        </Link>
                       </>
                     )}
 
                     {bookingInfo.roundTrip === '왕복 가는편' && (
                       <>
-                        <input type="hidden" name="productNoDep" value={booking.productNo} />
-                        <input type="hidden" name="routeNoDep" value={booking.routeNo} />
-                        <a href="javascript:;" className="btn btn-outline-primary btn-lg btn-select">
+                        <Link to="/booking/bookingList" onClick={() => handleLinkClick(bookingItem)} className="btn btn-outline-primary btn-lg btn-select" >
                           선택하기
-                        </a>
+                        </Link>
                       </>
                     )}
 
                     {bookingInfo.roundTrip === '왕복' && (
                       <>
-                        <input type="hidden" name="productNoDes" value={booking.productNo} />
-                        <input type="hidden" name="routeNoDes" value={booking.routeNo} />
-                        <input type="submit" value="예매하기" className="btn btn-outline-primary btn-lg" />
+                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                          예매하기
+                        </Link>
                       </>
                     )}
                   </td>

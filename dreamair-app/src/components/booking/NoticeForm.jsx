@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
+import SelectedFlight from './SelectedFlight';
 
-const NoticeForm = ( {} ) => {
+const NoticeForm = ( { goBookingList, comeBookingList } ) => {
   return (
     <Container className="mt-5 py-3">
       <h1 style={{ textAlign: 'center' }}>탑승객 유의사항 안내</h1>
@@ -18,79 +19,10 @@ const NoticeForm = ( {} ) => {
         <Form.Control type="hidden" name="goFlightNo" value={bookingInfo.goFlightNo} />
         <Form.Control type="hidden" name="comeFlightNo" value={bookingInfo.comeFlightNo} /> */}
 
-        <section>
-          <h2>가는편</h2>
-          <Table striped bordered hover className="text-center align-middle">
-
-            <thead>
-              <tr>
-                <th>여정</th>
-                <th>항공편</th>
-                <th>출발일시</th>
-                <th>도착일시</th>
-                <th>좌석구분</th>
-                <th>요금</th>
-                <th>요청좌석</th>
-                <th>이름</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {/* 반복되는 부분도 map 함수를 사용하여 변환 */}
-              {/* {goBookingList.map((booking) => (
-                <tr key={booking.id}>
-                  <td>{`${booking.departure} → ${booking.destination}`}</td>
-                  <td>{booking.flightName}</td>
-                  <td>{booking.departureDate}</td>
-                  <td>{booking.destinationDate}</td>
-                  <td>일반석</td>
-                  <td>{booking.productPrice}</td>
-                  <td>{booking.seatNoDep}</td>
-                  <td>{booking.passengerName}</td>
-                  <Form.Control type="hidden" name="passengerNames" value={bookingInfo.passengerName} />
-                  <Form.Control type="hidden" name="passengerNos" value={bookingInfo.passengerNo} />
-                  <Form.Control type="hidden" name="phones" value={bookingInfo.phone} />
-                  <Form.Control type="hidden" name="seatNoDepss" value={bookingInfo.seatNoDep} />
-                </tr>
-              ))} */}
-            </tbody>
-          </Table>
-        </section>
-
-        <section>
-          <h2>오는편</h2>
-          <Table striped bordered hover className="text-center align-middle">
-            <thead>
-              <tr>
-                <th>여정</th>
-                <th>항공편</th>
-                <th>출발일시</th>
-                <th>도착일시</th>
-                <th>좌석구분</th>
-                <th>요금</th>
-                <th>요청좌석</th>
-                <th>이름</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {/* 반복되는 부분도 map 함수를 사용하여 변환 */}
-              {/* {comeBookingList.map((booking) => (
-                <tr key={booking.id}>
-                  <td>{`${booking.departure} → ${booking.destination}`}</td>
-                  <td>{booking.flightName}</td>
-                  <td>{booking.departureDate}</td>
-                  <td>{booking.destinationDate}</td>
-                  <td>일반석</td>
-                  <td>{booking.productPrice}</td>
-                  <td>{booking.seatNoDes}</td>
-                  <td>{booking.passengerName}</td>
-                  <Form.Control type="hidden" name="seatNoDesss" value={bookingInfo.seatNoDes} />
-                </tr>
-              ))} */}
-            </tbody>
-          </Table>
-        </section>
+        <SelectedFlight
+                        goBookingList={goBookingList}
+                        comeBookingList={comeBookingList}
+        />
 
         {/* 취소/환불 안내사항 */}
         <div className="notice_container mt-5" style={{ border: '1px solid rgb(247, 244, 244)' }}>

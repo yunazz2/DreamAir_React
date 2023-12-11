@@ -8,7 +8,7 @@ const LatestBoard = ({ mainList }) => {
         <h1 className="mt-5 ms-5">최근 게시글</h1>
 
         <Row className="board_container">
-          {/* {mainList.map((board) => (
+          {mainList.map((board) => (
             <Col key={board.boardNo} md={4}>
               <Card className="px-1">
                 <div className="img_container" style={{ height: '250px', overflow: 'hidden' }}>
@@ -37,7 +37,7 @@ const LatestBoard = ({ mainList }) => {
                 </Card.Body>
               </Card>
             </Col>
-          ))} */}
+          ))}
         </Row>
       </Container>
     </section>

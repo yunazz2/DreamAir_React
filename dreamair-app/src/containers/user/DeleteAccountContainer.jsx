@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import * as users from '../../apis/user'
+import * as userjs from '../../apis/user'
 import DeleteAccount from '../../components/user/DeleteAccount'
 
 // ⛄ 회원 탈퇴
@@ -11,7 +11,7 @@ const DeleteAccountContainer = () => {
   const navigate = useNavigate()
 
   const onDelete = async (userId) => {
-    const response = await users.deleteAccount(userId);
+    const response = await userjs.deleteAccount(userId);
     console.log(response.data);
 
     alert('회원 탈퇴 완료')

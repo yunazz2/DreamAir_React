@@ -1,23 +1,47 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import BookingListForm from '../../components/booking/BookingListForm';
+import * as bookingAPI from '../../apis/booking'
+import { BookingContext } from '../../contexts/BookingContextProvider';
 
 const BookingListContainer = () => {
-  
-  const [roundTrip, setRoundTrip] = useState('');
-  const [departure, setDeparture] = useState('');
-  const [destination, setDestination] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
-  const [pasCount, setPasCount] = useState(1);
 
-  const booking = {
+  const {booking, setBooking} = useContext(BookingContext);
+  const [bookingList, setBookingList] = useState([]);
+
+  const roundTrip = booking.roundTrip;
+  const departure = booking.departure;
+  const destination = booking.destination;
+  const departureDate = booking.departureDate;
+  const pasCount = booking.pasCount
+  
+
+  const bookingInfo = {
     roundTrip : roundTrip,
     departure : departure,
     destination : destination,
-    departureDate : departureDate,
-    pasCount : pasCount
+    departureDate : departureDate, 
+    pasCount : pasCount    
   }
   
+  const getBookingList = async () => {
+    if (roundTrip === ('왕복 가는편' || '편도') ) {
+      const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
+      const data = await response.data
+      console.log("항공권 : " + data);
+      setBookingList(data);
+    } else {
+      const response = await bookingAPI.comeList(roundTrip, departure, destination, departureDate, pasCount );    
+      const data = await response.data
+      console.log("항공권 : " + data);
+      setBookingList(data);
+    }
+  };
+
+  useEffect(() => {
+    getBookingList()
+  },[])
+
   return (
     <Container className="mt-5 py-3">
       <h1 className="text-center">항공권 조회</h1>
@@ -26,22 +50,10 @@ const BookingListContainer = () => {
         <Image src="/img/searchTicket.png" alt="조회" />
       </div>
       <br />
-      {/* 출발지 - 목적지를 보여주는 섹션 */}
-      <section>
-        <div id="flight_box">{/* 출발지 - 목적지를 보여주는 박스 */}</div>
-      </section>
-
-      {/* 이전날짜 다음날짜 목록을 보여줘서 해당날짜 항공권 목록을 보여주는 섹션(옵션) */}
-      <section></section>
 
       {/* 항공권 목록을 보여주는 섹션 */}
-      <section id="goWay">
-        {/* <BookingListForm /> */}
-      </section>
-
-      {/* 오는편 */}
-      <section id="comeWay">
-        {/* <BookingListForm /> */}
+      <section>
+        <BookingListForm bookingInfo={bookingInfo} bookingList={bookingList} />
       </section>
 
       <div className="d-flex justify-content-between">

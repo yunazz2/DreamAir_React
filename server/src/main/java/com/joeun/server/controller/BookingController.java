@@ -2,7 +2,9 @@ package com.joeun.server.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +28,8 @@ import com.joeun.server.service.ProductService;
 import com.joeun.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @RestController
@@ -39,45 +44,49 @@ public class BookingController {
 
     @Autowired
     private ProductService productService;
-    
-    // 항공권 조회 목록 -> 예매
-    // 출발지 날짜 도착지(ticket), 탑승인원 왕복여부(booking) 를 정보()에 맞는 검색결과를 보여주기
-    @GetMapping(value="/list")
-    public ResponseEntity<?> list(Booking bookingInfo) throws Exception {
 
+    // 가는 편 항공권 목록 조회
+    @GetMapping(value="/goList")
+    public ResponseEntity<?> goList(Booking booking) {
+        log.info("goList : " + booking);
         try {
-            List<Booking> bookingList = bookingService.golist(bookingInfo);   //?
+            List<Booking> bookingList = bookingService.golist(booking);   
+
+            if(bookingList == null) {
+                log.info("조회된 항공권 없음");
+            }
+            else {
+                log.info("조회된 항공권 수 : " + bookingList.size());
+            }
+
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
-        return new ResponseEntity<>( HttpStatus.OK);
-    }
-
-    // 가는 편
-    @GetMapping(value="/component/golist")
-    public String gobookingList(Model model, Booking booking) throws Exception {
-        log.info("편도 여부: " + booking.getRoundTrip());
-        log.info("편도 인원수: " + booking.getPasCount());
         
-        List<Booking> bookingList = bookingService.golist(booking);
-        model.addAttribute("bookingList", bookingList);
-        model.addAttribute("bookingInfo", booking);
-        return "UI/component/booking/list";
     }
-    
-    // 오는 편
-    @GetMapping(value="/component/comelist")
-    public String comebookingList(Model model, Booking booking) throws Exception {
-        log.info("오는편 출발지 : " + booking.getDeparture());
-        log.info("오는편 상품번호(가는편) : " + booking.getProductNoDep());
-        log.info("오는편 노선번호(오는편) : " + booking.getRouteNoDes());
 
-        List<Booking> bookingList = bookingService.comelist(booking);
-        model.addAttribute("bookingList", bookingList);
-        model.addAttribute("bookingInfo", booking);
-        return "UI/component/booking/list";
+    // 오는 편 항공권 목록 조회
+    @GetMapping(value="/comeList")
+    public ResponseEntity<?> comeList(Booking booking) {
+        log.info("comeList : " + booking);
+        try {
+            List<Booking> bookingList = bookingService.comelist(booking);   
+
+            if(bookingList == null) {
+                log.info("조회된 항공권 없음");
+            }
+            else {
+                log.info("조회된 항공권 수 : " + bookingList.size());
+            }
+
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
     
     // 탑승객 정보 입력
@@ -111,18 +120,17 @@ public class BookingController {
     
         return "redirect:/booking/seat";
     }
-    
-        
-    // 좌석 선택
-    @GetMapping(value="/seat")
-    public String seat(Model model, @ModelAttribute("booking") Booking booking) throws Exception {
 
+    // 가는 편 좌석 선택
+    @GetMapping("/seat")
+    public ResponseEntity<?> seat(Booking booking) throws Exception {
+        
         int productNoDepValue = booking.getProductNoDeps()[0];
         int productNoDesValue = booking.getProductNoDeps()[0];
 
         String departure = bookingService.selectDeparture(productNoDepValue);
         String destination = bookingService.selectDestination(productNoDesValue);
-        
+
         // 출발지명과 도착지명으로 노선 조회해서 항공기 번호 부여
         int routeNoToFlightNo = bookingService.selectRouteNo(departure, destination);
         booking.setFlightNo(routeNoToFlightNo);
@@ -138,25 +146,23 @@ public class BookingController {
         booking.setPassengerNoss(selectLastPasNoss);
         
         log.info("가는 편 페이지 부킹 객체 : " + booking);
-        
-        // 모델에 등록
-        model.addAttribute("booking", booking);
-        model.addAttribute("seatStatus", seatStatus);
 
-        return "booking/seat";
+        // seatStatus와 selectLastPasNos를 Map으로 묶어서 반환
+        Map<String, Object> bookingObject = new HashMap<>();
+        bookingObject.put("seatStatus", seatStatus);
+        bookingObject.put("selectLastPasNos", selectLastPasNoss);
+
+        return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
-
 
     // 예약된 좌석 데이터 가져오기
-    @ResponseBody       // 데이터만 응답
-    @GetMapping(value="/booked")
-    public List<Booking> bookedSeatList(int flightNo) throws Exception {
-        log.info("filghtNo : " + flightNo);
-        List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
-        return bookedSeatList;
-    }
-    
+    @GetMapping("/seatStatus/{flightNo}")
+    public ResponseEntity<?> bookedSeatList(@PathVariable Integer flightNo) throws Exception {
 
+        List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
+        
+        return new ResponseEntity<>(bookedSeatList, HttpStatus.OK);
+    }
 
     // 왕복 여부에 따라 페이지 처리
     @PostMapping(value = "/seat")
@@ -200,64 +206,84 @@ public class BookingController {
 
     // 탑승객 유의사항
     @GetMapping(value="/notice")
-    public String notice(Model model, Booking booking) throws Exception {
-            log.info("탑승객 이름 배열 : " + booking.getPassengerNames()[0]);
+    public ResponseEntity<?> notice(Booking booking) {
             log.info("탑승객 수 : " + booking.getPasCount());
             log.info("왕복 : " + booking.getRoundTrip());
-            log.info("노티스 좌석 : " + booking);
-
             log.info("noticeGET 페이지 부킹 객체 : " + booking);
 
-            List<Booking> goBookingList = new ArrayList<Booking>();
-            List<Booking> comeBookingList = new ArrayList<Booking>();
-            
-            if (booking.getRoundTrip().equals("편도")) {
-                // 편도 조회
-                goBookingList = bookingService.goScheduleList(booking);
-            } else {
-                // 왕복 조회
-                goBookingList = bookingService.goScheduleList(booking);
-                comeBookingList = bookingService.comeScheduleList(booking);
+            try {
+                List<Booking> goBookingList = new ArrayList<Booking>();
+                List<Booking> comeBookingList = new ArrayList<Booking>();
+                
+                if (booking.getRoundTrip().equals("편도")) {
+                    // 편도 조회
+                    goBookingList = bookingService.goScheduleList(booking);
+
+                    return new ResponseEntity<>(goBookingList, HttpStatus.OK);
+                } else {
+                    // 왕복 조회
+                    goBookingList = bookingService.goScheduleList(booking);
+                    comeBookingList = bookingService.comeScheduleList(booking);
+                    
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("goBookingList", goBookingList);
+                    response.put("comeBookingList", comeBookingList);
+                    
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                }
+                
+            } catch (Exception e) {
+                log.error(null, e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            model.addAttribute("goBookingList", goBookingList);
-            model.addAttribute("comeBookingList", comeBookingList);
-            model.addAttribute("bookingInfo", booking);
-    
-            return "booking/notice";
+
     }
 
 
     // 결제
     @GetMapping(value="/payment")
-    public String payment(Model model, Booking booking, Principal principal, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> payment(Booking booking, Principal principal, HttpServletRequest request) {
         log.info("페이먼트 booking : " + booking);
 
-        List<Booking> goBookingList = new ArrayList<Booking>();
-        List<Booking> comeBookingList = new ArrayList<Booking>();
+        try {
+            List<Booking> goBookingList = new ArrayList<Booking>();
+            List<Booking> comeBookingList = new ArrayList<Booking>();
+            
+            // 회원 : userNo 추출, 비회원 : userNo2 추출
+            // Users user = userService.selectById2(principal, request);
+            // if ( principal == null ) {
+            //     log.info("비회원 유저번호 : " + user.getUserNo2());
+            // } else {
+            //     log.info("회원 유저번호 : " + user.getUserNo());
+            // }
+
+            if (booking.getRoundTrip().equals("편도")) {
+                // 편도 조회
+                goBookingList = bookingService.goScheduleList(booking);
+
+                return new ResponseEntity<>(goBookingList, HttpStatus.OK);
+            } else {
+                // 왕복 조회
+                goBookingList = bookingService.goScheduleList(booking);
+                comeBookingList = bookingService.comeScheduleList(booking);
+
+                Map<String, Object> response = new HashMap<>();
+                response.put("goBookingList", goBookingList);
+                response.put("comeBookingList", comeBookingList);
+                
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         
-        if (booking.getRoundTrip().equals("편도")) {
-            // 편도 조회
-            goBookingList = bookingService.goScheduleList(booking);
-        } else {
-            // 왕복 조회
-            goBookingList = bookingService.goScheduleList(booking);
-            comeBookingList = bookingService.comeScheduleList(booking);
-        }
-        model.addAttribute("goBookingList", goBookingList);
-        model.addAttribute("comeBookingList", comeBookingList);
-        model.addAttribute("bookingInfo", booking);
+        // model.addAttribute("goBookingList", goBookingList);
+        // model.addAttribute("comeBookingList", comeBookingList);
+        // model.addAttribute("bookingInfo", booking);
+        // model.addAttribute("user", user);
 
-        // 회원 : userNo 추출, 비회원 : userNo2 추출
-        Users user = userService.selectById2(principal, request);
-        if ( principal == null ) {
-            log.info("비회원 유저번호 : " + user.getUserNo2());
-        } else {
-            log.info("회원 유저번호 : " + user.getUserNo());
-        }
-         
-        model.addAttribute("user", user);
-
-        return "booking/payment";
     }
     
 

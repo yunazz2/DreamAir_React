@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Index from './pages/Index';
+
+import IndexContainer from './containers/IndexContainer';
 
 import BoardInsertContainer from './containers/board/BoardInsertContainer';
 import BoardListContainer from './containers/board/BoardListContainer';
@@ -20,7 +21,12 @@ import UserUpdateContainer from './containers/user/UserUpdateContainer';
 
 import BookingInfoContainer from './containers/booking/BookingInfoContainer';
 import BookingListContainer from './containers/booking/BookingListContainer';
-import Notice from './containers/booking/Notice';
+import NoticeContainer from './containers/booking/NoticeContainer';
+import PaymentCompelteContainer from './containers/booking/PaymentCompelteContainer';
+import PaymentContainer from './containers/booking/PaymentContainer';
+import SeatContainer from './containers/booking/SeatContainer';
+import SeatRtContainer from './containers/booking/SeatRtContainer';
+import TicketInfoContainer from './containers/booking/TicketInfoContainer';
 
 import AdminBookingListContainer from './containers/admin/AdminBookingListContainer';
 import AdminInsertContainer from './containers/admin/AdminInsertContainer';
@@ -42,9 +48,13 @@ import FinalCheckCompleteContainer from './containers/admin/FinalCheckCompleteCo
 import CommentInsertContainer from './containers/board/CommentInsertContainer';
 import CommentListContainer from './containers/board/CommentListContainer';
 import CommentUpdateContainer from './containers/board/CommentUpdateContainer';
-import IndexContainer from './containers/bus/IndexContainer';
 import ReservationContainer from './containers/bus/ReservationContainer';
 import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
+import BookingContextProvider from './contexts/BookingContextProvider';
+
+import NotFound from './pages/error/NotFound';
+import ServerError from './pages/error/ServerError';
+import Test from './pages/error/Test';
 
 
 function App() {
@@ -52,7 +62,6 @@ function App() {
     <BrowserRouter>
       {/* index */}
       <Routes>
-        <Route path="/" element={<Index/>}/>
         <Route path="/join" element={<JoinContainer/>}/>
         <Route path="/login" element={<LoginContainer/>}/>
       </Routes>
@@ -66,6 +75,7 @@ function App() {
         <Route path="/user/deleteaccount/:userId" element={<DeleteAccountContainer/>}/>
         <Route path="/user/mybooking/:userId" element={<MyBookingContainer/>}/>
         <Route path="/user/logout" element={<LogoutContainer/>}/>
+        <Route path="/user/booking/ticketInfo/:ticketNo" element={<TicketInfoContainer/>}/>
         <Route path="/user/productFlightList" element={<ProductFlightListContainer/>}/>
 
       </Routes>
@@ -86,11 +96,18 @@ function App() {
       </Routes>
 
       {/* booking */}
-      <Routes>
-        <Route path='booking/bookingList' element={<BookingListContainer />} />
-        <Route path='booking/info' element={<BookingInfoContainer />} />
-        <Route path='booking/notice' element={<Notice />} />
-      </Routes>
+      <BookingContextProvider>
+        <Routes>
+          <Route path="/" element={<IndexContainer/>}/>
+          <Route path='booking/bookingList' element={<BookingListContainer />} />
+          <Route path='booking/info' element={<BookingInfoContainer />} />
+          <Route path='booking/seat' element={<SeatContainer />} />
+          <Route path='booking/seatRt' element={<SeatRtContainer />} />
+          <Route path='booking/notice' element={<NoticeContainer />} />
+          <Route path='booking/payment' element={<PaymentContainer />} />
+          <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />
+        </Routes>
+      </BookingContextProvider>
 
 
       {/* ADMIN */}
@@ -128,6 +145,16 @@ function App() {
       <Routes>
         <Route path="/qr" element={<QRListContainer/>}/>
       </Routes>
+
+
+      {/* Error */}
+      <Routes>
+        <Route path="/error/404" element={ <NotFound /> } />     {/* TODO : 404 페이지 꾸미기 */}
+        <Route path="/error/500" element={ <ServerError /> } />  {/* TODO : 500 페이지 꾸미기 */}
+        <Route path="/error/test" element={ <Test /> } />        {/* TODO : 500 페이지 꾸미기 */}
+        <Route path="/*" element={ <NotFound /> } />             {/* Info : 맨 마지막에 있어야합니다. */}
+      </Routes>
+
     </BrowserRouter>
 
   );

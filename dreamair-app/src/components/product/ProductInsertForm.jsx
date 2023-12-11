@@ -15,15 +15,52 @@ const ProductInsertForm = ({ onInsert }) => {
     const [destination, setDestination] = useState([])
     const [description, setDescription] = useState([])
     const [unitsInStock, setUnitsInStock] = useState([])
-    const [files, setFiles] = useState(null)
+    const [files, setFiles] = useState(null)  // ✅ files state 추가
 
+    const handleChangeProductId = (e) => {
+      setProductId(e.target.value)
+    }
+  
+    const handleChangeRouteNo = (e) => {
+      setRouteNo(e.target.value)
+   }
+  
+   const handleChangeName = (e) => {
+      setName(e.target.value)
+  }
+  
+    const handleChangeProductCat = (e) => {
+      setProductCat(e.target.value)
+    }
+  
+    const handleChangeProductPrice = (e) => {
+      setProductPrice(e.target.value)
+    }
+  
+    const handleChangeDeparture = (e) => {
+      setDeparture(e.target.value)
+    }
+  
+    const handleChangeDestination = (e) => {
+      setDestination(e.target.value)
+    }
+  
+    const handleChangeDescription = (e) => {
+      setDescription(e.target.value)
+    }
+  
+    const handleChangeUnitsInStock = (e) => {
+      setUnitsInStock(e.target.value)
+    }
+
+    // ✅ 파일 핸들러 추가
     const handleFileChange = (e) => {
         setFiles(e.target.files);
     };
 
     const onSubmit = () => {
+        // onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
         const formData = new FormData();
-    //    onInsert(productId, routeNo, name, productCat, productPrice, departure, destination, description, unitsInStock)
         formData.append('productId', productId);
         formData.append('routeNo', routeNo);
         formData.append('name', name);
@@ -85,47 +122,12 @@ const ProductInsertForm = ({ onInsert }) => {
             return customUploadAdapter(loader);
         };
     }
-  const handleChangeProductId = (e) => {
-    setProductId(e.target.value)
-  }
-
-  const handleChangeRouteNo = (e) => {
-    setRouteNo(e.target.value)
- }
-
- const handleChangeName = (e) => {
-    setName(e.target.value)
-}
-
-  const handleChangeProductCat = (e) => {
-    setProductCat(e.target.value)
-  }
-
-  const handleChangeProductPrice = (e) => {
-    setProductPrice(e.target.value)
-  }
-
-  const handleChangeDeparture = (e) => {
-    setDeparture(e.target.value)
-  }
-
-  const handleChangeDestination = (e) => {
-    setDestination(e.target.value)
-  }
-
-  const handleChangeDescription = (e) => {
-    setDescription(e.target.value)
-  }
-
-  const handleChangeUnitsInStock = (e) => {
-    setUnitsInStock(e.target.value)
-  }
+  
   
   return (
     
     <div className="container">
       <h1 className="text-center my-3">상품(항공권) 정보 등록</h1>
-          <form>
           <div className="input-group mb-3 row">
             <label className="input-group-text col-md-2" id="">상품코드</label>
             <input type="text" className="form-control col-md-10" name="productId" value={productId} onChange={handleChangeProductId}/>
@@ -150,33 +152,46 @@ const ProductInsertForm = ({ onInsert }) => {
             <label className="input-group-text w-100" id="">상세 정보</label>
             {/* <textarea className="form-control" name="description" style={{ height: '200px' }} value={description} onChange={handleChangeDescription}/> */}
             <CKEditor
-                                editor={ ClassicEditor }
-                                config={{
-                                    placeholder: "내용을 입력하세요.",
-                                    editorConfig: {
-                                        height: 500, // Set the desired height in pixels
-                                    },
-                                    alignment: {
-                                        options: ['left', 'center', 'right', 'justify'],
-                                    },
-
-                                    extraPlugins: [uploadPlugin]            // 업로드 플러그인
-                                }}
-                                data=""
-                                onReady={ editor => {
-                                    console.log( 'Editor is ready to use!', editor );
-                                } }
-                                onChange={ ( event, editor ) => {
-                                    const data = editor.getData();
-                                    console.log( { event, editor, data } );
-                                } }
-                                onBlur={ ( event, editor ) => {
-                                    console.log( 'Blur.', editor );
-                                } }
-                                onFocus={ ( event, editor ) => {
-                                    console.log( 'Focus.', editor );
-                                } }
-                            />
+          editor={ ClassicEditor }
+          config={{
+              placeholder: "내용을 입력하세요.",
+              toolbar: {
+                  items: [
+                      'undo', 'redo',
+                      '|', 'heading',
+                      '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                      '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                      '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent',
+                      '|', 'link', 'uploadImage', 'blockQuote', 'codeBlock',
+                      '|', 'mediaEmbed',
+                  ],
+                  shouldNotGroupWhenFull: false
+              },
+              editorConfig: {
+                  height: 500,
+              },
+              alignment: {
+                  options: ['left', 'center', 'right', 'justify'],
+              },
+              
+              extraPlugins: [uploadPlugin]            // 업로드 플러그인
+          }}
+          data=""
+          onReady={ editor => {
+              console.log( 'Editor is ready to use!', editor );
+          } }
+          onChange={ ( event, editor ) => {
+              const data = editor.getData();
+              console.log( { event, editor, data } );
+              setDescription(data);
+          } }
+          onBlur={ ( event, editor ) => {
+              console.log( 'Blur.', editor );
+          } }
+          onFocus={ ( event, editor ) => {
+              console.log( 'Focus.', editor );
+          } }
+          />
           </div>
 
           <div className="input-group mb-3 row">
@@ -207,17 +222,18 @@ const ProductInsertForm = ({ onInsert }) => {
               <input type="hidden" name="temp-category" id="temp-category" value={productCat} onChange={handleChangeProductCat}/>
               <div className="radio-box d-flex">
                 <div className="radio-item mx-5">
-                  <input type="radio" className="form-check-input" name="productCat" value="ticket" id="category-ticket"/>
+                  {/* <input type="radio" className="form-check-input" name="productCat" value="ticket" onChange={(ticket) => handleChangeProductCat(ticket.target.value)} id="category-ticket"/> */}
+                  <input type="radio" className="form-check-input" name="productCat" value="ticket" onChange={handleChangeProductCat} id="category-ticket"/>
                   <label htmlFor="category-ticket">항공권</label>
                 </div>
 
                 <div className="radio-item mx-5">
-                  <input type="radio" className="form-check-input" name="productCat" value="travle" id="category-travle"/>
+                  <input type="radio" className="form-check-input" name="productCat" value="travle" onChange={handleChangeProductCat} id="category-travle"/>
                   <label htmlFor="category-old">여행상품</label>
                 </div>
 
                 <div className="radio-item mx-5">
-                  <input type="radio" className="form-check-input" name="productCat" value="goods" id="category-goods"/>
+                  <input type="radio" className="form-check-input" name="productCat" value="goods" onChange={handleChangeProductCat} id="category-goods"/>
                   <label htmlFor="category-re">여행 필수품</label>
                 </div>
               </div>
@@ -230,7 +246,6 @@ const ProductInsertForm = ({ onInsert }) => {
             <button className='btn btn-danger'><Link to="/product">취소</Link></button>
             <button className='btn btn-primary' onClick={ onSubmit }>등록</button>
           </div>
-          </form>
       </div>
   );
 };

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             )
             VALUES(
                 #{parentTable}, #{parentNo}, #{writer}, #{content},
-                #{groupNo}, #{superNo}, #{depthNo}, #{seqNo}, #{subCount}, #{parentNo}, #{boardNo}
+                #{groupNo}, #{superNo}, #{depthNo}, #{seqNo}, #{subCount}, #{boardNo}
             )
         </insert>
         
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             FROM comment
             WHERE parent_no = #{boardNo}
         </select>
-		<!-- 
+		
         <update id="update">
             UPDATE comment SET 
                 parent_table = #{parentTable},
@@ -38,13 +38,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 sub_count = #{subCount}
             WHERE comment_no = #{commentNo}
         </update>
-		 -->
+		
 		 
-         <update id="update">
+         <!-- <update id="update">
             UPDATE comment SET 
                 content = #{content}
             WHERE comment_no = #{commentNo}
-        </update>
+        </update> -->
         
         <delete id="delete">
             DELETE FROM comment WHERE comment_no = #{commentNo}
@@ -58,6 +58,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             SELECT * FROM comment
         </select>
 
+        <select id="select" resultType="Comment">
+            SELECT * FROM comment WHERE comment_no  = #{commentNo}
+        </select>
 
 
 

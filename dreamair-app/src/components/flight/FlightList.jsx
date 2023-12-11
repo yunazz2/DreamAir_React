@@ -32,7 +32,7 @@ const FlightList = ( { flightList, onDelete }) => {
             {flightList.map((flight) => (
               <tr key={flight.flightNo}>
                 <td align='center'>{flight.flightNo}</td>
-                <td align='center' style={{width: '100px', height: '100px'}} >{flight.thumbnail && (<img src={`/file/img/${flight.thumbnail.fileNo}`} alt="게시글 이미지" className="card-img-top w-70 p-4" />)}</td>
+                <td align='center' style={{width: '300px', height: '300px'}} >{flight.thumbnail && (<img src={`/file/img/${flight.thumbnail.fileNo}`} alt="게시글 이미지" className="card-img-top w-70 p-4" />)}</td>
                 <td align='center'>{flight.flightName}</td>
                 <td align='center'>{flight.routeNo}</td>
                 <td align='center'>{flight.departure}</td>

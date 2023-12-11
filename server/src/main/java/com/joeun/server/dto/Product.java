@@ -50,12 +50,15 @@ public class Product {
     private String departureDate;     
     private String destinationDate;
 
-    private List<Files> files;
+    // private List<Files> files;
     private Files thumbnail;
     private String fileName;
     private String fileType;
     
     // 파일 등록
-    private List<MultipartFile> file;
+    private List<MultipartFile> files;
+    
+    // ❌ 삭제할 파일 번호 목록
+    private List<Integer> deleteFileNoList;
 
 }

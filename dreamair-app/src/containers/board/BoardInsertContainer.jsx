@@ -1,5 +1,5 @@
 import React from 'react'
-import { isRouteErrorResponse, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import * as boards from '../../apis/board'
 import BoardInsertForm from '../../components/board/BoardInsertForm'
 import Header from '../../components/fragment/Header'

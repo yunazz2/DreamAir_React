@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 // board 넘버에 대한 댓글
-// export const commentList = (boardNo) => axios.get(`/comment/${boardNo}`)
-export const commentList = () => axios.get(`/comment/`)
+export const commentList = (boardNo) => axios.get(`/comment/${boardNo}`)
+// export const commentList = () => axios.get(`/comment/`)
 
 // 댓글 조회
-export const commentSelect = (commentNo) => axios.get(`/comment/${commentNo}`)
+export const commentSelect = (commentNo) => axios.get("/comment/", {commentNo})
 
 // 댓글 등록
-export const commentInsert = (boardNo, writer, content) => axios.post('/comment', {boardNo, writer, content})
+export const commentInsert = (boardNo, writer, content) => axios.post(`/comment/${boardNo}`, {writer, content})
 
 // 댓글 수정
-export const commentUpdate = (commentNo, content) => axios.put('/comment', {commentNo, content})
+export const commentUpdate = (boardNo, commentNo, content) => axios.put(`/comment/${boardNo}/${commentNo}`, {content})
 
 // 댓글 삭제
-export const commentDelete = (commentNo) => axios.delete(`/comment/${commentNo}`)
+export const commentDelete = (boardNo, commentNo) => axios.delete(`/comment/${boardNo}/${commentNo}`)

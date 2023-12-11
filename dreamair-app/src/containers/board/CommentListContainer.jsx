@@ -3,12 +3,17 @@ import * as comments from '../../apis/comment'
 import CommentList from '../../components/board/CommentList'
 import { useNavigate } from 'react-router-dom'
 
-const CommentListContainer = () => {
+const CommentListContainer = ({boardNo}) => {
 
   const navigate = useNavigate();
   
-  const {boardNo} = useState('')
+  const {commentNo} = useState({})
   const [commentList, setCommentList] = useState([])
+  const [isEdit, setEdit] = useState(false)     // 댓글수정 모드 여부
+
+  const onUpateMode = () => {
+    setEdit(!isEdit)
+  }
 
   const getCommentList = async (boardNo) => {
     const response = await comments.commentList(boardNo);
@@ -19,27 +24,33 @@ const CommentListContainer = () => {
 
   useEffect(() => {
     getCommentList(boardNo);
-}, [boardNo])
+ }, [])
 
 const onUpdate = async(boardNo, commentNo, content) => {
+  alert('commentNo : ' + commentNo);
   try {
       const response = await comments.commentUpdate(boardNo, commentNo, content);
       console.log(response.data);
       alert('수정 완료');
 
-      navigate(`/board/${boardNo}`)
+      getCommentList(boardNo);
+      onUpateMode()
+      // navigate(`/board/${boardNo}`)
   }
   catch(e) {
       console.log(e);
   }
 }
 
-const onDelete = async (commentNo) => {
+const onDelete = async (boardNo, commentNo) => {
+  alert('commentNo : ' + commentNo);
   try {
-    const response = await comments.commentDelete(commentNo);
+    const response = await comments.commentDelete(boardNo, commentNo);
     console.log(response.data);
     alert('삭제 완료');
-    getCommentList();
+    
+    // getCommentList();
+    getCommentList(boardNo)
   } catch (error) {
     console.error('Error deleting comment:', error);
   }
@@ -47,7 +58,7 @@ const onDelete = async (commentNo) => {
 
   return (
     <>
-    <CommentList boardNo={boardNo} commentList={commentList} onDelete={onDelete} onUpdate={onUpdate}/>
+    <CommentList boardNo={boardNo} commentNo={commentNo} commentList={commentList} onDelete={onDelete} onUpdate={onUpdate} isEdit={isEdit} onUpateMode={onUpateMode}/>
     </>
   )
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const CommentInsertForm = ({boardNo, onInsert}) => {
 
-    // const [comment, setComment] = useState([])
     const [writer, setWriter] = useState([])
     const [content, setContent] = useState([])
 
@@ -34,7 +33,7 @@ const CommentInsertForm = ({boardNo, onInsert}) => {
                 </div>
             </div>
             <div className="btn-box">
-                <button id="btn-comment-insert" className="btn btn-basic btn-primary" onClick={ () => onSubmit(boardNo, writer, content) }>등록</button>
+                <button id="btn-comment-insert" className="btn btn-basic btn-primary" onClick={ () => onSubmit(boardNo, writer, content)}>등록</button>
             </div>
         </div>
         );

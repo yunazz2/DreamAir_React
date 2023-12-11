@@ -71,12 +71,12 @@ public class CommentController {
     }
     
     // 댓글 등록
-    @PostMapping()
-    public ResponseEntity<?> create(@RequestBody Comment comment, int boardNo) {
+    @PostMapping("/{boardNo}")
+    public ResponseEntity<?> create(@RequestBody Comment comment, @PathVariable Integer boardNo) {
         log.info("[POST] - /comment - 댓글 등록");
         try {
-            // comment.setParentTable("board");
-            // comment.setBoard_no(boardNo);
+            comment.setParentTable("board");
+            comment.setBoardNo(boardNo);
 
             int result = commentService.insert(comment);
             boardNo = comment.getParentNo();
@@ -94,16 +94,16 @@ public class CommentController {
     }
     
     // 댓글 수정
-    @PutMapping()
-    public ResponseEntity<?> update(@RequestBody Comment comment) {
+    @PutMapping("/{boardNo}/{commentNo}")
+    public ResponseEntity<?> update(@RequestBody Comment comment, @PathVariable Integer boardNo, @PathVariable Integer commentNo) {
         log.info("[PUT] - /comment - 댓글 수정");
         try {
-            int commentNo = comment.getCommentNo();
+            // comment.setCommentNo(commentNo);
+            String updatedContent = comment.getContent();
             comment = commentService.select(commentNo);
-
+            comment.setContent(updatedContent);
             int result = commentService.update(comment);
-            int boardNo = comment.getParentNo();
-            log.info("boardNo (parent_no) 확인 : " + boardNo);
+            log.info("수정 : " + comment);
 
             if( result > 0 )
                 return new ResponseEntity<>("댓글 수정 완료", HttpStatus.OK); 
@@ -116,18 +116,18 @@ public class CommentController {
     }
     
     // 댓글 삭제
-    @DeleteMapping("/{commentNo}")
-    public ResponseEntity<?> destroy(@PathVariable Integer commentNo) {
+    @DeleteMapping("/{boardNo}/{commentNo}")
+    public ResponseEntity<?> destroy(@PathVariable Integer commentNo, @PathVariable Integer boardNo) {
         log.info("[DELETE] - /comment/" + commentNo + " - 댓글 삭제");
         try {
-            Comment comment = commentService.select(commentNo);
-            int boardNo = comment.getParentNo();
-            log.info("boardNo (parent_no) 확인 : " + boardNo);
+            // Comment comment = commentService.select(commentNo);
+            // int boardNo = comment.getParentNo();
+            // log.info("boardNo (parent_no) 확인 : " + boardNo);
             int result = commentService.delete(commentNo);
             if( result > 0 )
-                return new ResponseEntity<>("게시글 삭제 완료", HttpStatus.OK); 
+                return new ResponseEntity<>("댓글 삭제 완료", HttpStatus.OK); 
             else
-                return new ResponseEntity<>("게시글 삭제 실패", HttpStatus.OK);
+                return new ResponseEntity<>("댓글글 삭제 실패", HttpStatus.OK);
         } catch (Exception e) {
             log.error(null, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

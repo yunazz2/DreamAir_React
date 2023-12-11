@@ -21,7 +21,7 @@ const BoardUpdateContainer = () => {
             alert('수정 완료');
 
             // 👉 게시글 목록 이동
-            navigate('/board')
+            navigate('/board/{boardNo}')
         }
         catch(e) {
             console.log(e);

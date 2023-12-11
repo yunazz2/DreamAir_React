@@ -15,7 +15,7 @@ const FlightListContainer = () => {
 
   const [currentPost, setCurrentPost] = useState([]);
   const [page, setPage] = useState(1);
-  const postPerPage = 5;
+  const postPerPage = 3;
 
   const handlePageChange = (page) => {
     setPage(page);

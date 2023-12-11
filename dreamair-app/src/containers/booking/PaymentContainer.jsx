@@ -1,20 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Payment from '../../components/booking/Payment'
-import * as booking from '../../apis/booking'
+import * as bookingAPI from '../../apis/booking'
+import { BookingContext } from '../../contexts/BookingContextProvider'
 
 const PaymentContainer = () => {
 
-    const [roundTrip, setRoundTrip] = useState('편도') 
-    const [pasCount, setPasCount] = useState(1)
-    const [passengerNames, setPassengerNames] = useState('테스트1');
-    const [phones, setPhones] = useState('010123456');
-    const [seatNoDepss, setseatNoDepss] = useState('A1');
+    const {booking, setBooking} = useContext(BookingContext)
+    console.log(booking.seatNoDepss);
+    console.log(booking.seatNoDesss);
+
+    const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
+    const [pasCount, setPasCount] = useState(booking.pasCount)
+    const [passengerNames, setPassengerNames] = useState(['테스트2']);
+    const [phones, setPhones] = useState(['010123456']);
+    const [seatNoDepss, setSeatNoDepss] = useState(booking.seatNoDepss);
+    const [seatNoDesss, setSeatNoDesss] = useState(booking.seatNoDesss);
     const [goBookingList, setGoBookingList] = useState([]);
     const [comeBookingList, setComeBookingList] = useState([]);
-    const [payment, setPayment] = useState('확인')
+    const [payment, setPayment] = useState(booking.payment)
 
     const getSelectedFlight = async () => {
-        const response = await booking.getPayment(roundTrip, pasCount, passengerNames, phones, seatNoDepss, payment)
+
+        let params = { 
+            'roundTrip' : roundTrip, 
+            'pasCount' : pasCount, 
+            'passengerNames' : passengerNames.join(","), 
+            'phones' : phones.join(","), 
+            'seatNoDepss' : seatNoDepss.join(","), 
+            'seatNoDesss' : seatNoDesss.join(","), 
+            'payment' : payment
+        }
+
+        const response = await bookingAPI.getPayment( params )
         const data = await response.data
         console.log(data);
         if (roundTrip === '편도') {

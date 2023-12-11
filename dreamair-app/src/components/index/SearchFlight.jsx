@@ -9,7 +9,7 @@ import { addDays } from 'date-fns';
 import { BookingContext } from '../../contexts/BookingContextProvider';
 import { Link } from 'react-router-dom';
 
-const SearchFlightForm = () => {
+const SearchFlight = () => {
 
   const {booking, setBooking} = useContext(BookingContext);
   const [showPassengerBox, setShowPassengerBox] = useState(false);
@@ -263,4 +263,4 @@ const SearchFlightForm = () => {
   );
 };
 
-export default SearchFlightForm;
+export default SearchFlight;

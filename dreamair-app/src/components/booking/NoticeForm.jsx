@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
 import SelectedFlight from './SelectedFlight';
+import { BookingContext } from '../../contexts/BookingContextProvider';
+import { Link } from 'react-router-dom';
 
 const NoticeForm = ( { goBookingList, comeBookingList } ) => {
+
+  const {booking, setBooking} = useContext(BookingContext)
+
+  const handelOnClick = () => {
+
+    const payment = '확인'
+    const passengerNos = []
+    const seatNoDepss = []
+    const seatNoDesss = []
+    
+    if(booking.roundTrip === '왕복') {
+      goBookingList.forEach(bookingItem => {
+        passengerNos.push(bookingItem.passengerNo)
+        seatNoDepss.push(bookingItem.seatNoDep)
+      });
+
+      comeBookingList.forEach(bookingItem => {
+        seatNoDesss.push(bookingItem.seatNoDes)
+      });
+      setBooking({ ...booking, passengerNos, seatNoDepss, seatNoDesss, payment })
+    } else if(booking.roundTrip === '편도') {
+      goBookingList.forEach(bookingItem => {
+        passengerNos.push(bookingItem.passengerNo)
+        seatNoDepss.push(bookingItem.seatNoDep)
+      });
+      setBooking({ ...booking, passengerNos, seatNoDepss, payment })
+    }
+
+  }
+
   return (
     <Container className="mt-5 py-3">
       <h1 style={{ textAlign: 'center' }}>탑승객 유의사항 안내</h1>
@@ -13,11 +45,6 @@ const NoticeForm = ( { goBookingList, comeBookingList } ) => {
       <h2 className="mt-3">선택한 항공 스케줄</h2>
 
       <Form action="/booking/payment">
-        {/* 입력 필드 (예: hidden)는 Form.Control 컴포넌트를 사용합니다. */}
-        {/* <Form.Control type="hidden" name="pasCount" value={bookingInfo.pasCount} />
-        <Form.Control type="hidden" name="roundTrip" value={bookingInfo.roundTrip} />
-        <Form.Control type="hidden" name="goFlightNo" value={bookingInfo.goFlightNo} />
-        <Form.Control type="hidden" name="comeFlightNo" value={bookingInfo.comeFlightNo} /> */}
 
         <SelectedFlight
                         goBookingList={goBookingList}
@@ -89,14 +116,14 @@ const NoticeForm = ( { goBookingList, comeBookingList } ) => {
               type="checkbox"
               label="위 내용을 확인하셨습니까?"
               id="commit"
-              name="payment"
-              value="확인"
               required
             />
           </Form.Group>
-          <Button variant="outline-primary" size="lg" type="submit">
-            결제하기
-          </Button>
+          <Link to="/booking/payment">
+            <Button variant="outline-primary" size="lg" type="submit" onClick={handelOnClick}>
+              결제하기
+            </Button>
+          </Link>
         </div>
       </Form>
     </Container>

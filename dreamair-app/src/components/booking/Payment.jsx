@@ -14,9 +14,6 @@ const Payment = ( {goBookingList, comeBookingList} ) => {
     const [email, setEmail] = useState('')
     const [price, setPrice] = useState(0)
 
-    // const goPrice = 0
-    // goBookingList.map
-
     // console.log("goPrice : " + goPrice);
     // console.log("comeBookingList.productPrice[0] : " + comeBooking.productPrice);
     // console.log("booking.pasCount : " + booking.pasCount);

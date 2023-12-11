@@ -3,11 +3,11 @@ import * as comments from '../../apis/comment'
 import CommentList from '../../components/board/CommentList'
 import { useNavigate } from 'react-router-dom'
 
-const CommentListContainer = () => {
+const CommentListContainer = ({boardNo}) => {
 
   const navigate = useNavigate();
   
-  const {boardNo} = useState('')
+  // const {boardNo} = useState('')
   const [commentList, setCommentList] = useState([])
 
   const getCommentList = async (boardNo) => {

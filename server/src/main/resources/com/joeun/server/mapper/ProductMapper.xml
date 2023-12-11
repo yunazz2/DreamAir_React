@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 항공기 관리 -->
 <!-- 항공기 전체 조회 -->
 <select id="flight_list" resultType="Product">
-  SELECT * FROM flight JOIN route ON flight.route_no = route.route_no;
+  SELECT * FROM flight JOIN route ON flight.route_no = route.route_no ORDER BY flight_no DESC;
 </select>
 
 <!-- 항공기 정보 조회 -->

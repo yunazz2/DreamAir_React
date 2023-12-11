@@ -62,7 +62,7 @@ const BoardReadContainer = () => {
                  onDownload={(fileNo, fileName) => onDownload(fileNo, fileName)}
                  />
       <CommentInsertContainer/>
-      <CommentListContainer/>
+      <CommentListContainer boardNo={boardNo}/>
       </div>
       <Footer/>
     </>

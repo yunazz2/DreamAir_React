@@ -1,6 +1,8 @@
 package com.joeun.server.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.joeun.server.dto.Board;
+import com.joeun.server.dto.Files;
 import com.joeun.server.dto.Product;
+import com.joeun.server.service.FileService;
 import com.joeun.server.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class FlightContorller {
 
     @Autowired
-    private ProductService productService;
+    private ProductService productService;   
+    
+    @Autowired
+    private FileService fileService;
 
     @GetMapping()
     public ResponseEntity<?> getAll() {
@@ -44,10 +53,17 @@ public class FlightContorller {
     }
     
     @GetMapping("/{flightNo}")
-    public ResponseEntity<?> getOne(@PathVariable Integer flightNo) {
+    public ResponseEntity<?> getOne(@PathVariable Integer flightNo, Files files) {
         log.info("[GET] - /flight/" + flightNo  + " - 항공기 목록 조회");
         try {
-             Product flight = productService.flight_select(flightNo);
+                Product flight = productService.flight_select(flightNo);
+                files.setParentTable("board");
+                files.setParentNo(flightNo);
+                List<Files> fileList = fileService.listByParent(files); // 파일 정보
+                
+                Map<String, Object> response = new HashMap<>();
+                response.put("flight", flight);
+                response.put("fileList", fileList);
              if( flight == null ) {
                  flight = new Product();
                  return new ResponseEntity<>(flight, HttpStatus.OK);
@@ -62,8 +78,15 @@ public class FlightContorller {
     }
     
     @PostMapping()
-    public ResponseEntity<?> create(@RequestBody Product flight) {
+    public ResponseEntity<?> create(Product flight) {
         log.info("[POST] - /flight - 항공기 등록");
+    List<MultipartFile> files = flight.getFiles();
+
+        if( files != null )
+            for (MultipartFile file : files) {
+                log.info("file : " +  file.getOriginalFilename());
+            }
+        
         try {
             int result = productService.flight_insert(flight);
             if( result > 0 )
@@ -78,7 +101,7 @@ public class FlightContorller {
     }
     
     @PutMapping()
-    public ResponseEntity<?> update(@RequestBody Product flight) {
+    public ResponseEntity<?> update(Product flight) {
         log.info("[PUT] - /flight - 항공기 수정");
         int flightNo = flight.getFlightNo();
         log.info("flightNo 확인 : ");

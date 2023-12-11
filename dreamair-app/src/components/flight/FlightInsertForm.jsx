@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as filesApi from '../../apis/files';
 
 const FlightInsertForm = ({ onInsert }) => {
   
@@ -12,7 +13,8 @@ const FlightInsertForm = ({ onInsert }) => {
   const [seatMax, setSeatMax] = useState([])
   const [seatUsed, setSeatUsed] = useState([])
   const [seatRemaining, setRemaining] = useState([])
-
+  const [files, setFiles] = useState(null);     // ✅ files state 추가
+  
   const handleChangeFlightName = (e) => {
       setFlightName(e.target.value)
   }
@@ -49,23 +51,74 @@ const FlightInsertForm = ({ onInsert }) => {
     setRemaining(e.target.value)
   }
   
+   // ✅ 파일 핸들러 추가
+   const handleFileChange = (e) => {
+    setFiles(e.target.files);
+  };
+
   const onSubmit = () => {
-    onInsert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
+    // onInsert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
+    const formData = new FormData();
+    formData.append('flightName', flightName);
+    formData.append('routeNo', routeNo);
+    formData.append('departure', departure);
+    formData.append('departureTime', departureTime);
+    formData.append('destinationTime', destinationTime);
+    formData.append('seatMax', seatMax);
+    formData.append('seatUsed', seatUsed);
+    formData.append('seatRemaining', seatRemaining);
+
+    const headers = {
+        headers: {
+            'Content-Type' : 'multipart/form-data',
+        },
+    };
+    
+    if (files) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[${i}]`, files[i]);
+        }
+    }
+
+    onInsert(formData, headers)            
   }
 
-  // useEffect(() => {
-  //   if(flight) {
-  //   setFlightName(flight.FlightName);
-  //   setRouteNo(flight.routeNo);
-  //   setDeparture(flight.departure);
-  //   setDestination(flight.destination);
-  //   setDepartureTime(flight.departureTime);
-  //   setDestinationTime(flight.destinationTime);
-  //   setSeatMax(flight.seatMax);
-  //   setSeatUsed(flight.seatUsed);
-  //   setRemaining (flight.seatRemaining);
-  //   }
-  // }, [flight])
+  const customUploadAdapter = (loader) => {
+    return {
+      upload() {
+        return new Promise( (resolve, reject) => {
+          const formData = new FormData();
+          loader.file.then( async (file) => {
+                console.log(file);
+                formData.append("parentTable", 'editor');
+                formData.append("file", file);
+
+                const headers = {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data',
+                    },
+                };
+
+                let response = await filesApi.upload(formData, headers);
+                let data = await response.data;
+                console.log(`data : ${data}`);
+                
+                let newFileNo = data;
+
+                await resolve({
+                    default: `/file/img/${newFileNo}`
+                })
+          });
+        });
+      },
+    };
+};
+
+function uploadPlugin(editor) {
+  editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return customUploadAdapter(loader);
+  };
+}
 
   return (
     <div className='container'>
@@ -80,7 +133,7 @@ const FlightInsertForm = ({ onInsert }) => {
 
         <div className="input-group mb-3 row">
           <label className="input-group-text col-md-2">항공기 이미지</label>
-          <input type="file" className="form-control col-md-10" name="file" multipart/>
+          <input type="file" className="form-control col-md-10" name="file" onChange={handleFileChange} multiple/>
         </div>
 
         <div className="input-group mb-3 row">
@@ -128,7 +181,7 @@ const FlightInsertForm = ({ onInsert }) => {
 
       <div className="btn-box">
         <button className='btn btn-danger'><Link to="/flight">취소</Link></button>
-        <button className='btn btn-primary' onClick={() => onSubmit(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)} >등록</button>
+        <button className='btn btn-primary' onClick={onSubmit}>등록</button>
       </div>
     </div>
   );

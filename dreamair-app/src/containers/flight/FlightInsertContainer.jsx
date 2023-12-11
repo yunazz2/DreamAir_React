@@ -10,11 +10,9 @@ const FlightInsertContainer = () => {
 
   const navigate = useNavigate();
 
-  const flight = useState([]);
-
-  const onInsert = async (flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining) => {
+  const onInsert = async (formData, headers) => {
     try {
-      const response = await flights.flight_insert(flightName, routeNo, departure, destination, departureTime, destinationTime, seatMax, seatUsed, seatRemaining)
+      const response = await flights.flight_insert(formData, headers)
 
       alert('등록 완료')
       console.log(response.data);
@@ -33,7 +31,7 @@ const FlightInsertContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <FlightInsertForm onInsert={onInsert} flight={flight}/>
+        <FlightInsertForm onInsert={onInsert}/>
     </div> 
     <Adminfooter/> 
     </>    

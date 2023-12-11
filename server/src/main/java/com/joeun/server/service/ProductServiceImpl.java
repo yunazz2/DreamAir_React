@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         int parentNo = productMapper.flight_maxPk();
 
         //파일 업로드 
-        List<MultipartFile> fileList = flight.getFile();
+        List<MultipartFile> fileList = flight.getFiles();
 
         if( !fileList.isEmpty() )
         for (MultipartFile file : fileList) {
@@ -181,7 +181,7 @@ public class ProductServiceImpl implements ProductService {
         int parentNo = productMapper.flight_maxPk();
 
         //파일 업로드 
-        List<MultipartFile> fileList = product.getFile();
+        List<MultipartFile> fileList = product.getFiles();
 
         if( !fileList.isEmpty() ){
         for (MultipartFile file : fileList) {

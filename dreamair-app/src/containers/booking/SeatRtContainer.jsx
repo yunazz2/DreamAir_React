@@ -20,6 +20,8 @@ const SeatContainer = () => {
         const destination = booking.destination;
         const departure = '제주';
 
+        console.log(booking);
+
         // 데이터 가져오기 전에 로딩 상태 설정
         setLoading(true);
 

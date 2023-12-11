@@ -12,11 +12,10 @@ const ProductInsertContainer = () => {
 
   const onInsert = async (formData, headers) => {
     try {
-
       const response = await products.product_insert(formData, headers) 
       alert('등록 완료')
       console.log(response.data);
-
+      
       navigate('/product')
     } catch(e) {
       console.log(e);

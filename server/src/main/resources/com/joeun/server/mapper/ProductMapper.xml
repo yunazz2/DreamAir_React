@@ -76,8 +76,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     , departure = #{departure}
     , destination = #{destination}
     , unitsInStock = #{unitsInStock}
+    , duration = #{duration}
   WHERE product_no = #{productNo}
 </update>
+
+<!-- 상품 순번 최댓값 -->
+<select id="product_maxPk" resultType="int">
+    SELECT MAX(product_no)
+    FROM product
+</select>
 
 <!-- 상품 삭제 -->
 <delete id="product_delete">

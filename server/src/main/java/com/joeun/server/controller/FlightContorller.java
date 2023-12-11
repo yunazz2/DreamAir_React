@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.joeun.server.dto.Board;
 import com.joeun.server.dto.Files;
 import com.joeun.server.dto.Product;
 import com.joeun.server.service.FileService;
 import com.joeun.server.service.ProductService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -57,7 +56,7 @@ public class FlightContorller {
         log.info("[GET] - /flight/" + flightNo  + " - 항공기 목록 조회");
         try {
                 Product flight = productService.flight_select(flightNo);
-                files.setParentTable("board");
+                files.setParentTable("flight");
                 files.setParentNo(flightNo);
                 List<Files> fileList = fileService.listByParent(files); // 파일 정보
                 
@@ -80,7 +79,7 @@ public class FlightContorller {
     @PostMapping()
     public ResponseEntity<?> create(Product flight) {
         log.info("[POST] - /flight - 항공기 등록");
-    List<MultipartFile> files = flight.getFiles();
+        List<MultipartFile> files = flight.getFiles();
 
         if( files != null )
             for (MultipartFile file : files) {

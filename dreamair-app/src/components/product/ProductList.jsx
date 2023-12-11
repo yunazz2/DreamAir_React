@@ -38,7 +38,7 @@ const ProductList = ( {productList, productNo, onDelete}) => {
               <tr key={product.productNo}>
                 {/* <td><Link to={`/product/product_list/${product.productNo}`}>{product.productNo}</Link></td> */}
                 <td align='center'>{product.productNo}</td>
-                <td align='center' style={{width: '100px', height: '100px'}} >{product.thumbnail && (<img src={`/file/img/${product.thumbnail.fileNo}`} alt="이미지" className="card-img-top w-70 p-4" />)}</td>
+                <td align='center' style={{width: '300px', height: '300px'}} >{ product.thumbnail && (<img src={`/file/img/${product.thumbnail.fileNo}`} alt="이미지" className="card-img-top w-70 p-4" />)}</td>
                 <td align='center'>{product.routeNo}</td>
                 <td align='center'>{product.name}</td>
                 <td align='center'>{product.productCat}</td>

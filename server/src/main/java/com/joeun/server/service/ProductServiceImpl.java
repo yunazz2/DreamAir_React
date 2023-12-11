@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
         //파일 업로드 
         List<MultipartFile> fileList = flight.getFiles();
 
-        if( !fileList.isEmpty() )
+        if( fileList != null && !fileList.isEmpty() )
         for (MultipartFile file : fileList) {
 
             if( file.isEmpty() ) continue;
@@ -152,7 +153,7 @@ public class ProductServiceImpl implements ProductService {
          for (int i = 0; i < productList.size(); i++) {
             Files file = new Files();
             file.setParentTable("product");
-            file.setParentNo(productList.get(i).getFlightNo());
+            file.setParentNo(productList.get(i).getProductNo());
 
             file = fileMapper.selectThumbnail(file);
             if(file != null) {
@@ -173,17 +174,18 @@ public class ProductServiceImpl implements ProductService {
 
     // 상품(항공권) 등록
     @Override
+    @Transactional
     public int product_insert(Product product) throws Exception {
         
         int result = productMapper.product_insert(product);
 
         String parentTable = "product";
-        int parentNo = productMapper.flight_maxPk();
+        int parentNo = productMapper.product_maxPk();
 
         //파일 업로드 
         List<MultipartFile> fileList = product.getFiles();
 
-        if( !fileList.isEmpty() ){
+        if( fileList != null && !fileList.isEmpty() ){
         for (MultipartFile file : fileList) {
 
             if( file.isEmpty() ) continue;

@@ -3,9 +3,11 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const LatestBoard = ({ mainList }) => {
   return (
+    <>
+    <hr></hr>
     <section id="board">
       <Container>
-        <h1 className="mt-5 ms-5">최근 게시글</h1>
+        <h1 className="board_title">최근 게시글</h1>
 
         <Row className="board_container">
           {mainList.map((board) => (
@@ -40,7 +42,9 @@ const LatestBoard = ({ mainList }) => {
           ))}
         </Row>
       </Container>
+      <hr></hr>
     </section>
+    </>
   );
 };
 

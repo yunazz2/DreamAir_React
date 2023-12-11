@@ -3,9 +3,11 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const RecommendedSpots = () => {
   return (
+    <>
+    <hr className='section_bar'/>
     <section id="spot">
       <Container>
-        <h1 className="mt-5 ms-5">추천 여행지</h1>
+        <h1 className='spot_title'>추천 여행지</h1>
 
         <Row className="spot_container">
           <Col md={3}>
@@ -81,7 +83,9 @@ const RecommendedSpots = () => {
           </Col>
         </Row>
       </Container>
+
     </section>
+    </>
   );
 };
 

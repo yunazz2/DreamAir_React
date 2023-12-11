@@ -1,47 +1,28 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+// import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const QuickMenu = () => {
   return (
     <section id="Quick">
       <div className="quick_container">
-        <Row>
-          <Col>
-            <div className="wrap">
-              <a href="#">
-                <img src="/img/seat.png" alt="좌석선택" />
-              </a>
-              <h3>사전 좌석</h3>
+      <div className="btn_search_box">
+            <div className="btn_search btn_search1">
+              <Link href="#"><img src="/img/ticket.png" alt="항공권 조회" />항공권 조회</Link>
             </div>
-          </Col>
-
-          <Col>
-            <div className="wrap">
-              <a href="/user/checkin">
-                <img src="/img/Checkin.png" alt="체크인" />
-              </a>
-              <h3>체크인</h3>
+            <div className="btn_search btn_search2">
+              <Link href="#"><img src="/img/booking.png" alt="예약 조회" />예약 조회</Link>
             </div>
-          </Col>
-
-          <Col>
-            <div className="wrap">
-              <a href="/board/list">
-                <img src="/img/community.png" alt="커뮤니티" />
-              </a>
-              <h3>커뮤니티</h3>
+            <div className="btn_search btn_search3">
+              <Link href="#"><img src="/img/Checkin.png" alt="체크인"/>체크인</Link>
             </div>
-          </Col>
-
-          <Col>
-            <div className="wrap">
-              <a href="/bus">
-                <img src="/img/bus.png" alt="공항버스 예약" />
-              </a>
-              <h3>공항 버스 예약</h3>
+            <div className="btn_search btn_search4">
+              <Link href="#"><img src="/img/search.png" alt="출도착 조회" />출도착 조회</Link>
             </div>
-          </Col>
-        </Row>
+            <div className="btn_search btn_search5">
+              <Link href="#"><img src="/img/bus.png" alt="공항버스 예약" />공항버스 예약</Link>
+            </div>
+          </div>
       </div>
     </section>
   );

@@ -8,6 +8,7 @@ import { ko } from 'date-fns/esm/locale';
 import { addDays } from 'date-fns';
 import { BookingContext } from '../../contexts/BookingContextProvider';
 import { Link } from 'react-router-dom';
+import QuickMenu from './QuickMenu';
 
 const SearchFlight = () => {
 
@@ -107,10 +108,10 @@ const SearchFlight = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center" id="main_index_back">
       <section id="searchFlight">
-        <Container>
-          <div className="card card-4" style={{ height: '100%', backgroundColor: '#e7f5fac7' }}>
+        <Container className='search_container'>
+          <QuickMenu/>
+          <div className="search_card card-4">
             <div className="tab-content">
               <div className="tab-pane active" id="tab1">
                 <div className="tab_wrap">
@@ -259,7 +260,6 @@ const SearchFlight = () => {
           </div>
         </Container>
       </section>
-    </div>
   );
 };
 

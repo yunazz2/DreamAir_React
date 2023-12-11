@@ -1,18 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Seat.module.css'
 import Swal from "sweetalert2";
+import { BookingContext } from '../../contexts/BookingContextProvider';
+import { useNavigate } from 'react-router';
 
-const SeatRt = ({pasCount, roundTrip, bookingObject, isLoading}) => {
+const SeatRt = ({bookingObject, isLoading}) => {
 
+  // notice 페이지로 넘겨야 할 값 : phone, passengerNames, selectedSeats, goFlightNo
+  const {booking, setBooking} = useContext(BookingContext);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const seatStatus = bookingObject.seatStatus;
 
-  // 체크박스 변경 시 처리하는 함수
+  const navigate = useNavigate();
+
+  // 선택 완료 버튼
+  const handleCompleteClick = () => {
+    setBooking({ ...booking, seatNoDess: selectedSeats.join(', ') });
+    // selectedSeats(선택된 좌석 정보)를 seatNoDess(오는 편 좌석) 변수에 저장
+    navigate('/booking/notice');
+  };
+
+  // 선택된 좌석 정보
   const handleCheckboxChange = (seatNo) => {
     const updatedSeats = selectedSeats.includes(seatNo)
       ? selectedSeats.filter((selectedSeat) => selectedSeat !== seatNo)
-      : selectedSeats.length < pasCount
+      : selectedSeats.length < booking.pasCount
       ? [...selectedSeats, seatNo]
       : selectedSeats;
 
@@ -36,7 +49,7 @@ const SeatRt = ({pasCount, roundTrip, bookingObject, isLoading}) => {
     setSelectedSeats(updatedSelectedSeats);
   }, [seatStatus]);
   
-
+  // 화면
   return (
     <div className={styles.wrap}>
       <div className={styles.seatContent}>
@@ -54,7 +67,6 @@ const SeatRt = ({pasCount, roundTrip, bookingObject, isLoading}) => {
           <h2>오는 편</h2>
         </div>
 
-        
         <div className={styles.seatInnerWrap}>
           <div className={styles.seatInnerLeft}>
             <div className={styles.left1}>
@@ -119,16 +131,16 @@ const SeatRt = ({pasCount, roundTrip, bookingObject, isLoading}) => {
             <div className={styles.seatInnerRightDown}>
               <div className={styles.passengerName}>
                 <p>탑승객명</p>
-                {/* <h5 th:each="passenger : ${booking.passengerNames}">
-                  <span th:text="${passenger}"></span>
-                </h5> */}
+                {booking.passengerNames && booking.passengerNames.map((passenger, index) => (
+                  <h4 key={index}>{passenger}</h4>
+                ))}
               </div>
 
               <br />
             
               <div className={styles.pasCount}>
                 <p>인원 수</p>
-                <p>{pasCount}명</p>
+                <p>{booking.pasCount}명</p>
               </div>
 
               <br />
@@ -146,7 +158,7 @@ const SeatRt = ({pasCount, roundTrip, bookingObject, isLoading}) => {
         </div>
 
         <div className={styles.buttonBox}>
-          <button type="button" className={styles.bottomButton} id="btn">
+          <button type="button" className={styles.bottomButton} id="btn" onClick={handleCompleteClick}>
             선택 완료
           </button>
         </div>

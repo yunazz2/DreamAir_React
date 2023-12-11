@@ -11,13 +11,13 @@ const BookingContextProvider = ({children}) => {
         bookingNo : 0,
         bookingNo2 : 0,
         name : '',
-        names : '',
+        names : [],
         seatNo : 0,
         seatNo2 : 0,
         userNo : 0,
-        userNos : 0,
+        userNos : [],
         userNo2 : 0,
-        userNos2 : 0,
+        userNos2 : [],
         productNo : 0,
         routeNo : 0,
         productId : '',
@@ -30,41 +30,41 @@ const BookingContextProvider = ({children}) => {
 
         // passengers 테이블
         pinType : 0,
-        pinTypes : 0,
+        pinTypes : [],
         passengerNo : 0,
-        passengerNos : 0,
+        passengerNos : [],
         passengerName : '',
-        passengerNames : '',
+        passengerNames : [],
         firstName : '',
-        firstNames : '',
+        firstNames : [],
         lastName : '',
-        lastNames : '',
+        lastNames : [],
         gender : '',
-        genders : '',
+        genders : [],
         birth : '',
-        births : '',
+        births : [],
         phone : '',
-        phones : '',
+        phones : [],
         email : '',
-        emails : '',
+        emails : [],
         seatNoDep : '',       // 좌석번호(가는편)
-        seatNoDepss : '',       // 좌석번호(가는편)
+        seatNoDepss : [],       // 좌석번호(가는편)
         seatNoDes : '',       // 좌석번호(오는편)
-        seatNoDesss : '',       // 좌석번호(오는편)
+        seatNoDesss : [],       // 좌석번호(오는편)
         productNoDep : 0,       // 상품번호(가는편)
-        productNoDeps : 0,       // 상품번호(가는편)
+        productNoDeps : [],       // 상품번호(가는편)
         productNoDes : 0,       // 상품번호(오는편)
-        productNoDess : 0,       // 상품번호(오는편)
+        productNoDess : [],       // 상품번호(오는편)
         productIdDep : '',
-        productIdDeps : '',
+        productIdDeps : [],
         productIdDes : '',
-        productIdDess : '',
+        productIdDess : [],
         userPw : '',
-        userPws : '',
+        userPws : [],
         routeNoDep : 0,         // 노선번호(가는편)
-        routeNoDeps : 0,         // 노선번호(가는편)
+        routeNoDeps : [],         // 노선번호(가는편)
         routeNoDes : 0,         // 노선번호(오는편)
-        routeNoDess : 0,         // 노선번호(오는편)
+        routeNoDess : [],         // 노선번호(오는편)
 
         // ticket 테이블
         ticketNo : 0,

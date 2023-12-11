@@ -9,16 +9,26 @@ const NoticeContainer = () => {
     
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)
-    const [passengerNames, setPassengerNames] = useState('테스트2');
-    const [phones, setPhones] = useState('010123456');
-    const [seatNoDeps, setseatNoDepss] = useState('A1');
-    const [seatNoDess, setseatNoDess] = useState('Al');
+    const [passengerNames, setPassengerNames] = useState(['테스트2']);
+    const [phones, setPhones] = useState(['010123456']);
+    const [seatNoDeps, setseatNoDepss] = useState(['A1']);                    
+    const [seatNoDess, setseatNoDess] = useState(['A1']);             
     const [goBookingList, setGoBookingList] = useState([]);
     const [comeBookingList, setComeBookingList] = useState([]);
 
 
     const getSelectedFlight = async () => {
-        const response = await bookingAPI.getNotice(roundTrip, pasCount, passengerNames, phones, seatNoDeps, seatNoDess)
+
+        let params = { 
+            'roundTrip' : roundTrip, 
+            'pasCount' : pasCount, 
+            'passengerNames' : passengerNames.join(","), 
+            'phones' : phones.join(","), 
+            'seatNoDeps' : seatNoDeps.join(","), 
+            'seatNoDess' : seatNoDess.join(","), 
+        }
+
+        const response = await bookingAPI.getNotice(params)
         const data = await response.data
         console.log(data);
         if (roundTrip === '편도') {

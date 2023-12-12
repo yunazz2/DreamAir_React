@@ -16,10 +16,10 @@ const SeatContainer = () => {
     const fetchData = async () => {
       try {
         // 지금은 이렇게 하드코딩해서 테스트하지만, 추후 booking 객체에서 저장된 값을 뽑아야 함
-        const productNoDeps = 1;
-        const pasCount = 2;
-        const roundTrip = '왕복';
-        const passengerNames = ['1', '2'];
+        const productNoDeps = booking.productNoDep;
+        const pasCount = booking.pasCount;
+        const roundTrip = booking.roundTrip;
+        const passengerNames = booking.passengerNames;
 
         // 데이터 가져오기 전에 로딩 상태 설정
         setLoading(true);

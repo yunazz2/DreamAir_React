@@ -16,7 +16,7 @@ const SeatRt = ({bookingObject, isLoading}) => {
 
   // 선택 완료 버튼
   const handleCompleteClick = () => {
-    setBooking({ ...booking, seatNoDess: selectedSeats.join(', ') });
+    setBooking({ ...booking, seatNoDesss: selectedSeats.join(', ') });
     // selectedSeats(선택된 좌석 정보)를 seatNoDess(오는 편 좌석) 변수에 저장
     navigate('/booking/notice');
   };

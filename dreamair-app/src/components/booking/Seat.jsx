@@ -18,16 +18,19 @@ const Seat = ({bookingObject, isLoading}) => {
   const roundTrip = booking.roundTrip;
   const passengerNames = booking.passengerNames;
 
+  const toDepartureSwitch = booking.departure;    // 기존 가는 편
+  const toDestinationSwitch = booking.destination;  // 기존 오는 편
+
   // 왕복일 시 - 다음 단계로 버튼
   const handleNextStepClick = () => {
-    setBooking({ ...booking, pasCount, roundTrip, passengerNames, seatNoDeps: selectedSeats.join(', ') });
+    setBooking({ ...booking, departure: toDestinationSwitch, destination: toDepartureSwitch, pasCount, roundTrip, passengerNames, seatNoDepss: selectedSeats.join(', ') });
     // selectedSeats(선택된 좌석 정보)를 seatNoDeps(가는 편 좌석) 변수에 저장
     navigate('/booking/SeatRt');
   };
   
   // 편도일 시 - 선택 완료 버튼
   const handleCompleteClick = () => {
-    setBooking({ ...booking, seatNoDeps: selectedSeats.join(', ') });
+    setBooking({ ...booking, pasCount, roundTrip, passengerNames, seatNoDepss: selectedSeats.join(', ') });
     // selectedSeats(선택된 좌석 정보)를 seatNoDeps(가는 편 좌석) 변수에 저장
     navigate('/booking/notice');
   };

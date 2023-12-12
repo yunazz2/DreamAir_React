@@ -12,13 +12,18 @@ const SeatContainer = () => {
   const [bookingObject, setBookingObject] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+
+  console.log("확인쓰");
+  console.log(booking);
+  console.log(booking.productNoDess);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // 지금은 이렇게 하드코딩해서 테스트하지만, 추후 booking 객체에서 저장된 값을 뽑아야 함
-        const productNoDess = 5;
+        const productNoDess = booking.productNoDes;
+        const departure = booking.departure;
         const destination = booking.destination;
-        const departure = '제주';
 
         console.log(booking);
 

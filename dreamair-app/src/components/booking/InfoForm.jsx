@@ -1,20 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { BookingContext } from '../../contexts/BookingContextProvider';
-import { Link } from 'react-router-dom';
 
-const InfoForm = ( {} ) => {
+const InfoForm = ( {onInsert} ) => {
 
   const {booking, setBooking} = useContext(BookingContext)
 
-  const [passengerNames, setPassengerNames] = useState('');  // context 추가
-  const [firstNames, setFirstNames] = useState([]);
-  const [lastNames, setLastNames] = useState([]);
-  const [genders, setGenders] = useState([]);
-  const [births, setBirths] = useState([]);
-  const [pinTypes, setPinTypes] = useState([]);
-  const [phones, setPhones] = useState([]);     // context 추가
-  const [emails, setEmails] = useState([]);
   const [userPw, setUserPw] = useState('');
   const [maleChecked, setMaleChecked] = useState(true);
 
@@ -25,6 +16,10 @@ const InfoForm = ( {} ) => {
   const handleFemaleClick = () => {
     setMaleChecked(false);
   };
+
+  const handleuserPwChange = (e) => {
+    setUserPw(e.target.value)
+  }
 
   
   const [passengerData, setPassengerData] = useState(
@@ -48,10 +43,57 @@ const InfoForm = ( {} ) => {
     
     const onSubmit = () => {
       const passengerNames = passengerData.map(passenger => passenger.passengerName);
-      const pinType = passengerData.map(passenger => passenger.pinType);
-      
+      const firstNames = passengerData.map(passenger => passenger.firstName);
+      const lastNames = passengerData.map(passenger => passenger.lastName);
+      const genders = passengerData.map(passenger => passenger.gender);
+      const births = passengerData.map(passenger => passenger.birth);
+      const pinTypes = passengerData.map(passenger => passenger.pinType);
+      const phones = passengerData.map(passenger => passenger.phone);
+      const emails = passengerData.map(passenger => passenger.email);
 
-      console.log(pinType);
+      setBooking({...booking, passengerNames, phones})
+
+      if (booking.roundTrip === '왕복') {
+        let params = {
+          roundTrip : booking.roundTrip,
+          pasCount : booking.pasCount,
+          productNoDep : booking.productNoDep,
+          productNoDes : booking.productNoDes,
+          routeNoDep : booking.routeNoDep,
+          routeNoDes : booking.routeNoDes,
+          passengerNames :  passengerNames,
+          firstNames :  firstNames,
+          lastNames :  lastNames,
+          genders :  genders,
+          births :  births,
+          pinTypes :  pinTypes,
+          phones :  phones,
+          emails :  emails,
+          userPw : userPw
+        }
+        
+        console.log(params);
+        onInsert(params)
+      } else {
+        let params = {
+          roundTrip : booking.roundTrip,
+          pasCount : booking.pasCount,
+          productNoDep : booking.productNoDep,
+          routeNoDep : booking.routeNoDep,
+          passengerNames :  passengerNames,
+          firstNames :  firstNames,
+          lastNames :  lastNames,
+          genders :  genders,
+          births :  births,
+          pinTypes :  pinTypes,
+          phones :  phones,
+          emails :  emails,
+          userPw : userPw
+        }
+
+        console.log(params);
+        onInsert(params)
+      }
     }
 
   return (
@@ -92,7 +134,7 @@ const InfoForm = ( {} ) => {
 
             <div className="radio-row" style={{ marginBottom: '20px' }}>
               <Form.Check
-                type="checkbox"
+                type="radio"
                 id={`male_${i}`}
                 className="male"
                 value="남자"
@@ -103,7 +145,7 @@ const InfoForm = ( {} ) => {
                 남자
               </Form.Label>
               <Form.Check
-                type="checkbox"
+                type="radio"
                 id={`female_${i}`}
                 className="female"
                 value="여자"
@@ -119,7 +161,6 @@ const InfoForm = ( {} ) => {
               <Form.Label className="col-md-2">생년월일</Form.Label>
               <Col md={10}>
                 <Form.Control type="text" value={passenger.birth} onChange={(e) => handleInputChange(i, 'birth', e.target.value)} />
-                <Form.Control type="text" name="births" />
               </Col>
             </Form.Group>
 
@@ -137,7 +178,6 @@ const InfoForm = ( {} ) => {
               <Form.Label className="col-md-2">핸드폰 번호</Form.Label>
               <Col md={10}>
                 <Form.Control type="text" value={passenger.phone} onChange={(e) => handleInputChange(i, 'phone', e.target.value)} />
-                <Form.Control type="text" name="phones" />
               </Col>
             </Form.Group>
             
@@ -145,7 +185,6 @@ const InfoForm = ( {} ) => {
               <Form.Label className="col-md-2">이메일</Form.Label>
               <Col md={10}>
                 <Form.Control type="text" value={passenger.email} onChange={(e) => handleInputChange(i, 'email', e.target.value)} />
-                <Form.Control type="text" name="emails" />
               </Col>
             </Form.Group>
 
@@ -157,7 +196,8 @@ const InfoForm = ( {} ) => {
           <Col md={10}>
             <Form.Control
               type="password"
-              name="userPw"
+              value={userPw}
+              onChange={handleuserPwChange}
               placeholder="비회원 예매할때 사용할 비밀번호를 입력하세요."
             />
           </Col>
@@ -167,11 +207,9 @@ const InfoForm = ( {} ) => {
           <a href="/" className="btn btn-lg btn-secondary">
             목록
           </a>
-          {/* <Link to="/booking/notice"> */}
             <Button onClick={onSubmit} className="btn btn-lg btn-primary ms-3">
               다음
             </Button>
-          {/* </Link> */}
         </div>
       </Form>
     </Container>

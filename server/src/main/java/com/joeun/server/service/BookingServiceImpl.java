@@ -52,8 +52,10 @@ public class BookingServiceImpl implements BookingService{
          
         for (int i = 0; i < booking.getPasCount(); i++) {
             Booking bookingItem = new Booking();
-            bookingItem.setProductNoDep(booking.getProductNoDeps()[i]);
-            bookingItem.setRouteNoDep(booking.getRouteNoDeps()[i]);
+            // bookingItem.setProductNoDep(booking.getProductNoDeps()[i]);
+            // bookingItem.setRouteNoDep(booking.getRouteNoDeps()[i]);
+            bookingItem.setProductNoDep(booking.getProductNoDep());
+            bookingItem.setRouteNoDep(booking.getRouteNoDep());
             bookingItem.setPassengerName(booking.getPassengerNames()[i]);
             bookingItem.setFirstName(booking.getFirstNames()[i]);
             bookingItem.setLastName(booking.getLastNames()[i]);
@@ -65,21 +67,23 @@ public class BookingServiceImpl implements BookingService{
             bookingItem.setUserPw(booking.getUserPw());
 
             if ( booking.getRoundTrip().equals("왕복")) {
-                bookingItem.setProductNoDes(booking.getProductNoDess()[i]);
-                bookingItem.setRouteNoDes(booking.getRouteNoDess()[i]);
+                // bookingItem.setProductNoDes(booking.getProductNoDess()[i]);
+                // bookingItem.setRouteNoDes(booking.getRouteNoDess()[i]);
+                bookingItem.setProductNoDes(booking.getProductNoDes());
+                bookingItem.setRouteNoDes(booking.getRouteNoDes());
             }
 
             bookingMapper.infoPassngers(bookingItem);
 
-            if ( principal == null ) {
+            // if ( principal == null ) {
                 
-                String userId = "GUEST_" + UUID.randomUUID().toString().substring(0, 5);
-                HttpSession session = request.getSession();
-                session.setAttribute("userId", userId);
-                bookingItem.setUserId(userId);
-                bookingItem.setStatus("GUEST");
-                bookingMapper.user2Insert(bookingItem); 
-            }
+            //     String userId = "GUEST_" + UUID.randomUUID().toString().substring(0, 5);
+            //     HttpSession session = request.getSession();
+            //     session.setAttribute("userId", userId);
+            //     bookingItem.setUserId(userId);
+            //     bookingItem.setStatus("GUEST");
+            //     bookingMapper.user2Insert(bookingItem); 
+            // }
             result++;
         }
         return result;

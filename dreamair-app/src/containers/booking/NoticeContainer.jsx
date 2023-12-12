@@ -8,6 +8,7 @@ const NoticeContainer = () => {
     const {booking, setBooking} = useContext(BookingContext)
 
     console.log(booking.passengerNames);
+    console.log(booking.phones);
     
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)

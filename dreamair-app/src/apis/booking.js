@@ -6,6 +6,9 @@ export const goList = (roundTrip, departure, destination, departureDate, pasCoun
 // 오는편 항공권 조회 목록
 export const comeList = (roundTrip, departure, destination, departureDate, pasCount ) => axios.get("/booking/comeList", { params : { roundTrip, departure, destination, departureDate, pasCount } })
 
+// 탑승객 정보 입력
+export const info = (booking) => axios.post("/booking/info", booking )
+
 // 좌석 선택 창 진입 시, 예매 완료된 좌석 현황 불러오기
 export const bookedSeatList = (flightNo) => axios.get(`/booking/seatStatus/${flightNo}`)
 

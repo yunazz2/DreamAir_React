@@ -118,7 +118,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
                   <td>
                     {bookingInfo.roundTrip === '편도' && (
                       <>
-                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                        <Link to="/booking/info" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
                           예매하기
                         </Link>
                       </>
@@ -134,7 +134,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
 
                     {bookingInfo.roundTrip === '왕복' && (
                       <>
-                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                        <Link to="/booking/info" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
                           예매하기
                         </Link>
                       </>

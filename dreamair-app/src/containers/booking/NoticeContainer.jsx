@@ -6,6 +6,9 @@ import { BookingContext } from '../../contexts/BookingContextProvider'
 const NoticeContainer = () => {
 
     const {booking, setBooking} = useContext(BookingContext)
+
+    console.log(booking.passengerNames);
+    console.log(booking.phones);
     
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)
@@ -17,31 +20,31 @@ const NoticeContainer = () => {
     const [comeBookingList, setComeBookingList] = useState([]);
 
 
-    const getSelectedFlight = async () => {
+    // const getSelectedFlight = async () => {
 
-        let params = { 
-            'roundTrip' : roundTrip, 
-            'pasCount' : pasCount, 
-            'passengerNames' : passengerNames.join(","), 
-            'phones' : phones.join(","), 
-            'seatNoDeps' : seatNoDeps.join(","), 
-            'seatNoDess' : seatNoDess.join(","), 
-        }
+    //     let params = { 
+    //         'roundTrip' : roundTrip, 
+    //         'pasCount' : pasCount, 
+    //         'passengerNames' : passengerNames.join(","), 
+    //         'phones' : phones.join(","), 
+    //         'seatNoDeps' : seatNoDeps.join(","), 
+    //         'seatNoDess' : seatNoDess.join(","), 
+    //     }
 
-        const response = await bookingAPI.getNotice(params)
-        const data = await response.data
-        console.log(data);
-        if (roundTrip === '편도') {
-            setGoBookingList(data)
-        } else {
-            setGoBookingList(data.goBookingList)
-            setComeBookingList(data.comeBookingList)
-        }
-    }
+    //     const response = await bookingAPI.getNotice(params)
+    //     const data = await response.data
+    //     console.log(data);
+    //     if (roundTrip === '편도') {
+    //         setGoBookingList(data)
+    //     } else {
+    //         setGoBookingList(data.goBookingList)
+    //         setComeBookingList(data.comeBookingList)
+    //     }
+    // }
     
-    useEffect(() => {
-        getSelectedFlight()
-    }, [])
+    // useEffect(() => {
+    //     getSelectedFlight()
+    // }, [])
 
 
     return (

@@ -5,22 +5,19 @@ import { BookingContext } from '../../contexts/BookingContextProvider';
 const InfoForm = ( {onInsert} ) => {
 
   const {booking, setBooking} = useContext(BookingContext)
-
   const [userPw, setUserPw] = useState('');
-  const [maleChecked, setMaleChecked] = useState(true);
-
-  const handleMaleClick = () => {
-    setMaleChecked(true);
-  };
-
-  const handleFemaleClick = () => {
-    setMaleChecked(false);
-  };
 
   const handleuserPwChange = (e) => {
     setUserPw(e.target.value)
   }
 
+  const handleGenderChange = (i, newGender) => {
+    setPassengerData(prevPassengerData => {
+      const updatedPassengerData = [...prevPassengerData];
+      updatedPassengerData[i].gender = newGender;
+      return updatedPassengerData;
+    });
+  };
   
   const [passengerData, setPassengerData] = useState(
     [...Array(booking.pasCount)].map(() => ({
@@ -138,8 +135,8 @@ const InfoForm = ( {onInsert} ) => {
                 id={`male_${i}`}
                 className="male"
                 value="남자"
-                checked={maleChecked}
-                onChange={handleMaleClick}
+                checked={passenger.gender === '남자'}
+                onChange={() => handleGenderChange(i, '남자')}
               />
               <Form.Label htmlFor={`male_${i}`} className="m-r-45">
                 남자
@@ -149,8 +146,8 @@ const InfoForm = ( {onInsert} ) => {
                 id={`female_${i}`}
                 className="female"
                 value="여자"
-                checked={!maleChecked}
-                onChange={handleFemaleClick}
+                checked={passenger.gender === '여자'}
+                onChange={() => handleGenderChange(i, '여자')}
               />
               <Form.Label htmlFor={`female_${i}`} className="m-r-45">
                 여자

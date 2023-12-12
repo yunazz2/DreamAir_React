@@ -90,18 +90,18 @@ const BoardInsertForm = ({ onInsert }) => {
   return (
     <div>
       <h1 className='my-4 text-center'>게시글 등록</h1>
-        <div className="mb-3">
+        <div className="boardForm mb-3">
           <label htmlFor="title" className="form-label">제목</label>
           <input type="text" className="form-input form-control" id="title" value={title} onChange={handleChangeTitle}/>
         </div>
 
-        <div className="mb-3">
+        <div className="boardForm mb-3">
           <label htmlFor="writer" className="form-label">작성자</label>
           <input type="text" className="form-input form-control" id="writer" value={writer} onChange={handleChangeWriter}/>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="content" className="form-input form-label">내용</label>
+        <div className="Form-label mb-3">
+          <label htmlFor="board_content" className="form-input form-label">내용</label>
           {/* <textarea className="form-control" id="content" rows="5" value={content} onChange={handleChangeContent}></textarea> */}
           <CKEditor
                                 editor={ ClassicEditor }
@@ -146,12 +146,12 @@ const BoardInsertForm = ({ onInsert }) => {
                             />
         </div>
 
-        <div className="mb-3">
+        <div className="boardForm mb-3">
           <label htmlFor="file" className="form-label">파일</label>
           <input type="file" className="form-control" onChange={handleFileChange} multiple/>
         </div>
 
-        <div className="btn-box mb-3 text-center">
+        <div className="btn-box mb-3 text-center mt-3">
           <button className="btn btn-basic btn-secondary me-2"><Link to="/board">목록</Link></button>
           <button className="btn btn-basic btn-primary" onClick={onSubmit}>등록</button>
         </div>

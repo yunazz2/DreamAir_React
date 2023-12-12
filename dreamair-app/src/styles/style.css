@@ -387,8 +387,8 @@ height: auto; /* 이미지 비율을 유지하면서 높이 자동 조절 */
   width: 150px;
 }
 
-input.form-control.col-md-10 {
-  border: 1px solid rgb(219, 218, 218);
+input.form-control.col-md-10, .form-control.comment-form-control {
+  border: 1px solid rgb(197, 196, 196);
 }
 
 .ck.ck-reset.ck-editor.ck-rounded-corners {
@@ -441,4 +441,78 @@ input.form-control.col-md-10 {
 .QRcode img {
   width: 150px;
   height: 150px;
+}
+
+.boardForm, .Form-label, .readForm {
+  display: flex;
+  font-weight: bold;
+}
+
+.boardForm {
+  line-height: 30px;
+}
+
+.boardForm > label {
+  line-height: 30px;
+  min-width: 50px;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.readForm > label {
+  line-height: 30px;
+  min-width: 100px;
+  text-align: center;
+  /* background-color: blue; */
+  margin-right: 10px;
+}
+
+.boardForm .form-input {
+  border: 1px solid rgb(204, 202, 202);
+}
+
+.file-box {
+  margin-left: 18px;
+  width: 500px;
+  height: 500px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: end;
+  width: 200px;
+  line-height: 40px;
+}
+
+.commentForm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  line-height: 40px;
+}
+
+.commentItem {
+  display: flex;
+  width: 800px;
+  justify-content: start;
+}
+
+.comment {
+  text-align: center;
+}
+
+li {
+  line-height: 30px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+
+.comment_container {
+  border: 1px solid rgb(220, 219, 219);
+}
+
+.comment-writer, .comment-content {
+  font-weight: bold;
+  font-size: 18px;
 }

@@ -9,7 +9,7 @@ const BoardList = ({ boardList, isLoading }) => {
   return (
     <div>
       <h1 className="my-4 text-center">게시글 목록</h1>
-      <Link to="/board/insert" className="btn btn-primary mb-3">글쓰기</Link>
+      <Link to="/board/insert" className="btn btn-primary btn-basic mb-3">글쓰기</Link>
 
       { isLoading && 
         <div>

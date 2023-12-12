@@ -10,7 +10,7 @@ const CommentList = ({ boardNo, commentList, onDelete, onUpdate, isEdit, onUpate
   return (
     
     <div className="commentList-box mt-5">
-      <h2>댓글 목록</h2>
+      <h2 className='mt-5'>댓글 목록</h2>
       {commentList && commentList.length > 0 ? (
         <ul id="comment-list">
           {commentList.map((comment) => (
@@ -21,17 +21,21 @@ const CommentList = ({ boardNo, commentList, onDelete, onUpdate, isEdit, onUpate
                 </>
               :
                 <>
-                  <strong id={`cmW_${comment.commentNo}`}>작성자 : {comment.writer}</strong>:
-                  <span id={`cmC_${comment.commentNo}`}>댓글 : {comment.content}</span>
-                  <span id={`cmC_${comment.commentNo}`}>등록일자 : {format.formatDate(comment.regDate)}</span>
-                  <span id={`cmC_${comment.commentNo}`}>수정일자 : {format.formatDate(comment.updDate)}</span>
-                  <div className="item">
-                    <button className='btn btn-primary btn-basic'>
-                      <button className="btn btn-primary" onClick={ onUpateMode }>수정</button>
-                      {/* <Link to={`/comment/comment_update/${boardNo}/${comment.commentNo}`}>수정</Link> */}
-                    </button>
-                    <button className='btn btn-danger btn-basic'><Link to="#" className="1" onClick={() => onDelete(boardNo, comment.commentNo)}>삭제</Link></button>
+                <div className="commentForm">
+                  <div className="commentItem">
+                    <div className='comment' id={`cmW_${comment.commentNo}`}>작성자 : {comment.writer}</div>
+                    <div className='comment' id={`cmC_${comment.commentNo}`}>댓글 : {comment.content}</div>
+                    <div className='comment' id={`cmC_${comment.commentNo}`}>등록일자 : {format.formatDate(comment.regDate)}</div>
+                    <div className='comment' id={`cmC_${comment.commentNo}`}>수정일자 : {format.formatDate(comment.updDate)}</div>
                   </div>
+                  <div className="btn-container">
+                    <div className="btn-box">
+                      <button className="btn btn-primary btn-basic me-1" onClick={ onUpateMode }>수정</button>
+                      {/* <Link to={`/comment/comment_update/${boardNo}/${comment.commentNo}`}>수정</Link> */}
+                      <button className='btn btn-danger btn-basic'><Link to="#" className="1" onClick={() => onDelete(boardNo, comment.commentNo)}>삭제</Link></button>
+                    </div>
+                  </div>
+                </div>
                 </>
               }
             </li>

@@ -16,7 +16,7 @@
 
 .container {
   width: 1920px;
-  min-height: 400px;
+  /* min-height: 400px; */
 }
 
 .adminsidebar {

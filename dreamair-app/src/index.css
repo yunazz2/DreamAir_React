@@ -16,4 +16,10 @@
 
 .container {
   width: 1920px;
+  min-height: 400px;
+}
+
+.adminsidebar {
+  padding-top: 10px;
+  margin-bottom: 10px;
 }

@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 const FlightList = ( { flightList, onDelete }) => {
 
   return (
-    <div className='container'>
+    <div className='admin_container'>
       <h1 className="text-center my-5">항공기 관리</h1>
-          <button className='btn btn-outline-primary btn-lg'><Link to="/flight/flight_insert" className='btn-Link'>항공기 정보 등록</Link></button>
+      <div className="btn-box d-grid gap-2">
+          <button className='btn btn-outline-primary btn-lg btn-big'><Link to="/flight/flight_insert" className='btn-Link'>항공기 정보 등록</Link></button>
+      </div>
       <br />
 
       {flightList != null && (

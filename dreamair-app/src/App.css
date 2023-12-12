@@ -37,7 +37,7 @@ header {
   z-index: 10;
   background-color: #fff;
   width: 100%;
-  height: 150px;
+  height: 140px;
 }
 
 .header_container {
@@ -108,13 +108,19 @@ header {
 
 /** ADMIN_FOOTER **/
 .admin_footer_container {
-  margin-top: 150px;
+  position: relative !important;
+  margin-top: 173px;
+  margin-bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 150px;
+}
+
+.Admin_copy {
+  margin-top: 60px;
 }
 
 .footer_container {
-  /* position: relative!important; */
+  position: relative!important;
   margin-bottom: 0;
   display: block;
   width: 100%;
@@ -415,7 +421,7 @@ img:not([draggable]), embed, object, video {
 
 .btn_search4 {
   background-color: #ffad0ad5;
-  text-align: cetner;
+  text-align: center;
   line-height: 50px;
   width: 180px;
   border-radius: 5px;
@@ -423,7 +429,7 @@ img:not([draggable]), embed, object, video {
 
 .btn_search5 {
   background-color: #1e821ed3;
-  text-align: cetner;
+  text-align: center;
   line-height: 50px;
   width: 180px;
   border-radius: 5px;
@@ -671,4 +677,38 @@ img:not([draggable]), embed, object, video {
 .card-text {
   margin-top: 10px;
   text-align: start;
+}
+
+/* 버튼 */
+.btn-big {
+  width: 1200px;
+}
+
+/* 관리자 사이드바 */
+.adminsidebar {
+  width: 300px;
+}
+
+.Admin_mainmenu > li {
+  line-height: 40px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgba(128, 128, 128, 0.201);
+}
+
+.Admin_submenu > li > a {
+  /* background-color: #1da1f2; */
+  line-height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.Admin_submenu > li > a:hover {
+  background-color: #BEEFFF;
+}
+
+.admin_container {
+  margin-left: 60px;
+  width: 1200px;
 }

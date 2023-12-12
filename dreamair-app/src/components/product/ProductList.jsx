@@ -5,10 +5,10 @@ import * as format from '../../apis/format'
 const ProductList = ( {productList, productNo, onDelete}) => {
 
   return (
-    <div className='container'>
+    <div className='admin_container'>
       <h1 className="text-center my-5">상품 관리</h1>
       <div className="btn-box d-grid gap-2">
-        <button className='btn btn-outline-primary btn-lg'><Link to="/product/product_insert">상품 등록</Link></button>
+        <button className='btn btn-outline-primary btn-lg btn-big'><Link to="/product/product_insert">상품 등록</Link></button>
       </div>
       <br />
 

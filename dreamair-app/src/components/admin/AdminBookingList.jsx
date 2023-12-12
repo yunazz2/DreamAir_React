@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminBookingList = ({AdminbookingList}) => {
   return (
-    <div className='container'>
+    <div className='admin_container'>
       <h1 className="text-center my-3">예매 관리</h1>
       <br />
       <br />

@@ -503,7 +503,7 @@ input.form-control.col-md-10, .form-control.comment-form-control {
   text-align: center;
 }
 
-li {
+.comment_line {
   line-height: 30px;
   border-bottom: 1px solid rgb(224, 222, 222);
 }

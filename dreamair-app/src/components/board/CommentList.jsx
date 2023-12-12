@@ -14,7 +14,7 @@ const CommentList = ({ boardNo, commentList, onDelete, onUpdate, isEdit, onUpate
       {commentList && commentList.length > 0 ? (
         <ul id="comment-list">
           {commentList.map((comment) => (
-            <li key={comment.commentNo} className="mb-2">
+            <li key={comment.commentNo} className="comment_line mb-2">
               { isEdit ? 
                 <>
                   <CommentUpdateForm boardNo={boardNo} comment={comment} onUpdate={onUpdate} onUpateMode={onUpateMode} />

@@ -12,7 +12,8 @@ const BookingListForm = ({ bookingInfo, bookingList, setRoundTrip }) => {
     setRoundTrip(roundTrip)
     const productNoDep = bookingItem.productNo
     const routeNoDep = bookingItem.routeNo
-    setBooking({ ...booking, roundTrip, productNoDep, routeNoDep })
+    const goPrice = bookingItem.productPrice
+    setBooking({ ...booking, roundTrip, productNoDep, routeNoDep, goPrice })
   }
 
   const handleSubmit = (bookingItem) => {
@@ -20,11 +21,13 @@ const BookingListForm = ({ bookingInfo, bookingList, setRoundTrip }) => {
     if(bookingInfo.roundTrip === ('편도')) {
       const productNoDep = bookingItem.productNo
       const routeNoDep = bookingItem.routeNo
-      setBooking({ ...booking, productNoDep, routeNoDep})
+      const goPrice = bookingItem.productPrice
+      setBooking({ ...booking, productNoDep, routeNoDep, goPrice})
     } else if(bookingInfo.roundTrip == ('왕복')) {
       const productNoDes = bookingItem.productNo
       const routeNoDes = bookingItem.routeNo
-      setBooking({ ...booking, productNoDes, routeNoDes})
+      const comePrice = bookingItem.productPrice
+      setBooking({ ...booking, productNoDes, routeNoDes, comePrice})
     }
 
   }
@@ -128,9 +131,6 @@ const BookingListForm = ({ bookingInfo, bookingList, setRoundTrip }) => {
 
                     {bookingInfo.roundTrip === '왕복 가는편' && (
                       <>
-                      {/* <Button onClick={() => handleLinkClick(bookingItem)} className="btn btn-outline-primary btn-lg btn-select">
-                          선택하기
-                      </Button> */}
                         <Link to="/booking/bookingList" onClick={() => handleLinkClick(bookingItem)} className="btn btn-outline-primary btn-lg btn-select" >
                           선택하기
                         </Link>

@@ -8,16 +8,18 @@ const BookingListContainer = () => {
 
   
   const {booking, setBooking} = useContext(BookingContext);
-  console.log(booking.roundTrip);
-  const [bookingList, setBookingList] = useState([]);
   const [roundTrip, setRoundTrip] = useState(booking.roundTrip)
-  // const roundTrip = booking.roundTrip;
-  const departure = booking.departure;
-  const destination = booking.destination;
+  // const [departure, setDeaprture] = useState(booking.departure)
+  // const [destination, setDestination] = useState(booking.destination)
+  // const [departureDate, setDepartureDate] = useState(booking.departureDate)
+  // const [pasCount, setPasCount] = useState(booking.pasCount)
+  const [bookingList, setBookingList] = useState([]);
+
+  let departure = booking.departure;
+  let destination = booking.destination;
   const departureDate = booking.departureDate;
   const pasCount = booking.pasCount
   
-
   const bookingInfo = {
     roundTrip : roundTrip,
     departure : departure,
@@ -27,25 +29,23 @@ const BookingListContainer = () => {
   }
   
   const getBookingList = async () => {
-    console.log("get");
     if (roundTrip === ('왕복 가는편' || '편도') ) {
       const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
       const data = await response.data
       console.log("가는편 항공권 : " + data);
       setBookingList(data);
-    } else if(booking.roundTrip === ('왕복')) {
-      // console.log("if");
-      // departure = booking.destination
-      // destination = booking.departure
-      // const response = await bookingAPI.comeList(roundTrip, departure, destination, departureDate, pasCount );    
-      // const data = await response.data
-      // console.log("오는편 항공권 : " + data);
-      // setBookingList(data);
+    } else if(roundTrip === ('왕복')) {
+      let departure = booking.destination 
+      let destination = booking.departure
+      const response = await bookingAPI.comeList(roundTrip, departure, destination, departureDate, pasCount );    
+      const data = await response.data
+      console.log("오는편 항공권 : " + data);
+      setBookingList(data);
     }
   };
 
   useEffect(() => {
-    getBookingList(roundTrip)
+    getBookingList()
   },[roundTrip])
 
   return (

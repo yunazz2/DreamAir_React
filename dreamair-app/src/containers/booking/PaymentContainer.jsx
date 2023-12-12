@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import Payment from '../../components/booking/Payment'
 import * as bookingAPI from '../../apis/booking'
 import { BookingContext } from '../../contexts/BookingContextProvider'
+import { useNavigate } from 'react-router-dom'
 
 const PaymentContainer = () => {
+
+    const navigate = useNavigate()
 
     const {booking, setBooking} = useContext(BookingContext)
     console.log(booking.seatNoDepss);
@@ -26,8 +29,8 @@ const PaymentContainer = () => {
             'pasCount' : pasCount, 
             'passengerNames' : passengerNames.join(","), 
             'phones' : phones.join(","), 
-            'seatNoDepss' : seatNoDepss, 
-            'seatNoDesss' : seatNoDesss, 
+            'seatNoDepss' : seatNoDepss.join(","), 
+            'seatNoDesss' : seatNoDesss.join(","), 
             'payment' : payment
         }
 
@@ -46,10 +49,21 @@ const PaymentContainer = () => {
         getSelectedFlight()
     }, [])
 
+    const bookingInsert = async (params) => {
+        try {
+            const response = await bookingAPI.bookingInsert(params)
+            console.log(response.data);
+            navigate('/booking/payment_complete')
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
         <div>
-            <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} />
+            <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} bookingInsert={bookingInsert}/>
         </div>
     )
 }

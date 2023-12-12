@@ -3,7 +3,7 @@ import Index from '../../components/bus/Index'
 import Header from '../../components/fragment/Header'
 import Footer from '../../components/fragment/Footer'
 
-const IndexContainer = () => {
+const BusIndexContainer = () => {
   return (
     <>
     <Header/>
@@ -15,4 +15,4 @@ const IndexContainer = () => {
   )
     }
 
-export default IndexContainer
+export default BusIndexContainer

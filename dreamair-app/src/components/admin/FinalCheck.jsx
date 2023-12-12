@@ -7,14 +7,14 @@ const FinalCheck = ({ticketNo, pasTicketList, qrList, onHandleCheck}) => {
     <div className='container'>
       <h1 className="text-center my-5 align-it">탑승권 관리 - 탑승 처리</h1>
         <div className="btn-box d-grid gap-2 mb-4">
-           <button className="btn btn-primary btn-lg" onClick={() => { onHandleCheck(ticketNo) }}>탑승 완료</button>
+           <button className="btn btn-outline-primary btn-lg btn-big" onClick={() => { onHandleCheck(ticketNo) }}>탑승 완료</button>
         </div>
 
         {pasTicketList!= null && pasTicketList.map((ticket) => (
           <div key={ticket.ticketNo} className="boarding-pass" style={{ width: '1200px', height: '300px' }}>
             {/* Left Section */}
             <div className="left-section">
-              <div className="section airline-logo"><img src="/img/BlueNameLogo.png" alt="로고이미지" style={{ width: '130px', height: '30px' }} /></div>
+              <div className="section airline-logo"><img src="/img/BlueNameLogo.png" alt="로고이미지" style={{ width: '130px', height: '50px' }} /></div>
               <hr />
               <div className="section flight-details">
                 <div className="flight-detail-item"><strong>TicketNo : </strong>{ticket.ticketNo}</div>
@@ -50,7 +50,7 @@ const FinalCheck = ({ticketNo, pasTicketList, qrList, onHandleCheck}) => {
               <div className="section"><strong>Departure : </strong>{ticket.departureDate} {ticket.departureTime}</div>
               <div className="section"><strong>Seat : </strong>{ticket.seatNo}</div>
               <div className="section"><strong>Class : </strong>Economy</div>
-              <div className="section"><img src="/img/logo.png" alt="로고이미지" style={{ width: '30px', height: '30px' }} /></div>
+              <div className="section"><img src="/img/logo.png" alt="로고이미지" style={{ width: '150px', height: '150px' }} /></div>
             </div>
           </div>
       ))}

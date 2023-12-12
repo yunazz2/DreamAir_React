@@ -9,7 +9,7 @@ const UserList = ({userList, userNo, onDelete}) => {
       <h1 className="text-center my-5">사용자 관리</h1>
 
       <div className="btn-box d-grid gap-2 ">
-          <button className='btn btn-outline-primary btn-lg'><Link to="/admin/user_insert">사용자 정보 수동 등록</Link></button>
+          <button className='btn btn-outline-primary btn-lg btn-big'><Link to="/admin/user_insert">사용자 정보 수동 등록</Link></button>
       </div>
       <br />
 
@@ -25,7 +25,7 @@ const UserList = ({userList, userNo, onDelete}) => {
                 <th>이메일</th>
                 <th>등록일자</th>
                 <th>수정일자</th>
-                <th colSpan="2">비고</th>
+                <th>비고</th>
               </tr>
             </thead>
             <tbody>
@@ -39,10 +39,12 @@ const UserList = ({userList, userNo, onDelete}) => {
                   <td>{user.email}</td>
                   <td>{format.formatDate(user.regDate)}</td>
                   <td>{format.formatDate(user.updDate)}</td>
-
-                  <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <td colSpan="2" align='right'><button className='btn btn-danger' onClick={ () => onDelete(user.userNo) }>삭제</button></td>
-                  </div>
+                  
+                  <td align='center'>
+                    <div className="btn-box ms-2">
+                      <button className='btn btn-danger' onClick={ () => onDelete(user.userNo) }>삭제</button>
+                    </div>
+                  </td>
              </tr>
               ))}
             </tbody>

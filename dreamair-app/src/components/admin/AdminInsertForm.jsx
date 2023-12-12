@@ -22,18 +22,18 @@ const AdminInsertForm = ({ onInsert }) => {
     <div className="container mt-5">
       <h1 style={{ textAlign: 'center' }}>관리자 정보 등록</h1>
 
-        <div className="row g-3">
-          <div className="col-5 ">
-            <label htmlFor="adminId" className="form-label">관리자 아이디</label>
-            <div className="input-group has-validation">
+        <div className="adminInsertForm row g-3">
+          <div className="insert_input_container col-5 ">
+            <label htmlFor="adminId" className="form-label">관리자 아이디 : </label>
+            <div className="insert_input-group has-validation">
               <input type="text" className="form-control" name="adminId" id="adminId" placeholder="관리자 아이디" value={adminId} onChange={handleChangeAdminId} required/>
               <div className="invalid-feedback">Your adminId is required.</div>
             </div>
           </div>
 
-          <div className="col-5">
-            <label htmlFor="adminPw" className="form-label">관리자 비밀번호</label>
-            <div className="input-group has-validation">
+          <div className="insert_input_container col-5">
+            <label htmlFor="adminPw" className="form-label">관리자 비밀번호 : </label>
+            <div className="insert_input-group has-validation">
               <input type="password" className="form-control" name="adminPw" id="adminPw" placeholder="관리자 비밀번호" value={adminPw} onChange={handleChangeAdminPw} required />
               <div className="invalid-feedback">Your admin password is required.</div>
             </div>

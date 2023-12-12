@@ -180,8 +180,8 @@ function uploadPlugin(editor) {
       <hr className="my-4" />
 
       <div className="btn-box">
-        <button className='btn btn-danger'><Link to="/flight">취소</Link></button>
-        <button className='btn btn-primary' onClick={onSubmit}>등록</button>
+        <button className='btn btn-danger btn-basic'><Link to="/flight">취소</Link></button>
+        <button className='btn btn-primary btn-basic' onClick={onSubmit}>등록</button>
       </div>
     </div>
   );

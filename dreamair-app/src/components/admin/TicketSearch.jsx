@@ -33,10 +33,9 @@ const TicketSearch = ({ onSearch }) => {
 
   return (
       <div className="d-grid">
-        <div className="d-flex">
-          <label htmlFor="flightNo" className="" style={{ lineHeight: '50px' }}>항공기 번호 조회 : </label>
-          <input type="text" className="" 
-                 style={{ lineHeight: '50px', width: '200px' }} id="filter" name="flightNo" placeholder='항공기 번호 입력'
+        <div className="search-box">
+          <label htmlFor="flightNo" className="searchInputbox_label" style={{ lineHeight: '40px', width: '200px'}}>항공기 번호 조회 : </label>
+          <input type="text" className="searchInputbox" id="filter" name="flightNo" placeholder='항공기 번호 입력'
                  onChange={ handleFlightNo }
                  />
           <Select

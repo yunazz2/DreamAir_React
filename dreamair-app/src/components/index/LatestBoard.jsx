@@ -3,15 +3,17 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const LatestBoard = ({ mainList }) => {
   return (
+    <>
+    <hr></hr>
     <section id="board">
       <Container>
-        <h1 className="mt-5 ms-5">최근 게시글</h1>
+        <h1 className="board_title">최근 게시글</h1>
 
         <Row className="board_container">
           {mainList.map((board) => (
             <Col key={board.boardNo} md={4}>
               <Card className="px-1">
-                <div className="img_container" style={{ height: '250px', overflow: 'hidden' }}>
+                <div className="img_container" style={{ height: '200px', overflow: 'hidden' }}>
                   {board.thumbnail && (
                     <Card.Img
                       src={`/file/img/${board.thumbnail.fileNo}`}
@@ -21,7 +23,7 @@ const LatestBoard = ({ mainList }) => {
                   )}
                 </div>
                 <Card.Body>
-                  <Card.Title>{board.title}</Card.Title>
+                  <Card.Title className='card_title'>{board.title}</Card.Title>
                   <p className="card-text">
                     작성자: <span>{board.writer}</span>
                     <br />
@@ -40,7 +42,9 @@ const LatestBoard = ({ mainList }) => {
           ))}
         </Row>
       </Container>
+      <hr></hr>
     </section>
+    </>
   );
 };
 

@@ -42,7 +42,9 @@ return (
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <AdminBookingList AdminbookingList = {currentPost}/>
+      <div className="admin_container">
+        <AdminBookingList AdminbookingList = {currentPost}/>
+      </div>
     </div>
     <Pagination activePage={page}
                       itemsCountPerPage={postPerPage}

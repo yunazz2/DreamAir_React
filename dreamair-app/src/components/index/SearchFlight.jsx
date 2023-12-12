@@ -8,6 +8,7 @@ import { ko } from 'date-fns/esm/locale';
 import { addDays } from 'date-fns';
 import { BookingContext } from '../../contexts/BookingContextProvider';
 import { Link } from 'react-router-dom';
+import QuickMenu from './QuickMenu';
 
 const SearchFlight = () => {
 
@@ -107,38 +108,39 @@ const SearchFlight = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center" id="main_index_back">
       <section id="searchFlight">
-        <Container>
-          <div className="card card-4" style={{ height: '100%', backgroundColor: '#e7f5fac7' }}>
+        <Container className='search_container'>
+          <QuickMenu/>
+          <div className="search_card card-4">
             <div className="tab-content">
               <div className="tab-pane active" id="tab1">
                 <div className="tab_wrap">
-                  <Form id="frm">
-                    <Row className="d-flex py-2">
-                      <Col>
-                        <Form.Check
+                  <Form id="frm" className="style=margin-top: -20px;">
+                    <Row className="radio-btn d-flex py-2">
+                      {/* <Col> */}
+                        <Form.Check className='radio_form'
                           type="radio"
                           label="왕복"
                           id="round"
                           checked={booking.roundTrip === '왕복 가는편'}
                           onChange={() => handleRoundTripChange('왕복 가는편')}
                         />
-                      </Col>
-                      <Col>
-                        <Form.Check
+                      {/* </Col> */}
+                      {/* <Col> */}
+                        <Form.Check className='radio_form'
                           type="radio"
                           label="편도"
                           id="eachWay"
                           checked={booking.roundTrip === '편도'}
                           onChange={() => handleRoundTripChange('편도')}
                         />
-                      </Col>
-                    </Row>
+                      {/* </Col> */}
+                    </Row >
 
+                    <div className="search-box">
                     <Row>
-                      <Col>
-                        <Form.Floating>
+                      <Col className='select_box'>
+                        <Form.Floating className='select_departure'>
                           <Form.Select
                             id="floatingSelectGrid"
                             value={booking.departure}
@@ -154,8 +156,8 @@ const SearchFlight = () => {
                           <label htmlFor="floatingSelectGrid">출발지</label>
                         </Form.Floating>
                       </Col>
-                      <Col>
-                        <Form.Floating>
+                      <Col className='select_box'>
+                        <Form.Floating className='select_destination'>
                           <Form.Select
                             id="floatingSelectGrid"
                             value={booking.destination}
@@ -171,10 +173,16 @@ const SearchFlight = () => {
                           <label htmlFor="floatingSelectGrid">도착지</label>
                         </Form.Floating>
                       </Col>
-                      <Col>
+                      <Col className='select_box'>
                           {(booking.roundTrip === '왕복 가는편') && (
-                            <Form.Floating>
-                                <DatePicker
+                            <Form.Floating className='form_trip'>
+                                <Form.Control 
+                                  type="text"
+                                  placeholder="yyyy/mm/dd"
+                                  id="input-start"
+                                />
+                              <label htmlFor="floatingSelectGrid">여정</label>
+                                <DatePicker className='datepicker'
                                   selected={startDate}
                                   onChange={onChange}
                                   startDate={startDate}
@@ -185,39 +193,33 @@ const SearchFlight = () => {
                                   dateFormat="yyyy/MM/dd"
                                   locale={ko} 
                                 />
+                            </Form.Floating>
+                          )}
+
+                          {(booking.roundTrip === '편도') && (
+                            <Form.Floating className='form_trip'>
                                 <Form.Control
                                   type="text"
                                   placeholder="yyyy/mm/dd"
                                   id="input-start"
                                 />
                               <label htmlFor="floatingSelectGrid">여정</label>
-                            </Form.Floating>
-                          )}
-
-                          {(booking.roundTrip === '편도') && (
-                            <Form.Floating>
-                                <DatePicker
+                                <DatePicker className='datepicker'
                                   selected={singleDate}
                                   onChange={handleDateChange}
                                   dateFormat="yyyy/MM/dd" 
                                   locale={ko} 
                                   id="input-start"
                                 />
-                                <Form.Control
-                                  type="text"
-                                  placeholder="yyyy/mm/dd"
-                                  id="input-start"
-                                />
-                              <label htmlFor="floatingSelectGrid">여정</label>
                             </Form.Floating>
                           )}
                       </Col>
-                      <Col>
+                      <Col className='select_box'>
                         <div className="passenger">
-                          <Form.Floating>
+                          <Form.Floating  className='form_passenger'>
                             <div className="text-center" id='icon_click' onClick={handleIconClick}>
-                              탑승객
-                              <Form.Control className="form-control" readOnly />
+                              <label htmlFor="passenger_title">탑승객</label>
+                              <Form.Control className="form-control " readOnly />
                             </div>
                             {showPassengerBox && (
                               <div className="number_box">
@@ -225,8 +227,7 @@ const SearchFlight = () => {
                                   <Button type="button" className="down btn btn-danger" onClick={handleDecrease}>
                                     -
                                   </Button>
-                                  <Form.Control
-                                    className="inputQty text-center"
+                                  <Form.Control className="inputQty text-center"
                                     type="number"
                                     min="0"
                                     max="999"
@@ -244,8 +245,8 @@ const SearchFlight = () => {
                         </div>
                       </Col>
                     </Row>
-
-                    <div className="search_btn pt-2">
+                    </div>
+                    <div className="search_btn pt-3">
                       <Link to="/booking/bookingList">
                         <Button id="booking_btn" onClick={handleSubmit} className="btn btn-primary">
                           검색
@@ -259,7 +260,6 @@ const SearchFlight = () => {
           </div>
         </Container>
       </section>
-    </div>
   );
 };
 

@@ -21,27 +21,27 @@ const BoardRead = ({ boardNo, board, fileList, onDownload }) => {
           <h1 className="display-4 mb-0 text-center">게시글 조회</h1>
         </div>
         <div className="card-body">
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="boardNo" className="form-label fw-bold">번호</label>
             <input type="text" className="form-control" id="boardNo" value={boardNo} readOnly />
           </div>
 
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="title" className="form-label fw-bold">제목</label>
             <input type="text" className="form-control" id="title" value={board.title} readOnly />
           </div>
 
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="writer" className="form-label fw-bold">작성자</label>
             <input type="text" className="form-control" id="writer" value={board.writer} readOnly />
           </div>
 
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="regDate" className="form-label fw-bold">등록일자</label>
             <input type="text" className="form-control" id="regDate" value={format.formatDate(board.regDate)} readOnly />
           </div>
 
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="content" className="form-label fw-bold">내용</label>
             {board && board.content &&
               <CKEditor
@@ -55,16 +55,16 @@ const BoardRead = ({ boardNo, board, fileList, onDownload }) => {
             }
           </div>
 
-          <div className="mb-3">
+          <div className="readForm mb-3">
             <label htmlFor="file" className="form-label fw-bold">파일</label>
             {fileList!==null && fileList.map((file) => (
               <div className='file-box' key={file.fileNo}>
                 <div className="item">
                   <img src={`/file/img/${file.fileNo}`} alt={file.fileName} className="img-fluid" />
-                  <span>{file.originName}({format.byteToUnit(file.fileSize)})</span>
+                  <div className='mt-3'>{file.originName}({format.byteToUnit(file.fileSize)})</div>
                 </div>
 
-                <div className="item">
+                <div className="item mt-3">
                   <button className="btn btn-primary" onClick={() => handleDownload(file.no, file.originName)}>다운로드</button>
                 </div>
               </div>

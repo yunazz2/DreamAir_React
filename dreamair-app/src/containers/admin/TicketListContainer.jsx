@@ -63,10 +63,12 @@ const TicketListContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <div className="container">
-          <h1 className="text-center my-5">탑승권 관리</h1>
-          <TicketSearch ticketList={currentPost} onSearch={onSearch} ticketNo={ticketNo}/>
-          <TicketList isLoading = {isLoading} ticketList = {ticketList} ticketNo={ticketNo}/>
+        <div className="admin_container">
+          <div className="container">
+            <h1 className="text-center my-5">탑승권 관리</h1>
+            <TicketSearch ticketList={currentPost} onSearch={onSearch} ticketNo={ticketNo}/>
+            <TicketList isLoading = {isLoading} ticketList = {ticketList} ticketNo={ticketNo}/>
+          </div>
         </div>
     </div>
           <Pagination activePage={page}

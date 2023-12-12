@@ -27,7 +27,9 @@ const ProductInsertContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <ProductInsertForm onInsert={onInsert}/>
+        <div className="admin_container">
+          <ProductInsertForm onInsert={onInsert}/>
+        </div>
     </div>
     <Adminfooter/>  
     </>

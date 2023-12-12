@@ -8,7 +8,7 @@ const admin_footer = () => {
       <p className="float-end"><Link to="#">Back to Top</Link></p>
       <p className="float-start"><Link to="#">Privacy</Link> &middot; <Link to="#">Terms</Link></p>
       <hr />
-      <p className="copy text-center">Copyright (C) 2023 DreamAir All rights reserved.</p>
+      <p className="copy text-center Admin_copy">Copyright (C) 2023 DreamAir All rights reserved.</p>
     </footer>
     </>
   );

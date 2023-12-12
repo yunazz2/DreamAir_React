@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchFlight from '../components/index/SearchFlight'
-import QuickMenu from '../components/index/QuickMenu'
-import RecommendedSpots from '../components/index/RecommendedSpots'
-import LatestBoard from '../components/index/LatestBoard'
-import TripSlide from '../components/index/TripSlide'
-import * as index from '../apis/index'
+import React, { useEffect, useState } from 'react';
+import * as index from '../apis/index';
+import Footer from '../components/fragment/Footer';
+import Header from '../components/fragment/Header';
+import LatestBoard from '../components/index/LatestBoard';
+import RecommendedSpots from '../components/index/RecommendedSpots';
+import SearchFlight from '../components/index/SearchFlight';
+import TripSlide from '../components/index/TripSlide';
 import '../styles/bookingMain.css';
-import '../styles/style.css';
 import '../styles/reset.css';
-import Header from '../components/fragment/Header'
-import Footer from '../components/fragment/Footer'
+import '../styles/style.css';
 
 const IndexContainer = () => {
 
@@ -30,14 +29,14 @@ const IndexContainer = () => {
   return (
     <>
       <Header />
-      <div>
+      <div id='main_index_back'>
+        <TripSlide />
         <SearchFlight />
-        <QuickMenu />
+      </div>
+        {/* <QuickMenu /> */}
         <RecommendedSpots />
         <LatestBoard mainList={mainList}/>
-        <TripSlide />
-      </div>
-      <Footer />
+        <Footer/>
     </>
   )
 }

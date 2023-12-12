@@ -54,7 +54,9 @@ const FlightListContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <FlightList  flightList={currentPost} flightNo={flightNo} onDelete={onDelete}/>
+        <div className="admin_container">
+          <FlightList  flightList={currentPost} flightNo={flightNo} onDelete={onDelete}/>
+        </div>
     </div>
     <Pagination activePage={page}
                 itemsCountPerPage={postPerPage}

@@ -55,7 +55,9 @@ const FlightUpdateContainer = () => {
       <Header/>
       <div className='d-flex'>
           <Adminsidebar/>
-          <FlightUpdateForm flightNo={flightNo} onUpdate={onUpdate} onDelete={onDelete} flight={flight}/>
+          <div className="admin_container">
+            <FlightUpdateForm flightNo={flightNo} onUpdate={onUpdate} onDelete={onDelete} flight={flight}/>
+          </div>
       </div>
       <Adminfooter/>  
       </>

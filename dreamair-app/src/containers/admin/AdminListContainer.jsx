@@ -56,7 +56,9 @@ const AdminListContainer = () => {
       <Header />
       <div className="d-flex">
         <Adminsidebar />
-        <AdminList adminList={currentPost} adminNo={adminNo} onDelete={onDelete} />
+        <div className="admin_container">
+          <AdminList adminList={currentPost} adminNo={adminNo} onDelete={onDelete} />
+        </div>
       </div>
         <Pagination
           activePage={page}

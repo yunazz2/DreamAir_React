@@ -52,6 +52,7 @@ import ReservationContainer from './containers/bus/ReservationContainer';
 import ProductFlightListContainer from './containers/user/ProductFlightListContainer';
 import BookingContextProvider from './contexts/BookingContextProvider';
 
+import BusIndexContainer from './containers/bus/BusIndexContainer';
 import NotFound from './pages/error/NotFound';
 import ServerError from './pages/error/ServerError';
 import Test from './pages/error/Test';
@@ -137,7 +138,7 @@ function App() {
 
       {/* BUS */}
       <Routes>
-        <Route path="/bus" element={<IndexContainer/>}/>
+        <Route path="/bus" element={<BusIndexContainer/>}/>
         <Route path="/bus/reservation" element={<ReservationContainer/>}/>
       </Routes>
 
@@ -152,7 +153,7 @@ function App() {
         <Route path="/error/404" element={ <NotFound /> } />     {/* TODO : 404 페이지 꾸미기 */}
         <Route path="/error/500" element={ <ServerError /> } />  {/* TODO : 500 페이지 꾸미기 */}
         <Route path="/error/test" element={ <Test /> } />        {/* TODO : 500 페이지 꾸미기 */}
-        <Route path="/*" element={ <NotFound /> } />             {/* Info : 맨 마지막에 있어야합니다. */}
+        {/* <Route path="/*" element={ <NotFound /> } />             Info : 맨 마지막에 있어야합니다. */}
       </Routes>
 
     </BrowserRouter>

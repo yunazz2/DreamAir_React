@@ -408,13 +408,14 @@ input.form-control.col-md-10, .form-control.comment-form-control {
   height: 30px;
 }
 
-.search-box {
+/* .search-box {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
   margin-bottom: 20px;
-}
+} */
+
 .searchInputbox_label {
   margin-top: 10px;
 }

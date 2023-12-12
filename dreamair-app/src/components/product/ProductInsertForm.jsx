@@ -151,9 +151,9 @@ const ProductInsertForm = ({ onInsert }) => {
           <div className="input-group mb-3 row">
             <label className="input-group-text w-100" id="">상세 정보</label>
             {/* <textarea className="form-control" name="description" style={{ height: '200px' }} value={description} onChange={handleChangeDescription}/> */}
-            <CKEditor
-          editor={ ClassicEditor }
-          config={{
+            <CKEditor className="w-100"
+              editor={ ClassicEditor }
+              config={{
               placeholder: "내용을 입력하세요.",
               toolbar: {
                   items: [
@@ -168,7 +168,7 @@ const ProductInsertForm = ({ onInsert }) => {
                   shouldNotGroupWhenFull: false
               },
               editorConfig: {
-                  height: 500,
+                  height: 500
               },
               alignment: {
                   options: ['left', 'center', 'right', 'justify'],
@@ -243,8 +243,8 @@ const ProductInsertForm = ({ onInsert }) => {
           <hr className="my-4" />
 
           <div className="btn-box">
-            <button className='btn btn-danger'><Link to="/product">취소</Link></button>
-            <button className='btn btn-primary' onClick={ onSubmit }>등록</button>
+            <button className='btn btn-danger btn-basic'><Link to="/product">취소</Link></button>
+            <button className='btn btn-primary btn-basic' onClick={ onSubmit }>등록</button>
           </div>
       </div>
   );

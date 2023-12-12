@@ -2,10 +2,9 @@ import React from 'react'
 
 const AdminBookingList = ({AdminbookingList}) => {
   return (
-    <div className='admin_container'>
-      <h1 className="text-center my-3">예매 관리</h1>
-      <br />
-      <br />
+    <div className='container'>
+      <h1 className="text-center mt-5 mb-2">예매 관리</h1>
+      <br/>
 
       {AdminbookingList != null && (
         <table className="table table-striped table-hover table-bordered text-center align-middle">

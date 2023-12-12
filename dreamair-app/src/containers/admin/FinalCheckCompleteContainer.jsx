@@ -14,7 +14,9 @@ const FinalCheckCompleteContainer = () => {
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <FinalCheckComplete ticketNo={ticketNo}/>  
+      <div className="admin_container">
+        <FinalCheckComplete ticketNo={ticketNo}/>
+      </div>  
     </div>
     <Adminfooter/>
     </>

@@ -5,7 +5,7 @@ import * as format from '../../apis/format'
 const ProductList = ( {productList, productNo, onDelete}) => {
 
   return (
-    <div className='admin_container'>
+    <div className='container'>
       <h1 className="text-center my-5">상품 관리</h1>
       <div className="btn-box d-grid gap-2">
         <button className='btn btn-outline-primary btn-lg btn-big'><Link to="/product/product_insert">상품 등록</Link></button>
@@ -18,18 +18,18 @@ const ProductList = ( {productList, productNo, onDelete}) => {
         <table className="table table-striped table-hover table-bordered text-center align-middle">
           <thead>
             <tr className="table-primary">
-              <th>상품번호</th>
-              <th>이미지</th>
-              <th>노선번호</th>
-              <th>상품명</th>
-              <th>카테고리</th>
-              <th>가격</th>
-              <th>출발지</th>
-              <th>도착지</th>
-              <th>출발시간</th>
-              <th>도착시간</th>
-              <th>등록일자</th>
-              <th>수정일자</th>
+              <th align='center'>상품번호</th>
+              <th align='center'>이미지</th>
+              <th align='center'>노선번호</th>
+              <th align='center'>상품명</th>
+              <th align='center'>카테고리</th>
+              <th align='center'>가격</th>
+              <th align='center'>출발지</th>
+              <th align='center'>도착지</th>
+              <th align='center'>출발시간</th>
+              <th align='center'>도착시간</th>
+              <th align='center'>등록일자</th>
+              <th align='center'>수정일자</th>
               <th colSpan="2">비고</th>
             </tr>
           </thead>
@@ -50,10 +50,12 @@ const ProductList = ( {productList, productNo, onDelete}) => {
                 <td align='center'>{format.formatDate(product.productRegDate)} </td>
                 <td align='center'>{format.formatDate(product.productUpdDate)}</td>
 
-                <div className="btn-box">
-                  <td align='right'><button className='btn btn-primary'><Link to={`/product/product_update/${product.productNo}`}>수정</Link></button></td>
-                  <td align='right'><button className='btn btn-danger' onClick={ () => onDelete(product.productNo) }>삭제</button></td>
-                </div>
+                <td colSpan={2}>
+                  <div className="btn-box">
+                    <button className='btn btn-danger me-1' onClick={ () => onDelete(product.productNo) }>삭제</button>
+                    <button className='btn btn-primary'><Link to={`/product/product_update/${product.productNo}`}>수정</Link></button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

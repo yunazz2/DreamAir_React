@@ -53,7 +53,9 @@ const UserListContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <UserList userList={currentPost} onDelete={onDelete}/> 
+        <div className="admin_container">
+          <UserList userList={currentPost} onDelete={onDelete}/>
+        </div> 
     </div>
     <Pagination activePage={page}
                 itemsCountPerPage={postPerPage}

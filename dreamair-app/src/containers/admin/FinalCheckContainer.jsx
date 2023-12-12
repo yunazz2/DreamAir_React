@@ -79,7 +79,9 @@ const FinalCheckContainer = () => {
     <Header/>
     <div className='d-flex'>
       <Adminsidebar/>
-      <FinalCheck ticketNo={ticketNo} pasTicketList={pasTicketList} qrList={qrList} onHandleCheck={onHandleCheck}/>  
+      <div className="admin_container">
+        <FinalCheck ticketNo={ticketNo} pasTicketList={pasTicketList} qrList={qrList} onHandleCheck={onHandleCheck}/>  
+      </div>
     </div>
     <Adminfooter/> 
     </>

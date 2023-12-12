@@ -53,7 +53,9 @@ const ProductListContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <ProductList productList={currentPost} productNo={productNo} onDelete={onDelete}/>
+        <div className="admin_container">
+          <ProductList productList={currentPost} productNo={productNo} onDelete={onDelete}/>
+        </div>
     </div>
     <Pagination activePage={page}
                       itemsCountPerPage={postPerPage}

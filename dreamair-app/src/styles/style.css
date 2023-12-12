@@ -361,3 +361,84 @@ height: auto; /* 이미지 비율을 유지하면서 높이 자동 조절 */
 .btn-basic {
   width: 80px;
 }
+
+.adminInsertForm {
+  margin-top: 20px;
+}
+
+.adminInsertForm label {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+.insert_input_container {
+  margin-left: 40px;
+  display: flex;
+  justify-content:center; 
+  text-align: center;
+  justify-items: center;
+}
+
+.input-group-text {
+  width: 150px;
+}
+
+input.form-control.col-md-10 {
+  border: 1px solid rgb(219, 218, 218);
+}
+
+.ck.ck-reset.ck-editor.ck-rounded-corners {
+  margin-left: 20px;
+}
+.ck-editor {
+  width: 100% !important;
+
+}
+
+.ck-editor__editable {
+  min-height: 300px !important;
+}
+
+.select {
+  width: 250px;
+  height: 30px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.searchInputbox_label {
+  margin-top: 10px;
+}
+.searchInputbox {
+  border: 1px solid rgb(179, 175, 175);
+  margin-left: 10px;
+  margin-right: 40px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 38px;
+  width: 300px;
+  margin-top: 10px;
+}
+
+.airline-logo {
+ margin-left: -650px;
+ margin-bottom: 5px;
+}
+
+.QRcode {
+  float: left;
+}
+
+.QRcode img {
+  width: 150px;
+  height: 150px;
+}

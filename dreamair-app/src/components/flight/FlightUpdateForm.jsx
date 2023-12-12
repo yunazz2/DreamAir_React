@@ -131,8 +131,8 @@ const FlightUpdateForm = ( {flightNo, flight, onUpdate}) => {
     <hr className="my-4" />
 
     <div className="d-flex justify-content-between">
-      <button className='btn btn-primary' onClick={ () => handleUpdate(flightNo, flight.flightName, flight.routeNo, flight.departure, flight.destination, flight.departureTime, flight.destinationTime, flight.seatMax, flight.seatUsed, flight.seatRemaining) }>수정</button>
-      <button className='btn btn-danger'><Link to="/flight">취소</Link></button>
+      <button className='btn btn-danger btn-basic'><Link to="/flight">취소</Link></button>
+      <button className='btn btn-primary btn-basic' onClick={ () => handleUpdate(flightNo, flight.flightName, flight.routeNo, flight.departure, flight.destination, flight.departureTime, flight.destinationTime, flight.seatMax, flight.seatUsed, flight.seatRemaining) }>수정</button>
     </div>
   </div>
 );

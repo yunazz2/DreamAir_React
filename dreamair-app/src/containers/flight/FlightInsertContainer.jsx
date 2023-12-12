@@ -31,7 +31,9 @@ const FlightInsertContainer = () => {
     <Header/>
     <div className='d-flex'>
         <Adminsidebar/>
-        <FlightInsertForm onInsert={onInsert}/>
+        <div className="admin_container">
+          <FlightInsertForm onInsert={onInsert}/>
+        </div>
     </div> 
     <Adminfooter/> 
     </>    

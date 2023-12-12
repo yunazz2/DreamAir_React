@@ -12,7 +12,7 @@ const TripSlide = () => {
   return (
     <section id="slide">
       <div className='swiper-container'>
-      <Container>
+      <>
         {/* <h1 className="mt-5 ms-5">여행지 둘러보기</h1> */}
 
         <Swiper
@@ -72,7 +72,7 @@ const TripSlide = () => {
           </SwiperSlide>
         </Swiper>
         <div style={ { height: '400px'} }></div>
-      </Container>
+      </>
       </div>
     </section>
     

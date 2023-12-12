@@ -13,7 +13,7 @@ const LatestBoard = ({ mainList }) => {
           {mainList.map((board) => (
             <Col key={board.boardNo} md={4}>
               <Card className="px-1">
-                <div className="img_container" style={{ height: '250px', overflow: 'hidden' }}>
+                <div className="img_container" style={{ height: '200px', overflow: 'hidden' }}>
                   {board.thumbnail && (
                     <Card.Img
                       src={`/file/img/${board.thumbnail.fileNo}`}
@@ -23,7 +23,7 @@ const LatestBoard = ({ mainList }) => {
                   )}
                 </div>
                 <Card.Body>
-                  <Card.Title>{board.title}</Card.Title>
+                  <Card.Title className='card_title'>{board.title}</Card.Title>
                   <p className="card-text">
                     작성자: <span>{board.writer}</span>
                     <br />

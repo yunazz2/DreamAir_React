@@ -36,7 +36,7 @@ const IndexContainer = () => {
         {/* <QuickMenu /> */}
         <RecommendedSpots />
         <LatestBoard mainList={mainList}/>
-      <Footer />
+        <Footer/>
     </>
   )
 }

@@ -5,7 +5,7 @@ const Footer = () => {
   
   return (
    
-    <footer className="footer_container bottom-0">
+    <footer className="footer_container mt-5">
       <hr />
       <div className="footer_link">
         <p className="float-end"><Link to="#">Back to Top</Link></p>

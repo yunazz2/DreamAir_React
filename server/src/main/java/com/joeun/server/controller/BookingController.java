@@ -158,16 +158,18 @@ public class BookingController {
         Map<String, Object> bookingObject = new HashMap<>();
         bookingObject.put("seatStatus", seatStatus);
         bookingObject.put("selectLastPasNos", selectLastPasNoss);
-
+        bookingObject.put("booking", booking);
+        
         return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
 
+  
     // 예약된 좌석 데이터 가져오기
     @GetMapping("/seatStatus/{flightNo}")
     public ResponseEntity<?> bookedSeatList(@PathVariable Integer flightNo) throws Exception {
 
         List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
-        
+
         return new ResponseEntity<>(bookedSeatList, HttpStatus.OK);
     }
     
@@ -187,7 +189,11 @@ public class BookingController {
 
         log.info("오는 편 페이지 부킹 객체 : " + booking);
 
-        return new ResponseEntity<>(seatStatus, HttpStatus.OK);
+        Map<String, Object> bookingObject = new HashMap<>();
+        bookingObject.put("seatStatus", seatStatus);
+        bookingObject.put("booking", booking);
+
+        return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
 
     // 탑승객 유의사항

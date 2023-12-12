@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Users;
+import com.joeun.server.service.AdminService;
 import com.joeun.server.service.BookingService;
 import com.joeun.server.service.UserService;
 
@@ -36,6 +37,9 @@ public class UserController {
 
     @Autowired
     private BookingService bookingservice;
+    
+    @Autowired
+    private AdminService adminService;
 
     // 회원 아이디로 회원 정보 조회
     @GetMapping("/{userId}")
@@ -139,21 +143,16 @@ public class UserController {
     public ResponseEntity<?> selectTicketList(@RequestBody Map<String, Object> requestData) {
         log.info("들어오니?????");
         try {
-            Integer ticketNo = (Integer) requestData.get("ticketNo");
+            Integer ticketNo = Integer.parseInt((String) requestData.get("ticketNo"));
             String userId = (String) requestData.get("userId");
 
-            // ticketNo와 userId를 사용하여 ticketList 데이터 조회 및 처리
-            // 이 예시에서는 단순히 로그를 출력하는 예시 코드를 작성했습니다.
-            System.out.println("Received ticketNo: " + ticketNo);
-            System.out.println("Received userId: " + userId);
+            List<Booking> ticketList = adminService.pas_ticketList(ticketNo);
 
-            // 여기서 ticketList 데이터를 조회하고 처리한 뒤, responseData에 결과를 담습니다.
-            // responseData에는 처리된 결과 데이터를 담아서 클라이언트에 응답합니다.
-            String responseData = "Ticket list data"; // 예시로 담길 데이터입니다.
+            log.info(ticketList + "");
+            return new ResponseEntity<>(ticketList, HttpStatus.OK);
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
         } catch (Exception e) {
-            // 오류 처리
+
             System.err.println("Error while processing ticket list: " + e.getMessage());
             return new ResponseEntity<>("Error while processing ticket list", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -11,8 +11,8 @@ const PaymentContainer = () => {
 
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)
-    const [passengerNames, setPassengerNames] = useState(['테스트2']);
-    const [phones, setPhones] = useState(['010123456']);
+    const [passengerNames, setPassengerNames] = useState(booking.passengerNames);
+    const [phones, setPhones] = useState(booking.phones);
     const [seatNoDepss, setSeatNoDepss] = useState(booking.seatNoDepss);
     const [seatNoDesss, setSeatNoDesss] = useState(booking.seatNoDesss);
     const [goBookingList, setGoBookingList] = useState([]);
@@ -26,8 +26,8 @@ const PaymentContainer = () => {
             'pasCount' : pasCount, 
             'passengerNames' : passengerNames.join(","), 
             'phones' : phones.join(","), 
-            'seatNoDepss' : seatNoDepss.join(","), 
-            'seatNoDesss' : seatNoDesss.join(","), 
+            'seatNoDepss' : seatNoDepss, 
+            'seatNoDesss' : seatNoDesss, 
             'payment' : payment
         }
 

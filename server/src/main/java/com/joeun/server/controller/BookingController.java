@@ -89,30 +89,10 @@ public class BookingController {
         }
         
     }
-    
-    // 탑승객 정보 입력
-    // @GetMapping(value="/info")
-    // public String info(Model model, Booking booking) {
-    //     log.info("가는편 상품번호 : " + booking.getProductNoDep());
-    //     log.info("오는편 상품번호 : " + booking.getProductNoDes());
-    //     log.info("인원수 : " + booking.getPasCount());
-    //     log.info("가는편 노선번호 : " + booking.getRouteNoDep());
-    //     log.info("오는편 노선번호 : " + booking.getRouteNoDes());
-    //     log.info("info 왕복여부 : " + booking.getRoundTrip());
-
-    //     model.addAttribute("booking", booking);
-        
-    //     return "booking/info";
-    // }
- 
 
     @PostMapping(value="/info")
     public ResponseEntity<?> infoPro(@RequestBody Booking booking , HttpServletRequest request, Principal principal) { 
-        // log.info("탑승객 이름 : " + booking.getPassengerNames()[0]);
         log.info("infoPro : " + booking);
-        // booking.forEach((key, value) -> {
-        //     log.info(key +  " : " + value);
-        // });
 
         try {
             int result = bookingService.infoPassngers(booking, request, principal);

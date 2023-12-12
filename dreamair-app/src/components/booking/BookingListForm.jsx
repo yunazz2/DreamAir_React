@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useHistory } from 'react-router-dom';
 import { BookingContext } from '../../contexts/BookingContextProvider';
+import { Button } from 'react-bootstrap';
 
-const BookingListForm = ({ bookingInfo, bookingList }) => {
+const BookingListForm = ({ bookingInfo, bookingList, setRoundTrip }) => {
 
   const {booking, setBooking} = useContext(BookingContext);
 
   const handleLinkClick = (bookingItem) => {
     const roundTrip = '왕복'
+    setRoundTrip(roundTrip)
     const productNoDep = bookingItem.productNo
     const routeNoDep = bookingItem.routeNo
     setBooking({ ...booking, roundTrip, productNoDep, routeNoDep })
@@ -126,6 +128,9 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
 
                     {bookingInfo.roundTrip === '왕복 가는편' && (
                       <>
+                      {/* <Button onClick={() => handleLinkClick(bookingItem)} className="btn btn-outline-primary btn-lg btn-select">
+                          선택하기
+                      </Button> */}
                         <Link to="/booking/bookingList" onClick={() => handleLinkClick(bookingItem)} className="btn btn-outline-primary btn-lg btn-select" >
                           선택하기
                         </Link>

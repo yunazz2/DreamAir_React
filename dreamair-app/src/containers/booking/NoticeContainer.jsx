@@ -7,9 +7,6 @@ const NoticeContainer = () => {
     
     const {booking, setBooking} = useContext(BookingContext)
 
-    console.log("확인쓰~~~~~~~~~~~~");
-    console.log(booking);
-
     console.log(booking.passengerNames);
     console.log(booking.phones);
     

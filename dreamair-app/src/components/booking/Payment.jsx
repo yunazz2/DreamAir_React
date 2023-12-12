@@ -61,7 +61,8 @@ const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
         }
 
         const params = {
-            
+            names : booking.names,
+            passengerNos : booking.passengerNos,
         }
 
         // 결제 로직을 처리하세요.

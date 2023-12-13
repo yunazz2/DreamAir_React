@@ -18,12 +18,12 @@ const Login = () => {
         <div className="form-check text-start my-3">
           {/* 아이디 저장 ✅ */}
           <label className="form-check-label" htmlFor="remember-id">아이디 저장
-            <input className="form-check-input" type="checkbox" name="remember-id" id="remember-id" />
+            <input className="form-check-input login_checkbox" type="checkbox" name="remember-id" id="remember-id" />
           </label>
         </div>
         <div className="form-check text-start my-3">
           <label className="form-check-label" htmlFor="remember-me">자동 로그인
-            <input className="form-check-input" type="checkbox" name="remember-me" id="remember-me" />
+            <input className="form-check-input login_checkbox" type="checkbox" name="remember-me" id="remember-me" />
           </label>
         </div>
       </div>

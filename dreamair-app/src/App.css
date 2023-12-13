@@ -512,7 +512,7 @@ img:not([draggable]), embed, object, video {
   margin-left: 1px;
 }
 
-.form-check, .radio-row, .login_checkbox {
+.form-check, .radio-row {
   display: block;
   margin-left: 22px;
 }
@@ -868,4 +868,19 @@ input#ticketNo {
   border: 1px solid rgb(242, 240, 240);
   margin-top: 20px;
   
+}
+
+.notice_checkbox {
+  display: flex;
+}
+
+.notice_container {
+  text-align: start;
+  align-items: center;
+}
+
+.notice_container img {
+  border: 1px solid rgb(244, 237, 233);
+  margin-left: 150px;
+  margin-top: 10px;
 }

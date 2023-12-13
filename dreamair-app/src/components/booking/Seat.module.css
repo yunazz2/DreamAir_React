@@ -134,7 +134,7 @@ input:focus {
 }
 
 /* 체크 박스 여기 */
-input[type=checkbox] {
+input[type=checkbox].seat-box {
 	/* checkbox의 실제 체크박스 부분을 숨깁니다. */
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -146,7 +146,6 @@ input[type=checkbox] {
 	width: 20px; /* 원하는 크기로 조정하세요 */
 	height: 20px; /* 원하는 크기로 조정하세요 */
 	margin: 5px 15px 5px 5px; /* 원하는 여백으로 조정하세요 */
-
 	
 	/* 배경 이미지 설정 */
 	background-image: url('../../../public/img/bookableSeat.png');
@@ -154,6 +153,7 @@ input[type=checkbox] {
 
 	cursor: pointer;
 }
+
 
 /* .seat1 .seatBox:checked { */
 .seat1 .seatBox:checked { 
@@ -219,10 +219,10 @@ input[type="text"]:hover{
     background-color: white;
 }
 
-.buttonBox {
+/* .buttonBox {
 	display: flex;
 	justify-content: center;
-}
+} */
 
 .buttonBox .bottomButton {
 	background-color: #94e1ff;

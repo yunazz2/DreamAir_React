@@ -111,7 +111,7 @@ const NoticeForm = ( { goBookingList, comeBookingList } ) => {
           </section>
 
           {/* 확인 체크박스 및 결제 버튼 */}
-          <Form.Group className="mt-3">
+          <Form.Group className="notice_checkbox mt-3">
             <Form.Check
               type="checkbox"
               label="위 내용을 확인하셨습니까?"
@@ -120,7 +120,7 @@ const NoticeForm = ( { goBookingList, comeBookingList } ) => {
             />
           </Form.Group>
           <Link to="/booking/payment">
-            <Button variant="outline-primary" size="lg" type="submit" onClick={handelOnClick}>
+            <Button variant="outline-primary btn-big mt-3" size="lg" type="submit" onClick={handelOnClick}>
               결제하기
             </Button>
           </Link>

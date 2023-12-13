@@ -25,7 +25,6 @@ const MyPageContainer = () => {
                         <Link to={`/user/mileage/${userId}`} className="btn btn-outline-primary btn-lg btn-big">마일리지 조회</Link>
                         <Link to={`/user/deleteaccount/${userId}`} className="btn btn-outline-primary btn-lg btn-big">회원 탈퇴</Link>
                         <Link to={`/user/mybooking/${userId}`} className="btn btn-outline-primary btn-lg btn-big">나의 탑승권 관리</Link>
-                        <Link to="/user/logout" className="btn btn-outline-primary btn-lg btn-big">로그아웃</Link>
                     </div>
                 </div>
             </div>

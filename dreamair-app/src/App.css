@@ -388,7 +388,7 @@ img:not([draggable]), embed, object, video {
 .search_container {
   width: 1280px;
   height: 180px;
-  z-index: 3;
+  z-index: 1;
 }
 
 .btn_search_box {
@@ -450,6 +450,7 @@ img:not([draggable]), embed, object, video {
 
 .btn_search a:hover {
   cursor: pointer;
+  background-color: #edf2f56e;
 }
 
 .btn_search a img {

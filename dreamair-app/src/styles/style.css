@@ -444,11 +444,14 @@ input.form-control.col-md-10, .form-control.comment-form-control {
   height: 150px;
 }
 
-.boardForm, .Form-label, .readForm {
+.boardForm, .readForm {
   display: flex;
   font-weight: bold;
 }
 
+.Form-label {
+  display: flex;
+}
 .boardForm {
   line-height: 30px;
 }

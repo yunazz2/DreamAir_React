@@ -26,7 +26,7 @@ const BoardList = ({ boardList, isLoading }) => {
                 // <img src={`/file/img/${board.thumbnail.fileNo}`} alt="게시글 이미지" className="card-img-top" style={{ maxHeight: '200px', objectFit: 'cover', minHeight: minImageHeight }}/>
               )}
               <div className="card-body">
-                <h5 className="card-title title"><Link to={`/board/${board.boardNo}`} style={{ color: '#333' }}>{board.title}</Link></h5>
+                <h4 className="card-title title"><Link to={`/board/${board.boardNo}`} style={{ color: '#333' }}>{board.title}</Link></h4>
                 <hr/>
                     <td align='right'>조회수: {board.views}</td>
                     <hr className='mb-3'/>

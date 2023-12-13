@@ -4,7 +4,6 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 const RecommendedSpots = () => {
   return (
     <>
-    <hr className='section_bar'/>
     <section id="spot">
       <Container>
         <h1 className='spot_title'>추천 여행지</h1>

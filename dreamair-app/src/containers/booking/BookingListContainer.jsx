@@ -31,7 +31,7 @@ const BookingListContainer = () => {
   }
   
   const getBookingList = async () => {
-    if (roundTrip === ('왕복 가는편' || '편도') ) {
+    if (roundTrip === ('왕복 가는편') || ('편도') ) {
       const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
       const data = await response.data
       console.log("가는편 항공권 : " + data);

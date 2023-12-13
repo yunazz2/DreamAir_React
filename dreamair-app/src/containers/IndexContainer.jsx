@@ -34,8 +34,10 @@ const IndexContainer = () => {
         <SearchFlight />
       </div>
         {/* <QuickMenu /> */}
+        <br/><br/><br/><br/><br/>
         <RecommendedSpots />
         <LatestBoard mainList={mainList}/>
+        <br/><br/><br/><br/><br/>
         <Footer/>
     </>
   )

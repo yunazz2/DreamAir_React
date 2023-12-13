@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { BookingContext } from '../../contexts/BookingContextProvider';
 
-const PaymentComplete = ({ isAuthenticated, bookingNo, bookingNo2 }) => {
+const PaymentComplete = ({ isAuthenticated }) => {
+  // context 해제하기
+  const {booking, setBooking} = useContext(BookingContext)
+
   return (
     <Container className="w-100 text-center">
       <i className="fa-regular fa-circle-check"></i>
@@ -11,7 +15,7 @@ const PaymentComplete = ({ isAuthenticated, bookingNo, bookingNo2 }) => {
       {isAuthenticated && (
         <Row>
           <Col>
-            <h3>예매 번호: DA0000{bookingNo}</h3>
+            <h3>예매 번호: DA0000{booking.bookingNo}</h3>
           </Col>
         </Row>
       )}
@@ -20,7 +24,7 @@ const PaymentComplete = ({ isAuthenticated, bookingNo, bookingNo2 }) => {
       {!isAuthenticated && (
         <Row>
           <Col>
-            <h3>예매 번호: DA0000{bookingNo2}</h3>
+            <h3>예매 번호: DA0000{booking.bookingNo2}</h3>
           </Col>
         </Row>
       )}

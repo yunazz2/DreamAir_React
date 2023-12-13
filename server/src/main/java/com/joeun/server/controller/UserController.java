@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
+import com.joeun.server.dto.Product;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.BookingService;
 import com.joeun.server.service.UserService;
@@ -125,6 +127,24 @@ public class UserController {
 
             return new ResponseEntity<>(responseData, HttpStatus.OK);
 
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 출도착 항공편 조회
+    @GetMapping("/productFlightList")
+    public ResponseEntity<?> getAll() {
+       log.info("[GET] - /user/productFlightList - 출도착 항공편 조회");
+       try {
+            List<Product> productFlightList = userService.product_flightList();
+            if( productFlightList == null )
+                log.info("출도착 항공편 목록 없음");
+            else 
+                log.info("출도착 항공편 목록 수 : " + productFlightList.size());
+
+            return new ResponseEntity<>(productFlightList, HttpStatus.OK);
         } catch (Exception e) {
             log.error(null, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

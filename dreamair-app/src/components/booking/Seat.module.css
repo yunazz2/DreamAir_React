@@ -52,9 +52,14 @@
 .seatInnerRightTop {
 	height: 57%;
     padding: 15px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     border: 1px solid #94e1ff;
     margin-bottom: 10px;
+}
+
+.seatInfo {
+	display: flex;
+	justify-content: space-between;
 }
 
 .seatInnerRightDown {
@@ -202,12 +207,12 @@ label {
 }
 
 .seatInfoBookSeat{
-	margin-right: 15px;
-    float: left;
+}
+
+.seatInfoBookingSeat{
 }
 
 .seatInfoBookedSeat {
-	margin-top: 10px;
 }
 
 .goSeat, .backSeat{

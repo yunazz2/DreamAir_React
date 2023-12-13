@@ -3,6 +3,8 @@ import Payment from '../../components/booking/Payment'
 import * as bookingAPI from '../../apis/booking'
 import { BookingContext } from '../../contexts/BookingContextProvider'
 import { useNavigate } from 'react-router-dom'
+import Header from '../../components/fragment/Header';
+import Footer from '../../components/fragment/Footer';
 
 const PaymentContainer = () => {
 
@@ -63,7 +65,11 @@ const PaymentContainer = () => {
 
     return (
         <div>
-            <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} bookingInsert={bookingInsert}/>
+            <Header/>
+            <div className="container">
+                <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} bookingInsert={bookingInsert}/>
+            </div>
+            <Footer/>
         </div>
     )
 }

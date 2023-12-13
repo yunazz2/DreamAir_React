@@ -48,7 +48,9 @@ const UserUpdateContainer = () => {
       <Header />
       <div className='d-flex'>
         <Sidebar />
-        <UserUpdateForm userId={userId} user={user} onUpdate={onUpdate} />
+        <div className="user_container">
+          <UserUpdateForm userId={userId} user={user} onUpdate={onUpdate} />
+        </div>
       </div>
       <Footer />
     </>

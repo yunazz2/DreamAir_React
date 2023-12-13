@@ -29,7 +29,9 @@ const DeleteAccountContainer = () => {
       <Header />
       <div className='d-flex'>
         <Sidebar />
-        <DeleteAccount userId={userId} onDelete={onDelete} />
+        <div className="user_container">
+          <DeleteAccount userId={userId} onDelete={onDelete} />
+        </div>
       </div>
       <Footer />
     </>

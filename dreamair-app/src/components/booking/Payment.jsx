@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import SelectedFlight from './SelectedFlight';
 import { BookingContext } from '../../contexts/BookingContextProvider';
-// import '../../styles/payment.css'
+import '../../styles/payment.css'
 
 const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
 
@@ -105,34 +105,34 @@ const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
     };
 
     return (
-        <Container className="container-pay">
+        <Container className="container-pay mt-3">
             <h1>주문/결제</h1>
             <Form id="fm">
                 <SelectedFlight goBookingList={goBookingList} comeBookingList={comeBookingList} />
 
-                <Form.Group controlId="productName">
+                <Form.Group className="paymentForm" controlId="productName">
                 <Form.Label>상품명:</Form.Label>
                 <Form.Control type="text" value='항공권' readOnly />
                 </Form.Group>
 
-                <Form.Group controlId="price">
+                <Form.Group className="paymentForm" controlId="price">
                 <Form.Label>결제금액:</Form.Label>
                 <Form.Control type="text" value={price} readOnly />
                 </Form.Group>
 
                 <Row className="mb-3">
-                <Col md={6}>
+                <Col md={6} className="paymentForm">
                     <Form.Label>이름:</Form.Label>
-                    <Form.Control type="text" onChange={handleChangeName} value={name} placeholder="이름 입력" />
+                    <Form.Control className="ms-3" type="text" onChange={handleChangeName} value={name} placeholder="이름 입력" />
                 </Col>
 
-                <Col md={6}>
+                <Col md={6} className="paymentForm">
                     <Form.Label>연락처:</Form.Label>
                     <Form.Control type="text" onChange={handleChangeTel} value={tel} placeholder="연락처 입력" />
                 </Col>
                 </Row>
 
-                <Form.Group controlId="email">
+                <Form.Group className="paymentForm" controlId="email">
                 <Form.Label>이메일:</Form.Label>
                 <Form.Control type="email" onChange={handleChangeEmail} value={email} placeholder="이메일 입력" />
                 </Form.Group>

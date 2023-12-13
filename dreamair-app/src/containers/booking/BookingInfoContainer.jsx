@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import InfoForm from '../../components/booking/InfoForm'
 import { useNavigate } from 'react-router-dom'
 import * as bookingAPI from '../../apis/booking'
+import Header from '../../components/fragment/Header';
+import Footer from '../../components/fragment/Footer';
 
 const BookingInfoContainer = () => {
 
@@ -22,7 +24,11 @@ const BookingInfoContainer = () => {
 
     return (
         <div>
-            <InfoForm onInsert={onInsert} />;
+            <Header/>
+            <div className="container">
+                <InfoForm onInsert={onInsert} />
+            </div>
+            <Footer/>
         </div>
     )
 }

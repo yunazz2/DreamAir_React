@@ -3,6 +3,8 @@ import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import BookingListForm from '../../components/booking/BookingListForm';
 import * as bookingAPI from '../../apis/booking'
 import { BookingContext } from '../../contexts/BookingContextProvider';
+import Header from '../../components/fragment/Header';
+import Footer from '../../components/fragment/Footer';
 
 const BookingListContainer = () => {
 
@@ -49,7 +51,9 @@ const BookingListContainer = () => {
   },[roundTrip])
 
   return (
-    <Container className="mt-5 py-3">
+    <>
+    <Header/>
+    <Container className="container mt-5 py-3">
       <h1 className="text-center">항공권 조회</h1>
       <br />
       <div className="img_container text-center">
@@ -63,11 +67,11 @@ const BookingListContainer = () => {
       </section>
 
       <div className="d-flex justify-content-between">
-        <Button href="/" variant="outline-primary" size="lg">
-          메인으로 가기
-        </Button>
+        <Button href="/" variant="outline-primary" size="lg">메인으로 가기</Button>
       </div>
     </Container>
+    <Footer/>
+    </>
   );
 };
 

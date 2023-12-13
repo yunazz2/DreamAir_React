@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import NoticeForm from '../../components/booking/NoticeForm'
 import * as bookingAPI from '../../apis/booking'
 import { BookingContext } from '../../contexts/BookingContextProvider'
+import Header from '../../components/fragment/Header';
+import Footer from '../../components/fragment/Footer';
 
 const NoticeContainer = () => {
     
@@ -48,10 +50,14 @@ const NoticeContainer = () => {
 
     return (
         <div>
-            <NoticeForm 
-                        goBookingList={goBookingList}
-                        comeBookingList={comeBookingList}
-            />
+            <Header/>
+            <div className="container">
+                <NoticeForm 
+                            goBookingList={goBookingList}
+                            comeBookingList={comeBookingList}
+                />
+            </div>
+            <Footer/>
         </div>
     )
 }

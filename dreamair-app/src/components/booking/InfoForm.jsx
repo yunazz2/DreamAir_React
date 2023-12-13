@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { BookingContext } from '../../contexts/BookingContextProvider';
+import { Link } from 'react-router-dom';
 
 const InfoForm = ( {onInsert} ) => {
 
@@ -94,7 +95,7 @@ const InfoForm = ( {onInsert} ) => {
     }
 
   return (
-    <Container className="mt-5 py-3">
+    <Container className="container mt-3 py-3">
       <h1 style={{ textAlign: 'center' }}>탑승객 정보입력</h1>
       <h3 style={{ textAlign: 'center', marginTop: '10px' }}>신분증 정보와 동일하게 입력해주세요.</h3>
       <br />
@@ -104,32 +105,33 @@ const InfoForm = ( {onInsert} ) => {
       <br /><br />
 
       <Form>
+       <div className="PassengerFormContainer">
         {passengerData.map((passenger, i) => (
           <div key={i}>
             <h2>탑승객 {i + 1}</h2>
 
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">이름</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" value={passenger.passengerName} onChange={(e) => handleInputChange(i, 'passengerName', e.target.value)} />
+                <Form.Control className="PassengerForm_input" type="text" value={passenger.passengerName} onChange={(e) => handleInputChange(i, 'passengerName', e.target.value)} />
               </Col>
             </Form.Group>
 
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">이름(영문)</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" value={passenger.firstName} onChange={(e) => handleInputChange(i, 'firstName', e.target.value)} />
+                <Form.Control className="PassengerForm_input" type="text" value={passenger.firstName} onChange={(e) => handleInputChange(i, 'firstName', e.target.value)} />
               </Col>
             </Form.Group>
 
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">성(영문)</Form.Label>
               <Col md={10}>
-              <Form.Control type="text" value={passenger.lastName} onChange={(e) => handleInputChange(i, 'lastName', e.target.value)} />
+              <Form.Control className="PassengerForm_input" type="text" value={passenger.lastName} onChange={(e) => handleInputChange(i, 'lastName', e.target.value)} />
               </Col>
             </Form.Group>
 
-            <div className="radio-row" style={{ marginBottom: '20px' }}>
+            <div className="PassengerRadio radio-row" style={{ marginBottom: '20px' }}>
               <Form.Check
                 type="radio"
                 id={`male_${i}`}
@@ -154,15 +156,15 @@ const InfoForm = ( {onInsert} ) => {
               </Form.Label>
             </div>
 
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">생년월일</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" value={passenger.birth} onChange={(e) => handleInputChange(i, 'birth', e.target.value)} />
+                <Form.Control className="PassengerForm_input" type="text" value={passenger.birth} onChange={(e) => handleInputChange(i, 'birth', e.target.value)} />
               </Col>
             </Form.Group>
 
-            <div className="form-floating input-group mb-3 row">
-                <Form.Select name="pinTypes" id="floatingSelectGrid" aria-label="Floating label select example"
+            <div className="PassengerForm form-floating input-group mb-3 row">
+                <Form.Select className="PassengerForm_label" name="pinTypes" id="floatingSelectGrid" aria-label="Floating label select example"
                     value={passenger.pinType} onChange={(e) => handleInputChange(i, 'pinType', e.target.value)}>
                     <option value="1">주민등록증</option>
                     <option value="2">여권</option>
@@ -171,43 +173,40 @@ const InfoForm = ( {onInsert} ) => {
                 <Form.Label htmlFor="floatingSelectGrid">신분증</Form.Label>
             </div>
 
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">핸드폰 번호</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" value={passenger.phone} onChange={(e) => handleInputChange(i, 'phone', e.target.value)} />
+                <Form.Control className="PassengerForm_input" type="text" value={passenger.phone} onChange={(e) => handleInputChange(i, 'phone', e.target.value)} />
               </Col>
             </Form.Group>
             
-            <Form.Group className="mb-3 row">
+            <Form.Group className="PassengerForm mb-3 row">
               <Form.Label className="col-md-2">이메일</Form.Label>
               <Col md={10}>
-                <Form.Control type="text" value={passenger.email} onChange={(e) => handleInputChange(i, 'email', e.target.value)} />
+                <Form.Control className="PassengerForm_input" type="text" value={passenger.email} onChange={(e) => handleInputChange(i, 'email', e.target.value)} />
               </Col>
             </Form.Group>
 
           </div>
         ))}
-
-        <div className="input-group mb-3 row">
+        <div className="PassengerForm input-group mb-3 row">
           <Form.Label className="col-md-2">비밀번호</Form.Label>
           <Col md={10}>
-            <Form.Control
+            <Form.Control className="PassengerForm_input"
               type="password"
               value={userPw}
               onChange={handleuserPwChange}
               placeholder="비회원 예매할때 사용할 비밀번호를 입력하세요."
-            />
+              />
           </Col>
         </div>
 
-        <div className="d-flex justify-content-between mt-5 mb-5">
-          <a href="/" className="btn btn-lg btn-secondary">
-            목록
-          </a>
-            <Button onClick={onSubmit} className="btn btn-lg btn-primary ms-3">
-              다음
-            </Button>
-        </div>
+            <div className="btn-box mt-5 mb-5">
+              <Link href="/" className="btn btn-lg btn-secondary">목록</Link>
+              <Button onClick={onSubmit} className="btn btn-lg btn-big btn-primary ms-3">다음</Button>
+            </div>
+      </div>
+
       </Form>
     </Container>
   );

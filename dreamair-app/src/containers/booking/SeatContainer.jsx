@@ -15,7 +15,7 @@ const SeatContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productNoDeps = booking.productNoDep;
+        const productNoDeps = [booking.productNoDep];
         const pasCount = booking.pasCount;
         const roundTrip = booking.roundTrip;
         const passengerNames = booking.passengerNames;

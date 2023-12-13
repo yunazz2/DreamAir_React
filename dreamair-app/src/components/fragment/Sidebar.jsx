@@ -25,7 +25,7 @@ const Sidebar = () => {
                 <li className="nav-item"><Link to={`/user/deleteaccount/${userId}`} className="nav-link d-flex align-items-center gap-2">회원 탈퇴</Link></li>
                
             {/* 회원 / 비회원 모두 조회 가능 메뉴 */}
-            <li className="nav-item"><Link to="/user/mybooking" className="nav-link d-flex align-items-center gap-2">나의 탑승권 관리</Link></li>
+            <li className="nav-item"><Link to={`/user/mybooking/${userId}`} className="nav-link d-flex align-items-center gap-2">나의 탑승권 관리</Link></li>
           </ul>
           <hr className="my-3" />
         </div>

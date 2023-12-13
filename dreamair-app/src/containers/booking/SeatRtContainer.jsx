@@ -28,7 +28,7 @@ const SeatContainer = () => {
         
         const comeFlightNo = bookingData.booking.comeFlightNo;
         const productNoDes = comeFlightNo;
-        const productNoDess = comeFlightNo;
+        const productNoDess = [comeFlightNo];
 
         // booking 정보 설정
         setBooking(prevBooking => ({ ...prevBooking, departure, destination, comeFlightNo, productNoDes, productNoDess }));

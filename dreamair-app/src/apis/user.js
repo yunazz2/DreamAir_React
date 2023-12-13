@@ -22,3 +22,6 @@ export const viewTicket = (ticketNo, userId) => axios.get(`/user/booking/ticketI
 
 // 출도착 항공편 조회
 export const productFlightList = () => axios.get('/user/productFlightList')
+
+// 체크인
+export const selectTicketList = (ticketNo, userId) => axios.post("/user/checkin", { ticketNo, userId })

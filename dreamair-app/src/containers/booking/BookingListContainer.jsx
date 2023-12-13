@@ -6,16 +6,20 @@ import { BookingContext } from '../../contexts/BookingContextProvider';
 
 const BookingListContainer = () => {
 
+  
   const {booking, setBooking} = useContext(BookingContext);
+  const [roundTrip, setRoundTrip] = useState(booking.roundTrip)
+  // const [departure, setDeaprture] = useState(booking.departure)
+  // const [destination, setDestination] = useState(booking.destination)
+  // const [departureDate, setDepartureDate] = useState(booking.departureDate)
+  // const [pasCount, setPasCount] = useState(booking.pasCount)
   const [bookingList, setBookingList] = useState([]);
 
-  const roundTrip = booking.roundTrip;
-  const departure = booking.departure;
-  const destination = booking.destination;
+  let departure = booking.departure;
+  let destination = booking.destination;
   const departureDate = booking.departureDate;
   const pasCount = booking.pasCount
   
-
   const bookingInfo = {
     roundTrip : roundTrip,
     departure : departure,
@@ -28,19 +32,21 @@ const BookingListContainer = () => {
     if (roundTrip === ('왕복 가는편' || '편도') ) {
       const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
       const data = await response.data
-      console.log("항공권 : " + data);
+      console.log("가는편 항공권 : " + data);
       setBookingList(data);
-    } else {
+    } else if(roundTrip === ('왕복')) {
+      let departure = booking.destination 
+      let destination = booking.departure
       const response = await bookingAPI.comeList(roundTrip, departure, destination, departureDate, pasCount );    
       const data = await response.data
-      console.log("항공권 : " + data);
+      console.log("오는편 항공권 : " + data);
       setBookingList(data);
     }
   };
 
   useEffect(() => {
     getBookingList()
-  },[])
+  },[roundTrip])
 
   return (
     <Container className="mt-5 py-3">
@@ -53,7 +59,7 @@ const BookingListContainer = () => {
 
       {/* 항공권 목록을 보여주는 섹션 */}
       <section>
-        <BookingListForm bookingInfo={bookingInfo} bookingList={bookingList} />
+        <BookingListForm bookingInfo={bookingInfo} bookingList={bookingList} setRoundTrip={setRoundTrip} />
       </section>
 
       <div className="d-flex justify-content-between">

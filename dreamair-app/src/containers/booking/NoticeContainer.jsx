@@ -4,15 +4,17 @@ import * as bookingAPI from '../../apis/booking'
 import { BookingContext } from '../../contexts/BookingContextProvider'
 
 const NoticeContainer = () => {
-
+    
     const {booking, setBooking} = useContext(BookingContext)
+
+    console.log(booking);
     
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)
-    const [passengerNames, setPassengerNames] = useState(['테스트2']);
-    const [phones, setPhones] = useState(['010123456']);
-    const [seatNoDeps, setseatNoDepss] = useState(['A1']);                    
-    const [seatNoDess, setseatNoDess] = useState(['A1']);             
+    const [passengerNames, setPassengerNames] = useState(booking.passengerNames);
+    const [phones, setPhones] = useState(booking.phones);
+    const [seatNoDeps, setseatNoDepss] = useState(booking.seatNoDepss);                    
+    const [seatNoDess, setseatNoDess] = useState(booking.seatNoDesss);             
     const [goBookingList, setGoBookingList] = useState([]);
     const [comeBookingList, setComeBookingList] = useState([]);
 
@@ -24,8 +26,8 @@ const NoticeContainer = () => {
             'pasCount' : pasCount, 
             'passengerNames' : passengerNames.join(","), 
             'phones' : phones.join(","), 
-            'seatNoDeps' : seatNoDeps.join(","), 
-            'seatNoDess' : seatNoDess.join(","), 
+            'seatNoDeps' : seatNoDeps, 
+            'seatNoDess' : seatNoDess, 
         }
 
         const response = await bookingAPI.getNotice(params)

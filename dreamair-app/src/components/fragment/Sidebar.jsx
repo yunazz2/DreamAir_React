@@ -28,7 +28,7 @@ const Sidebar = () => {
 
             {/* 회원 / 비회원 모두 조회 가능 메뉴 */}
             <li className="nav-item"><Link to="/user/cart" className="nav-link d-flex align-items-center gap-2">장바구니 조회</Link></li>
-            <li className="nav-item"><Link to="/user/bookingList" className="nav-link d-flex align-items-center gap-2">나의 탑승권 관리</Link></li>
+            <li className="nav-item"><Link to="/user/mybooking" className="nav-link d-flex align-items-center gap-2">나의 탑승권 관리</Link></li>
           </ul>
           <hr className="my-3" />
         </div>

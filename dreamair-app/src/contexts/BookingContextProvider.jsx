@@ -87,6 +87,8 @@ const BookingContextProvider = ({children}) => {
         flightName : '',
         seatRemaining : 0,
 
+        goPrice : 0,
+        comePrice : 0,
         
         // 탑승권 처리 할 때 필요한 변수
         // select : ,

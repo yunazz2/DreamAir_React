@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.joeun.server.dto.Admin;
 import com.joeun.server.dto.Booking;
 import com.joeun.server.dto.Product;
 import com.joeun.server.dto.Users;
+import com.joeun.server.service.AdminService;
 import com.joeun.server.service.BookingService;
 import com.joeun.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 @Slf4j
@@ -35,6 +39,9 @@ public class UserController {
 
     @Autowired
     private BookingService bookingservice;
+    
+    @Autowired
+    private AdminService adminService;
 
     // 회원 아이디로 회원 정보 조회
     @GetMapping("/{userId}")

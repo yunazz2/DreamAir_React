@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -88,37 +89,23 @@ public class BookingController {
         }
         
     }
-    
-    // 탑승객 정보 입력
-    @GetMapping(value="/info")
-    public String info(Model model, Booking booking) {
-        log.info("가는편 상품번호 : " + booking.getProductNoDep());
-        log.info("오는편 상품번호 : " + booking.getProductNoDes());
-        log.info("인원수 : " + booking.getPasCount());
-        log.info("가는편 노선번호 : " + booking.getRouteNoDep());
-        log.info("오는편 노선번호 : " + booking.getRouteNoDes());
-        log.info("info 왕복여부 : " + booking.getRoundTrip());
-
-        model.addAttribute("booking", booking);
-        
-        return "booking/info";
-    }
- 
 
     @PostMapping(value="/info")
-    public String infoPro(Model model, Booking booking, Users user, RedirectAttributes rttr, HttpServletRequest request, Principal principal) throws Exception{ 
-        log.info("탑승객 이름 : " + booking.getPassengerNames()[0]);
-        log.info("infoPro 왕복여부 : " + booking.getRoundTrip());
-        
-        int result1 = 0;
-        int result2 = 0;
+    public ResponseEntity<?> infoPro(@RequestBody Booking booking , HttpServletRequest request, Principal principal) { 
+        log.info("infoPro : " + booking);
 
-        result1 = bookingService.infoPassngers(booking, request, principal);
-        // result2 = bookingService.infoPassport(user);
-        // rttr.addFlashAttribute("user", user);     
-        rttr.addFlashAttribute("booking", booking);     
-    
-        return "redirect:/booking/seat";
+        try {
+            int result = bookingService.infoPassngers(booking, request, principal);
+            if( result > 0 )
+                return new ResponseEntity<>("탑승객 정보 등록 완료", HttpStatus.CREATED);  
+            else
+                return new ResponseEntity<>("탑승객 정보 등록 실패", HttpStatus.OK);  
+
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     // 가는 편 좌석 선택
@@ -151,16 +138,18 @@ public class BookingController {
         Map<String, Object> bookingObject = new HashMap<>();
         bookingObject.put("seatStatus", seatStatus);
         bookingObject.put("selectLastPasNos", selectLastPasNoss);
-
+        bookingObject.put("booking", booking);
+        
         return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
 
+  
     // 예약된 좌석 데이터 가져오기
     @GetMapping("/seatStatus/{flightNo}")
     public ResponseEntity<?> bookedSeatList(@PathVariable Integer flightNo) throws Exception {
 
         List<Booking> bookedSeatList = bookingService.bookedSeatStatus(flightNo);
-        
+
         return new ResponseEntity<>(bookedSeatList, HttpStatus.OK);
     }
     
@@ -180,7 +169,11 @@ public class BookingController {
 
         log.info("오는 편 페이지 부킹 객체 : " + booking);
 
-        return new ResponseEntity<>(seatStatus, HttpStatus.OK);
+        Map<String, Object> bookingObject = new HashMap<>();
+        bookingObject.put("seatStatus", seatStatus);
+        bookingObject.put("booking", booking);
+
+        return new ResponseEntity<>(bookingObject, HttpStatus.OK);
     }
 
     // 탑승객 유의사항

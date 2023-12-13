@@ -1,7 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-// const CheckIn = ({ TicketList, checkinPro }) => {
-const CheckIn = () => {
+const CheckIn = ({ getTicketList, ticketList }) => {
+
+  console.log(ticketList)
+  console.log("위에 확인해~!")
+
+  const [ticketNo, setTicketNo] = useState('');
+  const [showTable, setShowTable] = useState(false); // 상태 추가
+
+  const handleTicketNoChange = (event) => {
+    setTicketNo(event.target.value);
+  };
+
+  const handleCheckIn = () => {
+    console.log('ToContainer => ', ticketNo);
+    getTicketList(ticketNo);
+    setShowTable(true);
+  };
+
+    // 표를 보여주는 JSX
+    const renderTable = () => {
+      if (showTable) {
+        return (
+          <div>
+            <h2>조회 결과</h2>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Column 1</th>
+                  <th scope="col">Column 2</th>
+                  <th scope="col">Column 3</th>
+                  <th scope="col">Column 4</th>
+                  <th scope="col">Column 5</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* 여기에 데이터를 매핑하여 채우는 로직 추가 */}
+                <tr>
+                  <td>Data 1</td>
+                  <td>Data 2</td>
+                  <td>Data 3</td>
+                  <td>Data 4</td>
+                  <td>Data 5</td>
+                </tr>
+                {/* 추가적인 데이터들을 필요한 만큼 추가 */}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      return null; // '조회' 버튼을 누르기 전에는 아무것도 표시하지 않음
+    };
 
   return (
     <div className='container p-4'>
@@ -19,63 +68,22 @@ const CheckIn = () => {
               <option value="ticketNo">탑승권 번호</option>
             </select>
             <input
-              type="text"
-              id="ticketNo"
-              name="ticketNo"
-              maxLength="8"
-              placeholder="탑승권 번호 입력"
-              style={{ width: '280px', textTransform: 'uppercase' }}
+            type="text"
+            id="ticketNo"
+            name="ticketNo"
+            maxLength="8"
+            placeholder="탑승권 번호 입력"
+            style={{ width: '280px', textTransform: 'uppercase' }}
+            value={ticketNo}
+            onChange={handleTicketNoChange}
             />
-            <button type="submit" className="btn btn-outline-primary btn-lg">
+            <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleCheckIn}>
               조회
             </button>
           </div>
         </div>
       </div>
-      {/* {TicketList !== null && TicketList.length > 0 ? (
-        <table className="table table-striped table-hover table-bordered text-center align-middle">
-          <thead>
-            <tr className="table-primary">
-              <th>예약번호</th>
-              <th>출발지</th>
-              <th>도착지</th>
-              <th>출발일자</th>
-              <th>출발일시</th>
-              <th>도착일자</th>
-              <th>도착일시</th>
-              <th>요금</th>
-              <th colSpan="2">비고</th>
-            </tr>
-          </thead>
-          <tbody>
-            {TicketList.map((ticket) => (
-              <tr key={ticket.bookingNo}>
-                <td>DA000{ticket.bookingNo}</td>
-                <td>{ticket.departure}</td>
-                <td>{ticket.destination}</td>
-                <td>{ticket.departureDate}</td>
-                <td>{ticket.departureTime}</td>
-                <td>{ticket.destinationDate}</td>
-                <td>{ticket.destinationTime}</td>
-                <td>{ticket.productPrice}</td>
-                <td colSpan="2">
-				{ticket.checkedIn === 0 ? (
-				  <button className="checkin_btn btn btn-primary active" type="submit">
-					체크인
-				  </button>
-				) : (
-				  <button className="checkin_btn btn btn-primary disabled" type="button" disabled>
-					체크인 완료
-				  </button>
-				)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <div>예매된 탑승권이 없습니다.</div>
-      )} */}
+      
     </div>
   );
 };

@@ -15,28 +15,23 @@ const SeatContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 지금은 이렇게 하드코딩해서 테스트하지만, 추후 booking 객체에서 저장된 값을 뽑아야 함
-        const productNoDess = 5;
+        const departure = booking.departure;
         const destination = booking.destination;
-        const departure = '제주';
-
-        console.log(booking);
-
+        
         // 데이터 가져오기 전에 로딩 상태 설정
         setLoading(true);
-
-        // booking 정보 설정
-        setBooking(prevBooking => ({ ...prevBooking, productNoDess, departure, destination }));
-
+        
         // 좌석 현황 가져오기
-        const bookingResponse = await bookingjs.selectDesSeatStatus({...booking, productNoDess, departure, destination });
+        const bookingResponse = await bookingjs.selectDesSeatStatus({...booking, departure, destination });
         const bookingData = bookingResponse.data;
         setBookingObject(bookingData);
+        
+        const comeFlightNo = bookingData.booking.comeFlightNo;
+        const productNoDes = comeFlightNo;
+        const productNoDess = comeFlightNo;
 
-        // 예매 완료된 좌석 현황 가져오기
-        const bookedListResponse = await bookingjs.bookedSeatList(booking.flightNo);
-        const bookedListData = bookedListResponse.data;
-        setBookedList(bookedListData);
+        // booking 정보 설정
+        setBooking(prevBooking => ({ ...prevBooking, departure, destination, comeFlightNo, productNoDes, productNoDess }));
 
         // 데이터 가져오는 작업 완료 후 로딩 상태 해제
         setLoading(false);

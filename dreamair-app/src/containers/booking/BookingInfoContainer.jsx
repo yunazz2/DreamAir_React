@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
 import InfoForm from '../../components/booking/InfoForm'
+import { useNavigate } from 'react-router-dom'
+import * as bookingAPI from '../../apis/booking'
 
 const BookingInfoContainer = () => {
-    const [pasCount, setPasCount] = useState(2);
 
-    const booking = {
-        pasCount : pasCount
-    }
+    const navigate = useNavigate()
+
+    const onInsert = async (params) => {
+        try {
+            const response = await bookingAPI.info(params)
+
+            console.log(response.data);
+
+            navigate('/booking/seat')
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div>
-            <InfoForm booking={booking} />;
+            <InfoForm onInsert={onInsert} />;
         </div>
     )
 }

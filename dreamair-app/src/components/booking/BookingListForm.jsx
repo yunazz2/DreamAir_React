@@ -1,16 +1,19 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useHistory } from 'react-router-dom';
 import { BookingContext } from '../../contexts/BookingContextProvider';
+import { Button } from 'react-bootstrap';
 
-const BookingListForm = ({ bookingInfo, bookingList }) => {
+const BookingListForm = ({ bookingInfo, bookingList, setRoundTrip }) => {
 
   const {booking, setBooking} = useContext(BookingContext);
 
   const handleLinkClick = (bookingItem) => {
     const roundTrip = '왕복'
+    setRoundTrip(roundTrip)
     const productNoDep = bookingItem.productNo
     const routeNoDep = bookingItem.routeNo
-    setBooking({ ...booking, roundTrip, productNoDep, routeNoDep })
+    const goPrice = bookingItem.productPrice
+    setBooking({ ...booking, roundTrip, productNoDep, routeNoDep, goPrice })
   }
 
   const handleSubmit = (bookingItem) => {
@@ -18,11 +21,13 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
     if(bookingInfo.roundTrip === ('편도')) {
       const productNoDep = bookingItem.productNo
       const routeNoDep = bookingItem.routeNo
-      setBooking({ ...booking, productNoDep, routeNoDep})
+      const goPrice = bookingItem.productPrice
+      setBooking({ ...booking, productNoDep, routeNoDep, goPrice})
     } else if(bookingInfo.roundTrip == ('왕복')) {
       const productNoDes = bookingItem.productNo
       const routeNoDes = bookingItem.routeNo
-      setBooking({ ...booking, productNoDes, routeNoDes})
+      const comePrice = bookingItem.productPrice
+      setBooking({ ...booking, productNoDes, routeNoDes, comePrice})
     }
 
   }
@@ -118,7 +123,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
                   <td>
                     {bookingInfo.roundTrip === '편도' && (
                       <>
-                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                        <Link to="/booking/info" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
                           예매하기
                         </Link>
                       </>
@@ -134,7 +139,7 @@ const BookingListForm = ({ bookingInfo, bookingList }) => {
 
                     {bookingInfo.roundTrip === '왕복' && (
                       <>
-                        <Link to="/booking/notice" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
+                        <Link to="/booking/info" onClick={() => handleSubmit(bookingItem)} className="btn btn-outline-primary btn-lg" >
                           예매하기
                         </Link>
                       </>

@@ -7,6 +7,7 @@ const TicketInfoContainer = () => {
 
   const { ticketNo } = useParams();
   const userId = sessionStorage.getItem('userId');
+  const [isLoading, setLoading] = useState(true)
 
   const [viewTicketDetail, setViewTicketDetail] = useState([]);
 
@@ -23,12 +24,14 @@ const TicketInfoContainer = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
     getViewTicektDetail();
+    setLoading(false)
   }, [])
 
   return (
     <>
-      <TicketInfo ticketNo={ticketNo} viewTicketDetail={viewTicketDetail} />
+      <TicketInfo ticketNo={ticketNo} viewTicketDetail={viewTicketDetail} isLoading={isLoading} />
     </>
   )
 }

@@ -4,40 +4,22 @@ import SelectedFlight from './SelectedFlight';
 import { BookingContext } from '../../contexts/BookingContextProvider';
 // import '../../styles/payment.css'
 
-const Payment = ( {goBookingList, comeBookingList} ) => {
+const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
 
     const {booking, setBooking} = useContext(BookingContext)
+    console.log("payment : " + booking);
 
+    let totalPrice = 0
+    if(booking.roundTrip === '왕복') {
+        totalPrice = ( booking.goPrice + booking.comePrice ) * booking.pasCount
+    } else {
+        totalPrice = booking.goPrice * booking.pasCount
+    }
     
     const [name, setName] = useState('')
     const [tel, setTel] = useState('')
     const [email, setEmail] = useState('')
-    const [price, setPrice] = useState(0)
-
-    // const goPrice = 0
-    // goBookingList.map
-
-    // console.log("goPrice : " + goPrice);
-    // console.log("comeBookingList.productPrice[0] : " + comeBooking.productPrice);
-    // console.log("booking.pasCount : " + booking.pasCount);
-
-    const setTotalPrice = () => {
-
-        // if (booking.roundTrip === '왕복') {
-        //     const goPrice = goBookingList.productPrice[0] * booking.pasCount
-        //     const comePrice = comeBookingList.productPrice[0] * booking.pasCount
-        //     const totalPrice = goPrice + comePrice
-        //     setPrice(totalPrice)    
-        // } else if (booking.roundTrip === '편도') {
-        //     const goPrice = goBookingList.productPrice[0] * booking.pasCount
-        //     setPrice(goPrice)    
-        // }
-    }
-
-    // useEffect(() => {
-    //     setTotalPrice()
-    // },[price])
-    
+    const [price, setPrice] = useState(totalPrice)
     
     const handleChangeName = (e) => {
         setName(e.target.value)
@@ -51,15 +33,14 @@ const Payment = ( {goBookingList, comeBookingList} ) => {
         setEmail(e.target.value)
     }
 
-
     const handlePayment = () => {
         // status='예매완료', userNo(회원), userNo2(비회원), names, productIdDeps, productIdDess, productPriceDep, productPriceDes
         const status = '예매완료'
-        const names = []
-        const productIdDeps = []
-        const productIdDess = []
-        // const userNo = ''
-        // const userNo2 = ''
+        let names = []
+        let productIdDeps = []
+        let productIdDess = []
+        // let userNo = ''
+        // let userNo2 = ''
 
         if(booking.roundTrip === '왕복') {
             goBookingList.forEach(bookingItem => {
@@ -79,8 +60,48 @@ const Payment = ( {goBookingList, comeBookingList} ) => {
             setBooking({ ...booking, status, names, productIdDeps })
         }
 
+        const params = {
+            names : booking.names,
+            passengerNos : booking.passengerNos,
+        }
+
         // 결제 로직을 처리하세요.
         console.log('결제 처리 로직');
+        
+        // 2️⃣  객체 초기화 하기
+        var IMP = window.IMP; 
+        // IMP.init("imp67011510"); 
+        IMP.init("imp48458232"); 
+        
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+        IMP.request_pay({
+            pg : 'kcp',                                 // PG사
+            pay_method : 'card',                        // 결제방식
+            merchant_uid: "IMP"+makeMerchantUid,        // 주문번호(상품ID) *
+            name : '항공권',                            // 상품명 *
+            amount : price,                              // 결제금액 *
+            buyer_email : email,                        // 결제자 이메일 
+            buyer_name : name,                          // 결제자 이름
+            buyer_tel : tel,                            // 결제자 전화번호
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                // 결제 성공
+                console.log("결제성공");
+                console.log(rsp);
+                // bookingInsert(params)
+
+            } else {
+                // 결제 실패
+                console.log(rsp);
+            }
+        });
+
     };
 
     return (
@@ -96,7 +117,7 @@ const Payment = ( {goBookingList, comeBookingList} ) => {
 
                 <Form.Group controlId="price">
                 <Form.Label>결제금액:</Form.Label>
-                <Form.Control type="text"  readOnly />
+                <Form.Control type="text" value={price} readOnly />
                 </Form.Group>
 
                 <Row className="mb-3">

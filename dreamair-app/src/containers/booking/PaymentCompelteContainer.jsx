@@ -1,11 +1,17 @@
 import React from 'react'
 import PaymentComplete from '../../components/booking/PaymentComplete'
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
 
 const PaymentCompelteContainer = () => {
     return (
-        <div>
-            <PaymentComplete />
-        </div>
+        <>
+            <Header />
+            <div className="container" style={{minHeight:"400px"}}>
+                <PaymentComplete />
+            </div>
+            <Footer />
+        </>
     )
 }
 

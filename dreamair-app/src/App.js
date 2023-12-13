@@ -106,7 +106,7 @@ function App() {
           <Route path='booking/seatRt' element={<SeatRtContainer />} />
           <Route path='booking/notice' element={<NoticeContainer />} />
           <Route path='booking/payment' element={<PaymentContainer />} />
-          <Route path='booking/paymentComplete' element={<PaymentCompelteContainer />} />
+          <Route path='booking/payment_complete' element={<PaymentCompelteContainer />} />
         </Routes>
       </BookingContextProvider>
 

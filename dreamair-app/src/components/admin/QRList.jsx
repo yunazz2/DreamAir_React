@@ -11,6 +11,7 @@ const QRList = ({qrList, onDelete}) => {
             <thead>
              <tr className="table-primary">
                 <th>번호</th>
+                <th>티켓 번호</th>
                 <th>QR코드</th>
                 <th colSpan="2">비고</th>
              </tr>
@@ -20,6 +21,7 @@ const QRList = ({qrList, onDelete}) => {
             {qrList.map((qr) => (
                 <tr key={qr.qrNo}>
                     <td>{qr.qrNo}</td>
+                    <td>{qr.url}</td>
                     <td><Link to={qr.url} target="_blank" style={{ textDecoration: 'none' }}>
                         <img src={`/qr/img?qrNo=${qr.qrNo}`} alt="" /></Link>
                     </td>

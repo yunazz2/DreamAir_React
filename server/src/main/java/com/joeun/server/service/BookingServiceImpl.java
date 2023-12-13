@@ -75,15 +75,15 @@ public class BookingServiceImpl implements BookingService{
 
             bookingMapper.infoPassngers(bookingItem);
 
-            // if ( principal == null ) {
+            if ( principal == null ) {
                 
-            //     String userId = "GUEST_" + UUID.randomUUID().toString().substring(0, 5);
-            //     HttpSession session = request.getSession();
-            //     session.setAttribute("userId", userId);
-            //     bookingItem.setUserId(userId);
-            //     bookingItem.setStatus("GUEST");
-            //     bookingMapper.user2Insert(bookingItem); 
-            // }
+                String userId = "GUEST_" + UUID.randomUUID().toString().substring(0, 5);
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", userId);
+                bookingItem.setUserId(userId);
+                bookingItem.setStatus("GUEST");
+                bookingMapper.user2Insert(bookingItem); 
+            }
             result++;
         }
         return result;
@@ -310,7 +310,7 @@ public class BookingServiceImpl implements BookingService{
             
             bookingItem.setPasCount(booking.getPasCount());                 
             bookingItem.setRoundTrip(booking.getRoundTrip());
-            bookingItem.setStatus(booking.getStatus());
+            bookingItem.setStatus("예매완료");
             bookingItem.setProductNoDep(booking.getProductNoDep());         
             bookingItem.setProductIdDep(booking.getProductIdDeps()[0]);
             bookingItem.setRouteNoDep(booking.getRouteNoDep());             

@@ -16,7 +16,7 @@ const SeatRt = ({bookingObject, isLoading}) => {
 
   const comeFlightNo = booking.comeFlightNo;
   const productNoDes = comeFlightNo;
-  const productNoDess = comeFlightNo;
+  const productNoDess = [comeFlightNo];
 
   // 선택 완료 버튼
   const handleCompleteClick = () => {

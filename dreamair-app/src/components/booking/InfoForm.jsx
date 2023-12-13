@@ -6,6 +6,8 @@ const InfoForm = ( {onInsert} ) => {
 
   const {booking, setBooking} = useContext(BookingContext)
   const [userPw, setUserPw] = useState('');
+  console.log("info");
+  console.log(booking);
 
   const handleuserPwChange = (e) => {
     setUserPw(e.target.value)

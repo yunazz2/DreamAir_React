@@ -14,23 +14,31 @@ const NoticeForm = ( { goBookingList, comeBookingList } ) => {
     const passengerNos = []
     const seatNoDepss = []
     const seatNoDesss = []
+    const names = []
+    const productIdDeps = []
+    const productIdDess = []
     
     if(booking.roundTrip === '왕복') {
       goBookingList.forEach(bookingItem => {
         passengerNos.push(bookingItem.passengerNo)
         seatNoDepss.push(bookingItem.seatNoDep)
+        names.push(bookingItem.passengerName)
+        productIdDeps.push(bookingItem.productId)
       });
 
       comeBookingList.forEach(bookingItem => {
+        productIdDess.push(bookingItem.productId)
         seatNoDesss.push(bookingItem.seatNoDes)
       });
-      setBooking({ ...booking, passengerNos, seatNoDepss, seatNoDesss, payment })
+      setBooking({ ...booking, passengerNos, seatNoDepss, seatNoDesss, payment, names, productIdDeps, productIdDess })
     } else if(booking.roundTrip === '편도') {
       goBookingList.forEach(bookingItem => {
         passengerNos.push(bookingItem.passengerNo)
         seatNoDepss.push(bookingItem.seatNoDep)
+        names.push(bookingItem.passengerName)
+        productIdDeps.push(bookingItem.productId)
       });
-      setBooking({ ...booking, passengerNos, seatNoDepss, payment })
+      setBooking({ ...booking, passengerNos, seatNoDepss, payment, names, productIdDeps })
     }
 
   }

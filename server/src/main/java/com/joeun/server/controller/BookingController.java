@@ -178,7 +178,7 @@ public class BookingController {
 
     // 탑승객 유의사항
     @GetMapping(value="/notice")
-    public ResponseEntity<?> notice(Booking booking) {
+    public ResponseEntity<?> notice(Booking booking, Principal principal, HttpServletRequest request) {
             log.info("탑승객 수 : " + booking.getPasCount());
             log.info("왕복 : " + booking.getRoundTrip());
             log.info("noticeGET 페이지 부킹 객체 : " + booking);
@@ -187,11 +187,23 @@ public class BookingController {
                 List<Booking> goBookingList = new ArrayList<Booking>();
                 List<Booking> comeBookingList = new ArrayList<Booking>();
                 
+                // 회원 : userNo 추출, 비회원 : userNo2 추출
+                Users user = userService.selectById2(principal, request);
+                if ( principal == null ) {
+                    log.info("비회원 유저번호 : " + user.getUserNo2());
+                } else {
+                    log.info("회원 유저번호 : " + user.getUserNo());
+                }
+
                 if (booking.getRoundTrip().equals("편도")) {
                     // 편도 조회
                     goBookingList = bookingService.goScheduleList(booking);
 
-                    return new ResponseEntity<>(goBookingList, HttpStatus.OK);
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("goBookingList", goBookingList);
+                    response.put("user", user);
+
+                    return new ResponseEntity<>(response, HttpStatus.OK);
                 } else {
                     // 왕복 조회
                     goBookingList = bookingService.goScheduleList(booking);
@@ -200,6 +212,7 @@ public class BookingController {
                     Map<String, Object> response = new HashMap<>();
                     response.put("goBookingList", goBookingList);
                     response.put("comeBookingList", comeBookingList);
+                    response.put("user", user);
                     
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 }
@@ -214,21 +227,13 @@ public class BookingController {
 
     // 결제
     @GetMapping(value="/payment")
-    public ResponseEntity<?> payment(Booking booking, Principal principal, HttpServletRequest request) {
+    public ResponseEntity<?> payment(Booking booking) {
         log.info("페이먼트 booking : " + booking);
 
         try {
             List<Booking> goBookingList = new ArrayList<Booking>();
             List<Booking> comeBookingList = new ArrayList<Booking>();
             
-            // 회원 : userNo 추출, 비회원 : userNo2 추출
-            // Users user = userService.selectById2(principal, request);
-            // if ( principal == null ) {
-            //     log.info("비회원 유저번호 : " + user.getUserNo2());
-            // } else {
-            //     log.info("회원 유저번호 : " + user.getUserNo());
-            // }
-
             if (booking.getRoundTrip().equals("편도")) {
                 // 편도 조회
                 goBookingList = bookingService.goScheduleList(booking);
@@ -251,43 +256,44 @@ public class BookingController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
-        // model.addAttribute("goBookingList", goBookingList);
-        // model.addAttribute("comeBookingList", comeBookingList);
-        // model.addAttribute("bookingInfo", booking);
-        // model.addAttribute("user", user);
-
     }
     
 
     @PostMapping(value = "/bookingInsert")
-    public String bookingInsert(Model model, Booking booking, Principal principal, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> bookingInsert(@RequestBody Booking booking, Principal principal, RedirectAttributes rttr, HttpServletRequest request) {
         log.info("booking 객체 조회 : " + booking);
-        int result1 = bookingService.bookingInsert(booking, principal, request);
-        productService.productOut(booking);
-        int bookingNum = 0;
-        
-        Users user = userService.selectById2(principal, request);
-        if( (principal == null) ) {
-            bookingNum = bookingService.latest_user2_bookingNo(user.getUserNo2());  
-            booking.setBookingNo2(bookingNum);
-        } else {
-            bookingNum = bookingService.latest_user_bookingNo(user.getUserNo());  
-            booking.setBookingNo(bookingNum);
-        } 
 
-        // // ✅ TODO 티켓 발행 등록 요청
-        int result = bookingService.createTicket(booking, principal, request);
+        try {
+            int result1 = bookingService.bookingInsert(booking, principal, request);
+            productService.productOut(booking);
+            int bookingNum = 0;
+            
+            Users user = userService.selectById2(principal, request);
+            log.info("user.getUserNo2() : " + user.getUserNo2());
+            if( (principal == null) ) {
+                bookingNum = bookingService.latest_user2_bookingNo(user.getUserNo2());  
+                booking.setBookingNo2(bookingNum);
+            } else {
+                bookingNum = bookingService.latest_user_bookingNo(user.getUserNo());  
+                booking.setBookingNo(bookingNum);
+            } 
+    
+            // // ✅ TODO 티켓 발행 등록 요청
+            int result = bookingService.createTicket(booking, principal, request);
+    
+            // 같은 bookingNo에 대한 ticket 정보 조회
+            int bookingNo = booking.getBookingNo();
+            List<Booking> ticketList_bookingNo = bookingService.ticketList_bookingNo(bookingNo);   
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("booking", booking);
+            response.put("ticketList_bookingNo", ticketList_bookingNo);
 
-        // 같은 bookingNo에 대한 ticket 정보 조회
-        int bookingNo = booking.getBookingNo();
-        List<Booking> ticketList_bookingNo = bookingService.ticketList_bookingNo(bookingNo);        
-        model.addAttribute("ticketList_bookingNo", ticketList_bookingNo);
-        
-        // ticketNO 받아서 qr 발행
-
-        rttr.addFlashAttribute("booking", booking);
-
-        return "redirect:/booking/payment_complete";
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // 결제 완료

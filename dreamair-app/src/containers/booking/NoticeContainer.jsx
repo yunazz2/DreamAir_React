@@ -9,6 +9,7 @@ const NoticeContainer = () => {
     
     const {booking, setBooking} = useContext(BookingContext)
 
+    console.log("notice");
     console.log(booking);
     
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
@@ -36,10 +37,16 @@ const NoticeContainer = () => {
         const data = await response.data
         console.log(data);
         if (roundTrip === '편도') {
-            setGoBookingList(data)
+            setGoBookingList(data.goBookingList)
+            const userNo = data.user.userNo
+            const userNo2 = data.user.userNo2
+            setBooking({...booking, userNo, userNo2})
         } else {
             setGoBookingList(data.goBookingList)
             setComeBookingList(data.comeBookingList)
+            const userNo = data.user.userNo
+            const userNo2 = data.user.userNo2
+            setBooking({...booking, userNo, userNo2})
         }
     }
     

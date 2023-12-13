@@ -8,7 +8,6 @@ const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
 
     const {booking, setBooking} = useContext(BookingContext)
     console.log("payment : " + booking);
-
     let totalPrice = 0
     if(booking.roundTrip === '왕복') {
         totalPrice = ( booking.goPrice + booking.comePrice ) * booking.pasCount
@@ -34,36 +33,12 @@ const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
     }
 
     const handlePayment = () => {
-        // status='예매완료', userNo(회원), userNo2(비회원), names, productIdDeps, productIdDess, productPriceDep, productPriceDes
-        const status = '예매완료'
-        let names = []
-        let productIdDeps = []
-        let productIdDess = []
-        // let userNo = ''
-        // let userNo2 = ''
 
-        if(booking.roundTrip === '왕복') {
-            goBookingList.forEach(bookingItem => {
-                names.push(bookingItem.passengerName)
-                productIdDeps.push(bookingItem.productId)
-            });
-            
-            comeBookingList.forEach(bookingItem => {
-                productIdDess.push(bookingItem.productId)
-            });
-            setBooking({ ...booking, status, names, productIdDeps, productIdDess })
-        } else if(booking.roundTrip === '편도') {
-            goBookingList.forEach(bookingItem => {
-                names.push(bookingItem.passengerName)
-                productIdDeps.push(bookingItem.productId)
-            });
-            setBooking({ ...booking, status, names, productIdDeps })
-        }
-
-        const params = {
-            names : booking.names,
-            passengerNos : booking.passengerNos,
-        }
+        console.log("productIdDeps" + booking.productIdDeps);
+        console.log("productIdDess" + booking.productIdDess);
+        console.log("names" + booking.names);
+        console.log("productIdDeps" + booking.productIdDeps);
+        console.log("status" + booking.status);
 
         // 결제 로직을 처리하세요.
         console.log('결제 처리 로직');
@@ -94,7 +69,7 @@ const Payment = ( {goBookingList, comeBookingList, bookingInsert} ) => {
                 // 결제 성공
                 console.log("결제성공");
                 console.log(rsp);
-                // bookingInsert(params)
+                bookingInsert(booking)
 
             } else {
                 // 결제 실패

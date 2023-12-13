@@ -11,8 +11,8 @@ const PaymentContainer = () => {
     const navigate = useNavigate()
 
     const {booking, setBooking} = useContext(BookingContext)
-    console.log(booking.seatNoDepss);
-    console.log(booking.seatNoDesss);
+    console.log("payment");
+    console.log(booking);
 
     const [roundTrip, setRoundTrip] = useState(booking.roundTrip) 
     const [pasCount, setPasCount] = useState(booking.pasCount)
@@ -40,10 +40,11 @@ const PaymentContainer = () => {
         const data = await response.data
         console.log(data);
         if (roundTrip === '편도') {
-            setGoBookingList(data)
+            setGoBookingList(goBookingList)
         } else {
             setGoBookingList(data.goBookingList)
             setComeBookingList(data.comeBookingList)
+        
         }
     }
     
@@ -65,11 +66,7 @@ const PaymentContainer = () => {
 
     return (
         <div>
-            <Header/>
-            <div className="container">
-                <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} bookingInsert={bookingInsert}/>
-            </div>
-            <Footer/>
+            <Payment goBookingList={goBookingList} comeBookingList={comeBookingList} bookingInsert={bookingInsert} />
         </div>
     )
 }

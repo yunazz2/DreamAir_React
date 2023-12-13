@@ -8,14 +8,11 @@ import Footer from '../../components/fragment/Footer';
 
 const BookingListContainer = () => {
 
-  
   const {booking, setBooking} = useContext(BookingContext);
   const [roundTrip, setRoundTrip] = useState(booking.roundTrip)
-  // const [departure, setDeaprture] = useState(booking.departure)
-  // const [destination, setDestination] = useState(booking.destination)
-  // const [departureDate, setDepartureDate] = useState(booking.departureDate)
-  // const [pasCount, setPasCount] = useState(booking.pasCount)
   const [bookingList, setBookingList] = useState([]);
+  console.log("List");
+  console.log(booking);
 
   let departure = booking.departure;
   let destination = booking.destination;
@@ -31,7 +28,7 @@ const BookingListContainer = () => {
   }
   
   const getBookingList = async () => {
-    if (roundTrip === ('왕복 가는편') || ('편도') ) {
+    if (roundTrip === '왕복 가는편' || roundTrip === '편도') {
       const response = await bookingAPI.goList(roundTrip, departure, destination, departureDate, pasCount );    
       const data = await response.data
       console.log("가는편 항공권 : " + data);

@@ -32,7 +32,7 @@ const CheckInContainer = () => {
       <Header />
       <div className='d-flex'>
         <Sidebar />
-        <CheckIn getTicketList={getTicketList} ticketList={ticketList} />
+        <CheckIn getTicketList={getTicketList} ticketList={ticketList} userId={userId} />
       </div>
       <Footer />
     </>

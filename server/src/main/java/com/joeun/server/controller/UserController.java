@@ -141,20 +141,45 @@ public class UserController {
     }
 
     // 체크인
-    @PostMapping("/checkin")
-    public ResponseEntity<?> selectTicketList(@RequestBody Map<String, Object> requestData) {
-        log.info("들어오니?????");
+    @GetMapping("/checkin")
+    public ResponseEntity<?> selectTicketList(@RequestParam Integer ticketNo, @RequestParam String userId) {
+
         try {
-            Integer ticketNo = Integer.parseInt((String) requestData.get("ticketNo"));
-            String userId = (String) requestData.get("userId");
-
             List<Booking> ticketList = adminService.pas_ticketList(ticketNo);
-
             log.info(ticketList + "");
             return new ResponseEntity<>(ticketList, HttpStatus.OK);
 
         } catch (Exception e) {
+            System.err.println("Error while processing ticket list: " + e.getMessage());
+            return new ResponseEntity<>("Error while processing ticket list", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    // 체크인 처리
+    @PostMapping("/checkin")
+    public ResponseEntity<?> checkIn(@RequestBody Map<String, Object> requestData) {
+        log.info("들어오니?????");
+
+        try {
+            Integer ticketNo = Integer.parseInt((String) requestData.get("ticketNo"));
+            
+            int changeCheckedIn = 1;
+
+            List<Booking> ticketList = adminService.pas_ticketList(ticketNo);
+            
+            for (Booking booking : ticketList) {
+                booking.setCheckedIn(changeCheckedIn);
+
+                int result = adminService.ticket_update_c(ticketNo, changeCheckedIn);
+
+                if(result > 0) {
+                    log.info("DB 변경 완료");
+                }
+            }
+            return new ResponseEntity<>(ticketList, HttpStatus.OK);
+    
+        } catch (Exception e) {
+    
             System.err.println("Error while processing ticket list: " + e.getMessage());
             return new ResponseEntity<>("Error while processing ticket list", HttpStatus.INTERNAL_SERVER_ERROR);
         }

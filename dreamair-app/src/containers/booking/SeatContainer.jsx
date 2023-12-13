@@ -45,7 +45,7 @@ const SeatContainer = () => {
 
     const interval = setInterval(() => {
       fetchData();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [setBooking]);

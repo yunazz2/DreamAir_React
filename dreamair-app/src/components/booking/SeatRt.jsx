@@ -87,7 +87,8 @@ const SeatRt = ({bookingObject, isLoading}) => {
                             {(seat.status == 1) ? (
                               <input
                               type='checkbox'
-                              className={styles.seatBox}
+                              // className={styles.seatBox}
+                              className={`${styles.seatBox} ${styles['seat-box']}`}
                               id={`seat-${seat.seatNo}`}
                               style={{ marginRight: index % 4 === 3 ? '0' : '5px', marginBottom: '5px' }}
                               disabled
@@ -95,7 +96,8 @@ const SeatRt = ({bookingObject, isLoading}) => {
                               ) : (
                                 <input
                                   type="checkbox"
-                                  className={styles.seatBox}
+                                  // className={styles.seatBox}
+                                  className={`${styles.seatBox} ${styles['seat-box']}`}
                                   id={`seat-${seat.seatNo}`}
                                   style={{
                                     marginRight: index % 4 === 3 ? '0' : '5px',

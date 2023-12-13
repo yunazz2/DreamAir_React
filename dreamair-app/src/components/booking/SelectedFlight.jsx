@@ -7,7 +7,7 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
     return (
         <div>
             <section>
-                <h2>가는편</h2>
+                <h2 className='mt-3 mb-3'>가는편</h2>
                 <Table striped bordered hover className="text-center align-middle">
 
                     <thead>
@@ -49,7 +49,8 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
 
             {comeBookingList && 
                 <section>
-                    <h2>오는편</h2>
+                    <br></br>
+                    <h2 className='mt-3 mb-3'>오는편</h2>
                     <Table striped bordered hover className="text-center align-middle">
                         <thead>
                         <tr>

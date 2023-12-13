@@ -2,6 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as users from '../apis/index'
 import Join from '../components/index/Join'
+import Header from '../components/fragment/Header';
+import Footer from '../components/fragment/Footer';
 
 // ⛄ 회원 가입
 const JoinContainer = () => {
@@ -25,7 +27,11 @@ const JoinContainer = () => {
 
   return (
     <>
-      <Join onInsert={onInsert} />
+      <Header/>
+      <div className="container">
+        <Join onInsert={onInsert} />
+      </div>
+      <Footer/>
     </>
   )
 }

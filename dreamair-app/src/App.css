@@ -512,6 +512,11 @@ img:not([draggable]), embed, object, video {
   margin-left: 1px;
 }
 
+.form-check, .radio-row, .login_checkbox {
+  display: block;
+  margin-left: 22px;
+}
+
 .search-box {
   /* border: 1px solid salmon; */
   /* display: flex; */
@@ -719,6 +724,15 @@ img:not([draggable]), embed, object, video {
   min-height: 200px;
 }
 
+.user_container {
+  margin-left: 60px;
+  width: 1200px;
+  background-color: #ebfbff42;
+  padding-left: 5px;
+  padding-right: 5px;
+  min-height: 400px;
+}
+
 td, th {
   vertical-align: middle;
 }
@@ -729,4 +743,129 @@ th {
 
 .btn-box {
   height: auto;
+}
+
+/* Join */
+.form-signin {
+   border: 1px solid rgb(250, 249, 249);
+   border-radius: 5px;
+}
+
+.form-join {
+  display: block;
+}
+
+.form-join-label {
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  height: 60px;
+  line-height: 50px;
+}
+
+.form-join-label label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+
+.form-join-label input.form-control {
+  border: 1px solid rgb(221, 220, 220);
+}
+
+.updateForm {
+  display: block;
+}
+
+.updateForm-label {
+  display: flex;
+}
+
+.updateForm-label label {
+  width: 200px;
+  font-weight: bold;
+  margin-top: 35px;
+}
+
+.updateForm-label input.form-control {
+  border: 1px solid rgb(221, 220, 220);
+  margin-top: 30px;
+}
+
+.checkinForm {
+  display: block;
+  width: 1000px;
+}
+
+.list_type3 > li {
+  margin-left: auto;
+}
+
+.checkinForm_inner {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+input#ticketNo {
+  border: 1px solid rgb(221, 220, 220);
+  line-height: 40px;
+  padding-left: 10px;
+  margin-left: -40px;
+  border-radius: 10px;
+}
+
+/* 탑승객 정보 입력 */
+.PassengerFormContainer {
+  border: 1px solid rgba(243, 242, 242, 0.428);
+  width: 800px;
+  margin-left: auto;
+  margin-right: 200px;
+}
+
+.PassengerForm {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  width: 720px;
+}
+
+.PassengerForm label {
+  font-weight: bold;
+  font-size: 18px;
+  width: 80px;
+}
+
+.PassengerForm_input.form-control {
+  border: 1px solid rgb(236, 234, 234);
+  width: 570px;
+  line-height: 40px;
+  padding-left: 10px;
+  margin-left: 40px;
+  border-radius: 10px;
+}
+
+.PassengerRadio {
+  display: flex;
+  margin-left: 80px;
+}
+
+.paymentForm {
+  display: flex;
+}
+
+.paymentForm label {
+  width: 100px;
+  margin-top: 25px;
+  text-align: start;
+}
+
+.paymentForm .form-control {
+  border: 1px solid rgb(242, 240, 240);
+  margin-top: 20px;
+  
 }

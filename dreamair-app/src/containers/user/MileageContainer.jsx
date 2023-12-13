@@ -32,7 +32,9 @@ const MileageContainer = () => {
       <Header />
         <div className='d-flex'>
         <Sidebar />
-        <Mileage userId={userId} user={user}/>
+        <div className="user_container">
+          <Mileage userId={userId} user={user}/>
+        </div>
       </div>
       <Footer />
     </>

@@ -67,17 +67,12 @@ const CheckIn = ({ getTicketList, ticketList, userId, isLoading }) => {
   return (
     <div className='container p-4'>
       <h1 className='text-center my-3'>체크인</h1>
-      <br />
-      <div className="btn-box">
-        <div className='col-12'>
-          <ul className="list_type3">
+          <ul className="list_type3 mb-5">
             <li>예약정보를 입력하시면 로그인 없이도 체크인/좌석배정이 가능합니다.</li>
-            <li>팝업 차단 해제 후 이용해주시기 바랍니다.</li>
           </ul>
-
-          <br />
-
-          <div className="inner alC">
+      <div className="checkinForm d-grid gap-2 ">
+        <div className='checkinForm col-5'>
+          <div className="checkinForm_inner inner alC">
             <select id="numTypeSelect" style={{ width: '200px' }} title="종류별 번호">
               <option value="ticketNo">탑승권 번호</option>
             </select>
@@ -94,9 +89,6 @@ const CheckIn = ({ getTicketList, ticketList, userId, isLoading }) => {
             value={ticketNo}
             onChange={handleTicketNoChange}
             />
-            <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleCheckIn}>
-              조회
-            </button>
           </div>
           { isLoading && (
             <center>
@@ -130,6 +122,9 @@ const CheckIn = ({ getTicketList, ticketList, userId, isLoading }) => {
 
 
         </div>
+          <div className="btn-box mt-5">
+            <button type="button" className="btn btn-outline-primary btn-lg btn-big" onClick={handleCheckIn}>조회</button>
+          </div>
       </div>
       
     </div>

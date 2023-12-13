@@ -44,49 +44,49 @@ const UserUpdateForm = ({userId, user, onUpdate}) => {
 
   return (
     <div className='container p-4'>
-      <h1 className="text-center my-3">회원 정보 수정</h1>
-
-      <hr />
+      <h1 className="text-center my-3 mt-3">회원 정보 수정</h1>
       
-      <div className="col-12">
+      <div className="updateForm">
+      <div className="updateForm-label col-12">
         <label htmlFor="userId" className="form-label">아이디</label>
         <input type="text" value={userId} className="form-control" readOnly/>
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="userPw" className="form-label">비밀번호</label>
         <input type="password" onChange={handelChangePassword} className="form-control" />
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="userPwCheck" className="form-label">비밀번호 확인</label>
         <input type="password" className="form-control" />
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="name" className="form-label">이름</label>
         <input type="text" value={name} onChange={handleChangeName} className="form-control" />
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="phone" className="form-label">핸드폰 번호</label>
         <input type="text" value={phone} onChange={handleChangePhone} className="form-control" />
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="email" className="form-label">이메일</label>
         <input type="email" value={email} onChange={handelChangeEmail} className="form-control" />
       </div>
 
-      <div className="col-12">
+      <div className="updateForm-label col-12">
         <label htmlFor="address" className="form-label">주소</label>
         <input type="text" value={address} onChange={handleChangeAddress} className="form-control" />
       </div>
 
       <br />
 
-      <div className="btn-box d-grid gap-2">
-          <button type="submit" onClick={onSubmit} className="btn btn-outline-primary btn-lg">회원정보 수정</button>
+      <div className="btn-box d-grid gap-2 mt-3">
+          <button type="submit" onClick={onSubmit} className="btn btn-outline-primary btn-lg btn-big">회원정보 수정</button>
+      </div>
       </div>
     </div>
   )

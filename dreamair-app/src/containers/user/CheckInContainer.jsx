@@ -32,7 +32,13 @@ const CheckInContainer = () => {
       <Header />
       <div className='d-flex'>
         <Sidebar />
+<<<<<<< HEAD
         <CheckIn getTicketList={getTicketList} ticketList={ticketList} userId={userId} />
+=======
+        <div className="user_container">
+          <CheckIn getTicketList={getTicketList} ticketList={ticketList} />
+        </div>
+>>>>>>> JSG
       </div>
       <Footer />
     </>

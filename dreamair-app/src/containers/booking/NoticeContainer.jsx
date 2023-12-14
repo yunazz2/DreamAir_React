@@ -37,13 +37,12 @@ const NoticeContainer = () => {
         const data = await result.data
         console.log(data);
         if (roundTrip === '편도') {
-            console.log("편도")
             setGoBookingList(data.goBookingList)
+            setComeBookingList(null)
             const userNo = data.user.userNo
             const userNo2 = data.user.userNo2
             setBooking({...booking, userNo, userNo2})
         } else {
-            console.log("왕복")
             setGoBookingList(data.goBookingList)
             setComeBookingList(data.comeBookingList)
             const userNo = data.user.userNo

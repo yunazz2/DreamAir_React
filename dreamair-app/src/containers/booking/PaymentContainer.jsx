@@ -40,12 +40,9 @@ const PaymentContainer = () => {
         const data = await result.data
         console.log(data);
         if (roundTrip === '편도') {
-            console.log("편도")
-            console.log(data);
-            setGoBookingList(data.goBookingList)
+            setGoBookingList(data)
+            setComeBookingList(null)
         } else {
-            console.log("왕복")
-            console.log(data);
             setGoBookingList(data.goBookingList)
             setComeBookingList(data.comeBookingList)
         }

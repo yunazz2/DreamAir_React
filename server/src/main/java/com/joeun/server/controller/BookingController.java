@@ -278,6 +278,30 @@ public class BookingController {
                 booking.setBookingNo(bookingNum);
             } 
     
+            // seat 테이블 업데이트
+            if ("왕복".equals(booking.getRoundTrip())) {    // 왕복일 때
+                for (int i = 0; i < booking.getPasCount(); i++) {
+
+                    int flightNo = booking.getGoFlightNo();
+                    String seatNo = booking.getSeatNoDepss()[i];
+        
+                    int result = bookingService.updateSeat(flightNo, seatNo);
+
+                    int flightNo2 = booking.getComeFlightNo();
+                    String seatNo2 = booking.getSeatNoDesss()[i];
+        
+                    int result2 = bookingService.updateSeat(flightNo2, seatNo2);
+                }
+            } else {                                        // 편도일 때
+                for (int i = 0; i < booking.getPasCount(); i++) {
+
+                    int flightNo = booking.getGoFlightNo();
+                    String seatNo = booking.getSeatNoDepss()[i];
+        
+                    int result = bookingService.updateSeat(flightNo, seatNo);
+                }
+            }
+
             // // ✅ TODO 티켓 발행 등록 요청
             int result = bookingService.createTicket(booking, principal, request);
     

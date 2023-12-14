@@ -11,7 +11,6 @@ import com.joeun.server.dto.Users;
 @Mapper
 public interface UserMapper {
 
-
     // 회원 등록
     public int insertUsers(Users user) throws Exception;
     public int insertMileage(Users user) throws Exception;

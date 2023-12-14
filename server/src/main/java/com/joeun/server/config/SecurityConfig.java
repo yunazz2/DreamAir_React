@@ -12,7 +12,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -261,7 +263,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomAccessDeniedHandler();
     }
 
+    // ✔ 시큐리티 설정
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        log.info("시큐리티 설정...");
+        
+        // 폼 기반 로그인 비활성화
+        http.formLogin(login -> login.disable() );
 
+        // ✔ HTTP 기본 인증 비활성화
+        http.httpBasic(basic -> basic.disable() );
+
+        // ✔ CSRF(Cross-Site Request Forgery) 공격 방어 기능 비활성화
+        http.csrf( csrf -> csrf.disable() );
+
+        // 필터 설정
+        http.addFilterAt(null, null)
+            .addFilterBefore(null, null)
+            ;
+        
+        // 인가 설정
+
+        return http.build();
+    }
+
+    //
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // 암호화 알고리즘 방식 : Bcrypt
+    }
     
     
 }

@@ -14,7 +14,7 @@ const Header = () => {
 
           <div className="main_nav">
             <div className="logo">
-              <li className="mainlogo"><Link to="/" aria-current="page" ><img src="/img/blackNameLogo.png" alt="로고 이미지" /></Link></li>
+              <li className="mainlogo"><Link to="/"><img src="/img/blackNameLogo.png" alt="로고 이미지" /></Link></li>
             </div>
             <div className="nav_menu">
               <li className="navitem"><Link to="/user/productFlightList">출도착 조회</Link></li>

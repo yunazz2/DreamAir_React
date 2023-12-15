@@ -34,15 +34,15 @@ const PaymentContainer = () => {
             'payment' : payment
         }
 
-        const response = await bookingAPI.getPayment( params )
-        const data = await response.data
+        const result = await bookingAPI.getPayment( params )
+        const data = await result.data
         console.log(data);
         if (roundTrip === '편도') {
-            setGoBookingList(goBookingList)
+            setGoBookingList(data)
+            setComeBookingList(null)
         } else {
             setGoBookingList(data.goBookingList)
             setComeBookingList(data.comeBookingList)
-        
         }
     }
     
@@ -53,7 +53,12 @@ const PaymentContainer = () => {
     const bookingInsert = async (params) => {
         try {
             const response = await bookingAPI.bookingInsert(params)
+            const data = await response.data
             console.log(response.data);
+            const bookingNo = data.booking.bookingNo
+            const bookingNo2 = data.booking.bookingNo2
+            setBooking({...booking, bookingNo, bookingNo2})
+
             navigate('/booking/payment_complete')
 
         } catch (error) {

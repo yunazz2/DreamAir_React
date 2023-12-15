@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { Form, Table } from 'react-bootstrap'
-import { BookingContext } from '../../contexts/BookingContextProvider'
 
 const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
 
+    console.log("comeBookingList ");
+    console.log(comeBookingList);
+    console.log("goBookingList ");
+    console.log(goBookingList);
     return (
         <div>
             <section>
@@ -47,7 +50,7 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
                 </Table>
             </section>  
 
-            {comeBookingList && 
+            {comeBookingList != null && (
                 <section>
                     <br></br>
                     <h2 className='mt-3 mb-3'>오는편</h2>
@@ -89,7 +92,7 @@ const SelectedFlight = ( { goBookingList, comeBookingList } ) => {
                         </tbody>
                     </Table>
                 </section>
-            }
+            )}
         </div>
     )
 }

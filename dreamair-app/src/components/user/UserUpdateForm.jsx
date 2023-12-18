@@ -85,7 +85,7 @@ const UserUpdateForm = ({userId, user, onUpdate}) => {
       <br />
 
       <div className="btn-box d-grid gap-2 mt-3">
-          <button type="submit" onClick={onSubmit} className="btn btn-outline-primary btn-lg btn-big">회원정보 수정</button>
+          <button type="submit" onClick={onSubmit} className="btn btn-outline-primary btn-lg btn-big">회원 정보 수정</button>
       </div>
       </div>
     </div>

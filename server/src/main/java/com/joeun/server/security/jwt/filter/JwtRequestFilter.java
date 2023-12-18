@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-
+// 첫 번째 필터
 @Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
    

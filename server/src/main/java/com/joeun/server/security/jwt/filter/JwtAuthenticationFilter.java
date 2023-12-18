@@ -21,12 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
+// 두 번째 필터
 @Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
-
+    
     // 생성자
     public JwtAuthenticationFilter( AuthenticationManager authenticationManager,  JwtTokenProvider jwtTokenProvider ) {
         this.authenticationManager = authenticationManager;
@@ -34,8 +36,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 🔗 필터 URL 경로 설정 : /login
         setFilterProcessesUrl(SecurityConstants.AUTH_LOGIN_URL);
     }
-
-
+    
+    
     /**
      * 🔐 인증 시도 메소드
      * : /login 경로로 (username, password) 를 요청하면 이 필터에서 걸려 인증을 시도합니다.
@@ -47,7 +49,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
+    throws AuthenticationException {
         
         String username = request.getParameter("username");
         String password = request.getParameter("password");

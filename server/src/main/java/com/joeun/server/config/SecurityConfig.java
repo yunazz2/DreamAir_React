@@ -60,9 +60,9 @@ public class SecurityConfig  {
         http.authorizeHttpRequests( authorizeRequests ->
                                         authorizeRequests
                                             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                            .antMatchers("/").permitAll()
+                                            .antMatchers("/**").permitAll()
                                             .antMatchers("/login").permitAll()
-                                            .antMatchers("/users").permitAll()
+                                            .antMatchers("/user").permitAll()
                                             .antMatchers("/admin/**").hasRole("ADMIN")
                                             .anyRequest().authenticated() )
                                             ;

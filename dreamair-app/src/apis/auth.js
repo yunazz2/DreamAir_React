@@ -10,7 +10,7 @@ export const info = () => api.get("/users/info");
 // 회원가입
 export const join = (data) => api.post("/users", data)
 
-// 회원정보 수정
+// 회원 정보 수정
 export const update = (data) => api.put("/users", data)
 
 // 회원탈퇴

@@ -14,6 +14,8 @@ const Login = () => {
       const username = form.username.value
       const password = form.password.value
 
+      sessionStorage.setItem('userId', username);
+
       login(username, password)
   }
 

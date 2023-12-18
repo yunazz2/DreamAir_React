@@ -6,9 +6,6 @@ const Header = () => {
 
   const {isLogin, login, logout} = useContext(LoginContext);
 
-  console.log("아래 확인");
-  console.log(isLogin);
-
   return (
     <header>
       <div className="header_container">

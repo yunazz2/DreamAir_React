@@ -127,6 +127,7 @@ public class BookingServiceImpl implements BookingService{
             gobooking.setBoarding("0");
             gobooking.setRouteNo(booking.getRouteNoDep());
             gobooking.setSeatNo(booking.getSeatNoDepss()[i]);
+            gobooking.setFlightNo(booking.getGoFlightNo());
             
             if( principal == null ) {
                 gobooking.setBookingNo2(bookingNum);
@@ -141,6 +142,7 @@ public class BookingServiceImpl implements BookingService{
                 comeBooking.setBoarding("0");
                 comeBooking.setRouteNo(booking.getRouteNoDes());
                 comeBooking.setSeatNo(booking.getSeatNoDesss()[i]);
+                comeBooking.setFlightNo(booking.getComeFlightNo());
 
                 if( principal == null ) {
                     comeBooking.setBookingNo2(bookingNum);

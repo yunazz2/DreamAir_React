@@ -146,7 +146,7 @@ CREATE TABLE `booking` (
   `product_id` varchar(20) NOT NULL,
   `user_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`booking_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='예매';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='예매';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,6 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'이유나','A1',2,0,1,1,1,'왕복','예매완료','2023-12-18 06:09:35','2023-12-18 06:09:35','PT0001','user'),(2,'이유나','A1',2,0,5,5,1,'왕복','예매완료','2023-12-18 06:09:35','2023-12-18 06:09:35','PT0005','user'),(3,'비회원','A1',0,1,3,3,1,'편도','예매완료','2023-12-18 06:37:01','2023-12-18 06:37:01','PT0003','GUEST_07160'),(4,'테스트','B3',3,0,1,1,1,'왕복','예매완료','2023-12-18 09:06:09','2023-12-18 09:06:09','PT0001','test'),(5,'테스트','B3',3,0,5,5,1,'왕복','예매완료','2023-12-18 09:06:09','2023-12-18 09:06:09','PT0005','test'),(6,'테스트2','D4',1,0,4,4,1,'편도','예매완료','2023-12-18 09:14:15','2023-12-18 09:14:15','PT0004','admin');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -689,4 +688,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-18 18:21:13
+-- Dump completed on 2023-12-18 18:28:05

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -89,6 +90,7 @@ public class UserController {
     }
 
     // 회원 정보 수정
+    @Secured("ROLE_USER")   // 회원들만 접근 가능
     @PutMapping()
     public ResponseEntity<?> update(@RequestBody Users user) {
         log.info("[PUT] - /user - 회원 정보 수정");
@@ -107,6 +109,7 @@ public class UserController {
     }
 
     // 회원 탈퇴
+    @Secured("ROLE_USER")
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> destroy(@PathVariable String userId) {
         log.info("[DELETE] - /user/ " + userId + " - 회원 정보 삭제");

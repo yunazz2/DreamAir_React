@@ -1,27 +1,48 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import * as users from '../apis/index'
-import Join from '../components/index/Join'
-import Header from '../components/fragment/Header';
+import React from 'react';
+import * as Swal from '../apis/alert';
+import * as auth from '../apis/auth';
 import Footer from '../components/fragment/Footer';
+import Header from '../components/fragment/Header';
+import Join from '../components/index/Join';
+import { useNavigate } from 'react-router-dom'
 
 // ⛄ 회원 가입
 const JoinContainer = () => {
 
   const navigate = useNavigate()
-  
-  const onInsert = async (userId, userPw, userPwCheck, name, phone, email, address) => {
+
+  // 회원 가입 요청
+  const join = async (form) => {
+
+    console.log(form);
+
+    let response
+    let data
+
     try {
-      const response = await users.insert(userId, userPw, userPwCheck, name, phone, email, address)
+      response = await auth.join(form)
 
-      alert('회원 가입 완료')
-      console.log(response.data)
+    } catch (error) {
 
-      // 👉 인덱스로 이동
-      navigate('/')
+      console.error(`${error}`);
+      console.error(`회원가입 요청 중 에러 발생`);
+      return
     }
-    catch(e) {
-      console.log(e);
+
+    data = response.data
+    const status = response.status
+    console.log(`data : ${data}`);
+    console.log(`status : ${status}`);
+
+    if(status === 200) {
+
+      console.log(`회원 가입 성공`);
+      Swal.alert("회원 가입 성공", "로그인 페이지로 이동합니다.", "success", () => {navigate("/login")})
+      
+    } else {
+      
+      console.log(`회원 가입 실패`);
+      Swal.alert("회원 가입 실패", "회원 가입에 실패했습니다.", "error")
     }
   }
 
@@ -29,7 +50,7 @@ const JoinContainer = () => {
     <>
       <Header/>
       <div className="container">
-        <Join onInsert={onInsert} />
+        <Join join={join} />
       </div>
       <Footer/>
     </>

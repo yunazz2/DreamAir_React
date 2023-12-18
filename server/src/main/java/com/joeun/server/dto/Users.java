@@ -59,6 +59,21 @@ public class Users {
     private String token;
     private Date last_used;
 
+    private int enabled;            // 휴면여부
+
+    public Users() {
+        
+    }
+    
+    public Users(Users user) {
+        this.userNo = user.getUserNo();
+        this.userId = user.getUserId();
+        this.userPw = user.getUserPw();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.authList = user.getAuthList();
+    }
+
 }
     
   

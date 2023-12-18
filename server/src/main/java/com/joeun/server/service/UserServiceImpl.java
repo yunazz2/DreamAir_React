@@ -36,6 +36,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     *  회원 등록( 회원 가입)
+     *  1. 비밀번호 암호화
+     *  2. 회원 등록
+     *  3. 권한 등록
+     */
     
     @Override
     public int insert(Users user) throws Exception {
@@ -71,8 +77,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.select(userNo);
     }
 
-
-
+    /**
+     * 로그인
+     */
     @Override
     public void login(Users user, HttpServletRequest requset) throws Exception {
 
@@ -81,6 +88,7 @@ public class UserServiceImpl implements UserService {
         log.info("username : " + username);
         log.info("password : " + password);
 
+        // AuthenticationManager
         // 아이디, 패스워드 인증 토큰 생성
         UsernamePasswordAuthenticationToken token 
             = new UsernamePasswordAuthenticationToken(username, password);
@@ -124,8 +132,6 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
-
-
     
     @Override
     public int update(Users user) throws Exception {
@@ -138,26 +144,18 @@ public class UserServiceImpl implements UserService {
 
         return result;
     }
-    
-    
+
     // 회원 탈퇴
     @Override
     public int deleteUsers(String userId) {
-        
         int result = userMapper.deleteUsers(userId);
-
         return result;
     }
     
-
-    
     @Override
     public Users selectMileage(String userId) throws Exception {
-        
         return userMapper.selectMileage(userId);
-        
     }
-
 
     // 장바구니
     @Override

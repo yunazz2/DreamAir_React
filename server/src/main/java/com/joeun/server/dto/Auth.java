@@ -9,4 +9,13 @@ public class Auth {
     private String userId;
     private String auth;
 
+    public Auth() {
+
+    }
+
+    public Auth(String userId, String auth) {
+        this.userId = userId;
+        this.auth = auth;
+    }
+
 }

@@ -311,12 +311,16 @@ public class AdminController {
 
         ticket.setTicketNo(ticketNo);
         ticket.setIsBoarded(isBoarded);
-
         
         int result = adminService.ticket_update_b(ticketNo, isBoarded);
 
-        if( result > 0 )
+        QR qr = new QR();
+        qr.setParentNo(ticketNo);
+
+        if( result > 0 ){
+            qrService.deleteByParent(qr);
             return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+            }
         else
             return new ResponseEntity<>("FAIL", HttpStatus.OK);
     }

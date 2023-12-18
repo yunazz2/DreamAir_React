@@ -3,7 +3,7 @@ import React from 'react'
 const TicketInfo = ({ticketNo, viewTicketDetail, isLoading}) => {
 
   const ticketInfo = viewTicketDetail?.viewTicketDetail || [];
-const userInfo = viewTicketDetail?.userInfo || {};
+  const userInfo = viewTicketDetail?.userInfo || {};
   
   return (
     <div className="container p-4">
@@ -18,7 +18,9 @@ const userInfo = viewTicketDetail?.userInfo || {};
             <img src="/img/loading.webp" alt="loading" />
         </div> 
       }
-      <h3>• 티켓 정보</h3>
+      <br />
+      <h3 style={{ textAlign: 'left' }}>• 티켓 정보</h3>
+      <br />
       {!isLoading && viewTicketDetail && ticketInfo.length > 0 && (
         <>
           <table className="table table-striped table-hover table-bordered text-center align-middle">
@@ -45,8 +47,8 @@ const userInfo = viewTicketDetail?.userInfo || {};
 
           <br/><br/><br/>
 
-          <h3>• 예매자 정보</h3>
-
+          <h3 style={{ textAlign: 'left' }}>• 예매자 정보</h3>
+          <br />
           <table className="table table-striped table-hover table-bordered text-center align-middle">
             <thead>
               <tr className="table-primary">

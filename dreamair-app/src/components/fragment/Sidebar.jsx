@@ -27,6 +27,7 @@ const Sidebar = () => {
             <li className="nav-item"><Link to={`/user/checkin/${userId}`} className="nav-link d-flex align-items-center gap-2">체크인</Link></li>
             <li className="nav-item"><Link to={`/user/mileage/${userId}`} className="nav-link d-flex align-items-center gap-2">마일리지 조회</Link></li>
             <li className="nav-item"><Link to={`/user/deleteaccount/${userId}`} className="nav-link d-flex align-items-center gap-2">회원 탈퇴</Link></li>
+            <li className="nav-item"><Link to={`/user/mybooking/${userId}`} className="nav-link d-flex align-items-center gap-2">나의 탑승권 관리</Link></li>
           </ul>
            :
           // 비 로그인 시

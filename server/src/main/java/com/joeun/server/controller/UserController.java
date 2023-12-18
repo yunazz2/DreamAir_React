@@ -146,6 +146,9 @@ public class UserController {
         }
     }
 
+    // 예매 내역 조회 - 비회원
+    
+
     // 티켓 상세 조회
     @GetMapping("/booking/ticketInfo/{ticketNo}")
     public ResponseEntity<?> viewTicket(@PathVariable Integer ticketNo, String userId) {

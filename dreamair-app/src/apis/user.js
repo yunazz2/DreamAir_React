@@ -17,6 +17,9 @@ export const deleteAccount = (userId) => axios.delete(`/user/${userId}`)
 // 예매 내역 조회 - 회원
 export const selectBookingListByUser = (userId) => axios.get(`/user/bookingList/${userId}`)
 
+// 예매 내역 조회 - 비회원
+export const selectBookingListByGuest = (phone, userPw) => axios.post("/user/bookingList/", {phone, userPw})
+
 // 티켓 상세 조회
 export const viewTicket = (ticketNo, userId) => axios.get(`/user/booking/ticketInfo/${ticketNo}?userId=${userId}`);
 

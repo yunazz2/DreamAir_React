@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { BookingContext } from '../../contexts/BookingContextProvider';
 import { Link } from 'react-router-dom';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 
 const InfoForm = ( {onInsert} ) => {
 
-  const {booking, setBooking} = useContext(BookingContext)
+  const {isLogin} = useContext(LoginContext);
+  const {booking, setBooking} = useContext(BookingContext);
   const [userPw, setUserPw] = useState('');
-  console.log("info");
-  console.log(booking);
 
   const handleuserPwChange = (e) => {
     setUserPw(e.target.value)
@@ -191,6 +191,9 @@ const InfoForm = ( {onInsert} ) => {
 
           </div>
         ))}
+        {/* 비회원일 시 예매 비밀번호 입력 */}
+        {!isLogin
+        ?
         <div className="PassengerForm input-group mb-3 row">
           <Form.Label className="col-md-2">비밀번호</Form.Label>
           <Col md={10}>
@@ -202,6 +205,10 @@ const InfoForm = ( {onInsert} ) => {
               />
           </Col>
         </div>
+        :
+        <>
+        </>
+        }
 
             <div className="btn-box mt-5 mb-5">
               <Link href="/" className="btn btn-lg btn-secondary">목록</Link>

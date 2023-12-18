@@ -4,7 +4,7 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 
 const Header = () => {
 
-  const {isLogin, login, logout} = useContext(LoginContext);
+  const {isLogin, userInfo, roles, login, logout} = useContext(LoginContext);
 
   return (
     <header>
@@ -16,13 +16,13 @@ const Header = () => {
             <div className="sub_nav">
              <li className="nav-item"><Link to="/login" aria-current="page">로그인</Link></li>
              <li className="nav-item"><Link to="/join"  aria-current="page">회원가입</Link></li>
-             <li className="nav-item"><Link to="/admin" aria-current="page">관리자 페이지</Link></li>
             </div>
              :
             //  로그인 시
              <div className="sub_nav">
               <li className="nav-item"><Link to="/user" aria-current="page">마이 페이지</Link></li>
-              <li className="nav-item"><Link to="/admin"  aria-current="page">관리자 페이지</Link></li>
+              {/* 로그인 상태이면서 관리자 권한을 가지고 있는 경우 */}
+              {roles.isAdmin && <li className="nav-item"><Link to="/admin" aria-current="page">관리자 페이지</Link></li>}
               <li><button className='link' onClick={() => logout()}>로그아웃</button></li>
              </div>
             }

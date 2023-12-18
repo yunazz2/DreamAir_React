@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as admin from '../../apis/admin';
 import AdminList from '../../components/admin/AdminList';
 import Header from '../../components/fragment/Header';
@@ -7,8 +7,14 @@ import Adminfooter from '../../components/fragment/Adminfooter';
 import Adminsidebar from '../../components/fragment/Adminsidebar';
 import Pagination from 'react-js-pagination';
 import '../../styles/Paging.css'
+import { LoginContext } from '../../contexts/LoginContextProvider';
+import * as Swal from '../../apis/alert';
 
 const AdminListContainer = () => {
+
+  const {isLogin, userInfo, roles} = useContext(LoginContext);
+  const navigate = useNavigate();
+
   const {adminNo} = useParams();
   const [adminList, setAdminList] = useState([]);
   
@@ -48,6 +54,16 @@ const AdminListContainer = () => {
   };
 
   useEffect(() => {
+    
+    if(!isLogin || !userInfo) {
+      Swal.alert("로그인이 필요합니다.", "로그인 페이지로 이동합니다.", "error", () => {navigate("/login")})
+      return
+    }
+    if(!roles.isAdmin) {
+      Swal.alert("관리자 권한이 없습니다.", "메인 페이지로 이동합니다.", "error", () => {navigate("/")})
+      return
+    }
+
     getAdminList();
   }, []);
 

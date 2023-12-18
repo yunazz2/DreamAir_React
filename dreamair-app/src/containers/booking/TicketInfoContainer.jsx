@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import * as userjs from '../../apis/user'
 import TicketInfo from '../../components/booking/TicketInfo';
+import Header from '../../components/fragment/Header'
+import Footer from '../../components/fragment/Footer'
+import Sidebar from '../../components/fragment/Sidebar'
 
 const TicketInfoContainer = () => {
 
@@ -31,7 +34,14 @@ const TicketInfoContainer = () => {
 
   return (
     <>
-      <TicketInfo ticketNo={ticketNo} viewTicketDetail={viewTicketDetail} isLoading={isLoading} />
+      <Header />
+      <div className='d-flex'>
+        <Sidebar />
+        <div className="user_container">
+        <TicketInfo ticketNo={ticketNo} viewTicketDetail={viewTicketDetail} isLoading={isLoading} />
+        </div>
+      </div>
+      <Footer />
     </>
   )
 }

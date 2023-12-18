@@ -123,7 +123,7 @@ const LoginContextProvider = ({children}) => {    // 이 안에서 LoginContextP
                 loginCheck()
 
                 // title, content, icon, callback
-                Swal.alert(`로그인 성공`, `메인 화면으로 갑니다.`, "success", () => {navigate("/")})
+                Swal.alert(`로그인 성공`, `메인 화면으로 이동합니다.`, "success", () => {navigate("/")})
             }
         } catch (error) {
             // 로그인 실패
@@ -137,11 +137,14 @@ const LoginContextProvider = ({children}) => {    // 이 안에서 LoginContextP
     // 로그아웃 처리
     const logout = () => {
         
-        Swal.confirm("로그아웃 하시겠습니까?", "로그아웃 진행", "warning",
+        Swal.confirm("로그아웃을 진행 하시겠습니까?", "", "warning",
             (result) => {
                 if(result.isConfirmed) {
                     // 로그아웃 세팅
                     logoutSetting()
+
+                    // 세션 스토리지에서 userId 삭제
+                    sessionStorage.removeItem('userId');
             
                     // 메인 페이지로 이동
                     navigate("/")

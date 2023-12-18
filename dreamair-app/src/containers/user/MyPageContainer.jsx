@@ -10,8 +10,6 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 const MyPageContainer = () => {
 
     const {isLogin, login, logout} = useContext(LoginContext);
-
-    sessionStorage.setItem('userId', 'user');   // 세션에 user라고 하드코딩하여 저장
     const userId = sessionStorage.getItem('userId'); // 세션에서 userId를 가져옴
 
     return (
@@ -29,6 +27,7 @@ const MyPageContainer = () => {
                             <Link to={`/user/checkin/${userId}`} className="btn btn-outline-primary btn-lg btn-big">체크인</Link>
                             <Link to={`/user/mileage/${userId}`} className="btn btn-outline-primary btn-lg btn-big">마일리지 조회</Link>
                             <Link to={`/user/deleteaccount/${userId}`} className="btn btn-outline-primary btn-lg btn-big">회원 탈퇴</Link>
+                            <Link to={`/user/mybooking/${userId}`} className="btn btn-outline-primary btn-lg btn-big">나의 탑승권 관리</Link>
                         </div>
                         :
                         <div className="btn-box d-grid gap-2">

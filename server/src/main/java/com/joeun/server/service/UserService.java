@@ -54,4 +54,5 @@ public interface UserService {
 
     // 회원 삭제 시, mileage 테이블 삭제
     public int deleteMileage(String username);
+
 }

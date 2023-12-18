@@ -147,6 +147,14 @@ ON ticket.booking_no = #{bookingNo}
       ORDER BY ticket_no DESC
   </select>
 
+  <!-- 탑승권 리스트 조회 - 비회원 -->  
+  <select id="selectBookingListByGuest" resultMap="bookingMap">
+      SELECT *, CONCAT(departure, ' → ', destination) AS name
+      FROM ticket
+      WHERE phone = #{phone} AND user_pw = #{userPw}
+      ORDER BY ticket_no DESC
+  </select>
+
 
   <!-- 탑승권 상세 조회 - by bookingNo -->
   <select id="selectTicket" resultMap="bookingMap">

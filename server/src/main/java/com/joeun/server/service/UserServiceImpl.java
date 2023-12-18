@@ -188,29 +188,19 @@ public class UserServiceImpl implements UserService {
         List<Product> productFlightList = userMapper.product_flightList();
         return productFlightList;
     }
-
-    
     
     // 회원 탈퇴 시, auth 테이블 삭제
     @Override
     public Users deleteAuth(String username) {
-        
         Users deleteAuth = userMapper.deleteAuth(username);
-
         return deleteAuth;
     }
-
-
     
     // 회원 탈퇴 시, mileage 테이블 삭제
     @Override
     public int deleteMileage(String username) {
-
         int result = userMapper.deleteMileage(username);
-
         return result;
     }
-
-    
 
 }

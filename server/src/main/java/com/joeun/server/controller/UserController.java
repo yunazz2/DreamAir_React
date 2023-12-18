@@ -147,7 +147,26 @@ public class UserController {
     }
 
     // 예매 내역 조회 - 비회원
-    
+    @PostMapping("/bookingList/guest")
+    public ResponseEntity<?> selectBookingListByGuest(@RequestBody Users user) {
+        
+        String phone = user.getPhone();
+        String userPw = user.getUserPw();
+
+        try {
+            List<Booking> guestBookingList = bookingservice.selectBookingListByGuest(phone, userPw);
+            
+            if(guestBookingList == null) {
+                log.info("예매 내역 없음");
+            } else {
+                log.info("예매 건 수 : : " + guestBookingList.size());
+            }
+            return new ResponseEntity<>(guestBookingList, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // 티켓 상세 조회
     @GetMapping("/booking/ticketInfo/{ticketNo}")

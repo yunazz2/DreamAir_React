@@ -18,6 +18,7 @@ const DeleteAccountContainer = () => {
     console.log(response.data);
 
     alert('회원 탈퇴 완료')
+    sessionStorage.removeItem('userId');
     
     // 👉 인덱스로 이동
     navigate('/')

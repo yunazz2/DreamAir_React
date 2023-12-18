@@ -201,6 +201,13 @@ public class BookingServiceImpl implements BookingService{
         List<Booking> bookingList = bookingMapper.selectBookingListByUser(userId);
         return bookingList;
     }
+    
+    // 탑승권 리스트 조회 - 비회원
+    @Override
+    public List<Booking> selectBookingListByGuest(String phone, String userPw) throws Exception {
+        List<Booking> bookingList = bookingMapper.selectBookingListByGuest(phone, userPw);
+        return bookingList;
+    }
 
     // 탑승권 상세 조회
     @Override

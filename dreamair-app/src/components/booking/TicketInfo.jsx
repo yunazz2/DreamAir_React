@@ -2,6 +2,7 @@ import React from 'react'
 
 const TicketInfo = ({ticketNo, viewTicketDetail, isLoading}) => {
 
+  const userId = sessionStorage.getItem('userId'); // 세션에서 userId를 가져옴
   const ticketInfo = viewTicketDetail?.viewTicketDetail || [];
   const userInfo = viewTicketDetail?.userInfo || {};
   
@@ -47,25 +48,31 @@ const TicketInfo = ({ticketNo, viewTicketDetail, isLoading}) => {
 
           <br/><br/><br/>
 
-          <h3 style={{ textAlign: 'left' }}>• 예매자 정보</h3>
-          <br />
-          <table className="table table-striped table-hover table-bordered text-center align-middle">
-            <thead>
-              <tr className="table-primary">
-                <th>예매자 명</th>
-                <th>핸드폰 번호</th>
-                <th>이메일</th>
-              </tr>
-            </thead>
+          {userId ? (
+            <>
+              <h3 style={{ textAlign: 'left' }}>• 예매자 정보</h3>
+              <br />
+              <table className="table table-striped table-hover table-bordered text-center align-middle">
+                <thead>
+                  <tr className="table-primary">
+                    <th>예매자 명</th>
+                    <th>핸드폰 번호</th>
+                    <th>이메일</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              <tr>
-                <td align='center'>{userInfo.name}</td>
-                <td align='center'>{userInfo.phone}</td>
-                <td align='center'>{userInfo.email}</td>
-              </tr>
-            </tbody>
-          </table>
+                <tbody>
+                  <tr>
+                    <td align='center'>{userInfo.name}</td>
+                    <td align='center'>{userInfo.phone}</td>
+                    <td align='center'>{userInfo.email}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </>
+          ) : (
+            <h1></h1>
+          )}
         </>
       )}
     </div>

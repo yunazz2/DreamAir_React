@@ -46,6 +46,9 @@ public interface BookingService {
 
     // 탑승권 리스트 조회 - 회원
     public List<Booking> selectBookingListByUser(String userId) throws Exception;
+    
+    // 탑승권 리스트 조회 - 비회원
+    public List<Booking> selectBookingListByGuest(String phone, String userPw) throws Exception;
 
     // 탑승권 상세 조회
     public List<Booking> selectTicket(int ticketNo) throws Exception;
@@ -73,4 +76,5 @@ public interface BookingService {
 
     // seat 테이블 업데이트
     public int updateSeat(int flightNo, String seatNo) throws Exception;
+
 }

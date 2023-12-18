@@ -1,16 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 
 const Header = () => {
+
+  const {isLogin, login, logout} = useContext(LoginContext);
+
+  console.log("아래 확인");
+  console.log(isLogin);
+
   return (
     <header>
       <div className="header_container">
         <div className="container" style={{height: "100px"}}>
-          <div className="sub_nav">
-            <li className="nav-item"><Link to="/login" aria-current="page">로그인</Link></li>
-            <li className="nav-item"><Link to="/join"  aria-current="page">회원가입</Link></li>
-            <li className="nav-item"><Link to="/admin" aria-current="page">관리자 페이지</Link></li>
-          </div>
+            {!isLogin
+             ?
+            //  비 로그인 시
+            <div className="sub_nav">
+             <li className="nav-item"><Link to="/login" aria-current="page">로그인</Link></li>
+             <li className="nav-item"><Link to="/join"  aria-current="page">회원가입</Link></li>
+             <li className="nav-item"><Link to="/admin" aria-current="page">관리자 페이지</Link></li>
+            </div>
+             :
+            //  로그인 시
+             <div className="sub_nav">
+              <li className="nav-item"><Link to="/user" aria-current="page">마이 페이지</Link></li>
+              <li className="nav-item"><Link to="/admin"  aria-current="page">관리자 페이지</Link></li>
+              <li><button className='link' onClick={() => logout()}>로그아웃</button></li>
+             </div>
+            }
 
           <div className="main_nav">
             <div className="logo">

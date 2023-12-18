@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.joeun.server.dto.Board;
+import com.joeun.server.dto.CustomUser;
 import com.joeun.server.dto.Users;
 import com.joeun.server.service.BoardService;
 import com.joeun.server.service.UserService;
@@ -80,6 +82,21 @@ public class HomeController {
         }
     }
 
-    // 로그인
-    
+    // 사용자 정보 조회
+    @GetMapping("/info")
+    public ResponseEntity<?> userInfo(@AuthenticationPrincipal CustomUser customUser) {
+        
+        log.info("::::: customUser :::::");
+        log.info("customUser : "+ customUser);
+
+        Users user = customUser.getUser();
+        log.info("user : " + user);
+
+        // 인증된 사용자 정보 
+        if( user != null )
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
+        // 인증 되지 않음
+        return new ResponseEntity<>("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+    }
 }

@@ -174,6 +174,7 @@ public class BookingServiceImpl implements BookingService{
                 qr2.setName("QR_" + ticketNo3);
 
                 qrService.makeQR(qr2);
+
             }
         
             int count = count1 + count2;

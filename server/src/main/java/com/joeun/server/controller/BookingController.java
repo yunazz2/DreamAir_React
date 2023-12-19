@@ -301,7 +301,6 @@ public class BookingController {
                     int result = bookingService.updateSeat(flightNo, seatNo);
                 }
             }
-
             // // ✅ TODO 티켓 발행 등록 요청
             int result = bookingService.createTicket(booking, principal, request);
     

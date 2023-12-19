@@ -1,2 +1,2 @@
 # DreamAir_React
-DreamAir 프로젝트2(React)
+개발을 꿈꾸는 항공사 DreamAir(React)

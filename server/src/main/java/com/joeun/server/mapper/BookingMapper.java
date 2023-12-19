@@ -102,4 +102,7 @@ public interface BookingMapper {
 
     // 오는편 좌석, 예매번호 탑승객 테이블 등록
     public int comePasUpdate(Booking booking) throws Exception;
+
+    // 최근 티켓 번호 조회
+    public int selectTicketNo() throws Exception;
 }

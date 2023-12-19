@@ -135,7 +135,19 @@ public class BookingServiceImpl implements BookingService{
                 gobooking.setBookingNo(bookingNum);
             }
             count1 = bookingMapper.createTicket(gobooking);
-        
+
+            int ticketNo2 = bookingMapper.selectTicketNo();
+
+            QR qr = new QR();
+            qr.setParentTable("booking");
+            qr.setParentNo(ticketNo2);
+            String url = "http://localhost:" + serverPort + "/admin/Final_check?ticketNo=" + ticketNo2;
+            qr.setUrl( url );
+            qr.setName("QR_" + ticketNo2);
+
+            qrService.makeQR(qr);
+
+
             if(booking.getRoundTrip().equals("왕복")) {
                 Booking comeBooking = bookingMapper.comeTicketData(booking);
                 comeBooking.setUserId(principal == null ? userId : principal.getName());
@@ -151,6 +163,17 @@ public class BookingServiceImpl implements BookingService{
                 }
 
                 count2 = bookingMapper.createTicket(comeBooking);
+
+                int ticketNo3 = bookingMapper.selectTicketNo();
+
+                QR qr2 = new QR();
+                qr2.setParentTable("booking");
+                qr2.setParentNo(ticketNo3);
+                String url2 = "http://localhost:" + serverPort + "/admin/Final_check?ticketNo=" + ticketNo3;
+                qr2.setUrl( url2 );
+                qr2.setName("QR_" + ticketNo3);
+
+                qrService.makeQR(qr2);
             }
         
             int count = count1 + count2;
@@ -176,14 +199,6 @@ public class BookingServiceImpl implements BookingService{
                     }
             }
             
-            QR qr = new QR();
-            qr.setParentTable("booking");
-            qr.setParentNo(ticketNo);
-            String url = "http://localhost:" + serverPort + "/admin/Final_check?ticketNo=" + ticketNo;
-            qr.setUrl( url );
-            qr.setName("QR_" + ticketNo);
-
-            qrService.makeQR(qr);
 
             result += count;
         }

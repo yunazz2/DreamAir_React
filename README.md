@@ -329,7 +329,8 @@
 <details>
 <summary><h3>예매 서비스 👆</h3></summary>
 <div markdown="1">
-<img src="https://github.com/ybm1968/DreamAir/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EC%98%88%EB%A7%A41.PNG" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EB%A9%94%EC%9D%B81.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EB%A9%94%EC%9D%B82.png" width="1000" height="600"/>
 <img src="https://github.com/ybm1968/DreamAir/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EC%98%88%EB%A7%A42.PNG" width="1000" height="600"/>
 <img src="https://github.com/ybm1968/DreamAir/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EC%98%88%EB%A7%A43.PNG" width="1000" height="600"/>
 <img src="https://github.com/ybm1968/DreamAir/blob/LSM/img/%EC%8B%A4%EC%A0%9C%ED%99%94%EB%A9%B4/%EC%98%88%EB%A7%A4/%EC%98%88%EB%A7%A44.PNG" width="1000" height="600"/>

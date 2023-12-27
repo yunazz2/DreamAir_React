@@ -358,16 +358,30 @@
 
 ----
 
+# 6. REST Architecture로 전환
+<details>
+<summary><h3>대표 컨트롤러 코드 비교 및 설명 👆</h3></summary>
+<div markdown="1">
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC1.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC2.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC3.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC4.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC5.png" width="1000" height="600"/>
+<img src="https://github.com/yunazz2/DreamAir_React/blob/LSM/img/REST%20Architecture%EB%A1%9C%20%EC%A0%84%ED%99%98/%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC6.png" width="1000" height="600"/>
 
-# 6. 핵심기능 코드 리뷰
-## 6-1. 기능목표
+</div>
+</details>
+
+
+# 7. 핵심기능 코드 리뷰
+## 7-1. 기능목표
 ### 탑승권을 QR 코드의 형태로 제공하여 관리자가 편리하게 업무(사용자 탑승권 탑승 처리)를 볼 수 있도록 함
 - 사용자의 종이 탑승권 분실 위험도 감소
 - 탑승권 처리 시 해당 페이지로 자동 연결되므로 사용자 경험 개선
 ![캡처](https://github.com/ybm1968/DreamAir/assets/132187402/0361b8d7-2045-460a-a5b0-d1cc9f8d877b)
 
 
-## 6-2. QR코드 생성 및 처리과정
+## 7-2. QR코드 생성 및 처리과정
 ### QR코드 생성 : 항공권 결제 완료 → 티켓 번호 발급 → QR 코드 생성
 <details>
 <summary><h3>QR코드 생성 👆</h3></summary>
@@ -519,26 +533,23 @@
 
 ----
 
-## 6-3. 개선 할 점
+## 7-3. 개선 할 점
 - 추후 QR 코드를 사용자 버전과 관리자 버전으로 2개 생성하여 1) 사용자가 QR 코드를 인식 할 때 체크인 페이지로 이동하고, 2) 관리자가 QR 코드를 인식 할 때 탑승처리 페이지로 이동할 수 있도록 하여 보다 더 실제 항공사에서 사용하는 QR 코드 서비스처럼 구현하고자 함
   - QR 코드 1개에 1개의 URL 생성 가능함으로 2개를 생성하여 사용자 버전과 관리자 버전으로 구분하여 보다 제공되는 서비스 품질을 높일 수 있음
 
 
 
-# 7. 자체 평가 의견
-## 7-1. 개별 평가
-- 한현진
-  - 프로젝트를 진행하면서, 처음에 security와 csrf로 인해 오류가 많이 떠서, 제가 맡은 프로젝트를 진행하는데 시간이 지체되는 것 같아서 security와 csrf 를 제외해놓고 프로젝트를 시작했는데, 나중에 깃으로 합칠 때 수정하는 과정이 더 길어졌던 것 같습니다. 그래서 조금 지체 되더라도 처음부터 체계적으로 빼놓는 부분 없이 프로젝트를 시작하고 진행하는 것이 중요하다고 생각했습니다.
+# 8. 자체 평가 의견
+## 8-1. 개별 평가
 - 이유나
   - 이번 프로젝트를 통해 Git을 활용한 협업 방식과 conflict 대응 능력을 배웠고, 체계적인 설계 과정과 팀원들과의 적극적인 소통이 역시나 가장 중요하다는 것을 느끼게 되었습니다. 프로젝트 초기에 스프링 부트에 대한 막연한 두려움이 있었지만 느리더라도 꾸준히 공부하면 해낼 수 있다는 자신감을 얻게 되었습니다.
 - 임성민
   - 항공권 조회부터 결제까지 모든 과정을 하나의 연결된 과정으로 진행하다보니 하나의 페이지가 이동될때마다 이전에 입력한 데이터를 계속 가져와서 탑승객정보 입력부분과 결제부분에서 DB에 저장했는데 값을 계속 가져오는 부분이 어려웠고 더 좋은 방법이 있을지도 모르겠다는 고민을 해봤습니다. 그리고 처음으로 API를 적용해 봤는데 적용하기 전에는 어려울까봐 걱정했지만 생각보다 괜찮았고 다양한 기술을 적용해 볼 수 있는 좋은 경험이었습니다.
- 
 - 정슬기
   - Spring Boot라는 프레임워크를 처음 활용해서 만드는 프로젝트이다 보니 구조 파악하는데 어려움이 있었고, 특히 Security에서 user principal을 커스텀해서 사용해야 하는 부분이 다소 복잡해 시간이 오래 걸렸던 것 같습니다. 타임리프라는 새로운 템플릿 엔진을 사용하면서 익숙치 않아 당황스러운 부분도 있었지만 시간이 지날 수록 점차 적응하고 있었고 팀원들과 프로젝트 목표치에 가까워져갈 때는 성취감을 느낄 수 있었습니다.
  
 
-## 7-2. 종합 평가
+## 8-2. 종합 평가
 
 ### 한계점
 - 항공권 예매, 실시간 좌석 선택, 게시판과 같은 필수 기능들은 거의 구현이 되었으나, 공항버스 예매와 같은 옵션 기능들은 구현을 하지 못하였다.
